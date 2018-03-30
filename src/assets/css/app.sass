@@ -1,0 +1,575 @@
+@import "normalize"
+@import "variables"
+@import "fonts"
+@import "mixins"
+@import "grid"
+@import "flex"
+@import "mobile"
+@import "helpers"
+@import "components"
+
+// Определяем основые стили разметки тега html и body
+html, body
+  @include border-box
+  height: 100%
+  width: 100%
+  font-family: "PT Sans Caption", Arial, sans-serif !important
+
+  @include style-scrollbar
+
+  @media (max-width: 768px)
+    overflow-y: auto
+
+// Определеяем основной контейнер для вывода компонентов
+.grid-wrapper
+  display: flex
+  flex-flow: row
+  flex-wrap: wrap
+  height: 100%
+
+  & > div
+    @include border-box
+
+  .grid-nav
+
+    width: 100%
+    max-width: 240px
+
+    background: $deep-blue-color
+
+    @media (max-width: 768px)
+      display: none
+
+  .grid-aside
+    display: flex
+    flex-flow: column
+    flex: 1
+
+  .grid-header
+    max-height: 80px !important
+    height: 80px !important
+    flex: 1 auto
+    background: $clear-white-color
+    box-shadow: 5px 0 15px $shadow-header
+
+    @media (max-width: 768px)
+      width: 100%
+      height: 60px !important
+
+  .grid-content
+
+    flex: 1 auto
+
+    @media (max-width: 768px)
+      width: 100%
+
+
+body
+
+  // Основной компонент ожидания
+  .wait__component
+
+    @include border-box
+
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+    background: $hover-blue-color
+
+    label
+      font-size: .4em
+      padding: 1%
+      opacity: 0
+      display: inline-block
+      background: $clear-white-color
+      border-radius: 50%
+
+    $key-frames-ms: 600ms, 500ms, 400ms, 300ms, 200ms, 100ms
+
+    @each $current-ms in $key-frames-ms
+      $i: index($key-frames-ms, $current-ms)
+      label:nth-child(#{$i})
+        -webkit-animation: loader 3s $current-ms infinite ease-in-out
+        animation: loader 3s $current-ms infinite ease-in-out
+
+    @keyframes loader
+      0%
+        opacity: 0
+        transform: translateX(-300px) scale(1)
+      33%
+        opacity: 1
+        transform: translateX(0px) scale(2)
+      66%
+        opacity: 1
+        transform: translateX(0px) scale(1)
+      100%
+        opacity: 0
+        transform: translateX(300px) scale(2)
+
+    @-webkit-keyframes loader
+      0%
+        opacity: 0
+        -webkit-transform: translateX(-300px)
+
+      33%
+        opacity: 1
+        -webkit-transform: translateX(0px)
+      66%
+        opacity: 1
+        -webkit-transform: translateX(0px)
+      100%
+        opacity: 0
+        -webkit-transform: translateX(300px)
+
+
+  //  Основной компонент авторизации пользователя
+  .login__component
+    height: 100%
+    background: linear-gradient(to bottom, rgba(28, 58, 153, 0.8) 0%, rgba(28, 58, 153, 0.8) 100%), 50% 0/cover url(../images/background_astana.jpg)
+    display: flex
+    justify-content: center
+    align-items: center
+
+    & *
+
+      @include border-box
+
+    .login__component__form
+
+      color: $login-component-font-color
+      margin: 0 auto
+      max-width: 490px
+      width: 100%
+      padding: 65px 55px 55px
+      position: relative
+      border-radius: 7px
+      background-color: $login-component-background-color
+      box-shadow: $login-component-box-shadow
+
+      .login__component__logo
+        position: absolute
+        left: 50%
+        margin-left: -64px
+        top: -45px
+        border-radius: 7px
+        box-shadow: $login-component-logo-box-shadow
+
+      label
+        color: $login-component-label-color
+        text-transform: uppercase
+        margin-bottom: 7px
+        display: inline-block
+
+      input[type=text],
+      input[type=password]
+        color: $login-component-label-color
+        display: block
+        background-color: transparent
+        border: 2px #d1d9e6 solid
+        border-radius: 5px
+        padding: 15px
+        margin-bottom: 24px
+        width: 100%
+
+        &::-webkit-input-placeholder
+          color: $clear-white-color
+        &::-moz-placeholder
+          color: $clear-white-color
+        &:-moz-placeholder
+          color: $clear-white-color
+        &:-ms-input-placeholder
+          color: $clear-white-color
+
+      input[type=submit]
+        border: none
+        border-radius: 20px
+        color: $login-input-color
+        cursor: pointer
+        font-weight: bold
+        padding: 12px 25px
+        text-transform: uppercase
+        font-size: 15px
+        background: $login-input-background
+        box-shadow: 0 11px 65px 0 $login-input-box-shadow-color
+
+  // Стили логотипа
+  .logo-block
+    @include border-box
+    padding: 25px
+    background: $light-blue-color
+
+
+  // Стили основной навигационной панели
+  .main-nav__component
+
+    .main-nav__component__menu
+      margin: 0 !important
+      padding: 0 !important
+      list-style-type: none !important
+
+      & > li
+        background: $mute-blue-color
+        box-sizing: border-box
+        color: $mute-purple-color
+        font-size: .9em
+        font-family: "PT Sans Caption Bold"
+        position: relative
+        transition: all .2s
+
+        &.active
+          background: $active-blue-color
+          color: $clear-white-color
+          &:after
+            content: ""
+            position: absolute
+            margin-top: -10px
+            right: 0
+            top: 50%
+            width: 0
+            height: 0
+            border-top: 10px solid transparent
+            border-right: 10px solid #eee
+            border-bottom: 10px solid transparent
+
+        &:not(.active):hover
+          background: $hover-blue-color
+          color: $clear-white-color
+
+        & > a
+          box-sizing: border-box
+          padding: 15px
+          width: 100%
+          display: inline-block
+          text-decoration: none !important
+          color: inherit !important
+
+          & > span
+            font-size: 1.2em
+            margin-right: 5px
+
+  // Стили основного хедера
+  .main-header__component
+    @include border-box
+    width: 100%
+    height: 100%
+    padding: 10px 30px
+
+    @media (max-width: 728px)
+      padding: 5px
+
+    label.search_label
+      color: $mute-font-color
+      font-size: .95em
+
+      & select
+        background: transparent
+        border: none !important
+        color: $light-blue-color
+
+    input
+      color: $mute-font-color
+      border: 1px solid $mute-gray-color !important
+      border-radius: 3px
+      padding: 5px 10px
+      font-size: .90em
+
+    button[type=submit]
+      background: transparent !important
+      border: none !important
+      color: $mute-font-color
+      padding: 0 15px
+
+    .helper-header-panel
+
+      a
+        text-decoration: none !important
+
+      a.fast-task,
+      a.fast-client,
+      a.fast-union-client,
+      a.fast-logout-link
+        display: block
+        color: $mute-font-color
+        margin: 0 10px
+        font-size: 1.1em
+
+      .avatar-small-header
+        height: 40px
+        width: 40px
+        background-size: cover
+        background-position: center center
+        margin: 0 10px !important
+        border-radius: 5px
+
+      a.fast-cabinet-link
+        color: $mute-font-color !important
+        margin-right: 20px
+
+
+  // Компонент списка клиентов
+  .client-list__component
+
+    .client-list__component__list
+      list-style-type: none !important
+      margin: 0 !important
+      padding: 5px !important
+
+      & > li
+
+        &:hover
+
+          & > a
+            background: $hover-link-color
+
+        &.active
+
+          & > a
+            background: $second-blue-color
+            color: $clear-white-color
+
+        & > a
+          width: 100%
+          padding: 5px 15px
+          display: inline-block
+          text-decoration: none !important
+          color: $mute-font-color
+          font-size: .9em
+
+  // Компонент ленты событий
+  .timeline__component
+
+    & .main__component__body
+      padding-right: 20px
+
+    .timeline__component__item
+
+      width: 100%
+      margin: 10px 0
+      @include border-box
+
+      .timeline__component__item-header
+
+        @include border-box
+
+        padding: 5px 10px 10px 10px
+        font-size: 1.2em
+        font-family: "PT Sans Caption Bold"
+        color: $mute-font-color
+
+      .timeline__component__item-body
+
+        @include border-box
+
+        padding: 5px 10px
+
+        border: 1px solid $border-gray-color
+
+        margin-bottom: 10px
+
+        box-shadow: 5px 0 10px $shadow-header
+
+        line-height: 1.4em
+
+  // Компонент ленты задача
+  .taskline__component
+
+    .taskline__component__item
+
+      @include border-box
+
+      border: 1px solid $border-gray-color
+      box-shadow: 5px 0 10px $shadow-header
+
+      padding: 10px
+
+      margin-bottom: 10px
+
+      font-size: .9em
+
+      &:first-child
+        margin-top: 10px
+
+      &  button
+        color: $clear-white-color
+        background-color: $second-blue-color
+        width: 100%
+        font-size: 1.2em
+        line-height: 1.2em
+        border: 0 !important
+        padding: 10px 0
+
+        @include hover-main-color($second-blue-color)
+
+    .taskline__component__metadata
+      @include border-box
+
+      & > dt
+        font-size: .90em
+        line-height: 1.2em
+        margin-top: 15px
+        color: $description-gray-color
+
+      & > dd
+        font-size: .95em
+        padding: 0 0 5px 0 !important
+        margin: 0 !important
+        color: $mute-font-color
+        border-bottom: 1px solid $description-gray-color
+
+  // Компонент обзора клиента
+  .client-view__component
+
+    .client-view__component__list
+
+      margin: 0 !important
+
+      & > dt
+        color: $description-gray-color
+        font-size: .9em
+        line-height: 1.3em
+        margin-top: 10px
+
+        &:first-child
+          margin-top: 0 !important
+
+      & > dd
+        line-height: 1.4em
+        font-size: 1em
+        color: $mute-font-color
+        margin-left: 0 !important
+
+        & a
+          color: $mute-blue-color
+          text-decoration: none !important
+
+    .client-view__component__activities-list
+
+      .client-view__component__activities-list__item
+
+        &:first-child
+          margin-top: 0
+
+        @include border-box
+
+        margin-top: 10px
+        background-color: $activity-background-color
+        padding: 10px
+        color: $mute-font-color
+
+        article
+
+          font-size: .85em
+
+        dl
+          margin: 5px 0
+
+          dt
+            font-size: .8em
+            color: $description-gray-color
+
+          dd
+            font-size: .85em
+            margin-left: 0 !important
+
+            a
+              text-decoration: none
+              color: $mute-blue-color
+
+  // Список сделок
+  .deals__component
+
+    height: 100%
+
+    .main__component__body
+      padding: 0 !important
+
+      .col-sm-1.col-md-1.col-lg-1
+        padding: 0 !important
+
+    .deals__component__list
+      height: 100%
+      display: flex
+      flex-flow: row
+      overflow-x: auto
+      overflow-y: hidden
+
+      @include style-scrollbar
+
+      .deals__component__container
+        flex: 1 0 20%
+        overflow-y: auto
+        overflow-x: hidden
+        padding: 5px
+
+        @include border-box
+
+        border-right: 1px solid $description-gray-color
+
+        &:first-child
+          border-left: 0 !important
+
+        &:last-child
+          border-right: 0 !important
+
+        .deals__component__container__title
+
+          margin: -5px -5px 0 -5px
+
+          h3
+            padding: 5px
+            margin: 5px 0
+            text-align: center
+
+        .deals__component__item
+
+          @include border-box
+
+          -webkit-user-select: none
+          -moz-user-select: none
+          -ms-user-select: none
+          margin-bottom: 10px
+          padding: 5px
+          background-color: $activity-background-color
+
+          &:hover
+
+            cursor: move
+
+          h4
+            font-size: 1em
+            margin: 0 0 5px !important
+
+          .deals__item__status
+            margin: -5px -5px 5px
+            padding: 3px
+            color: $mute-font-color
+            text-align: center
+
+            &.deals__item__status--work
+              background-color: $deal-status-work-color
+
+            &.deals__item__status--fail
+              background-color: $deal-status-fail-color
+
+            &.deals__item__status--done
+              background-color: $deal-status-done-color
+
+          a.deals__component__item--link
+
+            @include border-box
+
+            display: block
+            text-align: center
+
+            border: 1px solid $mute-font-color
+            color: $mute-font-color
+            text-decoration: none !important
+            padding: 3px
+            transition: all .3s
+
+            &:hover
+
+              background: $light-blue-color
+              color: $clear-white-color

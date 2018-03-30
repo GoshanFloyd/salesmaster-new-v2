@@ -1,0 +1,26 @@
+<div class="client-list__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Список клиентов</h3>
+    <button class="main__component__header__helper-button" [routerLink]="'/contacts/main/add'"><span class="oi" data-glyph="plus"></span></button>
+  </div>
+  <form class="main__component__helper-panel">
+    <input type="text" placeholder="Ваш запрос...">
+    <select>
+      <option value="" disabled selected>-- Компания --</option>
+      <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
+    </select>
+    <select>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+    </select>
+    <input type="submit" value="Найти">
+  </form>
+  <div class="main__component__body">
+    <ul class="client-list__component__list">
+      <li *ngFor="let item of clients | async"><a [routerLink]='item.id'>{{item.title}}</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.grid-row
+  display: flex !important
+  flex-flow: row !important
+  flex-wrap: wrap !important
+  flex: 1 auto
+  @include border-box
+
+  @for $i from 1 through 10
+    $width: percentage(1 / $i)
+
+    .col-sm-#{$i}
+      @media (max-width: 768px)
+        @include border-box
+        padding: 10px
+        @if $i == 2
+          width: percentage(1 / $i) !important
+        @else if $i == 3
+          width: percentage(1 / $i) !important
+        @else if $i == 4
+          width: percentage(1 / $i) !important
+        @else
+          width: 100% !important
+
+    .col-md-#{$i}
+      @include border-box
+      padding: 10px
+      width: $width
+
+    .col-lg-#{$i}
+      @media (min-width: 1220px)
+        @include border-box
+        padding: 10px
+        width: $width !important

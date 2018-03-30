@@ -1,0 +1,13 @@
+<div class="login__component">
+  <form class="login__component__form" (submit)="loginUser()">
+    <img src="../../../assets/images/logo-small.png" alt="" class="login__component__logo">
+
+    <label for="login">EMAIL</label>
+    <input id="login" name="login" type="text" [(ngModel)]="loginInfo.username" placeholder="Your login">
+
+    <label for="password">PASSWORD</label>
+    <input id="password" name="password" type="password" [(ngModel)]="loginInfo.password" placeholder="Your password">
+
+    <input type="submit" value="Войти">
+  </form>
+</div>

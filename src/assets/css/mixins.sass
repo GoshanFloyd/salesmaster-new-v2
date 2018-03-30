@@ -1,0 +1,21 @@
+@mixin border-box
+  box-sizing: border-box !important
+
+@mixin display-block
+  display: block !important
+
+@mixin style-scrollbar
+  &::-webkit-scrollbar
+    width: 5px
+    background-color: $scrollbar-background-color
+
+    @media (max-width: 768px)
+      width: 10px
+
+  &::-webkit-scrollbar-thumb
+    background-color: rgba($second-blue-color, .5)
+
+@mixin hover-main-color($color)
+  transition: all .3s
+  &:hover
+    background-color: rgba($color, .7)
