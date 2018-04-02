@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { TokenGuard} from '../guards/token.guard';
 import { ContactsComponent} from '../components/contacts.component/contacts.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes)],
   providers: [TokenGuard, ClientsRepository, ClientsService, ClientsRepository],
   declarations:
     [

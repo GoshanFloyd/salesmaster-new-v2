@@ -7,6 +7,7 @@
 @import "mobile"
 @import "helpers"
 @import "components"
+@import "forms"
 
 // Определяем основые стили разметки тега html и body
 html, body
@@ -423,7 +424,8 @@ body
 
     .client-view__component__list
 
-      margin: 0 !important
+      &:first-child
+        margin: 0 !important
 
       & > dt
         color: $description-gray-color
@@ -573,3 +575,52 @@ body
 
               background: $light-blue-color
               color: $clear-white-color
+
+  .client-list__component__form-row
+
+    input, select
+      width: 100%
+      @include border-box
+
+  .list-fields__component
+    dd > div
+      padding: 3px 0
+
+    .list-fields__component__controls
+
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-wrap: wrap
+
+      & > *
+        margin-top: 10px !important
+
+      input[type='text']
+
+        @extend .input-add
+
+        flex: 1 1 45%
+        width: 45%
+        box-sizing: border-box
+        &:first-child
+          margin-right: 3px
+
+      select
+        @extend .select-add
+        flex: 1 0 65%
+        box-sizing: border-box
+        margin-right: 5px
+
+      button
+        @extend .button-standard
+        color: white !important
+        flex: 1 0 30%
+        padding: 0 !important
+        height: 32px !important
+
+    span.oi
+      &:hover
+        cursor: pointer
+
+

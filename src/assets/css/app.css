@@ -1248,6 +1248,9 @@ th {
   .overflow-y::-webkit-scrollbar-thumb {
     background-color: rgba(0, 168, 230, 0.5); }
 
+.mt-small {
+  margin-top: 10px !important; }
+
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -1313,6 +1316,46 @@ th {
     @media (max-width: 768px) {
       .main__component .main__component__body {
         max-height: 260px; } }
+
+.input-add, body .list-fields__component .list-fields__component__controls input[type='text'] {
+  max-height: 35px;
+  height: 100%;
+  padding: 4px 6px;
+  background: #fff;
+  box-sizing: border-box; }
+
+.select-add, body .list-fields__component .list-fields__component__controls select {
+  max-height: 35px;
+  height: 100%;
+  padding: 4px 6px;
+  background: #fff;
+  box-sizing: border-box; }
+
+.textarea-add {
+  width: 100%;
+  max-width: 100%;
+  height: 105px;
+  max-height: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+  resize: none; }
+
+.button-standard, .button-danger, body .list-fields__component .list-fields__component__controls button {
+  width: 100%;
+  box-sizing: border-box;
+  color: white;
+  background: #3756b9;
+  border: 0 !important;
+  padding: 10px 6px;
+  text-transform: uppercase;
+  transition: all 0.3s; }
+  .button-standard:hover, .button-danger:hover, body .list-fields__component .list-fields__component__controls button:hover {
+    background: rgba(55, 86, 185, 0.8); }
+
+.button-danger {
+  background: #da314b !important; }
+  .button-danger:hover {
+    background: rgba(218, 49, 75, 0.8); }
 
 html, body {
   box-sizing: border-box !important;
@@ -1643,23 +1686,23 @@ body .taskline__component .taskline__component__metadata {
     margin: 0 !important;
     color: #444;
     border-bottom: 1px solid #999; }
-body .client-view__component .client-view__component__list {
+body .client-view__component .client-view__component__list:first-child {
   margin: 0 !important; }
-  body .client-view__component .client-view__component__list > dt {
-    color: #999;
-    font-size: 0.9em;
-    line-height: 1.3em;
-    margin-top: 10px; }
-    body .client-view__component .client-view__component__list > dt:first-child {
-      margin-top: 0 !important; }
-  body .client-view__component .client-view__component__list > dd {
-    line-height: 1.4em;
-    font-size: 1em;
-    color: #444;
-    margin-left: 0 !important; }
-    body .client-view__component .client-view__component__list > dd a {
-      color: #3756b9;
-      text-decoration: none !important; }
+body .client-view__component .client-view__component__list > dt {
+  color: #999;
+  font-size: 0.9em;
+  line-height: 1.3em;
+  margin-top: 10px; }
+  body .client-view__component .client-view__component__list > dt:first-child {
+    margin-top: 0 !important; }
+body .client-view__component .client-view__component__list > dd {
+  line-height: 1.4em;
+  font-size: 1em;
+  color: #444;
+  margin-left: 0 !important; }
+  body .client-view__component .client-view__component__list > dd a {
+    color: #3756b9;
+    text-decoration: none !important; }
 body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item {
   box-sizing: border-box !important;
   margin-top: 10px;
@@ -1754,5 +1797,34 @@ body .deals__component {
           body .deals__component .deals__component__list .deals__component__container .deals__component__item a.deals__component__item--link:hover {
             background: #0073e6;
             color: #fff; }
+body .client-list__component__form-row input, body .client-list__component__form-row select {
+  width: 100%;
+  box-sizing: border-box !important; }
+body .list-fields__component dd > div {
+  padding: 3px 0; }
+body .list-fields__component .list-fields__component__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; }
+  body .list-fields__component .list-fields__component__controls > * {
+    margin-top: 10px !important; }
+  body .list-fields__component .list-fields__component__controls input[type='text'] {
+    flex: 1 1 45%;
+    width: 45%;
+    box-sizing: border-box; }
+    body .list-fields__component .list-fields__component__controls input[type='text']:first-child {
+      margin-right: 3px; }
+  body .list-fields__component .list-fields__component__controls select {
+    flex: 1 0 65%;
+    box-sizing: border-box;
+    margin-right: 5px; }
+  body .list-fields__component .list-fields__component__controls button {
+    color: white !important;
+    flex: 1 0 30%;
+    padding: 0 !important;
+    height: 32px !important; }
+body .list-fields__component span.oi:hover {
+  cursor: pointer; }
 
 /*# sourceMappingURL=app.css.map */

@@ -1,0 +1,45 @@
+$input-background: #fff
+$button-standard: #3756b9
+$button-danger: #da314b
+
+.input-add
+  max-height: 35px
+  height: 100%
+  padding: 4px 6px
+  background: $input-background
+  box-sizing: border-box
+
+.select-add
+  max-height: 35px
+  height: 100%
+  padding: 4px 6px
+  background: $input-background
+  box-sizing: border-box
+
+.textarea-add
+  width: 100%
+  max-width: 100%
+  height: 105px
+  max-height: 100%
+  padding: 4px
+  box-sizing: border-box
+  resize: none
+
+.button-standard
+  width: 100%
+  box-sizing: border-box
+  color: white
+  background: $button-standard
+  border: 0 !important
+  padding: 10px 6px
+  text-transform: uppercase
+  transition: all .3s
+  &:hover
+    background: rgba($button-standard, .8)
+
+.button-danger
+  @extend .button-standard
+  background: $button-danger !important
+  &:hover
+    background: rgba($button-danger, .8)
+

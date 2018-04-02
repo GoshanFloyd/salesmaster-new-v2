@@ -11,6 +11,17 @@ export class ClientsService {
 
   constructor (private _httpClient: HttpClient) { }
 
+  public createClient(obj: any): Observable<ClientModel> {
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.post<ClientModel>(`${this.baseProtocol}${this.baseURL}clients`, {
+      params: obj,
+      headers: headers
+    });
+  }
+
   public getContacts(obj?: any): Observable<ClientModel[]> {
 
     const headers = new HttpHeaders({
