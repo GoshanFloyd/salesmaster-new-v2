@@ -12,9 +12,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {ContactsModule} from './modules/contacts.module';
 import {UserService} from './services/user.service';
 import {UserRepository} from './repositories/user.repository';
-import {ClientsRepository} from './repositories/clients.repository';
-import {ClientsService} from './services/clients.service';
-
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,7 +24,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    WaitComponent
+    WaitComponent,
   ],
   imports: [
     BrowserModule,

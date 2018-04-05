@@ -13,6 +13,8 @@ import {HeaderComponent} from '../components/header.component/header.component';
 import {NavigationComponent} from '../components/navigation.component/navigation.component';
 import {DealsKanbanComponent} from '../components/deals-kanban.component/deals-kanban.component';
 import {ClientAddComponent} from '../components/client-add.component/client-add.component';
+import {ClientSelectComponent} from '../components/client.select.component/client.select.component';
+import {ModalStandardComponent} from '../components/modal.standard/modal.standard.component';
 
 const routes: Routes = [
   {
@@ -41,7 +43,9 @@ const routes: Routes = [
       HeaderComponent,
       NavigationComponent,
       DealsKanbanComponent,
-      ClientAddComponent
+      ClientAddComponent,
+      ClientSelectComponent,
+      ModalStandardComponent
     ]
 })
 

@@ -1,0 +1,8 @@
+<div class="client-select__component">
+  <ul *ngIf="clientsParent | async">
+    <li *ngFor="let client of clientsParent | async">
+      <span>{{client.title}}</span>
+      <button class="button-standard" (click)="setParentClient(client)">Выбрать</button>
+    </li>
+  </ul>
+</div>

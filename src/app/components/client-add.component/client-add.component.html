@@ -11,6 +11,11 @@
             <dd>
               <input class="input-add" type="text" name="title" placeholder="Наименование клиента" formControlName="title">
             </dd>
+            <div class="error-block">
+              <span  *ngIf="newClient.controls['title'].hasError('required')">
+                Укажите наименования клиента!
+              </span>
+            </div>
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Компания:</dt>
@@ -20,11 +25,22 @@
                 <option *ngFor="let item of user.company" [ngValue]="item.title">{{item.title}}</option>
               </select>
             </dd>
+            <div class="error-block">
+              <span *ngIf="newClient.controls['company'].hasError('required')">
+                Укажите компанию клиента!
+              </span>
+            </div>
+          </div>
+          <div class="client-view__component__list client-list__component__form-row mt-small" *ngIf="parentClient">
+            <dt>Клиент-родитель:</dt>
+            <dd>
+              {{parentClient.title}}
+            </dd>
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Тип клиента:</dt>
             <dd>
-              <select class="select-add" name="type" formControlName="type">
+              <select class="select-add" name="type" formControlName="type" (change)="changeClientType($event)">
                 <option disabled selected value="null"> -- Выберите тип клиента --</option>
                 <option value="fizlico">Физическое лицо</option>
                 <option value="yurlico">Юридическое лицо</option>
@@ -35,10 +51,15 @@
             <dt>Тип физ.лица:</dt>
             <dd>
               <select class="select-add" name="fizlico_type" formControlName="fizlico_type">
-                <option disabled selected value="null"> -- Выберите тип физ.лица --</option>
+                <option  value="null" disabled selected> -- Выберите тип физ.лица --</option>
                 <option *ngFor="let type of types_fizlico" [ngValue]="type.type">{{type.value}}</option>
               </select>
             </dd>
+            <div class="error-block">
+              <span *ngIf="newClient.controls['fizlico_type'].hasError('required')">
+                Необходимо указать тип физического лица!
+              </span>
+            </div>
           </div>
           <div *ngIf="newClient.controls['type'].value == 'yurlico'" class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Тип юр.лица:</dt>
@@ -48,6 +69,11 @@
                 <option *ngFor="let type of types_yurlico" [ngValue]="type.type">{{type.value}}</option>
               </select>
             </dd>
+            <div class="error-block">
+              <span *ngIf="newClient.controls['yurlico_type'].hasError('required')">
+                Необходимо указать тип юридического лица!
+              </span>
+            </div>
           </div>
           <div *ngIf="newClient.controls['type'].value == 'yurlico'" class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Форма юр.лица:</dt>
@@ -57,12 +83,22 @@
                 <option *ngFor="let form of forms_yurlico" [ngValue]="form.type">{{form.value}}</option>
               </select>
             </dd>
+            <div class="error-block">
+              <span *ngIf="newClient.controls['yurlico_form'].hasError('required')">
+                Необходимо указать форму юридического лица!
+              </span>
+            </div>
+          </div>
+          <div class="client-view__component_list client-list__component_form-row mt-small" data-custom-close="modal-1" >
+            <button class="button-standard" (click)="openSelectParentComponent(company)">
+              {{ parentClient ? 'Удалить клиента-родителя' : 'Добавить клиента-родителя'}}
+            </button>
           </div>
           <div class="client-view__component_list client-list__component_form-row mt-small">
-            <input type="submit" class="button-standard" value="Сохранить">
+            <input [disabled]="newClient.invalid" type="submit" (click)="createClient()" class="button-standard" value="Сохранить">
           </div>
           <div class="client-view__component_list client-list__component_form-row mt-small">
-            <button class="button-danger">
+            <button class="button-danger" (click)="returnMainPage()">
               Отменить
             </button>
           </div>
@@ -95,6 +131,14 @@
                    *ngFor="let item of newClient.controls.phones.controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
                 <input type="text" placeholder="Телефон" name="number" formControlName="number">
+                <div class="error-block" >
+                  <span *ngIf="newClient.controls.phones.controls[i].controls['number'].hasError('required')">
+                    Укажите телефон
+                  </span>
+                  <span *ngIf="newClient.controls.phones.controls[i].controls['owner_name'].hasError('required')">
+                    Укажите наименования телефонного контакта клиента
+                  </span>
+                </div>
                 <select  name="type" formControlName="type">
                   <option *ngFor="let type of type_phones" [ngValue]="type.type">{{type.value}}</option>
                 </select>
@@ -105,32 +149,46 @@
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small list-fields__component">
             <dt>Emails:</dt>
-            <dd>
-              <div class="list-fields__component__controls">
-                <input type="text" placeholder="Имя">
-                <input type="text" placeholder="Телефон">
-                <select>
-                  <option value="">Hello</option>
+            <dd formArrayName="emails">
+              <div class="list-fields__component__controls"
+                   *ngFor="let item of newClient.controls.emails.controls; let i = index;" [formGroupName]="i">
+                <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
+                <input type="text" placeholder="email" name="address" formControlName="address">
+                <div class="error-block" >
+                  <span *ngIf="newClient.controls.emails.controls[i].controls['address'].hasError('email')">
+                    Введите корректный email-адресс
+                  </span>
+                  <span *ngIf="newClient.controls.emails.controls[i].controls['owner_name'].hasError('required')">
+                    Укажите наименования контакта email-адреса
+                  </span>
+                </div>
+                <select name="type" formControlName="type">
+                  <option *ngFor="let type of type_emails" [ngValue]="type.type">{{type.value}}</option>
                 </select>
+                <button class="button-danger" (click)="deleteEmail(i)"><span class="oi" data-glyph="x"></span></button>
               </div>
-              <button class="button-standard"><span class="oi" data-glyph="plus"></span></button>
+              <button (click)="addEmail()" class="button-standard"><span class="oi" data-glyph="plus"></span></button>
             </dd>
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small list-fields__component">
             <dt>Кастомные поля:</dt>
-            <dd>
-              <div class="list-fields__component__controls">
-                <input type="text" placeholder="Имя">
-                <input type="text" placeholder="Телефон">
+            <dd formArrayName="customfields">
+              <div class="list-fields__component__controls"
+                   *ngFor="let item of newClient.controls.customfields.controls; let i = index;" [formGroupName]="i">
+                <input type="text" placeholder="Ключ"  name="key" formControlName="key">
+                <input type="text" placeholder="значение" name="value" formControlName="value">
+                <button class="button-danger" (click)="deleteCustomfield(i)"><span class="oi" data-glyph="x"></span></button>
               </div>
-              <button class="button-standard"><span class="oi" data-glyph="plus"></span></button>
+              <button (click)="addCustomfield()" class="button-standard"><span class="oi" data-glyph="plus"></span></button>
             </dd>
           </div>
 
         </div>
-        <p>Form value: {{ newClient.value | json }}</p>
       </form>
     </div>
   </div>
 </div>
 
+<app-modal-standard>
+  <app-client-select (onSetParent)="setParentClient($event)"></app-client-select>
+</app-modal-standard>

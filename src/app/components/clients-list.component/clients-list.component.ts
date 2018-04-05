@@ -15,7 +15,7 @@ export class ClientsListComponent {
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
     this._clientsRepository.getContacts({
-      company__id: this.user.company[0].id
+      company_id: this.user.company[0].id
     });
   }
 
@@ -25,5 +25,12 @@ export class ClientsListComponent {
 
   get clients(): Observable<ClientModel[]> {
     return this._clientsRepository.clients__main;
+  }
+
+  public changeCompany(event: any) {
+    console.log(event.target.value);
+    this._clientsRepository.getContacts({
+      company_title: event.target.value
+    });
   }
 }

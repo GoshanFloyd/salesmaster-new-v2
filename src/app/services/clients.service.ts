@@ -12,14 +12,13 @@ export class ClientsService {
   constructor (private _httpClient: HttpClient) { }
 
   public createClient(obj: any): Observable<ClientModel> {
-    const headers = new HttpHeaders({
+
+    const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<ClientModel>(`${this.baseProtocol}${this.baseURL}clients`, {
-      params: obj,
-      headers: headers
-    });
+    return this._httpClient.post<ClientModel>(`${this.baseProtocol}${this.baseURL}clients`,  obj, {headers: header},
+    );
   }
 
   public getContacts(obj?: any): Observable<ClientModel[]> {
@@ -28,7 +27,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientModel[]>(`${this.baseProtocol}${this.baseURL}clients`,{
+    return this._httpClient.get<ClientModel[]>(`${this.baseProtocol}${this.baseURL}clients`, {
       params: obj ? obj : null,
       headers: headers
     });
@@ -40,7 +39,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientModel>(`${this.baseProtocol}${this.baseURL}clients/${id}`,{
+    return this._httpClient.get<ClientModel>(`${this.baseProtocol}${this.baseURL}clients/${id}`, {
       headers: headers
     });
   }

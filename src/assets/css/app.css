@@ -1251,6 +1251,12 @@ th {
 .mt-small {
   margin-top: 10px !important; }
 
+.new-caption__helper {
+  float: right;
+  background: #da6170;
+  color: white;
+  padding: 3px 5px; }
+
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -1322,14 +1328,16 @@ th {
   height: 100%;
   padding: 4px 6px;
   background: #fff;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  border: 1px solid #444 !important; }
 
 .select-add, body .list-fields__component .list-fields__component__controls select {
   max-height: 35px;
   height: 100%;
   padding: 4px 6px;
   background: #fff;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  border: 1px solid #444 !important; }
 
 .textarea-add {
   width: 100%;
@@ -1338,24 +1346,46 @@ th {
   max-height: 100%;
   padding: 4px;
   box-sizing: border-box;
-  resize: none; }
+  resize: none;
+  border: 1px solid #444 !important; }
 
 .button-standard, .button-danger, body .list-fields__component .list-fields__component__controls button {
   width: 100%;
   box-sizing: border-box;
   color: white;
-  background: #3756b9;
+  background: #00a8e6;
   border: 0 !important;
   padding: 10px 6px;
   text-transform: uppercase;
   transition: all 0.3s; }
   .button-standard:hover, .button-danger:hover, body .list-fields__component .list-fields__component__controls button:hover {
-    background: rgba(55, 86, 185, 0.8); }
+    background: rgba(0, 168, 230, 0.8); }
+  .button-standard:disabled, .button-danger:disabled, body .list-fields__component .list-fields__component__controls button:disabled {
+    background: #eff0f1 !important;
+    color: rgba(0, 0, 0, 0.5); }
 
 .button-danger {
   background: #da314b !important; }
   .button-danger:hover {
     background: rgba(218, 49, 75, 0.8); }
+
+input.ng-invalid,
+select.ng-invalid {
+  background: rgba(218, 49, 75, 0.2) !important; }
+
+.error-block {
+  width: 100%;
+  text-align: left; }
+  .error-block span {
+    display: block;
+    color: #da314b;
+    font-size: 0.8em; }
+    .error-block span:first-child {
+      margin: 4px 0 0 0 !important; }
+    .error-block span:last-child {
+      margin: 0 0 4px 0 !important; }
+    .error-block span:only-child {
+      margin: 4px 0 !important; }
 
 html, body {
   box-sizing: border-box !important;
@@ -1628,6 +1658,7 @@ body .client-list__component .client-list__component__list {
     background: #00a8e6;
     color: #fff; }
   body .client-list__component .client-list__component__list > li > a {
+    box-sizing: border-box;
     width: 100%;
     padding: 5px 15px;
     display: inline-block;
@@ -1807,8 +1838,6 @@ body .list-fields__component .list-fields__component__controls {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap; }
-  body .list-fields__component .list-fields__component__controls > * {
-    margin-top: 10px !important; }
   body .list-fields__component .list-fields__component__controls input[type='text'] {
     flex: 1 1 45%;
     width: 45%;
@@ -1818,13 +1847,30 @@ body .list-fields__component .list-fields__component__controls {
   body .list-fields__component .list-fields__component__controls select {
     flex: 1 0 65%;
     box-sizing: border-box;
-    margin-right: 5px; }
+    margin: 4px 5px 4px 0 !important; }
   body .list-fields__component .list-fields__component__controls button {
     color: white !important;
     flex: 1 0 30%;
     padding: 0 !important;
-    height: 32px !important; }
+    height: 32px !important;
+    margin: 4px 0 !important; }
 body .list-fields__component span.oi:hover {
   cursor: pointer; }
+body .client-select__component ul {
+  box-sizing: border-box;
+  padding: 10px 0 !important;
+  margin: 0 !important;
+  list-style-type: none !important; }
+  body .client-select__component ul li {
+    padding: 5px 10px;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin: 5px 0; }
+    body .client-select__component ul li .button-standard, body .client-select__component ul li .button-danger, body .client-select__component ul li .list-fields__component .list-fields__component__controls button, body .list-fields__component .list-fields__component__controls .client-select__component ul li button {
+      max-width: 120px;
+      width: 100%;
+      font-size: 0.9em;
+      padding: 4px 6px !important;
+      float: right; }
 
 /*# sourceMappingURL=app.css.map */

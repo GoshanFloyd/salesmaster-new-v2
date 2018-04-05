@@ -167,15 +167,20 @@ export class ClientModel{
   }
 
   get datetime_created_format(): string {
-
-    let options = {
+    return this._datetime_created.toLocaleString("ru", {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric'
-    };
+    });
+  }
 
-    return this._datetime_created.toLocaleString("ru", options);
+  get isParent(): boolean {
+    return !this._parent.id ? true : false;
+  }
+
+  get isNewClient(): boolean {
+    return (new Date() - this.datetime_created > 900000) ? false : true;
   }
 }

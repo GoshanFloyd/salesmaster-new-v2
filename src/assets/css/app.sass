@@ -8,6 +8,7 @@
 @import "helpers"
 @import "components"
 @import "forms"
+@import "validation"
 
 // Определяем основые стили разметки тега html и body
 html, body
@@ -331,6 +332,7 @@ body
             color: $clear-white-color
 
         & > a
+          box-sizing: border-box
           width: 100%
           padding: 5px 15px
           display: inline-block
@@ -593,9 +595,6 @@ body
       align-items: center
       flex-wrap: wrap
 
-      & > *
-        margin-top: 10px !important
-
       input[type='text']
 
         @extend .input-add
@@ -610,7 +609,7 @@ body
         @extend .select-add
         flex: 1 0 65%
         box-sizing: border-box
-        margin-right: 5px
+        margin: 4px 5px 4px 0 !important
 
       button
         @extend .button-standard
@@ -618,9 +617,30 @@ body
         flex: 1 0 30%
         padding: 0 !important
         height: 32px !important
+        margin: 4px 0 !important
 
     span.oi
       &:hover
         cursor: pointer
+
+  .client-select__component
+    ul
+      box-sizing: border-box
+      padding: 10px 0 !important
+      margin: 0 !important
+      list-style-type: none !important
+
+      li
+        padding: 5px 10px
+        font-size: 1.2em
+        line-height: 1.2em
+        margin: 5px 0
+
+        .button-standard
+          max-width: 120px
+          width: 100%
+          font-size: .9em
+          padding: 4px 6px !important
+          float: right
 
 

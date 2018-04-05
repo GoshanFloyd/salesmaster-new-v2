@@ -1,6 +1,7 @@
 $input-background: #fff
-$button-standard: #3756b9
+$button-standard: #00a8e6
 $button-danger: #da314b
+$button-disabled: #eff0f1
 
 .input-add
   max-height: 35px
@@ -8,6 +9,7 @@ $button-danger: #da314b
   padding: 4px 6px
   background: $input-background
   box-sizing: border-box
+  border: 1px solid $mute-font-color !important
 
 .select-add
   max-height: 35px
@@ -15,6 +17,7 @@ $button-danger: #da314b
   padding: 4px 6px
   background: $input-background
   box-sizing: border-box
+  border: 1px solid $mute-font-color !important
 
 .textarea-add
   width: 100%
@@ -24,6 +27,7 @@ $button-danger: #da314b
   padding: 4px
   box-sizing: border-box
   resize: none
+  border: 1px solid $mute-font-color !important
 
 .button-standard
   width: 100%
@@ -36,6 +40,9 @@ $button-danger: #da314b
   transition: all .3s
   &:hover
     background: rgba($button-standard, .8)
+  &:disabled
+    background: $button-disabled !important
+    color: rgba(black, .5)
 
 .button-danger
   @extend .button-standard

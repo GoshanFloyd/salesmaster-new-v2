@@ -34,4 +34,8 @@ export class ClientsRepository {
       err => console.log(err)
     );
   }
+
+  public createClient(client: any) {
+    return this._clientService.createClient(client);
+  }
 }
