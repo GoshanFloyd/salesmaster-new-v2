@@ -506,6 +506,8 @@ body
         overflow-y: auto
         overflow-x: hidden
         padding: 5px
+        display: flex
+        flex-flow: column !important
 
         @include border-box
 
@@ -516,6 +518,9 @@ body
 
         &:last-child
           border-right: 0 !important
+
+        .drag-wrapper
+          flex: 1 0 auto
 
         .deals__component__container__title
 
@@ -544,6 +549,7 @@ body
           h4
             font-size: 1em
             margin: 0 0 5px !important
+            word-wrap: break-word
 
           .deals__item__status
             margin: -5px -5px 5px

@@ -181,6 +181,6 @@ export class ClientModel{
   }
 
   get isNewClient(): boolean {
-    return (new Date() - this.datetime_created > 900000) ? false : true;
+    return Date.now() - this.datetime_created.getTime() > 900000 ? false : true;
   }
 }

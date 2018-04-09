@@ -1780,12 +1780,16 @@ body .deals__component {
       overflow-y: auto;
       overflow-x: hidden;
       padding: 5px;
+      display: flex;
+      flex-flow: column !important;
       box-sizing: border-box !important;
       border-right: 1px solid #999; }
       body .deals__component .deals__component__list .deals__component__container:first-child {
         border-left: 0 !important; }
       body .deals__component .deals__component__list .deals__component__container:last-child {
         border-right: 0 !important; }
+      body .deals__component .deals__component__list .deals__component__container .drag-wrapper {
+        flex: 1 0 auto; }
       body .deals__component .deals__component__list .deals__component__container .deals__component__container__title {
         margin: -5px -5px 0 -5px; }
         body .deals__component .deals__component__list .deals__component__container .deals__component__container__title h3 {
@@ -1804,7 +1808,8 @@ body .deals__component {
           cursor: move; }
         body .deals__component .deals__component__list .deals__component__container .deals__component__item h4 {
           font-size: 1em;
-          margin: 0 0 5px !important; }
+          margin: 0 0 5px !important;
+          word-wrap: break-word; }
         body .deals__component .deals__component__list .deals__component__container .deals__component__item .deals__item__status {
           margin: -5px -5px 5px;
           padding: 3px;

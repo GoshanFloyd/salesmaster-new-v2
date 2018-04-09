@@ -15,6 +15,9 @@ import {DealsKanbanComponent} from '../components/deals-kanban.component/deals-k
 import {ClientAddComponent} from '../components/client-add.component/client-add.component';
 import {ClientSelectComponent} from '../components/client.select.component/client.select.component';
 import {ModalStandardComponent} from '../components/modal.standard/modal.standard.component';
+import {DragulaModule} from 'ng2-dragula';
+import {DealService} from '../services/deal.service';
+import {DealStageService} from '../services/dealstage.service';
 
 const routes: Routes = [
   {
@@ -32,8 +35,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes)],
-  providers: [TokenGuard, ClientsRepository, ClientsService, ClientsRepository],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes), DragulaModule],
+  providers:
+    [
+      TokenGuard,
+      ClientsRepository,
+      ClientsService,
+      ClientsRepository,
+      DealService,
+      DealStageService
+    ],
   declarations:
     [
       ContactsPageComponent,
