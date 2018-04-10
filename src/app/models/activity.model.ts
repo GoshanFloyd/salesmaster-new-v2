@@ -83,4 +83,14 @@ export class ActivityModel {
   get datetime_updated(): Date {
     return this._datetime_updated;
   }
+
+  get string_datetime_created(): any {
+    return new Date(this.datetime_created).toLocaleString("ru", {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+  }
 }

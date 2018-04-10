@@ -82,101 +82,22 @@
         </div>
         <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
           <div class="client-view__component__activities-list">
-            <div class="client-view__component__activities-list__item">
+            <div *ngFor="let activity of clientActivities" class="client-view__component__activities-list__item">
               <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
+                {{activity.description}}
               </article>
               <dl>
                 <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
+                <dd>{{activity.type_title}}</dd>
 
                 <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
+                <dd><a href="#">{{activity.employee.fullname}}</a></dd>
 
                 <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
+                <dd>{{activity.string_datetime_created}}</dd>
               </dl>
             </div>
 
-            <div class="client-view__component__activities-list__item">
-              <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
-
-                <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
-
-                <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
-              </dl>
-            </div>
-
-            <div class="client-view__component__activities-list__item">
-              <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
-
-                <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
-
-                <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
-              </dl>
-            </div>
-
-            <div class="client-view__component__activities-list__item">
-              <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
-
-                <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
-
-                <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
-              </dl>
-            </div>
-
-            <div class="client-view__component__activities-list__item">
-              <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
-
-                <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
-
-                <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
-              </dl>
-            </div>
-
-            <div class="client-view__component__activities-list__item">
-              <article>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consequatur culpa deleniti deserunt doloremque, eaque et, ex hic, minima minus nesciunt nobis odit provident saepe sapiente sint temporibus ullam vel?
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>Исходящий первичный звонок</dd>
-
-                <dt>Автор:</dt>
-                <dd><a href="#">Егор Кулик</a></dd>
-
-                <dt>Дата создания:</dt>
-                <dd>22 апреля 2016 г., 12:32</dd>
-              </dl>
-            </div>
           </div>
         </div>
       </div>

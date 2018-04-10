@@ -22,6 +22,7 @@ import {AuthenticationProvider} from '../providers/authentication.provider';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NotificationService} from '../services/notification.service';
 import {DealAddComponent} from '../components/deal-add.component/deal-add.component';
+import {ActivityService} from '../services/activity.service';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
       DealService,
       DealStageService,
       NotificationService,
+      ActivityService,
       { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true },
     ],
   declarations:

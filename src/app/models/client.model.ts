@@ -167,7 +167,7 @@ export class ClientModel{
   }
 
   get datetime_created_format(): string {
-    return this._datetime_created.toLocaleString("ru", {
+    return new Date(this._datetime_created).toLocaleString("ru", {
       year: 'numeric',
       month: 'long',
       day: 'numeric',

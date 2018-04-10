@@ -36,7 +36,7 @@ export class DealsKanbanComponent {
               private _notificationService: NotificationService,
               private _userRepository: UserRepository) {
 
-    dragula.drop.subscribe((value) => {
+    dragula.dropModel.subscribe((value) => {
       this._dealService.updateDeal(this.findDealsById(value[1].id).objectUpdate).subscribe(data => {
         const updatedDeal = new DealModel(data);
         this._notificationService.sendNotification('Сделка обновлена',
@@ -98,7 +98,7 @@ export class DealsKanbanComponent {
     return null;
   }
 
-  private resetMainArray() {
+  private resetMainArray(): void {
     let arrayResetObject = {};
     for (let stage of this._dealStages) {
       arrayResetObject[stage.id] = [];
@@ -106,7 +106,7 @@ export class DealsKanbanComponent {
     this._dealArraySortbale = arrayResetObject;
   }
 
-  public onAddDeal(event: boolean){
+  public onAddDeal(event: boolean): void{
     if (event) {
       this.modalAddDeal.hideModal();
       this.resetMainArray();
