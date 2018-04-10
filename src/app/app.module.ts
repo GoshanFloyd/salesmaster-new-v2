@@ -12,6 +12,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ContactsModule} from './modules/contacts.module';
 import {UserService} from './services/user.service';
 import {UserRepository} from './repositories/user.repository';
+import {NotificationService} from './services/notification.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     TokenGuard,
     AuthService,
     UserService,
-    UserRepository
+    UserRepository,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

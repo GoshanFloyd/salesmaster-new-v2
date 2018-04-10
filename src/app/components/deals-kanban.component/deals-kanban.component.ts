@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {DragulaService} from 'ng2-dragula';
 import {DealStageService} from '../../services/dealstage.service';
 import {DealStageModel} from '../../models/dealstage.model';
 import {DealModel} from '../../models/deal.model';
 import {DealService} from '../../services/deal.service';
+import {NotificationService} from '../../services/notification.service';
+import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
+import {DealAddComponent} from '../deal-add.component/deal-add.component';
+import {UserRepository} from '../../repositories/user.repository';
 
 @Component({
   moduleId: module.id,
@@ -12,6 +16,11 @@ import {DealService} from '../../services/deal.service';
 })
 
 export class DealsKanbanComponent {
+
+  @ViewChild(ModalStandardComponent) modalAddDeal: ModalStandardComponent;
+  @ViewChild(DealAddComponent) dealAddComponent: DealAddComponent;
+
+  public dataToCreateDeal: any = null;
 
   private _client_id: number = null;
   private _company_id: number = null;
@@ -23,16 +32,20 @@ export class DealsKanbanComponent {
 
   constructor(private dragula: DragulaService,
               private _dealStageService: DealStageService,
-              private _dealService: DealService) {
+              private _dealService: DealService,
+              private _notificationService: NotificationService,
+              private _userRepository: UserRepository) {
 
     dragula.drop.subscribe((value) => {
-      console.log(this.findDealsById(value[1].id).objectUpdate);
       this._dealService.updateDeal(this.findDealsById(value[1].id).objectUpdate).subscribe(data => {
+        const updatedDeal = new DealModel(data);
+        this._notificationService.sendNotification('Сделка обновлена',
+          `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`)
       })
     });
   }
 
-  public initKanban(client_id: number, company_id: number) {
+  public initKanban(client_id: number, company_id: number): void {
     if (this._client_id != client_id || this._company_id != company_id) {
       this._client_id = client_id;
       this._company_id = company_id;
@@ -40,7 +53,7 @@ export class DealsKanbanComponent {
     }
   }
 
-  private getStages(company_id: number) {
+  private getStages(company_id: number): void {
     this._dealStageService.getStages({
       'company_id': company_id
     }).subscribe(data => {
@@ -53,7 +66,7 @@ export class DealsKanbanComponent {
     })
   }
 
-  private getDeals(client_id: number) {
+  private getDeals(client_id: number): void {
     this._dealService.getDeals({
       'client_id': client_id
     }).subscribe(data => {
@@ -74,5 +87,39 @@ export class DealsKanbanComponent {
       }
     }
     return null;
+  }
+
+  private findStage(id: number): DealStageModel {
+    for (let stage of this._dealStages) {
+      if (stage.id == id) {
+        return stage;
+      }
+    }
+    return null;
+  }
+
+  private resetMainArray() {
+    let arrayResetObject = {};
+    for (let stage of this._dealStages) {
+      arrayResetObject[stage.id] = [];
+    }
+    this._dealArraySortbale = arrayResetObject;
+  }
+
+  public onAddDeal(event: boolean){
+    if (event) {
+      this.modalAddDeal.hideModal();
+      this.resetMainArray();
+      this.getDeals(this._client_id);
+    }
+  }
+
+  private showAddModal(event: any): void {
+    this.dataToCreateDeal = {
+      'employee': this._userRepository.getMyUser().id,
+      'client': this._client_id,
+      'stages': this._dealStages
+    }
+    this.modalAddDeal.showModal();
   }
 }

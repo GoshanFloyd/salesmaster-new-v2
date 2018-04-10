@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {Router} from '@angular/router';
-import {UserService} from './services/user.service';
-import {UserRepository} from './repositories/user.repository';
+import {NotificationService} from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +11,9 @@ import {UserRepository} from './repositories/user.repository';
 export class AppComponent implements OnInit {
   constructor (private _authService: AuthService,
                private _router: Router,
-               private _userRepository: UserRepository) {}
+               private _notificationService: NotificationService) {}
 
-  ngOnInit() {
+  ngOnInit( ) {
     this._router.navigateByUrl('/');
   }
 }

@@ -1,5 +1,6 @@
 <div class="modal-standard-wrapper {{ isVisible ? 'on-open-modal' : ''}}" (click)="!$event.target.classList.contains('modal-standard-wrapper') || hideModal()">
   <div class="modal-container">
+    <h3>{{ title || 'Типичный заголовок модали'}}</h3>
     <ng-content></ng-content>
   </div>
 </div>

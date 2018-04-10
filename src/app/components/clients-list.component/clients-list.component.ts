@@ -28,7 +28,6 @@ export class ClientsListComponent {
   }
 
   public changeCompany(event: any) {
-    console.log(event.target.value);
     this._clientsRepository.getContacts({
       company_title: event.target.value
     });

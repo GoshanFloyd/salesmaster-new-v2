@@ -1324,20 +1324,24 @@ th {
         max-height: 260px; } }
 
 .input-add, body .list-fields__component .list-fields__component__controls input[type='text'] {
-  max-height: 35px;
+  max-height: 45px;
   height: 100%;
   padding: 4px 6px;
   background: #fff;
   box-sizing: border-box;
-  border: 1px solid #444 !important; }
+  border: 1px solid #444 !important;
+  font-size: 1em;
+  line-height: 1.2em; }
 
 .select-add, body .list-fields__component .list-fields__component__controls select {
-  max-height: 35px;
+  max-height: 45px;
   height: 100%;
   padding: 4px 6px;
   background: #fff;
   box-sizing: border-box;
-  border: 1px solid #444 !important; }
+  border: 1px solid #444 !important;
+  font-size: 1em;
+  line-height: 1.2em; }
 
 .textarea-add {
   width: 100%;
@@ -1347,7 +1351,9 @@ th {
   padding: 4px;
   box-sizing: border-box;
   resize: none;
-  border: 1px solid #444 !important; }
+  border: 1px solid #444 !important;
+  font-size: 1em;
+  line-height: 1.2em; }
 
 .button-standard, .button-danger, body .list-fields__component .list-fields__component__controls button {
   width: 100%;
@@ -1369,8 +1375,18 @@ th {
   .button-danger:hover {
     background: rgba(218, 49, 75, 0.8); }
 
+.form-row {
+  width: 100% !important;
+  box-sizing: border-box;
+  margin: 5px 0 !important; }
+  .form-row label {
+    font-size: 1em;
+    display: block;
+    margin-bottom: 3px !important; }
+
 input.ng-invalid,
-select.ng-invalid {
+select.ng-invalid,
+textarea.ng-invalid {
   background: rgba(218, 49, 75, 0.2) !important; }
 
 .error-block {
@@ -1877,5 +1893,8 @@ body .client-select__component ul {
       font-size: 0.9em;
       padding: 4px 6px !important;
       float: right; }
+body .deal-add__component {
+  box-sizing: border-box !important;
+  padding: 5px 10px; }
 
 /*# sourceMappingURL=app.css.map */

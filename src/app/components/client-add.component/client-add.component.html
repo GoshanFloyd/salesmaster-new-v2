@@ -189,6 +189,6 @@
   </div>
 </div>
 
-<app-modal-standard>
+<app-modal-standard [title]="'Выберите клиента-родителя'">
   <app-client-select (onSetParent)="setParentClient($event)"></app-client-select>
 </app-modal-standard>

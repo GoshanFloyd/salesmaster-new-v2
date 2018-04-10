@@ -8,6 +8,7 @@ import {ClientsRepository} from '../../repositories/clients.repository';
 import {ClientSelectComponent} from '../client.select.component/client.select.component';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -33,7 +34,8 @@ export class ClientAddComponent {
 
   constructor( private _userRepository: UserRepository,
                private _clientRepository: ClientsRepository,
-               private _router: Router) {
+               private _router: Router,
+               private _notificationService: NotificationService) {
     this.newClient = new FormGroup({
       title: new FormControl('', Validators.required),
       company: new FormControl(this.user.company[0].title, Validators.required),
@@ -118,6 +120,8 @@ export class ClientAddComponent {
     this._clientRepository.createClient(this.newClient.value).subscribe(
       data => {
         this._router.navigate(['/contacts/main']);
+        this._notificationService.sendNotification('Добавлен клиент',
+          `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`)
       },
       err => console.log(err)
     );;
@@ -130,10 +134,10 @@ export class ClientAddComponent {
   public openSelectParentComponent(company: string) {
     if(this.parentClient) {
       this.parentClient = null
+    } else {
+      this.clientSelectComponent.getClientParent(company);
+      this.modalStandard.showModal();
     }
-
-    this.clientSelectComponent.getClientParent(company);
-    this.modalStandard.showModal();
   }
 
   public setParentClient(parentClient: ClientModel) {

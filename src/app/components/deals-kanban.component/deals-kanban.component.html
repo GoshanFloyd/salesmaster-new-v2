@@ -1,7 +1,7 @@
 <div class="deals__component main__component">
   <div class="main__component__header display-flex display-flex-row">
     <h3 class="display-flex-1">Сделки клиента {{(client | async)?.title}}</h3>
-    <button class="main__component__header__helper-button"><span class="oi" data-glyph="plus"></span></button>
+    <button class="main__component__header__helper-button" (click)="showAddModal($event)"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <div class="main__component__body">
     <div class="grid-row height-100">
@@ -38,3 +38,7 @@
     </div>
   </div>
 </div>
+
+<app-modal-standard [title]="'Добавления сделки к текущему клиенту'">
+  <app-deal-add (onAddDeal)="onAddDeal($event)" [metadata]="dataToCreateDeal"></app-deal-add>
+</app-modal-standard>

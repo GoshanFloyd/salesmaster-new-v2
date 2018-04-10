@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-modal-standard',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalStandardComponent implements OnInit {
 
+  @Input() title: string;
   private isVisible: boolean = false;
 
   constructor() { }

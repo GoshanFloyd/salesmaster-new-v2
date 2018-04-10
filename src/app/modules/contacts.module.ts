@@ -18,6 +18,10 @@ import {ModalStandardComponent} from '../components/modal.standard/modal.standar
 import {DragulaModule} from 'ng2-dragula';
 import {DealService} from '../services/deal.service';
 import {DealStageService} from '../services/dealstage.service';
+import {AuthenticationProvider} from '../providers/authentication.provider';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NotificationService} from '../services/notification.service';
+import {DealAddComponent} from '../components/deal-add.component/deal-add.component';
 
 const routes: Routes = [
   {
@@ -35,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule.forChild(routes), DragulaModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule, RouterModule.forChild(routes), DragulaModule],
   providers:
     [
       TokenGuard,
@@ -43,7 +47,9 @@ const routes: Routes = [
       ClientsService,
       ClientsRepository,
       DealService,
-      DealStageService
+      DealStageService,
+      NotificationService,
+      { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true },
     ],
   declarations:
     [
@@ -56,7 +62,8 @@ const routes: Routes = [
       DealsKanbanComponent,
       ClientAddComponent,
       ClientSelectComponent,
-      ModalStandardComponent
+      ModalStandardComponent,
+      DealAddComponent
     ]
 })
 

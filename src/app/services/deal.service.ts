@@ -23,6 +23,16 @@ export class DealService {
     });
   }
 
+  public createDeal(obj?: any) {
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.post(`${this.baseProtocol}${this.baseURL}deals`, obj, {
+      headers: headers
+    })
+  }
+
   public updateDeal(obj?: any) {
 
     const headers = new HttpHeaders({
