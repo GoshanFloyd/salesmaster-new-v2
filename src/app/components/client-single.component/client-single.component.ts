@@ -10,6 +10,7 @@ import {ActivityModel} from '../../models/activity.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
 import {UserRepository} from '../../repositories/user.repository';
+import {ActivityEditComponent} from '../activity-edit.component/activity-edit.component';
 
 @Component({
   moduleId: module.id,
@@ -20,8 +21,12 @@ import {UserRepository} from '../../repositories/user.repository';
 export class ClientSingleComponent implements AfterViewChecked {
 
   @ViewChild('dealComponent') private dealKanbanComponent: DealsKanbanComponent;
+
   @ViewChild('modalActivityAdd') private modalActivityAdd: ModalStandardComponent;
   @ViewChild('activityAddMainComponent') private addActivityComponent: ActivityAddComponent;
+
+  @ViewChild('modalActivityEdit') private modalActivityEdit: ModalStandardComponent;
+  @ViewChild('activityEditMainComponent') private editActivityComponent: ActivityEditComponent;
 
   private id: number = null;
 
@@ -75,8 +80,20 @@ export class ClientSingleComponent implements AfterViewChecked {
     }
   }
 
+  public onEditActivity(value: boolean) {
+    if (value) {
+      this.modalActivityEdit.hideModal();
+      this.getClientActivities(this.id);
+    }
+  }
+
   public showAddModal() {
     this.addActivityComponent.init(this.id);
     this.modalActivityAdd.showModal();
+  }
+
+  public showEditModal(activity: ActivityModel) {
+    this.editActivityComponent.init(activity, this.id);
+    this.modalActivityEdit.showModal();
   }
 }

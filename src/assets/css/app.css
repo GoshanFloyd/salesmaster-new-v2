@@ -1361,7 +1361,7 @@ th {
   font-size: 1em;
   line-height: 1.2em; }
 
-.button-standard, .button-danger, body .list-fields__component .list-fields__component__controls button {
+.button-standard, .button-danger, .button-help, body .list-fields__component .list-fields__component__controls button {
   width: 100%;
   box-sizing: border-box;
   color: white;
@@ -1370,9 +1370,9 @@ th {
   padding: 10px 6px;
   text-transform: uppercase;
   transition: all 0.3s; }
-  .button-standard:hover, .button-danger:hover, body .list-fields__component .list-fields__component__controls button:hover {
+  .button-standard:hover, .button-danger:hover, .button-help:hover, body .list-fields__component .list-fields__component__controls button:hover {
     background: rgba(0, 168, 230, 0.8); }
-  .button-standard:disabled, .button-danger:disabled, body .list-fields__component .list-fields__component__controls button:disabled {
+  .button-standard:disabled, .button-danger:disabled, .button-help:disabled, body .list-fields__component .list-fields__component__controls button:disabled {
     background: #eff0f1 !important;
     color: rgba(0, 0, 0, 0.5); }
 
@@ -1380,6 +1380,11 @@ th {
   background: #da314b !important; }
   .button-danger:hover {
     background: rgba(218, 49, 75, 0.8); }
+
+.button-help {
+  background: #82bb42 !important; }
+  .button-help:hover {
+    background: rgba(130, 187, 66, 0.8); }
 
 .form-row {
   width: 100% !important;
@@ -1894,7 +1899,7 @@ body .client-select__component ul {
     font-size: 1.2em;
     line-height: 1.2em;
     margin: 5px 0; }
-    body .client-select__component ul li .button-standard, body .client-select__component ul li .button-danger, body .client-select__component ul li .list-fields__component .list-fields__component__controls button, body .list-fields__component .list-fields__component__controls .client-select__component ul li button {
+    body .client-select__component ul li .button-standard, body .client-select__component ul li .button-danger, body .client-select__component ul li .button-help, body .client-select__component ul li .list-fields__component .list-fields__component__controls button, body .list-fields__component .list-fields__component__controls .client-select__component ul li button {
       max-width: 120px;
       width: 100%;
       font-size: 0.9em;

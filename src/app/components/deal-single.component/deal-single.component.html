@@ -55,6 +55,11 @@
 
                   <dt *ngIf="activity.document">Прикрепленный файл:</dt>
                   <dd *ngIf="activity.document" ><a [href]="activity.document" target="_blank">Скачать</a></dd>
+
+                  <dt>Действия:</dt>
+                  <dd>
+                    <button class="button-help" (click)="showEditModal(activity)">Редактировать</button>
+                  </dd>
                 </dl>
               </div>
 
@@ -70,6 +75,10 @@
 
 </div>
 
-<app-modal-standard [title]="'Добавить активность к текущей сделке'">
-  <app-activity-add (onCreate)="afterCreateActivity($event)"></app-activity-add>
+<app-modal-standard #activityAddModal [title]="'Добавить активность к текущей сделке'">
+  <app-activity-add #activityAddComponent (onCreate)="afterCreateActivity($event)"></app-activity-add>
+</app-modal-standard>
+
+<app-modal-standard #activityEditModal [title]="'Редактирование активности в текущей сделке'">
+  <app-edit-activity #activityEditComponent (onUpdate)="afterEditActivity($event)"></app-edit-activity>
 </app-modal-standard>

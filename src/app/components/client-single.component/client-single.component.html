@@ -2,7 +2,7 @@
   <div class="client-view__component main__component">
     <div class="main__component__header display-flex display-flex-row">
       <h3 class="display-flex-1">Описание клиента {{(client | async)?.title}}</h3>
-      <button class="main__component__header__helper-button"><span class="oi" data-glyph="pencil"></span></button>
+      <button class="main__component__header__helper-button"><span class="oi" data-glyph="pencil" [routerLink]="'/contacts/main/'+(client | async)?.id+'/edit'"></span></button>
     </div>
     <div class="main__component__body">
       <div class="grid-row height-100">
@@ -101,6 +101,11 @@
                 <dd *ngIf="activity.document">
                   <a accept="text/plain,application/pdf,application/excel,application/vnd.ms-excel,application/msword,image/jpeg,image/png,image/gif,application/powerpoint,text/html" [href]="activity.document" target="_blank" >Скачать</a>
                 </dd>
+
+                <dt>Действия:</dt>
+                <dd>
+                  <button class="button-help" (click)="showEditModal(activity)">Редактировать</button>
+                </dd>
               </dl>
             </div>
 
@@ -113,6 +118,10 @@
 <div class="col-sm-1 col-md-2 col-lg-2">
   <app-deals-kanban #dealComponent></app-deals-kanban>
 </div>
+
+<app-modal-standard #modalActivityEdit [title]="'Редактирование активности'">
+  <app-edit-activity #activityEditMainComponent (onUpdate)="onEditActivity($event)"></app-edit-activity>
+</app-modal-standard>
 
 <app-modal-standard #modalActivityAdd [title]="'Добавить активность текущему клиенту'">
   <app-activity-add #activityAddMainComponent (onCreate)="onCreateActivity($event)"></app-activity-add>

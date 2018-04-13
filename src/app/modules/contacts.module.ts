@@ -28,6 +28,9 @@ import {ActivityTypeService} from '../services/activitytype.service';
 import {DealSingleComponent} from '../components/deal-single.component/deal-single.component';
 import {ClientsSearchPipe} from '../pipes/clients-search.pipe';
 import {ClientsMyPipe} from '../pipes/clients-my.pipe';
+import {ClientEditComponent} from '../components/client-edit.component/client-edit.component';
+import {ActivityEditComponent} from '../components/activity-edit.component/activity-edit.component';
+import {DealEditComponent} from '../components/deal-edit.component/deal-edit.component';
 
 const routes: Routes = [
   {
@@ -36,6 +39,7 @@ const routes: Routes = [
       { path: 'main', component: ContactsComponent },
       { path: 'main/add', component: ClientAddComponent },
       { path: 'main/:id', component: ClientSingleComponent },
+      { path: 'main/:id/edit', component: ClientEditComponent },
       { path: 'main/:id/deal/:deal_id', component: DealSingleComponent },
       { path: '**', redirectTo: 'main' }
     ]
@@ -76,7 +80,10 @@ const routes: Routes = [
       ActivityAddComponent,
       DealSingleComponent,
       ClientsSearchPipe,
-      ClientsMyPipe
+      ClientsMyPipe,
+      ClientEditComponent,
+      ActivityEditComponent,
+      DealEditComponent
     ]
 })
 

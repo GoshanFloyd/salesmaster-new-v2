@@ -8,6 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {ActivityModel} from '../../models/activity.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
+import {ActivityEditComponent} from '../activity-edit.component/activity-edit.component';
 
 @Component({
   moduleId: module.id,
@@ -17,8 +18,11 @@ import {ActivityAddComponent} from '../activity-add.component/activity-add.compo
 
 export class DealSingleComponent implements OnInit{
 
-  @ViewChild(ModalStandardComponent) private modalAddActivity: ModalStandardComponent;
-  @ViewChild(ActivityAddComponent) private activityAddComponent: ActivityAddComponent;
+  @ViewChild('activityAddModal') private modalAddActivity: ModalStandardComponent;
+  @ViewChild('activityAddComponent') private activityAddComponent: ActivityAddComponent;
+
+  @ViewChild('activityEditModal') private modalEditActivity: ModalStandardComponent;
+  @ViewChild('activityEditComponent') private activityEditComponent: ActivityEditComponent;
 
   private _clientID: number;
   private _dealID: number;
@@ -71,6 +75,18 @@ export class DealSingleComponent implements OnInit{
   public afterCreateActivity(value: boolean) {
     if (value) {
       this.modalAddActivity.hideModal();
+      this.getActivities(this._dealID).subscribe(data => {});
+    }
+  }
+
+  public showEditModal(activity: ActivityModel) {
+    this.activityEditComponent.init(activity, this._clientID);
+    this.modalEditActivity.showModal();
+  }
+
+  public afterEditActivity(value: boolean) {
+    if (value) {
+      this.modalEditActivity.hideModal();
       this.getActivities(this._dealID).subscribe(data => {});
     }
   }

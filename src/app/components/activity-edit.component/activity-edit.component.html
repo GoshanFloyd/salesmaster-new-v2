@@ -1,0 +1,26 @@
+<form class="activity-add__component" [formGroup]="_formEditActivity" (submit)="editActivity($event)">
+  <div class="form-row">
+    <label for="activity-add-title">Тип активности:</label>
+    <select class="input-add" id="activity-add-title" formControlName="type_title">
+      <option value="null" disabled selected>-- Выберите тип активности --</option>
+      <option *ngFor="let type of activitiesTypes" [value]="type.title">{{type.title}}</option>
+    </select>
+    <div class="error-block">
+      <span *ngIf="_formEditActivity.controls['type_title'].hasError('required')">
+        Необходимо указать тип активности!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="activity-add-description">Описание активности</label>
+    <textarea class="textarea-add" id="activity-add-description" rows="10" formControlName="description"></textarea>
+    <div class="error-block">
+      <span *ngIf="_formEditActivity.controls['description'].hasError('required')">
+        Необходимо указать описание активности!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <input [disabled]="_formEditActivity.invalid" type="submit" value="Сохранить активность" class="button-standard">
+  </div>
+</form>

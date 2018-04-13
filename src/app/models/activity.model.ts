@@ -48,6 +48,14 @@ export class ActivityModel {
     return newArray;
   }
 
+  set description(description: string) {
+    this._description = description;
+  }
+
+  set type_title(type_title: string) {
+    this.type_title = type_title;
+  }
+
   get id(): number {
     return this._id;
   }

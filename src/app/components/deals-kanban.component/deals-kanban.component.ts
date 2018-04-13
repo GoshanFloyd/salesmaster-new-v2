@@ -62,6 +62,7 @@ export class DealsKanbanComponent {
       for (let stage of this._dealStages) {
         this._dealArraySortbale[stage.id] = [];
       }
+      console.log(this._dealArraySortbale);
       this.getDeals(this._client_id);
     })
   }
@@ -71,6 +72,7 @@ export class DealsKanbanComponent {
       'client_id': client_id
     }).subscribe(data => {
       this._dealsList = DealModel.fromArray(data);
+      console.log(this._dealsList);
       for (let deal of this._dealsList) {
         this._dealArraySortbale[deal.stage_id].push(deal);
       }

@@ -15,16 +15,16 @@ type ParentField = {
 
 type PhoneArrayField = Array<{
   id: number;
-  title: string;
+  owner_name: string;
   type: string;
   number: string;
 }>;
 
 type EmailArrayField = Array<{
   id: number;
-  title: string;
+  owner_name: string;
   type: string;
-  email: string;
+  address: string;
 }>;
 
 type CustomFieldsArrayField = Array<{

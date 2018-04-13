@@ -2,6 +2,7 @@ $input-background: #fff
 $button-standard: #00a8e6
 $button-danger: #da314b
 $button-disabled: #eff0f1
+$button-help: #82bb42
 
 .input-add
   max-height: 45px
@@ -55,6 +56,12 @@ $button-disabled: #eff0f1
   background: $button-danger !important
   &:hover
     background: rgba($button-danger, .8)
+
+.button-help
+  @extend .button-standard
+  background: $button-help !important
+  &:hover
+    background: rgba($button-help, .8)
 
 .form-row
   width: 100% !important
