@@ -12,11 +12,17 @@ import {Observable} from 'rxjs/Observable';
 })
 
 export class ClientsListComponent {
+
+  public searchString: string = '';
+  public company_filter: number;
+  public my_client_filter: boolean = true;
+
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
     this._clientsRepository.getContacts({
       company_id: this.user.company[0].id
     });
+    this.company_filter = this.user.company[0].id;
   }
 
   get user(): UserModel {
@@ -29,7 +35,7 @@ export class ClientsListComponent {
 
   public changeCompany(event: any) {
     this._clientsRepository.getContacts({
-      company_title: event.target.value
+      company_id: this.company_filter
     });
   }
 }

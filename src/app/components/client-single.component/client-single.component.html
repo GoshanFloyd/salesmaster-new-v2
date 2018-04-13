@@ -82,6 +82,7 @@
         </div>
         <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
           <div class="client-view__component__activities-list">
+            <button class="button-standard" (click)="showAddModal()">Добавить активность</button>
             <div *ngFor="let activity of clientActivities" class="client-view__component__activities-list__item">
               <article>
                 {{activity.description}}
@@ -95,6 +96,11 @@
 
                 <dt>Дата создания:</dt>
                 <dd>{{activity.string_datetime_created}}</dd>
+
+                <dt *ngIf="activity.document">Прикрепленный файл:</dt>
+                <dd *ngIf="activity.document">
+                  <a accept="text/plain,application/pdf,application/excel,application/vnd.ms-excel,application/msword,image/jpeg,image/png,image/gif,application/powerpoint,text/html" [href]="activity.document" target="_blank" >Скачать</a>
+                </dd>
               </dl>
             </div>
 
@@ -107,4 +113,8 @@
 <div class="col-sm-1 col-md-2 col-lg-2">
   <app-deals-kanban #dealComponent></app-deals-kanban>
 </div>
+
+<app-modal-standard #modalActivityAdd [title]="'Добавить активность текущему клиенту'">
+  <app-activity-add #activityAddMainComponent (onCreate)="onCreateActivity($event)"></app-activity-add>
+</app-modal-standard>
 

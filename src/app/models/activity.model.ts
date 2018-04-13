@@ -34,8 +34,8 @@ export class ActivityModel {
     this._type_title = obj && obj.type_title ? obj.type_title : null;
     this._description = obj && obj.description ? obj.description : null;
     this._document = obj && obj.document ? obj.document : null;
-    this._datetime_created = obj && obj.datetime_created ? obj.datetime_created : new Date();
-    this._datetime_updated = obj && obj.datetime_updated ? obj.datetime_updated : null;
+    this._datetime_created = obj && obj.datetime_created ? new Date(obj.datetime_created) : new Date();
+    this._datetime_updated = obj && obj.datetime_updated ? new Date(obj.datetime_updated) : null;
   }
 
   static fromArray(array: any): Array<ActivityModel> {

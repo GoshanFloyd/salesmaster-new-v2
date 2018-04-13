@@ -465,6 +465,7 @@ body
         article
 
           font-size: .85em
+          word-wrap: break-word
 
         dl
           margin: 5px 0
@@ -650,5 +651,9 @@ body
           float: right
 
   .deal-add__component
+    @include border-box
+    padding: 5px 10px
+
+  .activity-add__component
     @include border-box
     padding: 5px 10px

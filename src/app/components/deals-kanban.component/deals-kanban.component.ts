@@ -122,4 +122,8 @@ export class DealsKanbanComponent {
     }
     this.modalAddDeal.showModal();
   }
+
+  get client_id(): number {
+    return this._client_id;
+  }
 }

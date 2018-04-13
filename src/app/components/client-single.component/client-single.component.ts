@@ -7,6 +7,9 @@ import {DealsKanbanComponent} from '../deals-kanban.component/deals-kanban.compo
 import {ClientsService} from '../../services/clients.service';
 import {ActivityService} from '../../services/activity.service';
 import {ActivityModel} from '../../models/activity.model';
+import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
+import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
+import {UserRepository} from '../../repositories/user.repository';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +20,8 @@ import {ActivityModel} from '../../models/activity.model';
 export class ClientSingleComponent implements AfterViewChecked {
 
   @ViewChild('dealComponent') private dealKanbanComponent: DealsKanbanComponent;
+  @ViewChild('modalActivityAdd') private modalActivityAdd: ModalStandardComponent;
+  @ViewChild('activityAddMainComponent') private addActivityComponent: ActivityAddComponent;
 
   private id: number = null;
 
@@ -24,7 +29,8 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   constructor (private _clientRepository: ClientsRepository,
                private _activateRoute: ActivatedRoute,
-               private _activityService: ActivityService) {
+               private _activityService: ActivityService,
+               private _userRepository: UserRepository) {
 
     this._activateRoute.params.subscribe((data) => {
       this.initClient();
@@ -51,14 +57,26 @@ export class ClientSingleComponent implements AfterViewChecked {
       'deal_null': true
     }).subscribe(
       data => {
-        console.log(data);
-        this.clientActivities = ActivityModel.fromArray(data);
-      },
+        this.clientActivities = ActivityModel.fromArray(data)
+          .sort((n1: ActivityModel, n2: ActivityModel) => n2.datetime_created.getTime() - n1.datetime_created.getTime());
+        },
       err => console.log(err)
     )
   }
 
   get client(): Observable<ClientModel> {
     return this._clientRepository.current_client;
+  }
+
+  public onCreateActivity(value: boolean) {
+    if (value) {
+      this.modalActivityAdd.hideModal();
+      this.getClientActivities(this.id);
+    }
+  }
+
+  public showAddModal() {
+    this.addActivityComponent.init(this.id);
+    this.modalActivityAdd.showModal();
   }
 }

@@ -1305,6 +1305,12 @@ th {
       transition: all 0.3s; }
       .main__component .main__component__helper-panel > input[type=submit]:hover {
         background-color: rgba(0, 168, 230, 0.7); }
+    .main__component .main__component__helper-panel > label {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .main__component .main__component__helper-panel > label > span {
+        margin-right: 5px; }
   .main__component .main__component__body {
     box-sizing: border-box !important;
     height: 100%;
@@ -1759,7 +1765,8 @@ body .client-view__component .client-view__component__activities-list .client-vi
   body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item:first-child {
     margin-top: 0; }
   body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item article {
-    font-size: 0.85em; }
+    font-size: 0.85em;
+    word-wrap: break-word; }
   body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item dl {
     margin: 5px 0; }
     body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item dl dt {
@@ -1894,6 +1901,9 @@ body .client-select__component ul {
       padding: 4px 6px !important;
       float: right; }
 body .deal-add__component {
+  box-sizing: border-box !important;
+  padding: 5px 10px; }
+body .activity-add__component {
   box-sizing: border-box !important;
   padding: 5px 10px; }
 

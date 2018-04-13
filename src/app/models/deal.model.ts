@@ -103,6 +103,16 @@ export class DealModel {
     this._stage_id = id;
   }
 
+  get datetime_created_format(): string {
+    return new Date(this._datetime_created).toLocaleString("ru", {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+  }
+
   get objectUpdate(): any {
     return {
       'id': this.id,

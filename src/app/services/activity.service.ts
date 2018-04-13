@@ -20,4 +20,14 @@ export class ActivityService {
       headers: headers
     });
   }
+
+  public createActivity(obj?: any) {
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.post<ActivityModel>(`${this.baseProtocol}${this.baseURL}activities`, obj, {
+      headers: headers
+    });
+  }
 }

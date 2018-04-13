@@ -23,6 +23,11 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NotificationService} from '../services/notification.service';
 import {DealAddComponent} from '../components/deal-add.component/deal-add.component';
 import {ActivityService} from '../services/activity.service';
+import {ActivityAddComponent} from '../components/activity-add.component/activity-add.component';
+import {ActivityTypeService} from '../services/activitytype.service';
+import {DealSingleComponent} from '../components/deal-single.component/deal-single.component';
+import {ClientsSearchPipe} from '../pipes/clients-search.pipe';
+import {ClientsMyPipe} from '../pipes/clients-my.pipe';
 
 const routes: Routes = [
   {
@@ -31,6 +36,7 @@ const routes: Routes = [
       { path: 'main', component: ContactsComponent },
       { path: 'main/add', component: ClientAddComponent },
       { path: 'main/:id', component: ClientSingleComponent },
+      { path: 'main/:id/deal/:deal_id', component: DealSingleComponent },
       { path: '**', redirectTo: 'main' }
     ]
   },
@@ -51,6 +57,7 @@ const routes: Routes = [
       DealStageService,
       NotificationService,
       ActivityService,
+      ActivityTypeService,
       { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true },
     ],
   declarations:
@@ -65,7 +72,11 @@ const routes: Routes = [
       ClientAddComponent,
       ClientSelectComponent,
       ModalStandardComponent,
-      DealAddComponent
+      DealAddComponent,
+      ActivityAddComponent,
+      DealSingleComponent,
+      ClientsSearchPipe,
+      ClientsMyPipe
     ]
 })
 
