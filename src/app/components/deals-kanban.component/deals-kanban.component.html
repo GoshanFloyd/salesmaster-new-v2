@@ -1,7 +1,7 @@
 <div class="deals__component main__component">
   <div class="main__component__header display-flex display-flex-row">
-    <h3 class="display-flex-1">Сделки клиента {{(client | async)?.title}}</h3>
-    <button class="main__component__header__helper-button" (click)="showAddModal($event)"><span class="oi" data-glyph="plus"></span></button>
+    <h3 class="display-flex-1">Проекты клиента {{(client | async)?.title}}</h3>
+    <button *ngIf="_type == 'standard'" class="main__component__header__helper-button" (click)="showAddModal($event)"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <div class="main__component__body">
     <div class="grid-row height-100">
@@ -28,6 +28,14 @@
                 </div>
 
                 <h4>{{item.title}}</h4>
+
+                <dt>Автор проекта:</dt>
+                <dd>{{item.employee.fullname}}</dd>
+
+                <dt>Клиент:</dt>
+                <dd>{{item.client.title}}</dd>
+
+                <button class="button-help mtb-small" [routerLink]="'/contacts/main/deal/'+item.id+'/edit'">Редактировать</button>
 
                 <a class="deals__component__item--link" [routerLink]='"/contacts/main/"+client_id+"/deal/"+item.id'>Подробнее</a>
               </div>

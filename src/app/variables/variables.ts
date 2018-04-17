@@ -1,3 +1,18 @@
+export const DEALS_STATUS = [
+  {
+    type: 'in_process',
+    value: 'В работе'
+  },
+  {
+    type: 'failed',
+    value: 'Провалено'
+  },
+  {
+    type: 'completed',
+    value: 'Успешно завершено'
+  }
+];
+
 export const TYPE_FIZLICO = [
   {
     type: 'yp',

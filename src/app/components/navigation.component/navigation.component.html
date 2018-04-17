@@ -5,13 +5,13 @@
 </div>
 <div class="main-nav__component">
   <ul class="main-nav__component__menu">
-    <li>
-      <a >
+    <li [class]="isActiveRoute('/desktop') ? 'active' : '' ">
+      <a [routerLink]='["/desktop"]'>
         <span class="oi" data-glyph="grid-three-up"></span>
         Рабочий стол
       </a>
     </li>
-    <li class="active">
+    <li [class]="isActiveRoute('/contacts') ? 'active' : '' " >
       <a [routerLink]='["/contacts"]'>
         <span class="oi" data-glyph="people"></span>
         Контакты

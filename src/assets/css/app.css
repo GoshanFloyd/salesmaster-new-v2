@@ -1251,6 +1251,9 @@ th {
 .mt-small {
   margin-top: 10px !important; }
 
+.mtb-small {
+  margin: 10px 0 !important; }
+
 .new-caption__helper {
   float: right;
   background: #da6170;

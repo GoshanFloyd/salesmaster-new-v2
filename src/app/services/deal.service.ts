@@ -9,49 +9,34 @@ export class DealService {
   private readonly baseProtocol = 'https://';
   private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
+  private header = new HttpHeaders({
+    'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+  });
+
   constructor (private _httpClient: HttpClient) {}
 
   public getDeal(id: number): Observable<DealModel> {
-
-    const headers = new HttpHeaders({
-      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
-    });
-
     return this._httpClient.get<DealModel>(`${this.baseProtocol}${this.baseURL}deals/${id}`, {
-      headers: headers
+      headers: this.header
     });
   }
 
   public getDeals(obj?: any): Observable<DealModel[]> {
-
-    const headers = new HttpHeaders({
-      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
-    });
-
     return this._httpClient.get<DealModel[]>(`${this.baseProtocol}${this.baseURL}deals`, {
       params: obj ? obj : null,
-      headers: headers
+      headers: this.header
     });
   }
 
   public createDeal(obj?: any) {
-    const headers = new HttpHeaders({
-      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
-    });
-
     return this._httpClient.post(`${this.baseProtocol}${this.baseURL}deals`, obj, {
-      headers: headers
+      headers: this.header
     })
   }
 
   public updateDeal(obj?: any) {
-
-    const headers = new HttpHeaders({
-      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
-    });
-
     return this._httpClient.patch(`${this.baseProtocol}${this.baseURL}deals/${obj.id}`, obj, {
-      headers: headers
+      headers: this.header
     })
   }
 }

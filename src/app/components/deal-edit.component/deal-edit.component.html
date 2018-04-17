@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="col-sm-1 col-md-1 col-lg-1">
+  <div class="client-add__component client-view__component main__component">
+    <div class="main__component__header display-flex display-flex-row">
+      <h3 class="display-flex-1">Редактирование проекта</h3>
+    </div>
+    <div class="main__component__body">
+      <form class="grid-row height-100" [formGroup]="dealEditForm" (submit)="editDeal($event)">
+        <div class="col-sm-1 col-md-4 col-lg-4">
+          <div class="client-view__component__list client-list__component__form-row mt-small">
+            <dt>Наименование проекта:</dt>
+            <dd>
+              <input class="input-add" type="text" name="title" placeholder="Наименование клиента" formControlName="title">
+            </dd>
+            <div class="error-block">
+              <span  *ngIf="dealEditForm.controls['title'].hasError('required')">
+                Укажите наименования проекта!
+              </span>
+            </div>
+          </div>
+          <div class="client-view__component__list client-list__component__form-row mt-small">
+            <dt>Описание проекта:</dt>
+            <dd>
+              <textarea name="description" class="textarea-add" formControlName="description"></textarea>
+            </dd>
+            <div class="error-block">
+              <span  *ngIf="dealEditForm.controls['description'].hasError('required')">
+                Укажите описание проекта!
+              </span>
+            </div>
+          </div>
+          <div class="client-view__component__list client-list__component__form-row mt-small">
+            <dt>Статус проекта:</dt>
+            <dd>
+              <select class="select-add" name="status" formControlName="status">
+                <option disabled selected value="null"> -- Выберите статус --</option>
+                <option *ngFor="let item of dealStatus" [ngValue]="item.type">{{item.value}}</option>
+              </select>
+            </dd>
+            <div class="error-block">
+              <span *ngIf="dealEditForm.controls['status'].hasError('required')">
+                Укажите статус проекта!
+              </span>
+            </div>
+          </div>
+          <div class="client-view__component__list client-list__component__form-row mt-small">
+            <dt>Сумма проекта:</dt>
+            <dd>
+              <input class="input-add" type="text" name="total" placeholder="Сумма клиента" formControlName="total">
+            </dd>
+          </div>
+          <div class="client-view__component_list client-list__component_form-row mt-small">
+            <input [disabled]="dealEditForm.invalid" type="submit" class="button-standard" value="Сохранить изменения">
+          </div>
+          <div class="client-view__component_list client-list__component_form-row mt-small">
+            <button class="button-danger" (click)="returnMainPage()">
+              Отменить
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-</body>
-</html>

@@ -7,5 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class NavigationComponent {
-  constructor( ) { }
+
+  constructor() {}
+
+  public isActiveRoute(link: string): boolean {
+    const path = location.pathname;
+
+    if (path.indexOf(link) > -1) {
+      return true
+    } else {
+      return false;
+    }
+  }
 }

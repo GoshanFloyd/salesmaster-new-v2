@@ -24,6 +24,7 @@ export class DealsKanbanComponent {
 
   private _client_id: number = null;
   private _company_id: number = null;
+  private _type: string;
 
   public _dealArraySortbale: any = {};
 
@@ -45,11 +46,17 @@ export class DealsKanbanComponent {
     });
   }
 
-  public initKanban(client_id: number, company_id: number): void {
-    if (this._client_id != client_id || this._company_id != company_id) {
+  public initKanban(client_id?: number, company_id?: number, type: string = 'standard'): void {
+    if (this._client_id != client_id && this._company_id != company_id) {
       this._client_id = client_id;
       this._company_id = company_id;
-      this.getStages(this._company_id);
+      this._type = type;
+      if (type =='standard') {
+        this.getStages(this._company_id);
+      } else {
+        this._company_id = this._userRepository.getMyUser().company[0].id;
+        this.getStages(this._userRepository.getMyUser().company[0].id);
+      }
     }
   }
 
@@ -62,8 +69,22 @@ export class DealsKanbanComponent {
       for (let stage of this._dealStages) {
         this._dealArraySortbale[stage.id] = [];
       }
-      console.log(this._dealArraySortbale);
-      this.getDeals(this._client_id);
+      if (this._type == 'standard') {
+        this.getDeals(this._client_id)
+      } else {
+        this.getDealsByEmployee(this._userRepository.getMyUser().id);
+      }
+    })
+  }
+
+  private getDealsByEmployee(employee_id: number) {
+    this._dealService.getDeals({
+      'employee_id': employee_id
+    }).subscribe(data => {
+      this._dealsList = DealModel.fromArray(data);
+      for (let deal of this._dealsList) {
+        this._dealArraySortbale[deal.stage_id].push(deal);
+      }
     })
   }
 
@@ -72,7 +93,6 @@ export class DealsKanbanComponent {
       'client_id': client_id
     }).subscribe(data => {
       this._dealsList = DealModel.fromArray(data);
-      console.log(this._dealsList);
       for (let deal of this._dealsList) {
         this._dealArraySortbale[deal.stage_id].push(deal);
       }
