@@ -35,9 +35,8 @@
                 <dt>Клиент:</dt>
                 <dd>{{item.client.title}}</dd>
 
-                <button class="button-help mtb-small" [routerLink]="'/contacts/main/deal/'+item.id+'/edit'">Редактировать</button>
-
-                <a class="deals__component__item--link" [routerLink]='"/contacts/main/"+client_id+"/deal/"+item.id'>Подробнее</a>
+                <button class="button-help mtb-small small-font" [routerLink]="'/contacts/main/deal/'+item.id+'/edit'">Редактировать</button>
+                <button class="button-standard  small-font" [routerLink]='"/contacts/main/"+item.client.id+"/deal/"+item.id'>Подробнее</button>
               </div>
             </div>
           </div>
@@ -47,6 +46,6 @@
   </div>
 </div>
 
-<app-modal-standard [title]="'Добавления сделки к текущему клиенту'">
-  <app-deal-add (onAddDeal)="onAddDeal($event)" [metadata]="dataToCreateDeal"></app-deal-add>
+<app-modal-standard #dealAddModal [title]="'Добавления сделки к текущему клиенту'">
+  <app-deal-add #dealAddComponent (onAddDeal)="onAddDeal($event)" [metadata]="dataToCreateDeal"></app-deal-add>
 </app-modal-standard>

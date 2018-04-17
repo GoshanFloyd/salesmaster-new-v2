@@ -17,8 +17,8 @@ import {UserRepository} from '../../repositories/user.repository';
 
 export class DealsKanbanComponent {
 
-  @ViewChild(ModalStandardComponent) modalAddDeal: ModalStandardComponent;
-  @ViewChild(DealAddComponent) dealAddComponent: DealAddComponent;
+  @ViewChild('dealAddModal') modalAddDeal: ModalStandardComponent;
+  @ViewChild('dealAddComponent') dealAddComponent: DealAddComponent;
 
   public dataToCreateDeal: any = null;
 

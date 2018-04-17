@@ -12,7 +12,9 @@ type ClientObject = {
 type ProductObject = {
   id: number;
   brand_title: string;
-  title: string
+  title: string,
+  currency: string,
+  total: number
 };
 
 type ProductArray = Array<ProductObject>;

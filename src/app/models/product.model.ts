@@ -1,3 +1,5 @@
+import {ActivityModel} from './activity.model';
+
 type CompanyObject = {
   id: number;
   title: string;
@@ -29,6 +31,16 @@ export class ProductModel {
     this._currency = obj && obj.currency ? obj.currency : null;
     this._image = obj && obj.image ? obj.image : null;
     this._call_text = obj && obj.call_text ? obj.call_text : null;
+  }
+
+  static fromArray(array: any): Array<ProductModel> {
+    let newArray: Array<ProductModel> = [];
+
+    for (let item of array) {
+      newArray.push(new ProductModel(item));
+    }
+
+    return newArray;
   }
 
   get id(): number {

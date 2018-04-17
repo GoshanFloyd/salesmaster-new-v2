@@ -2,36 +2,36 @@
   <div class="col-sm-1 col-md-2 col-lg-2">
     <div class="client-view__component main__component">
       <div class="main__component__header display-flex display-flex-row">
-        <h3 class="display-flex-1">Описание сделки</h3>
+        <h3 class="display-flex-1">Описание проекта</h3>
         <button class="main__component__header__helper-button"><span class="oi" data-glyph="pencil"></span></button>
       </div>
       <div class="main__component__body">
         <div class="grid-row height-100">
           <div class="col-sm-1 col-md-2 col-lg-2">
             <dl class="client-view__component__list">
-              <dt>Наименование сделки:</dt>
+              <dt>Наименование проекта:</dt>
               <dd *ngIf="currentDeal">{{currentDeal.title}}</dd>
 
               <dt>Клиент:</dt>
               <dd *ngIf="currentDeal"><a [routerLink]="'/contacts/main/'+currentDeal.client.id">{{currentDeal.client.title}}</a></dd>
 
-              <dt>Статус сделки:</dt>
+              <dt>Статус проекта:</dt>
               <dd *ngIf="currentDeal" [ngSwitch]="currentDeal.status">
                 <span *ngSwitchCase="'in_process'">В работе</span>
                 <span *ngSwitchCase="'failed'">Провалена</span>
                 <span *ngSwitchCase="'completed'">Завершена</span>
               </dd>
 
-              <dt>Сумма сделки:</dt>
+              <dt>Сумма проекта:</dt>
               <dd *ngIf="currentDeal">{{currentDeal.total}}</dd>
 
-              <dt >Описание сделки:</dt>
+              <dt >Описание проекта:</dt>
               <dd *ngIf="currentDeal">{{currentDeal.description}}</dd>
 
-              <dt>Дата создания сделки:</dt>
+              <dt>Дата создания проекта:</dt>
               <dd *ngIf="currentDeal">{{currentDeal.datetime_created_format}}</dd>
 
-              <dt>Автор сделки:</dt>
+              <dt>Автор проекта:</dt>
               <dd *ngIf="currentDeal">{{currentDeal.employee.fullname}}</dd>
 
             </dl>
@@ -70,7 +70,47 @@
     </div>
   </div>
   <div class="col-sm-1 col-md-2 col-lg-2">
-    2
+    <div class="client-view__component main__component">
+      <div class="main__component__header display-flex display-flex-row">
+        <h3 class="display-flex-1">Продукты проекта:</h3>
+        <button *ngIf="_companyID" class="main__component__header__helper-button" (click)="showProductsModal(_companyID)"><span class="oi" data-glyph="plus"></span></button>
+      </div>
+      <div class="main__component__body">
+        <div class="grid-row height-100">
+          <div class="col-sm-1 col-md-1 col-lg-1">
+            <div class="overflow-container">
+              <table class="table-main">
+                <caption></caption>
+                <thead>
+                  <tr>
+                    <th>Бренд</th>
+                    <th>Наименование</th>
+                    <th>Стоимость</th>
+                    <th>Валюта</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="currentDeal">
+                  <tr *ngFor="let product of currentDeal.product">
+                    <td>{{product.brand_title}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.total}}</td>
+                    <td>{{product.currency}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Бренд</td>
+                    <td>Наименование</td>
+                    <td>Стоимость</td>
+                    <td>Валюта</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -81,4 +121,8 @@
 
 <app-modal-standard #activityEditModal [title]="'Редактирование активности в текущей сделке'">
   <app-edit-activity #activityEditComponent (onUpdate)="afterEditActivity($event)"></app-edit-activity>
+</app-modal-standard>
+
+<app-modal-standard #productAddModal [title]="'Добавить продукт к текущей сделке'">
+  <app-product-list #productListComponent (onSetProduct)="addProductToDeal($event)"></app-product-list>
 </app-modal-standard>

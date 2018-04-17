@@ -40,6 +40,9 @@ import {DealService} from './services/deal.service';
 import {ClientsService} from './services/clients.service';
 import {DealStageService} from './services/dealstage.service';
 import {DragulaModule} from 'ng2-dragula';
+import {ProductService} from './services/product.service';
+import {ProductListComponent} from './components/product-list.component/product-list.component';
+import {ProductsSearchPipe} from './pipes/products-search.pipe';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,13 +51,13 @@ const appRoutes: Routes = [
     {
       path: '', component: ContactsPageComponent, canActivate: [TokenGuard],
       children: [
-        {path: 'main', component: ContactsComponent},
-        {path: 'main/add', component: ClientAddComponent},
-        {path: 'main/:id', component: ClientSingleComponent},
-        {path: 'main/:id/edit', component: ClientEditComponent},
-        {path: 'main/:id/deal/:deal_id', component: DealSingleComponent},
-        {path: 'main/deal/:deal_id/edit', component: DealEditComponent},
-        {path: '**', redirectTo: 'main'}
+        { path: 'main', component: ContactsComponent },
+        { path: 'main/add', component: ClientAddComponent },
+        { path: 'main/:id', component: ClientSingleComponent },
+        { path: 'main/:id/edit', component: ClientEditComponent },
+        { path: 'main/:id/deal/:deal_id', component: DealSingleComponent },
+        { path: 'main/deal/:deal_id/edit', component: DealEditComponent },
+        { path: '**', redirectTo: 'main'}
       ]
     }
     ]
@@ -99,8 +102,10 @@ const appRoutes: Routes = [
     ClientSingleComponent,
     ClientsSearchPipe,
     ClientsMyPipe,
+    ProductsSearchPipe,
     ClientSelectComponent,
-    ModalStandardComponent
+    ModalStandardComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -124,6 +129,7 @@ const appRoutes: Routes = [
     NotificationService,
     ActivityService,
     ActivityTypeService,
+    ProductService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

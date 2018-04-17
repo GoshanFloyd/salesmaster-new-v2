@@ -9,6 +9,9 @@ import {ActivityModel} from '../../models/activity.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
 import {ActivityEditComponent} from '../activity-edit.component/activity-edit.component';
+import {ProductListComponent} from '../product-list.component/product-list.component';
+import {ProductModel} from '../../models/product.model';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -24,34 +27,50 @@ export class DealSingleComponent implements OnInit{
   @ViewChild('activityEditModal') private modalEditActivity: ModalStandardComponent;
   @ViewChild('activityEditComponent') private activityEditComponent: ActivityEditComponent;
 
+  @ViewChild('productAddModal') private modalAddProduct: ModalStandardComponent;
+  @ViewChild('productListComponent') private productListComponent: ProductListComponent;
+
   private _clientID: number;
   private _dealID: number;
+  public _companyID: number;
 
   public currentDeal: DealModel = null;
   public activitiesOfCurrentDeal: Array<ActivityModel> = [];
+
+  public productInDeal: Array<number> = [];
 
   constructor (
     private _activateRoute: ActivatedRoute,
     private _clientService: ClientsService,
     private _dealServie: DealService,
-    private _activityService: ActivityService) {}
+    private _activityService: ActivityService,
+    private _notificationService: NotificationService) {}
 
   ngOnInit() {
     this._clientID = this._activateRoute.snapshot.params['id'];
     this._dealID = this._activateRoute.snapshot.params['deal_id'];
     this.getDeal(this._dealID).subscribe(
       data => {
-        this.getActivities(this._dealID)
-          .subscribe(data => {
-          })
+        this.getCompany(this._clientID).subscribe(
+          data => {
+            this._companyID = data.company.id;
+            this.getActivities(this._dealID)
+              .subscribe(data => {})
+          }
+        )
       }
     );
+  }
+
+  private getCompany(id: number) {
+    return this._clientService.getClientById(id)
   }
 
   private getDeal(id: number): Observable<DealModel> {
     return this._dealServie.getDeal(id)
       .map(value => {
         this.currentDeal = new DealModel(value);
+        this.productInDeal = this.currentDeal.product.map(x => x.id);
         return value;
       })
   }
@@ -90,4 +109,31 @@ export class DealSingleComponent implements OnInit{
       this.getActivities(this._dealID).subscribe(data => {});
     }
   }
+
+  public showProductsModal(company_id: number) {
+    this.modalAddProduct.showModal();
+    this.productListComponent.init(company_id);
+  }
+
+  public addProductToDeal(product: ProductModel) {
+    if(!this.productInDeal.find(x => x == product.id)) {
+
+      const updatedDeal = {
+        id: this.currentDeal.id,
+        product: [product.id]
+      }
+
+      this._dealServie.updateDeal(updatedDeal).subscribe(
+        data => {
+          this.currentDeal = new DealModel(data);
+          this.productInDeal = this.currentDeal.product.map(x => x.id);
+        },
+        err => console.log(err)
+      )
+    } else {
+      this._notificationService.sendNotification('Данный продукт уже присутствует в сделке');
+    }
+  }
+
+  public delete
 }

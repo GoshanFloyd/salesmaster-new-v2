@@ -1254,11 +1254,21 @@ th {
 .mtb-small {
   margin: 10px 0 !important; }
 
+.small-font {
+  font-size: 0.8em !important; }
+
 .new-caption__helper {
   float: right;
   background: #da6170;
   color: white;
   padding: 3px 5px; }
+
+.overflow-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box !important; }
 
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -1837,6 +1847,16 @@ body .deals__component {
         background-color: #f1f1f1; }
         body .deals__component .deals__component__list .deals__component__container .deals__component__item:hover {
           cursor: move; }
+        body .deals__component .deals__component__list .deals__component__container .deals__component__item dt, body .deals__component .deals__component__list .deals__component__container .deals__component__item dd {
+          padding: 0 !important;
+          margin: 0 !important; }
+        body .deals__component .deals__component__list .deals__component__container .deals__component__item dt {
+          font-size: 0.9em;
+          line-height: 1.2em;
+          margin-top: 15px;
+          color: #999; }
+        body .deals__component .deals__component__list .deals__component__container .deals__component__item dd {
+          font-size: 0.9em !important; }
         body .deals__component .deals__component__list .deals__component__container .deals__component__item h4 {
           font-size: 1em;
           margin: 0 0 5px !important;
@@ -1914,5 +1934,16 @@ body .deal-add__component {
 body .activity-add__component {
   box-sizing: border-box !important;
   padding: 5px 10px; }
+body .search-controls {
+  padding: 0 10px;
+  box-sizing: border-box !important; }
+
+.table-main {
+  width: 100%; }
+  .table-main td, .table-main th {
+    border: 1px solid #444;
+    text-align: left;
+    box-sizing: border-box !important;
+    padding: 5px 10px; }
 
 /*# sourceMappingURL=app.css.map */

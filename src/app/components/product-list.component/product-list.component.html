@@ -1,0 +1,11 @@
+<div class="client-select__component">
+  <div class="search-controls">
+    <input type="text" class="input-add" name="search_string" [(ngModel)]="searchString">
+  </div>
+  <ul>
+    <li *ngFor="let product of productsList | searchProduct: searchString">
+      <span>{{product.title}}</span>
+      <button class="button-standard" (click)="addProduct(product)">Выбрать</button>
+    </li>
+  </ul>
+</div>
