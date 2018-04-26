@@ -1,7 +1,52 @@
 <div class="grid-row ">
-  <div class="col-sm-1 col-md-2 col-lg-2">
-    <app-analytic-activity-list></app-analytic-activity-list>
+  <!--<div class="col-sm-1 col-md-2 col-lg-2">-->
+    <!--&lt;!&ndash;<app-analytic-activity-list></app-analytic-activity-list>&ndash;&gt;-->
+  <!--</div>-->
+  <div class="col-sm-1 col-md-1 col-lg-1">
+    <button (click)="showChart()" class="input-add">Показать график</button>
+
+    <div class="overflow-container">
+      <table class="table-main">
+        <caption></caption>
+        <thead>
+        <tr>
+          <th>Индекс</th>
+          <th>Наименование сделки</th>
+          <th>Стадия сделки</th>
+          <th>Дата создания</th>
+          <th>Стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let deal of CurrentDeals; let i = index">
+            <td>{{i}}</td>
+            <td>{{deal.title}}</td>
+            <td>{{deal.stage}}</td>
+            <td>{{deal.date}}</td>
+            <td>{{deal.sum}}</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold">Итого</td>
+            <td style="font-weight: bold"> - </td>
+            <td style="font-weight: bold"> - </td>
+            <td style="font-weight: bold"> - </td>
+            <td style="font-weight: bold"> 12 380 000 тнг</td>
+          </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>Индекс</th>
+          <td>Наименование сделки</td>
+          <th>Стадия сделки</th>
+
+          <td>Дата создания</td>
+          <td>Стоимость</td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
-  <div class="col-sm-1 col-md-2 col-lg-2">
+  <div class="col-sm-1 col-md-1 col-lg-1">
+    <p-chart type="bar" [data]="data"></p-chart>
   </div>
 </div>

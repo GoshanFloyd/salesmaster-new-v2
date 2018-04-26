@@ -52,6 +52,7 @@ import {TaskSingleComponent} from './components/task.single.component/task.singl
 import {TaskAddComponent} from './components/task.add.component/task.add.component';
 import {CalendarModule} from 'primeng/primeng';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ChartModule} from 'primeng/chart';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -161,7 +162,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     CalendarModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    ChartModule
   ],
   providers: [
     TokenGuard,

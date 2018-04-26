@@ -15,7 +15,7 @@ export class ClientsListComponent {
 
   public searchString: string = '';
   public company_filter: number;
-  public my_client_filter: boolean = true;
+  public my_client_filter: boolean = false;
 
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
