@@ -1065,6 +1065,7 @@ th {
   flex-flow: row !important;
   flex-wrap: wrap !important;
   flex: 1 auto;
+  height: 100% !important;
   box-sizing: border-box !important; }
   @media (max-width: 768px) {
     .grid-row .col-sm-1 {
@@ -1310,7 +1311,7 @@ th {
     .main__component .main__component__helper-panel > select {
       background: transparent;
       font-size: 0.9em;
-      height: 28px; }
+      height: 31px !important; }
     .main__component .main__component__helper-panel > input[type=submit] {
       color: #fff;
       background: #00a8e6;
@@ -1321,7 +1322,9 @@ th {
     .main__component .main__component__helper-panel > label {
       display: flex;
       justify-content: center;
-      align-items: center; }
+      align-items: center;
+      max-height: 28px;
+      height: 28px; }
       .main__component .main__component__helper-panel > label > span {
         margin-right: 5px; }
   .main__component .main__component__body {
@@ -1361,6 +1364,11 @@ th {
   border: 1px solid #444 !important;
   font-size: 1em;
   line-height: 1.2em; }
+  .select-add:disabled, body .list-fields__component .list-fields__component__controls select:disabled {
+    background: #d6d6d6;
+    color: #9a9a9a; }
+  .select-add.not_full_height, body .list-fields__component .list-fields__component__controls select.not_full_height {
+    height: auto !important; }
 
 .textarea-add {
   width: 100%;
@@ -1448,7 +1456,8 @@ html, body {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
-  height: 100%; }
+  height: 100%;
+  width: 100% !important; }
   .grid-wrapper > div {
     box-sizing: border-box !important; }
   .grid-wrapper .grid-nav {
@@ -1473,7 +1482,7 @@ html, body {
         width: 100%;
         height: 60px !important; } }
   .grid-wrapper .grid-content {
-    flex: 1 auto; }
+    flex: 1 !important; }
     @media (max-width: 768px) {
       .grid-wrapper .grid-content {
         width: 100%; } }
@@ -1945,5 +1954,43 @@ body .search-controls {
     text-align: left;
     box-sizing: border-box !important;
     padding: 5px 10px; }
+
+.task_in_process {
+  background-color: #00a8e6 !important; }
+
+.task_verifying {
+  background-color: #faa732 !important; }
+
+.task_done {
+  background-color: #82bb42 !important; }
+
+.task_failed {
+  background-color: #da314b !important; }
+
+.task_in_process_background {
+  box-shadow: 0 0 10px rgba(0, 168, 230, 0.5) !important; }
+  .task_in_process_background .main__component__header {
+    background: rgba(0, 168, 230, 0.5) !important; }
+
+.task_verifying_background {
+  box-shadow: 0 0 10px rgba(250, 167, 50, 0.5) !important; }
+  .task_verifying_background .main__component__header {
+    background: rgba(250, 167, 50, 0.5) !important; }
+
+.task_done_background {
+  box-shadow: 0 0 10px rgba(130, 187, 66, 0.5) !important; }
+  .task_done_background .main__component__header {
+    background: rgba(130, 187, 66, 0.5) !important; }
+
+.task_failed_background {
+  box-shadow: 0 0 10px rgba(218, 49, 75, 0.5) !important; }
+  .task_failed_background .main__component__header {
+    background: rgba(218, 49, 75, 0.5) !important; }
+
+.second_check_label {
+  margin: 5px 0;
+  font-size: 2em; }
+  .second_check_label > input[type=checkbox] {
+    vertical-align: middle; }
 
 /*# sourceMappingURL=app.css.map */

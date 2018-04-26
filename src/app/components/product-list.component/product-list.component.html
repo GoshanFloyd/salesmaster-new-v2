@@ -4,7 +4,7 @@
   </div>
   <ul>
     <li *ngFor="let product of productsList | searchProduct: searchString">
-      <span>{{product.title}}</span>
+      <span>{{product.title}} - {{product.brand_title}}</span>
       <button class="button-standard" (click)="addProduct(product)">Выбрать</button>
     </li>
   </ul>

@@ -1,0 +1,92 @@
+<div class="col-sm-1 col-md-2 col-lg-2">
+  <div class="client-view__component main__component" [ngClass]="currentTask?.status ? 'task_'+currentTask.status+'_background' : ''">
+    <div class="main__component__header display-flex display-flex-row">
+      <h3 class="display-flex-1">Описание задачи</h3>
+      <button class="main__component__header__helper-button" *ngIf="currentTask?.employee_owner && currentTask.employee_owner.id == user.id">
+        <span class="oi" data-glyph="pencil"></span>
+      </button>
+    </div>
+    <div class="main__component__body">
+      <div class="grid-row height-100">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <dl class="client-view__component__list">
+            <dt>Заголовок задачи:</dt>
+            <dd>{{currentTask?.title ? currentTask.title : ''}}</dd>
+
+            <dt>Описание задачи:</dt>
+            <dd>{{currentTask?.desription ? currentTask.desription : ''}}</dd>
+
+            <dt>Дата создания:</dt>
+            <dd>{{currentTask?.datetime_created ? currentTask.datetime_created_format : ''}}</dd>
+
+            <dt>Дата дедлайна:</dt>
+            <dd>{{currentTask?.datetime_deadline ? currentTask.datetime_deadline_format : ''}}</dd>
+
+            <dt>Автор:</dt>
+            <dd ><a href="#">{{currentTask?.employee_owner ? currentTask.employee_owner.fullname : ''}}</a></dd>
+
+            <dt>Исполнитель:</dt>
+            <dd>
+              <a href="#">{{currentTask?.employee_doer ? currentTask.employee_doer.fullname : ''}}</a>
+            </dd>
+
+            <dt *ngIf="currentTask?.client">Сделка относится к клиенту:</dt>
+            <dd *ngIf="currentTask?.client">
+              <a href="#">{{currentTask.client.title}}</a>
+            </dd>
+
+            <dt>Приоритет задачи:</dt>
+            <dd *ngIf="currentTask?.priority">
+              <div [ngSwitch]="currentTask.priority">
+                <span *ngSwitchCase="'cold'">Может подождать</span>
+                <span *ngSwitchCase="'middle'">Плановая задача</span>
+                <span *ngSwitchCase="'hot'">Важная задча</span>
+              </div>
+            </dd>
+
+            <dt>Статус:</dt>
+            <dd *ngIf="currentTask?.status">
+              <div [ngSwitch]="currentTask.status">
+                <span *ngSwitchCase="'in_process'">В работе</span>
+                <span *ngSwitchCase="'done'">Выполнена</span>
+                <span *ngSwitchCase="'failed'">Провалена</span>
+                <span *ngSwitchCase="'verifying'">На проверке</span>
+              </div>
+            </dd>
+          </dl>
+
+          <button *ngIf="currentTask?.employee_owner && currentTask.employee_owner.id == user.id"
+                  class="button-danger mt-small" (click)="deleteTask()">Удалить</button>
+          <button *ngIf="currentTask?.status && currentTask.status == 'failed' && currentTask.employee_owner.id == user.id"
+                  class="button-help mt-small">Продлить</button>
+          <button *ngIf="currentTask?.employee_doer && currentTask.employee_doer.id == user.id && currentTask.status == 'in_process'"
+                  class="button-standard mt-small" (click)="showModalDoneTask()">Выполнить</button>
+          <button  *ngIf="currentTask?.employee_owner && currentTask.employee_owner.id == user.id && currentTask.status == 'verifying'"
+            class="button-help mt-small" (click)="approveTask()">Одобрить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-standard #modalDoneTask [title]="'Выполнить задачу'">
+  <form [formGroup]="formDoneTask" (submit)="doneTask()">
+    <div class="form-row">
+      <label for="task-done-description">Результат выполненной задачи:</label>
+      <textarea formControlName="result" class="textarea-add" name="task-done-description" id="task-done-description" rows="10">
+      </textarea>
+      <div class="error-block">
+              <span *ngIf="formDoneTask.controls['result'].hasError('required')">
+                Необходимо указать результат выполненной задачи.
+              </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <input [disabled]="formDoneTask.invalid" type="submit" value="Выполнить задачу" class="button-standard">
+      </div>
+    </div>
+  </form>
+</app-modal-standard>
+
+<app-modal-standard #modalToExtendTask></app-modal-standard>

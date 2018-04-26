@@ -1,58 +1,68 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ActivityModel} from '../models/activity.model';
-import {ProductModel} from '../models/product.model';
+import {TaskModel} from '../models/task.model';
 
 @Injectable()
-export class ProductService {
+export class TaskService {
 
   private readonly baseProtocol = 'https://';
   private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
-  public getProducts(obj?: any) {
+  public getTasks(obj?: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ProductModel[]>(`${this.baseProtocol}${this.baseURL}products`, {
+    return this._httpClient.get<TaskModel[]>(`${this.baseProtocol}${this.baseURL}tasks`, {
       params: obj ? obj : null,
       headers: header
     });
   }
 
-  public getProduct(id: number) {
+  public getTask(id: number) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ProductModel[]>(`${this.baseProtocol}${this.baseURL}products/${id}`, {
+    return this._httpClient.get<TaskModel>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, {
       headers: header
     });
   }
 
-  public createProduct(obj: any) {
+  public createTask(obj: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<ProductModel>(`${this.baseProtocol}${this.baseURL}products`, obj, {
+    return this._httpClient.post<TaskModel>(`${this.baseProtocol}${this.baseURL}tasks`, obj, {
       headers: header
     });
   }
 
-  public updateProduct(id: number, obj: any) {
+  public updateTask(id: number, obj: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}products/${id}`, obj, {
+    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, obj, {
       headers: header
     })
+  }
+
+  public deleteTask(id: number) {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.delete<any>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, {
+      headers: header
+    });
   }
 }

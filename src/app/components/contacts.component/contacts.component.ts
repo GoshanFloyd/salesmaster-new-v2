@@ -8,7 +8,7 @@ import {UserModel} from '../../models/user.model';
   templateUrl: './contacts.component.html'
 })
 
-export class ContactsComponent{
+export class ContactsComponent {
 
 
   constructor(public _userRepository: UserRepository,

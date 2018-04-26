@@ -22,6 +22,8 @@ export class DealsKanbanComponent {
 
   public dataToCreateDeal: any = null;
 
+  private _currentCompanyID: number = this.user.company[0].id;
+
   private _client_id: number = null;
   private _company_id: number = null;
   private _type: string;
@@ -44,6 +46,14 @@ export class DealsKanbanComponent {
           `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`)
       })
     });
+  }
+
+  get user() {
+    return this._userRepository.getMyUser();
+  }
+
+  public onChangeCompany(id: number) {
+    this.getStages(id);
   }
 
   public initKanban(client_id?: number, company_id?: number, type: string = 'standard'): void {

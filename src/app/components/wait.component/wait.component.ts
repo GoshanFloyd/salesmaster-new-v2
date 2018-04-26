@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserRepository} from '../../repositories/user.repository';
 
 @Component({
@@ -16,6 +16,7 @@ export class WaitComponent implements OnInit {
               private _userRepository: UserRepository) { }
 
   ngOnInit() {
+
     if (this._authService.isVerify) {
       if (this._userRepository.user) {
         this._router.navigateByUrl('/contacts/main');

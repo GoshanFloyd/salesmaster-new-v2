@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login.component/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -43,6 +42,16 @@ import {DragulaModule} from 'ng2-dragula';
 import {ProductService} from './services/product.service';
 import {ProductListComponent} from './components/product-list.component/product-list.component';
 import {ProductsSearchPipe} from './pipes/products-search.pipe';
+import {TasksPageComponent} from './components/tasks.page/tasks.page.component';
+import {TasksMainComponent} from './components/tasks.main.component/tasks.main.component';
+import {TaskService} from './services/task.service';
+import {AnalyticPageComponent} from './components/analytic.page/analytic.page.component';
+import {AnalyticMainComponent} from './components/analytic.main.component/analytic.main.component';
+import {AnalyticListActivityComponent} from './components/analytic.list-activity.component/analytic.list-activity.component';
+import {TaskSingleComponent} from './components/task.single.component/task.single.component';
+import {TaskAddComponent} from './components/task.add.component/task.add.component';
+import {CalendarModule} from 'primeng/primeng';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -68,6 +77,35 @@ const appRoutes: Routes = [
         path: '', component: DesktopPageComponent, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: DesktopComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  { path: 'tasks',
+    children: [
+      {
+        path: '', component: TasksPageComponent, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: TasksMainComponent },
+          { path: 'main/:id', component: TaskSingleComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  { path: 'analytics',
+    children: [
+      {
+        path: '', component: AnalyticPageComponent, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: AnalyticMainComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },
@@ -105,7 +143,14 @@ const appRoutes: Routes = [
     ProductsSearchPipe,
     ClientSelectComponent,
     ModalStandardComponent,
-    ProductListComponent
+    ProductListComponent,
+    TasksPageComponent,
+    TasksMainComponent,
+    AnalyticPageComponent,
+    AnalyticMainComponent,
+    AnalyticListActivityComponent,
+    TaskSingleComponent,
+    TaskAddComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +158,10 @@ const appRoutes: Routes = [
     FormsModule,
     DragulaModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    CalendarModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule
   ],
   providers: [
     TokenGuard,
@@ -130,6 +178,7 @@ const appRoutes: Routes = [
     ActivityService,
     ActivityTypeService,
     ProductService,
+    TaskService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

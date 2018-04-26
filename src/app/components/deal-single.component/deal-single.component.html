@@ -83,26 +83,34 @@
                 <caption></caption>
                 <thead>
                   <tr>
+                    <th>Индекс</th>
                     <th>Бренд</th>
                     <th>Наименование</th>
                     <th>Стоимость</th>
                     <th>Валюта</th>
+                    <th>Действия</th>
                   </tr>
                 </thead>
                 <tbody *ngIf="currentDeal">
-                  <tr *ngFor="let product of currentDeal.product">
+                  <tr *ngFor="let product of currentDeal.product; let i = index">
+                    <td>{{i}}</td>
                     <td>{{product.brand_title}}</td>
                     <td>{{product.title}}</td>
                     <td>{{product.total}}</td>
                     <td>{{product.currency}}</td>
+                    <td>
+                      <button class="button-danger" (click)="deleteProduct(product.id)">Удалить</button>
+                    </td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
+                    <th>Индекс</th>
                     <td>Бренд</td>
                     <td>Наименование</td>
                     <td>Стоимость</td>
                     <td>Валюта</td>
+                    <td>Действия</td>
                   </tr>
                 </tfoot>
               </table>

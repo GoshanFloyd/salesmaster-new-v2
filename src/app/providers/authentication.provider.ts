@@ -26,6 +26,10 @@ export class AuthenticationProvider implements HttpInterceptor {
             'Данные пользователя устарели. Пожалуйста, войдите в CRM заново.');
           this._router.navigate(['login']);
         }
+        if (err.status === 500) {
+          this._notificationService.sendNotification('Произошла ошибка',
+            'Ошибка на стороне сервера. Обратитесь к системному администратору.');
+        }
       }
     });
   }

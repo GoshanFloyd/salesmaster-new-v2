@@ -1,0 +1,18 @@
+<div class="grid-row ">
+  <div class="col-sm-1 col-md-1 col-lg-1">
+    <div class="client-add__component client-view__component main__component">
+      <div class="main__component__header display-flex display-flex-row">
+        <h3 class="display-flex-1">Календарь задач</h3>
+      </div>
+      <div class="main__component__body">
+        <div id="calendar">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-standard #modalCreateTask [title]="'Добавить задачу'">
+  <app-task-add #taskAddComponent></app-task-add>
+</app-modal-standard>

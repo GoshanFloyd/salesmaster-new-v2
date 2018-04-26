@@ -1,0 +1,57 @@
+<form class="deal-add__component" [formGroup]="_formNewTask" (submit)="addDeal()">
+  <div class="form-row">
+    <label for="task-add-title">Заголовок задачи:</label>
+    <input formControlName="title" class="input-add" id="task-add-title" type="text" placeholder="Введите наименования сделки">
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['title'].hasError('required')">
+        Необходимо указать наименование задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-add-stage">Приоритет задачи:</label>
+    <select class="select-add" id="task-add-stage" formControlName="priority">
+      <option value="null" selected disabled>-- Выберите приоритет задачи --</option>
+      <option *ngFor="let el of tasksPriority" [value]="el.type">{{el.value}}</option>
+    </select>
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['priority'].hasError('required')">
+        Необходимо указать приоритет задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-doer">Исполнитель задачи:</label>
+    <select class="select-add" id="task-doer" formControlName="employee_doer">
+      <option value="null" selected disabled>-- Выберите исполнителя задач --</option>
+      <option *ngFor="let user of usersList" [value]="user.id">{{user.user.first_name + ' ' + user.user.last_name}}</option>
+    </select>
+    <label class="second_check_label">Это моя задача <input (change)="onChangeDoer($event)" [value]="isMyTask" type="checkbox" name="my_task"></label>
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['employee_doer'].hasError('required')">
+        Необходимо указать исполнителя задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-deadline-title">Дата окончания задачи:</label>
+    <p-calendar id="task-deadline-title" formControlName="datetime_deadline" [showTime]="true"></p-calendar>
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['datetime_deadline'].hasError('required')">
+        Необходимо указать дату окончания задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-add-description">Описание задачи:</label>
+    <textarea formControlName="description" class="textarea-add" id="task-add-description" cols="10" rows="10"></textarea>
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['description'].hasError('required')">
+        Необходимо указать описание задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <input [disabled]="_formNewTask.invalid" class="button-standard" type="submit" value="Добавить задачу">
+  </div>
+</form>

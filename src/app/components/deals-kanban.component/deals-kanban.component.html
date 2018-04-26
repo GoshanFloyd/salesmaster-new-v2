@@ -1,6 +1,12 @@
 <div class="deals__component main__component">
   <div class="main__component__header display-flex display-flex-row">
     <h3 class="display-flex-1">Проекты клиента {{(client | async)?.title}}</h3>
+    <label *ngIf="_type != 'standard'">
+      Сортировка по компаниям:
+      <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="_currentCompanyID" (click)="onChangeCompany(_currentCompanyID)">
+        <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
+      </select>
+    </label>
     <button *ngIf="_type == 'standard'" class="main__component__header__helper-button" (click)="showAddModal($event)"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <div class="main__component__body">

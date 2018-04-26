@@ -20,4 +20,16 @@ export class UserService {
       headers: headers
     });
   }
+
+  public getUsers(obj?: any): Observable<UserModel[]> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this.httpClient.get<UserModel[]>(`${this.baseProtocol}${this.baseURL}employees`, {
+      headers: headers,
+      params: obj ? obj : null
+    });
+  }
 }

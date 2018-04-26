@@ -27,11 +27,11 @@
         <span class="oi" data-glyph="loop"></span>
       </a>
 
-      <div class="avatar-small-header" style="background-image: url(../../../assets/images/avatar-example.jpg)">
+      <div class="avatar-small-header" [ngStyle]="{'background-image': 'url(' + mainHost + user.avatar + ')'}">
 
       </div>
 
-      <a class="fast-cabinet-link" href="">Егор Кулик</a>
+      <a class="fast-cabinet-link" href="">{{user.user.first_name + ' ' + user.user.last_name}}</a>
 
       <a href="" class="fast-logout-link">
         <span class="oi" data-glyph="account-logout"></span>

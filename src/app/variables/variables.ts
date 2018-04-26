@@ -139,3 +139,37 @@ export const TYPE_EMAIL = [
     value: 'Персональная'
   }
 ];
+
+export const TASKS_STATUS = [
+  {
+    type: 'in_process',
+    value: 'В работе'
+  },
+  {
+    type: 'done',
+    value: 'Выполненная задача'
+  },
+  {
+    type: 'failed',
+    value: 'Проваленная задача'
+  },
+  {
+    type: 'verifying',
+    value: 'Задача на проверке'
+  }
+];
+
+export const TASKS_PRIORITY = [
+  {
+    type: 'hot',
+    value: 'Важная задача'
+  },
+  {
+    type: 'middle',
+    value: 'Плановая задача'
+  },
+  {
+    type: 'cold',
+    value: 'Может подождать'
+  }
+];

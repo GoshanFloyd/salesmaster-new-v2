@@ -1,37 +1,37 @@
 <form class="deal-add__component" [formGroup]="_formNewDeal" (submit)="addDeal()">
   <div class="form-row">
-    <label for="deal-add-title">Заголовок сделки:</label>
-    <input formControlName="title"  class="input-add" id="deal-add-title" type="text" placeholder="Введите наименования сделки">
+    <label for="deal-add-title">Заголовок проекта:</label>
+    <input formControlName="title"  class="input-add" id="deal-add-title" type="text" placeholder="Введите наименования проекта">
     <div class="error-block">
       <span *ngIf="_formNewDeal.controls['title'].hasError('required')">
-        Необходимо указать наименование сделки!
+        Необходимо указать наименование проекта!
       </span>
     </div>
   </div>
   <div class="form-row">
-    <label for="deal-add-stage">Стадия сделки:</label>
+    <label for="deal-add-stage">Стадия проекта:</label>
     <select class="input-add" id="deal-add-stage" formControlName="stage_id">
-      <option value="null" selected disabled>-- Выберите стадию сделки --</option>
+      <option value="null" selected disabled>-- Выберите стадию проекта --</option>
       <option *ngFor="let stage of metadata?.stages" [value]="stage.id">{{stage.title}}</option>
     </select>
     <div class="error-block">
       <span *ngIf="_formNewDeal.controls['stage_id'].hasError('required')">
-        Необходимо указать стадию сделки!
+        Необходимо указать стадию проекта!
       </span>
     </div>
   </div>
   <div class="form-row">
-    <label for="deal-add-description">Описание сделки сделки:</label>
+    <label for="deal-add-description">Описание проекта:</label>
     <textarea formControlName="description" class="textarea-add" id="deal-add-description" cols="10" rows="10"></textarea>
     <div class="error-block">
       <span *ngIf="_formNewDeal.controls['description'].hasError('required')">
-        Необходимо указать описание сделки!
+        Необходимо указать описание проекта!
       </span>
     </div>
   </div>
   <div class="form-row">
-    <label for="deal-add-total">Потенциальная стоимость сделки:</label>
-    <input placeholder="Введите потенциальную сумму сделки" formControlName="total"  class="input-add" id="deal-add-total" type="text">
+    <label for="deal-add-total">Потенциальная стоимость проекта:</label>
+    <input placeholder="Введите потенциальную сумму проекта" formControlName="total"  class="input-add" id="deal-add-total" type="text">
   </div>
   <div class="form-row">
     <input [disabled]="_formNewDeal.invalid" class="button-standard" type="submit" value="Сохранить">

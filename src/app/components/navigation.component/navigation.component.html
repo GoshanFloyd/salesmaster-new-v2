@@ -17,14 +17,14 @@
         Контакты
       </a>
     </li>
-    <li>
-      <a href="">
+    <li [class]="isActiveRoute('/analytics') ? 'active' : '' ">
+      <a [routerLink]='["/analytics"]'>
         <span class="oi" data-glyph="pie-chart"></span>
         Аналитика
       </a>
     </li>
-    <li>
-      <a href="">
+    <li [class]="isActiveRoute('/tasks') ? 'active' : '' ">
+      <a [routerLink]='["/tasks"]'>
         <span class="oi" data-glyph="calendar"></span>
         Задачи
       </a>
@@ -47,11 +47,11 @@
         Файловый менеджер
       </a>
     </li>
-    <li>
-      <a href="">
-        <span class="oi" data-glyph="monitor"></span>
-        Администрирование
-      </a>
-    </li>
+    <!--<li>-->
+      <!--<a href="">-->
+        <!--<span class="oi" data-glyph="monitor"></span>-->
+        <!--Администрирование-->
+      <!--</a>-->
+    <!--</li>-->
   </ul>
 </div>

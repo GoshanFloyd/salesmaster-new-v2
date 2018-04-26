@@ -8,6 +8,7 @@
   align-items: center;
   background: rgba(0,0,0,.6);
   display: none;
+  z-index: 9999;
 }
 
 .modal-standard-wrapper.on-open-modal{
@@ -20,7 +21,7 @@
   box-sizing: border-box !important;
   max-width: 700px;
   width: 100%;
-  max-height: 520px;
+  max-height: 670px;
   overflow-y: auto;
 }
 

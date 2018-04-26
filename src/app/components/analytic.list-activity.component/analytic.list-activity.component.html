@@ -1,0 +1,60 @@
+<div class="client-list__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Список активностей</h3>
+    <button class="main__component__header__helper-button"><span class="oi" data-glyph="menu"></span></button>
+  </div>
+  <form class="main__component__helper-panel">
+    <select  name="company_filter" >
+      <option value="" disabled selected>-- Компания --</option>
+      <option></option>
+    </select>
+    <label >
+      <span>Мои клиенты</span>
+      <input type="checkbox" value="Мои активности" name="my_activities_filter" [(ngModel)]="isMyActivity">
+    </label>
+    <select>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+      <option value="">Option 1</option>
+    </select>
+    <!--<input type="submit" value="Найти">-->
+  </form>
+  <div class="main__component__body">
+    <table class="table-main">
+      <thead>
+        <tr>
+          <th>Индекс</th>
+          <th>Бренд</th>
+          <th>Наименование</th>
+          <th>Стоимость</th>
+          <th>Валюта</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activity of activitiesList">
+          <td>{{activity.description}}</td>
+          <td>{{activity.type_title}}</td>
+          <td>{{activity.client.title}}</td>
+          <td>{{activity.employee.fullname}}</td>
+          <td>{{activity.deal ? activity.deal.title : 'Активность внутри клиента'}}</td>
+          <td>
+            <button class="button-danger">Удалить</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Индекс</th>
+          <td>Бренд</td>
+          <td>Наименование</td>
+          <td>Стоимость</td>
+          <td>Валюта</td>
+          <td>Действия</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

@@ -16,27 +16,47 @@ export class DealService {
   constructor (private _httpClient: HttpClient) {}
 
   public getDeal(id: number): Observable<DealModel> {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
     return this._httpClient.get<DealModel>(`${this.baseProtocol}${this.baseURL}deals/${id}`, {
-      headers: this.header
+      headers: header
     });
   }
 
   public getDeals(obj?: any): Observable<DealModel[]> {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
     return this._httpClient.get<DealModel[]>(`${this.baseProtocol}${this.baseURL}deals`, {
       params: obj ? obj : null,
-      headers: this.header
+      headers: header
     });
   }
 
   public createDeal(obj?: any) {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
     return this._httpClient.post(`${this.baseProtocol}${this.baseURL}deals`, obj, {
-      headers: this.header
+      headers: header
     })
   }
 
   public updateDeal(obj?: any) {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
     return this._httpClient.patch(`${this.baseProtocol}${this.baseURL}deals/${obj.id}`, obj, {
-      headers: this.header
+      headers: header
     })
   }
 }

@@ -47,7 +47,7 @@ export class UserModel {
     return this._type;
   }
 
-  get avatart(): string {
+  get avatar(): string {
     return this._avatar;
   }
 
@@ -63,6 +63,16 @@ export class UserModel {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
+  }
+
+  static fromArray(array: any): Array<UserModel> {
+    let newArray: Array<UserModel> = [];
+
+    for (let item of array) {
+      newArray.push(new UserModel(item))
+    }
+
+    return newArray;
   }
 }
 
