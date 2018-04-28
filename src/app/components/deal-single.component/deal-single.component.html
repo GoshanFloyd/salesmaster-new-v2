@@ -38,7 +38,8 @@
           </div>
           <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
             <div class="client-view__component__activities-list">
-              <button class="button-standard" (click)="showModalAdd()">Добавить активность</button>
+              <button class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
+              <button class="button-standard mt-small" (click)="showModalAdd()">Добавить активность</button>
               <div *ngFor="let activity of activitiesOfCurrentDeal"  class="client-view__component__activities-list__item">
                 <article>
                   {{activity.description}}
@@ -123,14 +124,28 @@
 
 </div>
 
-<app-modal-standard #activityAddModal [title]="'Добавить активность к текущей сделке'">
+<app-modal-standard #activityAddModal [title]="'Добавить активность к текущему проекту'">
   <app-activity-add #activityAddComponent (onCreate)="afterCreateActivity($event)"></app-activity-add>
 </app-modal-standard>
 
-<app-modal-standard #activityEditModal [title]="'Редактирование активности в текущей сделке'">
+<app-modal-standard #activityEditModal [title]="'Редактирование активности в текущем проекте'">
   <app-edit-activity #activityEditComponent (onUpdate)="afterEditActivity($event)"></app-edit-activity>
 </app-modal-standard>
 
-<app-modal-standard #productAddModal [title]="'Добавить продукт к текущей сделке'">
+<app-modal-standard #productAddModal [title]="'Добавить продукт к текущему проекту'">
   <app-product-list #productListComponent (onSetProduct)="addProductToDeal($event)"></app-product-list>
+</app-modal-standard>
+
+<app-modal-standard #closeDealModal [title]="'Закрыть текущий проект?'">
+  <form class="activity-add__component">
+    <p-toggleButton onLabel="Успешно завершен" offLabel="Провален"
+                    onIcon="fa-check-square" offIcon="fa-square"></p-toggleButton>
+    <div class="form-row">
+      <label for="activity-add-description">Описание активности</label>
+      <textarea class="textarea-add" id="activity-add-description" rows="10"></textarea>
+    </div>
+    <div class="form-row">
+      <input type="submit" value="Закрыть проект" class="button-standard">
+    </div>
+  </form>
 </app-modal-standard>

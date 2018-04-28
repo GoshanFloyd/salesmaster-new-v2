@@ -5,6 +5,7 @@ import {UserRepository} from '../../repositories/user.repository';
 import {CentrifugeService} from '../../services/centrifuge.service';
 import {ClientsService} from '../../services/clients.service';
 import {ClientsRepository} from '../../repositories/clients.repository';
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +19,8 @@ export class WaitComponent implements OnInit {
               private _router: Router,
               private _userRepository: UserRepository,
               private _centrifugeService: CentrifugeService,
-              private _clientsRepository: ClientsRepository) { }
+              private _clientsRepository: ClientsRepository,
+              private _loadingService: LoadingService) { }
 
   ngOnInit() {
 

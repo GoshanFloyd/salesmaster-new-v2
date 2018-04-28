@@ -1,5 +1,5 @@
 import {UserRepository} from '../../repositories/user.repository';
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {TaskService} from '../../services/task.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TASKS_PRIORITY, TASKS_STATUS} from '../../variables/variables';
@@ -14,9 +14,22 @@ import {UserService} from '../../services/user.service';
 
 export class TaskAddComponent {
 
+  @Output() onCreate = new EventEmitter<any>()
+
   public usersList: Array<UserModel> = [];
 
   public isMyTask: boolean = false;
+
+  public ruLocale: any = {
+    firstDayOfWeek: 0,
+    dayNames: ["Воскресение", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+    dayNamesShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+    monthNames: [ "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь" ],
+    monthNamesShort: [ "Янв", "Фев", "Мар", "Апр", "May", "Июн","Июл", "Авг", "Сен", "Окт", "Нов", "Дек" ],
+    today: 'Сегодня',
+    clear: 'Очистить'
+  };
 
   public readonly tasksPriority: Array<{
     type: string,
@@ -61,8 +74,61 @@ export class TaskAddComponent {
   private getUsers(): void {
     this._userService.getUsers().subscribe(
       data => {
-        console.log(data);
         this.usersList = UserModel.fromArray(data);
+      },
+      err => console.log(err)
+    )
+  }
+
+  private getDeadlineDate(date: string): string {
+    const dateObj = new Date(date);
+
+    const pad = (number) => {
+      if (number < 10) {
+        return '0' + number;
+      }
+      return number;
+    }
+
+    return dateObj.getFullYear() +
+      '-' + pad(dateObj.getMonth() + 1) +
+      '-' + pad(dateObj.getDate()) +
+      'T' + pad(dateObj.getHours()) +
+      ':' + pad(dateObj.getMinutes()) +
+      ':' + pad(dateObj.getSeconds()) +
+      '.' + (dateObj.getMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+      'Z';
+  }
+
+  private clearForm(){
+    this._formNewTask.controls.employee_doer.setValue(null);
+    this._formNewTask.controls.title.setValue(null);
+    this._formNewTask.controls.description.setValue(null);
+    this._formNewTask.controls.priority.setValue('middle');
+    this._formNewTask.controls.status.setValue('in_process');
+    this._formNewTask.controls.datetime_deadline.setValue(null);
+  }
+
+  public addTask(event: Event){
+
+    event.preventDefault();
+
+    console.log(this.getDeadlineDate(this._formNewTask.controls['datetime_deadline'].value));
+
+    const task = {
+      'employee_owner': this._formNewTask.controls['employee_owner'].value,
+      'employee_doer': this._formNewTask.controls['employee_doer'].value,
+      'client': null,
+      'title': this._formNewTask.controls['title'].value,
+      'description': this._formNewTask.controls['description'].value,
+      'priority': this._formNewTask.controls['priority'].value,
+      'status': this._formNewTask.controls['status'].value,
+      'datetime_deadline': this.getDeadlineDate(this._formNewTask.controls['datetime_deadline'].value)
+    };
+
+    this._taskService.createTask(task).subscribe(
+      data => {
+        this.onCreate.emit(true);
       },
       err => console.log(err)
     )

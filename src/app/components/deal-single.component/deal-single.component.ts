@@ -12,6 +12,7 @@ import {ActivityEditComponent} from '../activity-edit.component/activity-edit.co
 import {ProductListComponent} from '../product-list.component/product-list.component';
 import {ProductModel} from '../../models/product.model';
 import {NotificationService} from '../../services/notification.service';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -30,6 +31,8 @@ export class DealSingleComponent implements OnInit{
   @ViewChild('productAddModal') private modalAddProduct: ModalStandardComponent;
   @ViewChild('productListComponent') private productListComponent: ProductListComponent;
 
+  @ViewChild('closeDealModal') private modalCloseDeal: ModalStandardComponent;
+
   private _clientID: number;
   private _dealID: number;
   public _companyID: number;
@@ -38,6 +41,10 @@ export class DealSingleComponent implements OnInit{
   public activitiesOfCurrentDeal: Array<ActivityModel> = [];
 
   public productInDeal: Array<number> = [];
+
+  public _formCloseDeal = new FormGroup({
+
+  })
 
   constructor (
     private _activateRoute: ActivatedRoute,
@@ -133,6 +140,10 @@ export class DealSingleComponent implements OnInit{
     } else {
       this._notificationService.sendNotification('Данный продукт уже присутствует в сделке');
     }
+  }
+
+  public showModalCloseDeal(){
+    this.modalCloseDeal.showModal();
   }
 
   public deleteProduct(id: number) {

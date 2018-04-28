@@ -50,10 +50,12 @@ import {AnalyticMainComponent} from './components/analytic.main.component/analyt
 import {AnalyticListActivityComponent} from './components/analytic.list-activity.component/analytic.list-activity.component';
 import {TaskSingleComponent} from './components/task.single.component/task.single.component';
 import {TaskAddComponent} from './components/task.add.component/task.add.component';
-import {CalendarModule} from 'primeng/primeng';
+import {CalendarModule, ToggleButtonModule} from 'primeng/primeng';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ChartModule} from 'primeng/chart';
 import {CentrifugeService} from './services/centrifuge.service';
+import {LoadingComponent} from './components/loading.component/loading.component';
+import {LoadingService} from './services/loading.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -152,7 +154,8 @@ const appRoutes: Routes = [
     AnalyticMainComponent,
     AnalyticListActivityComponent,
     TaskSingleComponent,
-    TaskAddComponent
+    TaskAddComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -164,7 +167,8 @@ const appRoutes: Routes = [
     CalendarModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    ChartModule
+    ChartModule,
+    ToggleButtonModule
   ],
   providers: [
     TokenGuard,
@@ -183,6 +187,7 @@ const appRoutes: Routes = [
     ProductService,
     TaskService,
     CentrifugeService,
+    LoadingService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

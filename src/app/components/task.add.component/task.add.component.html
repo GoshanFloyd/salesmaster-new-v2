@@ -1,10 +1,19 @@
-<form class="deal-add__component" [formGroup]="_formNewTask" (submit)="addDeal()">
+<form class="deal-add__component" [formGroup]="_formNewTask" (submit)="addTask($event)">
   <div class="form-row">
     <label for="task-add-title">Заголовок задачи:</label>
     <input formControlName="title" class="input-add" id="task-add-title" type="text" placeholder="Введите наименования сделки">
     <div class="error-block">
       <span *ngIf="_formNewTask.controls['title'].hasError('required')">
         Необходимо указать наименование задачи!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-deadline-title">Дата окончания задачи:</label>
+    <p-calendar id="task-deadline-title" formControlName="datetime_deadline" [showTime]="true" [locale]="ruLocale"></p-calendar>
+    <div class="error-block">
+      <span *ngIf="_formNewTask.controls['datetime_deadline'].hasError('required')">
+        Необходимо указать дату окончания задачи!
       </span>
     </div>
   </div>
@@ -30,15 +39,6 @@
     <div class="error-block">
       <span *ngIf="_formNewTask.controls['employee_doer'].hasError('required')">
         Необходимо указать исполнителя задачи!
-      </span>
-    </div>
-  </div>
-  <div class="form-row">
-    <label for="task-deadline-title">Дата окончания задачи:</label>
-    <p-calendar id="task-deadline-title" formControlName="datetime_deadline" [showTime]="true"></p-calendar>
-    <div class="error-block">
-      <span *ngIf="_formNewTask.controls['datetime_deadline'].hasError('required')">
-        Необходимо указать дату окончания задачи!
       </span>
     </div>
   </div>

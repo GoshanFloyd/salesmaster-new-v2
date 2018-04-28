@@ -83,6 +83,13 @@ export class TasksMainComponent implements OnInit{
     $('#calendar').fullCalendar('rerenderEvents');
   }
 
+  public onCreateTask(value: any) {
+    if(value){
+      this.modalCreateTask.hideModal();
+      this.getTasks(this._userRepository.getMyUser().id);
+    }
+  }
+
   private initCalendar(): void {
 
     const self = this;

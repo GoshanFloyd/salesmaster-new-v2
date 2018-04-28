@@ -14,5 +14,5 @@
 </div>
 
 <app-modal-standard #modalCreateTask [title]="'Добавить задачу'">
-  <app-task-add #taskAddComponent></app-task-add>
+  <app-task-add #taskAddComponent (onCreate)="onCreateTask($event)"></app-task-add>
 </app-modal-standard>
