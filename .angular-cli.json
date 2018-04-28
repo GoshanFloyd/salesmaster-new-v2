@@ -31,7 +31,9 @@
         "../node_modules/moment/moment.js",
         "../node_modules/fullcalendar/dist/fullcalendar.js",
         "../node_modules/fullcalendar/dist/locale/ru.js",
-        "../node_modules/chart.js/dist/Chart.js"
+        "../node_modules/chart.js/dist/Chart.js",
+        "../node_modules/sockjs-client/dist/sockjs.js",
+        "../node_modules/centrifuge/centrifuge.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

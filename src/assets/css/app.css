@@ -1300,7 +1300,8 @@ th {
     box-sizing: border-box !important;
     display: flex;
     flex-flow: row;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    flex: 1 0 58px; }
     .main__component .main__component__helper-panel > * {
       flex: 1 auto;
       box-sizing: border-box !important;

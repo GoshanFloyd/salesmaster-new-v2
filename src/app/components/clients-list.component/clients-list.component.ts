@@ -19,9 +19,6 @@ export class ClientsListComponent {
 
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
-    this._clientsRepository.getContacts({
-      company_id: this.user.company[0].id
-    });
     this.company_filter = this.user.company[0].id;
   }
 

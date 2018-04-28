@@ -53,6 +53,7 @@ import {TaskAddComponent} from './components/task.add.component/task.add.compone
 import {CalendarModule} from 'primeng/primeng';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ChartModule} from 'primeng/chart';
+import {CentrifugeService} from './services/centrifuge.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -181,6 +182,7 @@ const appRoutes: Routes = [
     ActivityTypeService,
     ProductService,
     TaskService,
+    CentrifugeService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]
