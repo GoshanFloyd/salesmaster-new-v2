@@ -5,7 +5,8 @@ import {UserModel} from '../../models/user.model';
 
 @Component({
   moduleId: module.id,
-  templateUrl: './contacts.component.html'
+  templateUrl: './contacts.component.html',
+  host: {class: 'grid-row'}
 })
 
 export class ContactsComponent {

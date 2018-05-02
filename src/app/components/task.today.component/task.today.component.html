@@ -3,60 +3,61 @@
     <h3>Лента задач</h3>
   </div>
   <form class="main__component__helper-panel">
-    <select>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
+    <select name="userSort" [(ngModel)]="userSort">
+      <option [ngValue]="null">Все доступные задачи</option>
+      <option [ngValue]="1">Где я исполнитель</option>
+      <option [ngValue]="2">Где я автор</option>
     </select>
-    <select>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-    </select>
-    <select>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
-      <option value="">Option 1</option>
+    <select name="statusSort" [(ngModel)]="statusSort">
+      <option [ngValue]="null" disabled selected>-- Выберите статус --</option>
+      <option [ngValue]="'failed'">Проваленные задачи</option>
+      <option [ngValue]="'done'">Выполненные задачи</option>
+      <option [ngValue]="'in_process'">Задачи в работе</option>
+      <option [ngValue]="'verifying'">Задачи на проверке</option>
     </select>
   </form>
   <div class="main__component__body">
-    <div class="taskline__component__item">
+    <div class="taskline__component__item" *ngFor="let task of taskList">
       <article>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium cum doloribus, fugit in iusto magnam necessitatibus obcaecati qui quidem? A aliquam culpa distinctio doloremque eveniet necessitatibus qui soluta tenetur voluptatum.
+        {{task.title}} <br>
+        {{task.desription}}
       </article>
       <dl class="taskline__component__metadata">
         <dt>Исполнитель:</dt>
-        <dd><a href="">Егор кулик</a></dd>
+        <dd><a href="">{{task.employee_doer.fullname}}</a></dd>
+
         <dt>Автор:</dt>
-        <dd><a href="">Абиш Абдельдинов</a></dd>
+        <dd><a href="">{{task.employee_owner.fullname}}</a></dd>
+
+        <dt>Статус:</dt>
+        <dd [ngSwitch]="task.status">
+          <span *ngSwitchCase="'in_process'">В работе</span>
+          <span *ngSwitchCase="'done'">Выполнена</span>
+          <span *ngSwitchCase="'failed'">Провалена</span>
+          <span *ngSwitchCase="'verifying'">На проверке</span>
+        </dd>
+
         <dt>Важность:</dt>
-        <dd>Плановая задача</dd>
+        <dd [ngSwitch]="task.priority">
+          <span *ngSwitchCase="'cold'">Может подождать</span>
+          <span *ngSwitchCase="'middle'">Плановая задача</span>
+          <span *ngSwitchCase="'hot'">Срочная задача</span>
+        </dd>
+
+        <dt *ngIf="task.result">Результат:</dt>
+        <dd *ngIf="task.result">
+          {{task.result}}
+        </dd>
+
+        <dt>Дата создания:</dt>
+        <dd>{{task.datetime_created_format}}</dd>
+
         <dt>Deadline:</dt>
-        <dd>28 ноября 2018 г., 18:00</dd>
+        <dd>{{task.datetime_deadline_format}}</dd>
       </dl>
-      <button>Выполнить</button>
-    </div>
-    <div class="taskline__component__item">
-      <article>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium cum doloribus, fugit in iusto magnam necessitatibus obcaecati qui quidem? A aliquam culpa distinctio doloremque eveniet necessitatibus qui soluta tenetur voluptatum.
-      </article>
-      <dl class="taskline__component__metadata">
-        <dt>Исполнитель:</dt>
-        <dd><a href="">Егор кулик</a></dd>
-        <dt>Автор:</dt>
-        <dd><a href="">Абиш Абдельдинов</a></dd>
-        <dt>Важность:</dt>
-        <dd>Плановая задача</dd>
-        <dt>Deadline:</dt>
-        <dd>28 ноября 2018 г., 18:00</dd>
-      </dl>
-      <button>Выполнить</button>
+      <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_process'">Выполнить</button>
+      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'">Одобрить</button>
+      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'">Продлить на 1 день</button>
     </div>
   </div>
 </div>

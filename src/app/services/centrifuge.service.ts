@@ -35,7 +35,6 @@ export class CentrifugeService {
   public init(): void {
     this.getToken(this._userRepository.getMyUser().id).subscribe(
       data => {
-        console.log(data);
         this.initToken(data);
       },
       err => console.log(err)
