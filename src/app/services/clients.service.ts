@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {ClientModel} from '../models/client.model';
+import {ClientLightModel} from '../models/client.light.model.';
 
 @Injectable()
 export class ClientsService {
@@ -41,6 +42,40 @@ export class ClientsService {
 
     return this._httpClient.get<ClientModel>(`${this.baseProtocol}${this.baseURL}clients/${id}`, {
       headers: header
+    });
+  }
+
+  public getClientsLightWeight(obj?: any) {
+
+    let lightweight = null;
+
+    if (obj) {
+      obj['lightweight'] = true;
+    } else {
+      lightweight = {
+        'lightweight': true
+      }
+    }
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.get<ClientLightModel>(`${this.baseProtocol}${this.baseURL}clients`, {
+      headers: header,
+      params: obj ? obj : lightweight
+    });
+  }
+
+
+  public getClientLightWeightById(id: number): Observable<ClientLightModel> {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.get<ClientLightModel>(`${this.baseProtocol}${this.baseURL}clients/${id}?lightweight=True`, {
+      headers: header,
     });
   }
 

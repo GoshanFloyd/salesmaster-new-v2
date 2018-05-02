@@ -3,8 +3,14 @@
     <h3 class="display-flex-1">Проекты клиента {{(client | async)?.title}}</h3>
     <label *ngIf="_type != 'standard'">
       Сортировка по компаниям:
-      <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="_currentCompanyID" (click)="onChangeCompany(_currentCompanyID)">
+      <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="_currentCompanyID" (change)="onChangeCompany(_currentCompanyID)">
         <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
+      </select>
+    </label>
+    <label *ngIf="_type != 'standard'" class="ml-small">
+      Сортировка по пользователям:
+      <select class="select-add not_full_height" name="currentUserID" [(ngModel)]="_currentUserID" (change)="onChangeUser(_currentUserID)">
+        <option *ngFor="let u of _userList" [ngValue]="u.id" >{{u.user.first_name + ' ' + u.user.last_name}}</option>
       </select>
     </label>
     <button *ngIf="_type == 'standard'" class="main__component__header__helper-button" (click)="showAddModal($event)"><span class="oi" data-glyph="plus"></span></button>

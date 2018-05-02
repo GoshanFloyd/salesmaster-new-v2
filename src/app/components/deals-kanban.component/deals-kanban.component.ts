@@ -8,6 +8,8 @@ import {NotificationService} from '../../services/notification.service';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {DealAddComponent} from '../deal-add.component/deal-add.component';
 import {UserRepository} from '../../repositories/user.repository';
+import {UserModel} from '../../models/user.model';
+import {UserService} from '../../services/user.service';
 
 @Component({
   moduleId: module.id,
@@ -23,6 +25,7 @@ export class DealsKanbanComponent {
   public dataToCreateDeal: any = null;
 
   private _currentCompanyID: number = this.user.company[0].id;
+  private _currentUserID: number = this._userRepository.getMyUser().id;
 
   private _client_id: number = null;
   private _company_id: number = null;
@@ -32,12 +35,14 @@ export class DealsKanbanComponent {
 
   public _dealStages: Array<DealStageModel> = [];
   public _dealsList: Array<DealModel> = [];
+  public _userList: Array<UserModel> = [];
 
   constructor(private dragula: DragulaService,
               private _dealStageService: DealStageService,
               private _dealService: DealService,
               private _notificationService: NotificationService,
-              private _userRepository: UserRepository) {
+              private _userRepository: UserRepository,
+              private _userService: UserService) {
 
     dragula.dropModel.subscribe((value) => {
       this._dealService.updateDeal(this.findDealsById(value[1].id).objectUpdate).subscribe(data => {
@@ -56,6 +61,10 @@ export class DealsKanbanComponent {
     this.getStages(id);
   }
 
+  public onChangeUser(id: number) {
+    this.getStages(this._currentCompanyID);
+  }
+
   public initKanban(client_id?: number, company_id?: number, type: string = 'standard'): void {
     if (this._client_id != client_id && this._company_id != company_id) {
       this._client_id = client_id;
@@ -64,6 +73,7 @@ export class DealsKanbanComponent {
       if (type =='standard') {
         this.getStages(this._company_id);
       } else {
+        this.getUsers();
         this._company_id = this._userRepository.getMyUser().company[0].id;
         this.getStages(this._userRepository.getMyUser().company[0].id);
       }
@@ -76,15 +86,25 @@ export class DealsKanbanComponent {
     }).subscribe(data => {
       this._dealStages = [];
       this._dealStages = DealStageModel.fromArray(data);
+      console.log(this._dealStages);
       for (let stage of this._dealStages) {
         this._dealArraySortbale[stage.id] = [];
-      }
+      };
       if (this._type == 'standard') {
         this.getDeals(this._client_id)
       } else {
-        this.getDealsByEmployee(this._userRepository.getMyUser().id);
+        this.getDealsByEmployee(this._currentUserID);
       }
     })
+  }
+
+  public getUsers() {
+    this._userService.getUsers().subscribe(
+      data => {
+        this._userList = UserModel.fromArray(data);
+      },
+      err => console.log(err)
+    )
   }
 
   private getDealsByEmployee(employee_id: number) {
@@ -93,7 +113,12 @@ export class DealsKanbanComponent {
     }).subscribe(data => {
       this._dealsList = DealModel.fromArray(data);
       for (let deal of this._dealsList) {
-        this._dealArraySortbale[deal.stage_id].push(deal);
+        if(this._dealArraySortbale[deal.stage_id]) {
+          this._dealArraySortbale[deal.stage_id].push(deal);
+        } else {
+          this._dealArraySortbale[deal.stage_id] = [];
+          this._dealArraySortbale[deal.stage_id].push(deal);
+        }
       }
     })
   }

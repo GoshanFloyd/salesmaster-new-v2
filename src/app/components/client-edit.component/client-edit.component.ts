@@ -9,6 +9,7 @@ import {FORMS_YURLICO, TYPE_EMAIL, TYPE_FIZLICO, TYPE_PHONE, TYPE_YURLICO} from 
 import {ClientSelectComponent} from '../client.select.component/client.select.component';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {NotificationService} from '../../services/notification.service';
+import {ClientsRepository} from '../../repositories/clients.repository';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class ClientEditComponent implements OnInit {
                private _clientService: ClientsService,
                private _userRepository: UserRepository,
                private _router: Router,
-               private _notificationService: NotificationService) {
+               private _notificationService: NotificationService,
+               private _clientRepository: ClientsRepository) {
     this.editableClient = new FormGroup({
       title: new FormControl('', Validators.required),
       company: new FormControl(null, Validators.required),
@@ -213,6 +215,9 @@ export class ClientEditComponent implements OnInit {
     console.log(this.editableClient.value);
     this._clientService.updateClient(this.client.id, this.editableClient.value).subscribe(
       data => {
+        this._clientRepository.getContactsLight({
+          company_title: this.editableClient.controls['company'].value
+        });
         this._notificationService.sendNotification('Клиент обновлен');
         this._router.navigate(['contacts/main/'+this._id]);
       },

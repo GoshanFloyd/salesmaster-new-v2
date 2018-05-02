@@ -119,7 +119,9 @@ export class ClientAddComponent {
   public createClient() {
     this._clientRepository.createClient(this.newClient.value).subscribe(
       data => {
-        console.log(data);
+        this._clientRepository.getContactsLight({
+          company_title: this.newClient.controls['company'].value
+        });
         this._router.navigate(['/contacts/main']);
         this._notificationService.sendNotification('Добавлен клиент',
           `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`)

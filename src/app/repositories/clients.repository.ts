@@ -4,6 +4,7 @@ import {ClientModel} from '../models/client.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {LoadingService} from '../services/loading.service';
+import {ClientLightModel} from '../models/client.light.model.';
 
 @Injectable()
 export class ClientsRepository {
@@ -16,6 +17,9 @@ export class ClientsRepository {
   private _current_client: BehaviorSubject<ClientModel> = new BehaviorSubject<ClientModel>(null);
   public current_client: Observable<ClientModel> = this._current_client.asObservable();
 
+  private _clients_main_light: BehaviorSubject<Array<ClientLightModel>> = new BehaviorSubject([]);
+  public clients_main_light: Observable<Array<ClientLightModel>> = this._clients_main_light.asObservable();
+
   public getContacts (obj?: any) {
     this._loadingService.showLoader();
     this._clientService.getContacts(obj).subscribe(
@@ -23,6 +27,19 @@ export class ClientsRepository {
         this._clients_main.next(ClientModel.getClientArray(data));
         this._loadingService.hideLoader();
         },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  public getContactsLight(obj?: any) {
+    this._loadingService.showLoader();
+    this._clientService.getClientsLightWeight(obj).subscribe(
+      data => {
+        this._clients_main_light.next(ClientLightModel.getClientArray(data));
+        this._loadingService.hideLoader();
+      },
       err => {
         console.log(err);
       }

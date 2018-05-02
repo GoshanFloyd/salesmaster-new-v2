@@ -4,6 +4,7 @@ import {ClientsRepository} from '../../repositories/clients.repository';
 import {UserModel} from '../../models/user.model';
 import {ClientModel} from '../../models/client.model';
 import {Observable} from 'rxjs/Observable';
+import {ClientLightModel} from '../../models/client.light.model.';
 
 @Component({
   moduleId: module.id,
@@ -26,12 +27,12 @@ export class ClientsListComponent {
     return this._userRepository.getMyUser();
   }
 
-  get clients(): Observable<ClientModel[]> {
-    return this._clientsRepository.clients__main;
+  get clients(): Observable<ClientLightModel[]> {
+    return this._clientsRepository.clients_main_light;
   }
 
   public changeCompany(event: any) {
-    this._clientsRepository.getContacts({
+    this._clientsRepository.getContactsLight({
       company_id: this.company_filter
     });
   }

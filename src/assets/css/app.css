@@ -1252,6 +1252,12 @@ th {
 .mt-small {
   margin-top: 10px !important; }
 
+.ml-small {
+  margin-left: 10px !important; }
+
+.mr-small {
+  margin-right: 10px !important; }
+
 .mtb-small {
   margin: 10px 0 !important; }
 
@@ -1301,14 +1307,15 @@ th {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
-    flex: 1 0 58px; }
+    flex: 1 0 auto; }
     .main__component .main__component__helper-panel > * {
       flex: 1 auto;
       box-sizing: border-box !important;
       border: 1px solid #ddd; }
     .main__component .main__component__helper-panel > input[type=text] {
       padding: 5px;
-      font-size: 0.9em; }
+      font-size: 0.9em;
+      height: 31px !important; }
     .main__component .main__component__helper-panel > select {
       background: transparent;
       font-size: 0.9em;

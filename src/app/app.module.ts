@@ -56,6 +56,7 @@ import {ChartModule} from 'primeng/chart';
 import {CentrifugeService} from './services/centrifuge.service';
 import {LoadingComponent} from './components/loading.component/loading.component';
 import {LoadingService} from './services/loading.service';
+import {TaskTodayComponent} from './components/task.today.component/task.today.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -155,7 +156,8 @@ const appRoutes: Routes = [
     AnalyticListActivityComponent,
     TaskSingleComponent,
     TaskAddComponent,
-    LoadingComponent
+    LoadingComponent,
+    TaskTodayComponent
   ],
   imports: [
     BrowserModule,

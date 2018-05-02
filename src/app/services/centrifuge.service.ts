@@ -43,38 +43,38 @@ export class CentrifugeService {
   }
 
   private initToken(data: any) {
-    var centrifuge = new Centrifuge({
-      url: 'https://test.salesmaster.me/centrifugo/connection/',
-      project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
-      user: this._userRepository.getMyUser().id.toString(),
-      timestamp: data.timestamp.toString(),
-      token: data.token
-    });
-
-
-    var public_callbacks = {
-      "message": function(dataset) {
-        console.log('DATASET: '+JSON.stringify(dataset));
-      },
-      "join": function(message) {
-        console.log('JOIN: '+JSON.stringify(message));
-      },
-      "leave": function(message) {
-        console.log('LEAVE: '+JSON.stringify(message));
-      },
-      "subscribe": function(context) {
-        console.log('SUBSCRIBE: '+JSON.stringify(context));
-      },
-      "error": function(errContext) {
-        console.log('ERROR: '+JSON.stringify(errContext));
-      },
-      "unsubscribe": function(context) {
-        console.log('UNSUBSCRIBE: '+JSON.stringify(context));
-      }
-    }
-
-    var subscription = centrifuge.subscribe("task:expiring_task:$"+this._userRepository.getMyUser().id.toString(), public_callbacks);
-
-    centrifuge.connect();
+    // var centrifuge = new Centrifuge({
+    //   url: 'https://test.salesmaster.me/centrifugo/connection/',
+    //   project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
+    //   user: this._userRepository.getMyUser().id.toString(),
+    //   timestamp: data.timestamp.toString(),
+    //   token: data.token
+    // });
+    //
+    //
+    // var public_callbacks = {
+    //   "message": function(dataset) {
+    //     console.log('DATASET: '+JSON.stringify(dataset));
+    //   },
+    //   "join": function(message) {
+    //     console.log('JOIN: '+JSON.stringify(message));
+    //   },
+    //   "leave": function(message) {
+    //     console.log('LEAVE: '+JSON.stringify(message));
+    //   },
+    //   "subscribe": function(context) {
+    //     console.log('SUBSCRIBE: '+JSON.stringify(context));
+    //   },
+    //   "error": function(errContext) {
+    //     console.log('ERROR: '+JSON.stringify(errContext));
+    //   },
+    //   "unsubscribe": function(context) {
+    //     console.log('UNSUBSCRIBE: '+JSON.stringify(context));
+    //   }
+    // }
+    //
+    // var subscription = centrifuge.subscribe("task:expiring_task:$"+this._userRepository.getMyUser().id.toString(), public_callbacks);
+    //
+    // centrifuge.connect();
   }
 }
