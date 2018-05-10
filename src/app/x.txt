@@ -1,0 +1,7 @@
+ng serve -> запуск dev-сервера
+ng build -> компирирования для использования на продакшене
+
+Логин:
+leaddev@softech.kz
+Пароль:
+d!xEqRDeHAz8y&3Su5%w

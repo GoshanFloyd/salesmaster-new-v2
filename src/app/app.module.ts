@@ -111,6 +111,7 @@ const appRoutes: Routes = [
         path: '', component: AnalyticPageComponent, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: AnalyticMainComponent },
+          { path: 'main/activity', component: AnalyticListActivityComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },

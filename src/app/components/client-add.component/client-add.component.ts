@@ -58,27 +58,35 @@ export class ClientAddComponent {
     return this._userRepository.getMyUser();
   }
 
-  public changeClientType(event: any){
+  public changeClientType(event: any) {
     const value = event.target.value;
 
-    if (value == 'fizlico') {
-      this.newClient.controls['fizlico_type'].setValidators([Validators.required])
+    if (value === 'fizlico') {
+
+      console.log('Fiz');
+
+      this.newClient.controls['fizlico_type'].setValidators([Validators.required]);
 
       this.newClient.controls['yurlico_type'].setValidators(null);
-      this.newClient.controls['yurlico_form'].setValidators(null)
+      this.newClient.controls['yurlico_form'].setValidators(null);
 
     }
 
-    if (value == 'yurlico') {
-      this.newClient.controls['fizlico_type'].setValidators(null)
+    if (value === 'yurlico') {
+
+      console.log('Yur');
+
+      this.newClient.controls['fizlico_type'].setValidators(null);
 
       this.newClient.controls['yurlico_type'].setValidators([Validators.required]);
-      this.newClient.controls['yurlico_form'].setValidators([Validators.required])
+      this.newClient.controls['yurlico_form'].setValidators([Validators.required]);
     }
 
     this.newClient.updateValueAndValidity();
 
+    console.log(this.newClient);
   }
+
 
   public addPhone(): void {
 
@@ -90,7 +98,7 @@ export class ClientAddComponent {
   }
 
   public deletePhone(index: number): void {
-    (this.newClient.controls['phones'] as FormArray).removeAt(index)
+    (this.newClient.controls['phones'] as FormArray).removeAt(index);
   }
 
   public addEmail(): void {
@@ -102,7 +110,7 @@ export class ClientAddComponent {
   }
 
   public deleteEmail(index: number): void {
-    (this.newClient.controls['emails'] as FormArray).removeAt(index)
+    (this.newClient.controls['emails'] as FormArray).removeAt(index);
   }
 
   public addCustomfield(): void {
@@ -113,7 +121,7 @@ export class ClientAddComponent {
   }
 
   public deleteCustomfield(index: number): void {
-    (this.newClient.controls['customfields'] as FormArray).removeAt(index)
+    (this.newClient.controls['customfields'] as FormArray).removeAt(index);
   }
 
   public createClient() {
@@ -124,10 +132,10 @@ export class ClientAddComponent {
         });
         this._router.navigate(['/contacts/main']);
         this._notificationService.sendNotification('Добавлен клиент',
-          `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`)
+          `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`);
       },
       err => console.log(err)
-    );;
+    );
   }
 
   get company() {
@@ -135,8 +143,8 @@ export class ClientAddComponent {
   }
 
   public openSelectParentComponent(company: string) {
-    if(this.parentClient) {
-      this.parentClient = null
+    if (this.parentClient) {
+      this.parentClient = null;
     } else {
       this.clientSelectComponent.getClientParent(company);
       this.modalStandard.showModal();

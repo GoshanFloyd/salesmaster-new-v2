@@ -54,14 +54,14 @@ export class TasksMainComponent implements OnInit{
         this.reloadCalendar();
       },
       err => console.log(err)
-    )
+    );
   }
 
   private initData(tasks: Array<TaskModel>): void {
 
     this._events = [];
 
-    for(let task of tasks) {
+    for (const task of tasks) {
       this._events.push({
         id: task.id,
         title: task.title,
@@ -84,7 +84,7 @@ export class TasksMainComponent implements OnInit{
   }
 
   public onCreateTask(value: any) {
-    if(value){
+    if (value) {
       this.modalCreateTask.hideModal();
       this.getTasks(this._userRepository.getMyUser().id);
     }
@@ -105,14 +105,14 @@ export class TasksMainComponent implements OnInit{
         onlyMyDoerTasks: {
           text: 'Где я исполнитель',
           click: function() {
-            self.initData(self._tasks.filter(x => x.employee_doer.id == self._userRepository.getMyUser().id));
+            self.initData(self._tasks.filter(x => x.employee_doer.id === self._userRepository.getMyUser().id));
             self.reloadCalendar();
           }
         },
         onlyMyOwnerTasks: {
           text: 'Где я автор',
           click: function() {
-            self.initData(self._tasks.filter(x => x.employee_owner.id == self._userRepository.getMyUser().id));
+            self.initData(self._tasks.filter(x => x.employee_owner.id === self._userRepository.getMyUser().id));
             self.reloadCalendar();
           }
         },
@@ -129,9 +129,9 @@ export class TasksMainComponent implements OnInit{
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      eventClick: function(calEvent:any, jsEvent:any, view:any) {
+      eventClick: function(calEvent: any, jsEvent: any, view: any) {
         console.log(calEvent);
-        self._router.navigate(['/tasks/main/'+calEvent.id]);
+        self._router.navigate(['/tasks/main/' + calEvent.id]);
       },
       dayClick: function(date, jsEvent, view) {
         self.showCreateModal();

@@ -1207,6 +1207,10 @@ th {
       box-sizing: border-box !important;
       padding: 10px;
       width: 10% !important; } }
+  .grid-row .col-sm-75, .grid-row .col-md-75, .grid-row .col-lg-72 {
+    box-sizing: border-box !important;
+    padding: 10px;
+    width: 75%; }
 
 .display-flex {
   display: flex !important; }
@@ -1270,12 +1274,15 @@ th {
   color: white;
   padding: 3px 5px; }
 
-.overflow-container {
+.overflow-container, .overflow-container-x {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box !important; }
+
+.overflow-container-x {
+  overflow-x: auto; }
 
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

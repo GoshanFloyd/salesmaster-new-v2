@@ -7,7 +7,24 @@
       <app-header></app-header>
     </div>
     <div class="grid-content display-flex">
-      <router-outlet></router-outlet>
+      <div class="grid-row">
+        <div class="col-sm-1 col-md-4 col-lg-4">
+          <div class="client-list__component main__component">
+            <div class="main__component__header display-flex display-flex-row">
+              <h3 class="display-flex-1">Меню раздела аналитики:</h3>
+            </div>
+            <div class="main__component__body">
+              <ul class="client-list__component__list">
+                <li><a [routerLink]="'main'">Основная информация</a></li>
+                <li><a [routerLink]="'main/activity'">Аналитика по активностям</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-75 col-lg-75">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
   </div>
 </div>
