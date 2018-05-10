@@ -1282,7 +1282,13 @@ th {
   box-sizing: border-box !important; }
 
 .overflow-container-x {
-  overflow-x: auto; }
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.customHelperDatetimePicker span {
+  width: 100% !important; }
+  .customHelperDatetimePicker span > input {
+    width: 100% !important; }
 
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -1338,8 +1344,8 @@ th {
       display: flex;
       justify-content: center;
       align-items: center;
-      max-height: 28px;
-      height: 28px; }
+      max-height: 31px;
+      height: 31px; }
       .main__component .main__component__helper-panel > label > span {
         margin-right: 5px; }
   .main__component .main__component__body {

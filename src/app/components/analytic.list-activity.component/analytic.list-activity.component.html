@@ -4,7 +4,7 @@
     <button class="main__component__header__helper-button"><span class="oi" data-glyph="menu"></span></button>
   </div>
   <form class="main__component__helper-panel">
-    <select  name="company_filter" [(ngModel)]="currentCompany">
+    <select  name="company_filter" [(ngModel)]="currentCompany" (change)="getActivity()">
       <option value="" disabled selected>-- Компания --</option>
       <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
     </select>
@@ -12,48 +12,55 @@
       <span>Мои активности:</span>
       <input type="checkbox" value="Мои активности" name="my_activities_filter" [(ngModel)]="isMyActivity">
     </label>
-    <!--<select>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-    <!--</select>-->
+    <p-calendar class='customHelperDatetimePicker'
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterStart"
+                [maxDate]="maxDateToFilterStart"
+                (onSelect)="getActivity()"
+                name="dateFilterStart"></p-calendar>
+    <p-calendar class="customHelperDatetimePicker"
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterEnd"
+                [maxDate]="maxDateToFilterEnd"
+                (onSelect)="getActivity()"
+                name="dateFilterEnd"></p-calendar>
+    <select name="activity_type" [(ngModel)]="currentActivityType">
+      <option [ngValue]="null">Все типы активностей</option>
+      <option *ngFor="let t of activitiesTypes" [ngValue]="t.title">{{t.title}}</option>
+    </select>
   </form>
   <div class="main__component__body">
     <div class="overflow-container-x">
       <table class="table-main">
         <thead>
-        <tr>
-          <th>Индекс</th>
-          <th>Бренд</th>
-          <th>Наименование</th>
-          <th>Стоимость</th>
-          <th>Валюта</th>
-          <th>Действия</th>
-        </tr>
+          <tr>
+            <th>Описание:</th>
+            <th>Тип активности:</th>
+            <th>Клиент:</th>
+            <th>Автор:</th>
+            <th>Дата:</th>
+            <th>Проект:</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let activity of activitiesList">
-          <td>{{activity.description}}</td>
-          <td>{{activity.type_title}}</td>
-          <td>{{activity.client.title}}</td>
-          <td>{{activity.employee.fullname}}</td>
-          <td>{{activity.deal ? activity.deal.title : 'Активность внутри клиента'}}</td>
-          <td>
-            <button class="button-danger">Удалить</button>
-          </td>
-        </tr>
+          <tr *ngFor="let activity of activitiesList">
+            <td>{{activity.description}}</td>
+            <td>{{activity.type_title}}</td>
+            <td>{{activity.client.title}}</td>
+            <td>{{activity.employee.fullname}}</td>
+            <td>{{activity.string_datetime_created}}</td>
+            <td>{{activity.deal ? activity.deal.title : 'Активность внутри клиента'}}</td>
+          </tr>
         </tbody>
         <tfoot>
-        <tr>
-          <th>Индекс</th>
-          <td>Бренд</td>
-          <td>Наименование</td>
-          <td>Стоимость</td>
-          <td>Валюта</td>
-          <td>Действия</td>
-        </tr>
+          <tr>
+            <th>Описание:</th>
+            <th>Тип активности:</th>
+            <th>Клиент:</th>
+            <th>Автор:</th>
+            <th>Дата:</th>
+            <th>Проект:</th>
+          </tr>
         </tfoot>
       </table>
     </div>

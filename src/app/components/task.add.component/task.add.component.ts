@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TASKS_PRIORITY, TASKS_STATUS} from '../../variables/variables';
 import {UserModel} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
+import {DATEPICKER_RU_LOCALE} from '../../variables/variables';
 
 @Component({
   moduleId: module.id,
@@ -14,22 +15,13 @@ import {UserService} from '../../services/user.service';
 
 export class TaskAddComponent {
 
-  @Output() onCreate = new EventEmitter<any>()
+  @Output() onCreate = new EventEmitter<any>();
 
   public usersList: Array<UserModel> = [];
 
   public isMyTask: boolean = false;
 
-  public ruLocale: any = {
-    firstDayOfWeek: 0,
-    dayNames: ["Воскресение", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
-    dayNamesShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-    dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-    monthNames: [ "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь" ],
-    monthNamesShort: [ "Янв", "Фев", "Мар", "Апр", "May", "Июн","Июл", "Авг", "Сен", "Окт", "Нов", "Дек" ],
-    today: 'Сегодня',
-    clear: 'Очистить'
-  };
+  public ruLocale: any = DATEPICKER_RU_LOCALE;
 
   public readonly tasksPriority: Array<{
     type: string,
@@ -77,7 +69,7 @@ export class TaskAddComponent {
         this.usersList = UserModel.fromArray(data);
       },
       err => console.log(err)
-    )
+    );
   }
 
   private getDeadlineDate(date: string): string {
@@ -88,7 +80,7 @@ export class TaskAddComponent {
         return '0' + number;
       }
       return number;
-    }
+    };
 
     return dateObj.getFullYear() +
       '-' + pad(dateObj.getMonth() + 1) +
@@ -109,7 +101,7 @@ export class TaskAddComponent {
     this._formNewTask.controls.datetime_deadline.setValue(null);
   }
 
-  public addTask(event: Event){
+  public addTask(event: Event) {
 
     event.preventDefault();
 
@@ -131,6 +123,6 @@ export class TaskAddComponent {
         this.onCreate.emit(true);
       },
       err => console.log(err)
-    )
+    );
   }
 }
