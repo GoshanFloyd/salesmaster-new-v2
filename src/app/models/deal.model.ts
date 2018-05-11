@@ -48,10 +48,10 @@ export class DealModel {
   }
 
   static fromArray(array: any): Array<DealModel> {
-    let newArray: Array<DealModel> = [];
+    const newArray: Array<DealModel> = [];
 
-    for (let item of array) {
-      newArray.push(new DealModel(item))
+    for (const item of array) {
+      newArray.push(new DealModel(item));
     }
 
     return newArray;
@@ -126,6 +126,27 @@ export class DealModel {
       'description': this.description,
       'status': this.status,
       'total': this.total
+    };
+  }
+
+  get statusLocale(): string {
+    if (this.status) {
+      switch (this.status) {
+        case 'in_process': {
+          return 'В работе';
+        }
+        case 'failed': {
+          return 'Провалена';
+        }
+        case 'completed': {
+          return 'Успешно завершена';
+        }
+        default: {
+          return null;
+        }
+      }
+    } else {
+      return null;
     }
   }
 }

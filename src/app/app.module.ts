@@ -57,6 +57,7 @@ import {CentrifugeService} from './services/centrifuge.service';
 import {LoadingComponent} from './components/loading.component/loading.component';
 import {LoadingService} from './services/loading.service';
 import {TaskTodayComponent} from './components/task.today.component/task.today.component';
+import {AnalyticListDealsComponent} from './components/analytic.list-deals.component/analytic.list-deals.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -112,6 +113,7 @@ const appRoutes: Routes = [
         children: [
           { path: 'main', component: AnalyticMainComponent },
           { path: 'main/activity', component: AnalyticListActivityComponent },
+          { path: 'main/deals', component: AnalyticListDealsComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },
@@ -158,7 +160,8 @@ const appRoutes: Routes = [
     TaskSingleComponent,
     TaskAddComponent,
     LoadingComponent,
-    TaskTodayComponent
+    TaskTodayComponent,
+    AnalyticListDealsComponent
   ],
   imports: [
     BrowserModule,
