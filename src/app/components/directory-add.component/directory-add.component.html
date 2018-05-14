@@ -1,0 +1,31 @@
+<form class="deal-add__component" [formGroup]="_formNewDirectory" (submit)="addDirectory($event)">
+  <div class="form-row">
+    <label for="task-add-title">Наименование директории:</label>
+    <input formControlName="title" class="input-add" id="task-add-title" type="text" placeholder="Введите наименования директории">
+    <div class="error-block">
+      <span *ngIf="_formNewDirectory.controls['title'].hasError('required')">
+        Необходимо указать наименование директории!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-doer">Компания:</label>
+    <select class="select-add" id="task-doer" formControlName="company">
+      <option value="null" selected disabled>-- Выберите исполнителя задач --</option>
+      <option *ngFor="let c of user.company" [value]="c.title">{{c.title}}</option>
+    </select>
+    <div class="error-block">
+      <span *ngIf="_formNewDirectory.controls['company'].hasError('required')">
+        Необходимо указать компанию!
+      </span>
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="task-add-title">Приватная ли директория:</label>
+    <p-toggleButton onLabel="Папка приватная" offLabel="Директория общедоступна"
+                    onIcon="fa-eye" offIcon="fa-eye-slash" formControlName="is_private"></p-toggleButton>
+  </div>
+  <div class="form-row">
+    <input [disabled]="_formNewDirectory.invalid" class="button-standard" type="submit" value="Добавить директорию">
+  </div>
+</form>

@@ -18,7 +18,7 @@ export class TaskSingleComponent implements OnInit{
   public currentTask: TaskModel = null;
   public formDoneTask: FormGroup = new FormGroup({
     result: new FormControl(null, Validators.required)
-  })
+  });
 
   @ViewChild('modalDoneTask') private modalDoneTask: ModalStandardComponent;
 
@@ -32,36 +32,36 @@ export class TaskSingleComponent implements OnInit{
     this.getTask();
   }
 
-  private getTask(){
+  private getTask() {
     this._taskService.getTask(this._activateRoute.snapshot.params['id']).subscribe(
       data => {
         this.currentTask = new TaskModel(data);
         console.log(this.currentTask.priority);
       },
       err => console.log(err)
-    )
+    );
   }
 
   get user() {
     return this._userRepository.getMyUser();
   }
 
-  public deleteTask(){
-    if (this.currentTask.employee_owner.id == this.user.id) {
+  public deleteTask() {
+    if (this.currentTask.employee_owner.id === this.user.id) {
       this._taskService.deleteTask(this.currentTask.id).subscribe(
         data => {
           this._notificationService.sendNotification('Задача удалена');
           this._router.navigate(['/tasks/main']);
         },
         err => console.log(err)
-      )
+      );
     } else {
-      this._notificationService.sendNotification('Данную задачу удалить нельзя')
+      this._notificationService.sendNotification('Данную задачу удалить нельзя');
     }
   }
 
   public approveTask() {
-    if (this.currentTask.employee_owner.id == this.user.id) {
+    if (this.currentTask.employee_owner.id === this.user.id) {
       this._taskService.updateTask(this.currentTask.id, {
         'status': 'done'
       }).subscribe(
@@ -70,7 +70,7 @@ export class TaskSingleComponent implements OnInit{
           this.getTask();
         },
         err => console.log(err)
-      )
+      );
     }
   }
 
@@ -82,29 +82,29 @@ export class TaskSingleComponent implements OnInit{
 
     let task = {};
 
-    if(this.currentTask.employee_owner.id == this.user.id) {
+    if (this.currentTask.employee_owner.id === this.user.id) {
       task = {
         'result': this.formDoneTask.controls['result'].value,
         'status': 'done'
-      }
+      };
     } else {
       task = {
         'result': this.formDoneTask.controls['result'].value,
         'status': 'verifying'
-      }
+      };
     }
 
     this._taskService.updateTask(this.currentTask.id, task).subscribe(
       data => {
-        if (this.currentTask.employee_owner.id == this.user.id) {
-          this._notificationService.sendNotification('Задача была выполнена')
+        if (this.currentTask.employee_owner.id === this.user.id) {
+          this._notificationService.sendNotification('Задача была выполнена');
         } else {
-          this._notificationService.sendNotification(`Задача отправлена на проверку ${this.currentTask.employee_owner.fullname}`)
+          this._notificationService.sendNotification(`Задача отправлена на проверку ${this.currentTask.employee_owner.fullname}`);
         }
         this.modalDoneTask.hideModal();
         this.getTask();
       },
       err => console.log(err)
-    )
+    );
   }
 }

@@ -1,0 +1,28 @@
+.grid-row-small-max-height {
+  height: auto !important;
+}
+
+.grid-row-small-max-height > * {
+  max-height: 120px !important;
+  height: 120px !important;
+}
+
+.file-manager-directory-link {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.file-manager-directory-link > span {
+  font-size: 2em;
+  display: inline-block;
+  margin: 5px auto;
+}
+
+.file-manager-directory-link > a {
+  display: block;
+  text-decoration: none;
+  line-height: 1em;
+  text-overflow: ellipsis;
+  padding: 3px;
+}

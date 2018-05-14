@@ -1,0 +1,31 @@
+<div class="col-sm-1 col-md-1 col-lg-1">
+  <div class="client-view__component main__component">
+    <div class="main__component__header display-flex display-flex-row">
+      <h3 class="display-flex-1">Файловый менеджер </h3>
+      <button class="main__component__header__helper-button mr-small" (click)="openAddDirectoryModal()"><span class="oi" data-glyph="plus"></span></button>
+      <label>
+        Сортировка по компаниям:
+        <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID" (change)="onChangeCompany()">
+          <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
+        </select>
+      </label>
+      <p-toggleButton class="check-ng-input" onLabel="Показать приватные папки" offLabel="Не показывать приватные папки"
+                      onIcon="fa-eye" offIcon="fa-eye-slash" [(ngModel)]="showPrivateDirectories"></p-toggleButton>
+    </div>
+    <div class="main__component__body">
+      <div class="grid-row grid-row-small-max-height">
+        <div class="col-sm-10 col-md-10 col-lg-10" *ngFor="let d of directoriesList">
+          <div class="file-manager-directory-link">
+            <span class="oi" data-glyph="folder"></span>
+            <a [routerLink]="'directory/'+d.id">{{d.title}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-standard #AddDirectoryModal [title]="'Добавить директорию'">
+  <app-directory-add #DirectoryAddComponent (onAddDirectory)="afterAddDirectory($event)"></app-directory-add>
+</app-modal-standard>
+

@@ -58,6 +58,13 @@ import {LoadingComponent} from './components/loading.component/loading.component
 import {LoadingService} from './services/loading.service';
 import {TaskTodayComponent} from './components/task.today.component/task.today.component';
 import {AnalyticListDealsComponent} from './components/analytic.list-deals.component/analytic.list-deals.component';
+import {FileManagerPageComponent} from './components/file-manager.page/file-manager.page.component';
+import {FileManagerComponent} from './components/file-manager.component/file-manager.component';
+import {DocumentService} from './services/document.service';
+import {DirectoryService} from './services/directory.service';
+import {DirectorySingleComponent} from './components/directory-single.component/directory-single.component';
+import {DirectoryAddComponent} from './components/directory-add.component/directory-add.component';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -122,6 +129,21 @@ const appRoutes: Routes = [
       }
     ]
   },
+  { path: 'file-manager',
+    children: [
+      {
+        path: '', component: FileManagerPageComponent, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: FileManagerComponent },
+          { path: 'main/directory/:id', component: DirectorySingleComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];
 
@@ -161,7 +183,11 @@ const appRoutes: Routes = [
     TaskAddComponent,
     LoadingComponent,
     TaskTodayComponent,
-    AnalyticListDealsComponent
+    AnalyticListDealsComponent,
+    FileManagerPageComponent,
+    FileManagerComponent,
+    DirectorySingleComponent,
+    DirectoryAddComponent
   ],
   imports: [
     BrowserModule,
@@ -194,6 +220,8 @@ const appRoutes: Routes = [
     TaskService,
     CentrifugeService,
     LoadingService,
+    DocumentService,
+    DirectoryService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

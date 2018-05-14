@@ -66,11 +66,11 @@ export class DealsKanbanComponent {
   }
 
   public initKanban(client_id?: number, company_id?: number, type: string = 'standard'): void {
-    if (this._client_id != client_id && this._company_id != company_id) {
+    if (this._client_id !== client_id && this._company_id !== company_id) {
       this._client_id = client_id;
       this._company_id = company_id;
       this._type = type;
-      if (type =='standard') {
+      if (type === 'standard') {
         this.getStages(this._company_id);
       } else {
         this.getUsers();
@@ -87,15 +87,15 @@ export class DealsKanbanComponent {
       this._dealStages = [];
       this._dealStages = DealStageModel.fromArray(data);
       console.log(this._dealStages);
-      for (let stage of this._dealStages) {
+      for (const stage of this._dealStages) {
         this._dealArraySortbale[stage.id] = [];
-      };
-      if (this._type == 'standard') {
-        this.getDeals(this._client_id)
+      }
+      if (this._type === 'standard') {
+        this.getDeals(this._client_id);
       } else {
         this.getDealsByEmployee(this._currentUserID);
       }
-    })
+    });
   }
 
   public getUsers() {
@@ -109,6 +109,7 @@ export class DealsKanbanComponent {
 
   private getDealsByEmployee(employee_id: number) {
     this._dealService.getDeals({
+      'client_company_id': this._currentCompanyID,
       'employee_id': employee_id
     }).subscribe(data => {
       this._dealsList = DealModel.fromArray(data);

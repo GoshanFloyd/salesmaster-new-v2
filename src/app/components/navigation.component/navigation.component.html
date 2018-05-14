@@ -41,8 +41,8 @@
         Отчеты
       </a>
     </li>
-    <li>
-      <a href="">
+    <li [class]="isActiveRoute('/file-manager') ? 'active' : '' ">
+      <a [routerLink]='["/file-manager"]'>
         <span class="oi" data-glyph="file"></span>
         Файловый менеджер
       </a>
