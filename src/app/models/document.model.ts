@@ -36,6 +36,10 @@ export class DocumentModel {
     return newArray;
   }
 
+  public getDownloadLink(): string {
+    return `https://test.salesmaster.me${this._file}`;
+  }
+
   get id(): number {
     return this._id;
   }

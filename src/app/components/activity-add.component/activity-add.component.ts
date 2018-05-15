@@ -53,7 +53,7 @@ export class ActivityAddComponent {
       data => {
         this.activitiesTypes = ActivityTypeModel.getTypesArray(data);
       }
-    )
+    );
   }
 
   public init(client_id: number, deal?: number ){
@@ -63,7 +63,7 @@ export class ActivityAddComponent {
         this._client = new ClientModel(data);
         this.getActivityTypes(this._client.company.id);
       }
-    )
+    );
   }
 
   private resetForm(){
@@ -72,9 +72,9 @@ export class ActivityAddComponent {
   }
 
   public onChangeFileEvent(event: any){
-    let fileList: FileList = event.target.files;
+    const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      let file: File = fileList[0];
+      const file: File = fileList[0];
       this._formData.append('document', file, file.name);
     }
   }

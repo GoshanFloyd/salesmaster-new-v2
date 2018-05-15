@@ -22,6 +22,17 @@ export class DirectoryService {
     });
   }
 
+  public getDirectory(directory_id: number) {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.get<DirectoryModel>(`${this.baseProtocol}${this.baseURL}directories/${directory_id}`, {
+      headers: header
+    });
+  }
+
   public createDirectory(obj?: any) {
 
     const header = new HttpHeaders({

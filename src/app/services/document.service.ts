@@ -22,7 +22,7 @@ export class DocumentService {
     });
   }
 
-  public createDocument(obj?: any) {
+  public createDocument(obj: FormData) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`

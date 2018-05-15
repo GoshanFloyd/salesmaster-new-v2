@@ -1,27 +1,41 @@
 <div class="col-sm-1 col-md-1 col-lg-1">
   <div class="client-view__component main__component">
     <div class="main__component__header display-flex display-flex-row">
-      <h3 class="display-flex-1"></h3>
-      <!--<label>-->
-        <!--Сортировка по компаниям:-->
-        <!--<select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID" (change)="onChangeCompany()">-->
-          <!--<option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>-->
-        <!--</select>-->
-      <!--</label>-->
-      <!--<p-toggleButton class="check-ng-input" onLabel="Показать приватные папки" offLabel="Не показывать приватные папки"-->
-                      <!--onIcon="fa-eye" offIcon="fa-eye-slash" [(ngModel)]="showPrivateDirectories"></p-toggleButton>-->
+      <h3 class="display-flex-1">{{currentDirectory ? currentDirectory.title : null }}</h3>
+      <button class="main__component__header__helper-button mr-small" (click)="openUploadModal()"><span class="oi" data-glyph="plus"></span></button>
     </div>
     <div class="main__component__body">
       <div class="grid-row grid-row-small-max-height">
         <div class="col-sm-10 col-md-10 col-lg-10" *ngFor="let d of documentsList">
           <div class="file-manager-directory-link">
-            <span class="oi" data-glyph="folder"></span>
-            <a [routerLink]="'directory/'+d.id">{{d.title}}</a>
+            <span class="oi" data-glyph="file"></span>
+            <a [href]="d.getDownloadLink()" download target="_blank">{{d.title}}</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<app-modal-standard #modalUpload [title]="'Загрузить файл'">
+  <form class="deal-add__component" [formGroup]="_formUploadDocument" (submit)="uploadDocument($event)">
+    <div class="form-row">
+      <label for="file-upload-title">Заголовок файла:</label>
+      <input formControlName="title" class="input-add" id="file-upload-title" type="text" placeholder="Введите заголовок файла">
+      <div class="error-block">
+      <span *ngIf="_formUploadDocument.controls['title'].hasError('required')">
+        Необходимо указать заголовок файла!
+      </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="file-body">Файл:</label>
+      <input (change)="onChangeFileEvent($event)" class="input-add" name="file-body" id="file-body" type="file">
+    </div>
+    <div class="form-row">
+      <input [disabled]="_formUploadDocument.invalid || !isFile" class="button-standard" type="submit" value="Добавить задачу">
+    </div>
+  </form>
+</app-modal-standard>
 
 
