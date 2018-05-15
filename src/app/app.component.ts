@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {CentrifugeService} from './services/centrifuge.service';
 import {LoadingService} from './services/loading.service';
 
@@ -24,6 +24,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit( ) {
+
+    this._router.events.subscribe(
+      data => {
+        if (data instanceof NavigationEnd){
+          console.log(data.url);
+        }
+      }
+    );
+
     this._router.navigateByUrl('/');
   }
 }

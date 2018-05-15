@@ -64,6 +64,8 @@ import {DocumentService} from './services/document.service';
 import {DirectoryService} from './services/directory.service';
 import {DirectorySingleComponent} from './components/directory-single.component/directory-single.component';
 import {DirectoryAddComponent} from './components/directory-add.component/directory-add.component';
+import {ProductPageComponent} from './components/product.page.component/product.page.component';
+import {ProductMainComponent} from './components/product-main.component/product-main.component';
 
 
 const appRoutes: Routes = [
@@ -144,6 +146,20 @@ const appRoutes: Routes = [
       }
     ]
   },
+  { path: 'products',
+    children: [
+      {
+        path: '', component: ProductPageComponent, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: ProductMainComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];
 
@@ -187,7 +203,9 @@ const appRoutes: Routes = [
     FileManagerPageComponent,
     FileManagerComponent,
     DirectorySingleComponent,
-    DirectoryAddComponent
+    DirectoryAddComponent,
+    ProductPageComponent,
+    ProductMainComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 <div class="logo-block">
-  <a href="">
+  <a [routerLink]='["/"]'>
     <img src="../../../assets/images/logo-small.png" alt="Логотип SalesMaster">
   </a>
 </div>
@@ -29,8 +29,8 @@
         Задачи
       </a>
     </li>
-    <li>
-      <a href="">
+    <li [class]="isActiveRoute('/products') ? 'active' : '' ">
+      <a [routerLink]='["/products"]'>
         <span class="oi" data-glyph="box"></span>
         Продукты
       </a>

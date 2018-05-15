@@ -25,4 +25,5 @@
   line-height: 1em;
   text-overflow: ellipsis;
   padding: 3px;
+  word-wrap: break-word;
 }
