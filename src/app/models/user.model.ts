@@ -7,10 +7,12 @@ type TypeUserInfo = {
   password: string
 };
 
-type TypeGroupArray = Array<{
+type GroupItem = {
   id: number,
   title: string
-}>;
+}
+
+type TypeGroupArray = Array<GroupItem>;
 
 export class UserModel {
   private readonly _id: number;
@@ -57,6 +59,10 @@ export class UserModel {
 
   get gender(): string {
     return this._gender;
+  }
+
+  public getDefaultCompany(): GroupItem {
+    return this.company[0];
   }
 
   static parseJwt (token) {

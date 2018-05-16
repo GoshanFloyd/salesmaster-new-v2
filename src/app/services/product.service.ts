@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ActivityModel} from '../models/activity.model';
 import {ProductModel} from '../models/product.model';
 
 @Injectable()

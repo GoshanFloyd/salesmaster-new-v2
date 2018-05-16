@@ -15,6 +15,8 @@ import {LoadingService} from '../../services/loading.service';
 
 export class WaitComponent implements OnInit {
 
+  private _mainURL: string = '/products/main';
+
   constructor(private _authService: AuthService,
               private _router: Router,
               private _userRepository: UserRepository,
@@ -26,7 +28,7 @@ export class WaitComponent implements OnInit {
 
     if (this._authService.isVerify) {
       if (this._userRepository.user) {
-        this._router.navigateByUrl('/contacts/main');
+        this._router.navigateByUrl(this._mainURL);
         this._clientsRepository.getContacts({
           company_id: this._userRepository.user.company[0].id
         });
@@ -34,7 +36,7 @@ export class WaitComponent implements OnInit {
       } else {
         this._userRepository.initMyUser().subscribe(
           res => {
-            this._router.navigateByUrl('/contacts/main');
+            this._router.navigateByUrl(this._mainURL);
             this._clientsRepository.getContacts({
               company_id: this._userRepository.user.company[0].id
             });
@@ -53,7 +55,7 @@ export class WaitComponent implements OnInit {
           } else {
             this._userRepository.initMyUser().subscribe(
               res => {
-                this._router.navigateByUrl('/contacts/main');
+                this._router.navigateByUrl(this._mainURL);
                 this._clientsRepository.getContacts({
                   company_id: this._userRepository.user.company[0].id
                 });

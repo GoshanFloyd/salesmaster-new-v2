@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this._router.events.subscribe(
       data => {
         if (data instanceof NavigationEnd){
-          console.log(data.url);
+          // console.log(data.url);
         }
       }
     );

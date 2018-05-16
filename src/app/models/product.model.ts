@@ -1,12 +1,11 @@
-import {ActivityModel} from './activity.model';
+import {s} from '@angular/core/src/render3';
 
-type CompanyObject = {
+interface CompanyObject {
   id: number;
   title: string;
 }
 
 export class ProductModel {
-
   private _id: number;
   private _company: CompanyObject;
   private _brand_title: string;
@@ -36,11 +35,15 @@ export class ProductModel {
   static fromArray(array: any): Array<ProductModel> {
     let newArray: Array<ProductModel> = [];
 
-    for (let item of array) {
+    for (const item of array) {
       newArray.push(new ProductModel(item));
     }
 
     return newArray;
+  }
+
+  public getVisibleTitle(): string {
+    return `${this.title} - ${this.brand_title}`;
   }
 
   get id(): number {

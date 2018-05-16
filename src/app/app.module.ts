@@ -66,6 +66,9 @@ import {DirectorySingleComponent} from './components/directory-single.component/
 import {DirectoryAddComponent} from './components/directory-add.component/directory-add.component';
 import {ProductPageComponent} from './components/product.page.component/product.page.component';
 import {ProductMainComponent} from './components/product-main.component/product-main.component';
+import {ProductSelectComponent} from './components/products-select.component/product-select.component';
+import {ProductBrandService} from './services/product.brand.service';
+import {ProductSingleComponent} from './components/product.single.component/product.single.component';
 
 
 const appRoutes: Routes = [
@@ -205,7 +208,9 @@ const appRoutes: Routes = [
     DirectorySingleComponent,
     DirectoryAddComponent,
     ProductPageComponent,
-    ProductMainComponent
+    ProductMainComponent,
+    ProductSelectComponent,
+    ProductSingleComponent
   ],
   imports: [
     BrowserModule,
@@ -240,6 +245,7 @@ const appRoutes: Routes = [
     LoadingService,
     DocumentService,
     DirectoryService,
+    ProductBrandService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

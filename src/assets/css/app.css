@@ -1730,8 +1730,10 @@ body .client-list__component .client-list__component__list {
   list-style-type: none !important;
   margin: 0 !important;
   padding: 5px !important; }
-  body .client-list__component .client-list__component__list > li:hover > a {
-    background: rgba(0, 0, 0, 0.05); }
+  body .client-list__component .client-list__component__list > li:hover {
+    cursor: pointer; }
+    body .client-list__component .client-list__component__list > li:hover > a {
+      background: rgba(0, 0, 0, 0.05); }
   body .client-list__component .client-list__component__list > li.active > a {
     background: #00a8e6;
     color: #fff; }
