@@ -46,6 +46,10 @@ export class ProductModel {
     return `${this.title} - ${this.brand_title}`;
   }
 
+  public getVisiblePrice(): string {
+    return `${this.total} ${this.currency.toLocaleUpperCase()}`;
+  }
+
   get id(): number {
     return this._id;
   }

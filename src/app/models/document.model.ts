@@ -37,7 +37,7 @@ export class DocumentModel {
   }
 
   public getDownloadLink(): string {
-    return `https://test.salesmaster.me${this._file}`;
+    return this._file;
   }
 
   get id(): number {

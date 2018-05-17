@@ -1,1 +1,32 @@
-svdfvdfvvf
+<div class="client-view__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Описание продукта</h3>
+  </div>
+  <div class="main__component__body">
+    <div class="grid-row height-100">
+      <div class="col-sm-1 col-md-2 col-lg-2">
+        <dl class="client-view__component__list" *ngIf="currentProduct">
+          <dt>Наименование продукта:</dt>
+          <dd>{{currentProduct?.title}} <button class="button-standard" (click)="openCallText()">Посмотреть текст обзвона</button></dd>
+
+          <dt>Бренд:</dt>
+          <dd>{{currentProduct?.brand_title}}</dd>
+
+          <dt>Описание:</dt>
+          <dd>{{currentProduct?.description}}</dd>
+
+          <dt>Цена:</dt>
+          <dd >{{currentProduct.getVisiblePrice()}}</dd>
+
+          <dt *ngIf="currentProduct.image">Изображение:</dt>
+          <dd *ngIf="currentProduct.image">
+            <img [src]="'https://test.salesmaster.me'+currentProduct.image" [alt]="currentProduct.getVisibleTitle()">
+          </dd>
+        </dl>
+      </div>
+      <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -15,7 +15,7 @@ import {ProductModel} from '../../models/product.model';
 
 export class ProductSelectComponent implements OnInit {
 
-  @Output() public onSelectProduct = new EventEmitter<ProductModel>()
+  @Output() public onSelectProduct = new EventEmitter<ProductModel>();
 
   public brandsList: Array<ProductBrandModel> = [];
 
@@ -27,9 +27,10 @@ export class ProductSelectComponent implements OnInit {
   public currentBrand: ProductBrandModel;
   public company_filter: number = this.user.getDefaultCompany().id;
 
-  constructor (private _userRepository: UserRepository,
-               private _productBrandService: ProductBrandService,
-               private _productService: ProductService) {}
+  constructor(private _userRepository: UserRepository,
+              private _productBrandService: ProductBrandService,
+              private _productService: ProductService) {
+  }
 
   get user(): UserModel {
     return this._userRepository.getMyUser();
@@ -39,7 +40,7 @@ export class ProductSelectComponent implements OnInit {
 
     let arr: Array<ProductModel> = this._productsList;
 
-    if(this.searchString){
+    if (this.searchString) {
       arr = arr.filter(x => x.title.toLocaleLowerCase().indexOf(this.searchString.toLocaleLowerCase()) > -1);
     }
 
@@ -90,7 +91,7 @@ export class ProductSelectComponent implements OnInit {
         this._productsList = ProductModel.fromArray(data);
       },
       err => console.log(err)
-    )
+    );
   }
 
   public setCurrentProduct(product: ProductModel) {

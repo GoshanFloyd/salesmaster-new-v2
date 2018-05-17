@@ -69,11 +69,13 @@ import {ProductMainComponent} from './components/product-main.component/product-
 import {ProductSelectComponent} from './components/products-select.component/product-select.component';
 import {ProductBrandService} from './services/product.brand.service';
 import {ProductSingleComponent} from './components/product.single.component/product.single.component';
+import {CalltextComponent} from './components/calltext.component/calltext.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: WaitComponent, canActivate: [TokenGuard] },
+  { path: 'calltext/:id', component: CalltextComponent, canActivate: [TokenGuard] },
   { path: 'contacts', children: [
     {
       path: '', component: ContactsPageComponent, canActivate: [TokenGuard],
@@ -210,7 +212,8 @@ const appRoutes: Routes = [
     ProductPageComponent,
     ProductMainComponent,
     ProductSelectComponent,
-    ProductSingleComponent
+    ProductSingleComponent,
+    CalltextComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
 import {ProductModel} from '../../models/product.model';
+import {ProductSingleComponent} from '../product.single.component/product.single.component';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,8 @@ import {ProductModel} from '../../models/product.model';
 })
 
 export class ProductMainComponent {
+
+  @ViewChild('productSingleComponent') private productSingleComponent: ProductSingleComponent;
 
   private _currentProduct: ProductModel = null;
 
@@ -22,6 +25,6 @@ export class ProductMainComponent {
 
   public selectProduct(product: ProductModel) {
     this._currentProduct = product;
-    console.log(this._currentProduct);
+    this.productSingleComponent.initCurrentProduct(this._currentProduct);
   }
 }
