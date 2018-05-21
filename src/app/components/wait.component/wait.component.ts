@@ -28,7 +28,7 @@ export class WaitComponent implements OnInit {
   ngOnInit() {
     this._activeRoute.queryParams
       .subscribe(params => {
-        const currentURL: string = params.pathname != '/' ? params.pathname : this._mainURL;
+        const currentURL: string = params.pathname != '/' && params.pathname ? params.pathname : this._mainURL;
         if (this._authService.isVerify) {
           if (this._userRepository.user) {
             this._router.navigateByUrl(currentURL);

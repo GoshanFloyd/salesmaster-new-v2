@@ -1,0 +1,59 @@
+<div class="grid-wrapper">
+  <div class="grid-nav">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="grid-aside">
+    <div class="grid-header">
+      <app-header></app-header>
+    </div>
+    <div class="grid-content display-flex ">
+      <div class="grid-row">
+        <div class="client-view__component main__component">
+          <div class="main__component__header display-flex display-flex-row">
+            <h3 class="display-flex-1">Личный кабинет</h3>
+          </div>
+          <div class="main__component__body">
+            <div class="grid-row height-100">
+              <div class="col-sm-1 col-md-5 col-lg-5">
+                <dl class="client-view__component__list">
+                  <dt>Ф.И.О:</dt>
+                  <dd>{{user?.user.first_name + ' ' + user?.user.last_name}}</dd>
+
+                  <dt>Email-адрес:</dt>
+                  <dd>{{user?.user.email}}</dd>
+
+                  <dt>Пол:</dt>
+                  <dd>{{user?.genderString}}</dd>
+
+                  <dt>Аватар:</dt>
+                  <dd class="helper-text-center">
+                    <img class="simple-avatar-image" [src]="user?.avatar" [alt]="user?.user.email+' avatar'">
+
+                    <button class="button-standard" (click)="showUploadModal()">Изменить фото </button>
+                  </dd>
+                </dl>
+              </div>
+              <div class="col-sm-1 col-md-5 col-lg-5">
+                <div class="client-view__component__list">
+                  <dt>Компании, в которые я имею доступ:</dt>
+                  <dd >
+                    <span style="display: block" *ngFor="let c of user?.company">{{c.title}}</span>
+                  </dd>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-standard #uploadAvatarModal [title]="'Загрузить новое фото'">
+  <button class="button-standard" (click)="updateImage()">Загрузить фото</button>
+  <div class="file-upload">
+    <span class="text">upload</span>
+    <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+  </div>
+  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+</app-modal-standard>

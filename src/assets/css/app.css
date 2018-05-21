@@ -1290,6 +1290,19 @@ th {
   .customHelperDatetimePicker span > input {
     width: 100% !important; }
 
+.simple-header-h4 {
+  margin: 0 auto 5px !important; }
+
+.simple-avatar-image {
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%; }
+
+.helper-text-center {
+  text-align: center !important; }
+
 .main__component {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -1722,7 +1735,7 @@ body .main-header__component {
     background-size: cover;
     background-position: center center;
     margin: 0 10px !important;
-    border-radius: 5px; }
+    border-radius: 50%; }
   body .main-header__component .helper-header-panel a.fast-cabinet-link {
     color: #444 !important;
     margin-right: 20px; }

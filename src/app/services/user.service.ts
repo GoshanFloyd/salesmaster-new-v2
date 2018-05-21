@@ -32,4 +32,14 @@ export class UserService {
       params: obj ? obj : null
     });
   }
+
+  public updateUser(id: number, obj: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this.httpClient.patch<UserModel[]>(`${this.baseProtocol}${this.baseURL}employees/${id}`, obj, {
+      headers: headers,
+    });
+  }
 }

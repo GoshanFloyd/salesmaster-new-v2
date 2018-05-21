@@ -1,3 +1,4 @@
+import {s} from '@angular/core/src/render3';
 
 type TypeUserInfo = {
   username: string,
@@ -59,6 +60,18 @@ export class UserModel {
 
   get gender(): string {
     return this._gender;
+  }
+
+  get genderString(): string {
+    if (this._gender == 'bot') {
+      return 'Системный пользоваель';
+    }
+    if (this._gender == 'male') {
+      return 'Мужской';
+    }
+    if (this._gender == 'female') {
+      return 'Женский';
+    }
   }
 
   public getDefaultCompany(): GroupItem {

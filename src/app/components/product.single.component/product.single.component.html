@@ -13,7 +13,7 @@
           <dd>{{currentProduct?.brand_title}}</dd>
 
           <dt>Описание:</dt>
-          <dd>{{currentProduct?.description}}</dd>
+          <dd>{{currentProduct?.description ? currentProduct?.description : 'Описание не указано'}}</dd>
 
           <dt>Цена:</dt>
           <dd >{{currentProduct.getVisiblePrice()}}</dd>
@@ -25,6 +25,25 @@
         </dl>
       </div>
       <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
+        <h4 class="simple-header-h4">Список дочерних продуктов</h4>
+        <table class="table-main">
+          <caption></caption>
+          <thead>
+            <tr>
+              <th>Наименование</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of childrenProducts; let i = index">
+              <td>{{product.title}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Наименование</th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </div>

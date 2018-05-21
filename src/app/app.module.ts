@@ -70,12 +70,15 @@ import {ProductSelectComponent} from './components/products-select.component/pro
 import {ProductBrandService} from './services/product.brand.service';
 import {ProductSingleComponent} from './components/product.single.component/product.single.component';
 import {CalltextComponent} from './components/calltext.component/calltext.component';
+import {EmployeeProfileComponent} from './components/employee.profile.component/employee.profile.component';
+import {ImageCropperComponent} from 'ng2-img-cropper';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: WaitComponent, canActivate: [TokenGuard] },
   { path: 'calltext/:id', component: CalltextComponent, canActivate: [TokenGuard] },
+  { path: 'profile', component: EmployeeProfileComponent, canActivate: [TokenGuard] },
   { path: 'contacts', children: [
     {
       path: '', component: ContactsPageComponent, canActivate: [TokenGuard],
@@ -213,7 +216,9 @@ const appRoutes: Routes = [
     ProductMainComponent,
     ProductSelectComponent,
     ProductSingleComponent,
-    CalltextComponent
+    CalltextComponent,
+    EmployeeProfileComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
