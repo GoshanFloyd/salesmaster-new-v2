@@ -1,0 +1,35 @@
+<div class="client-list__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Аналитика аквтивностей (Графическое представление):</h3>
+  </div>
+  <form class="main__component__helper-panel">
+    <select  name="company_filter" [(ngModel)]="currentCompanyID" (change)="changeCompany()">
+      <option value="" disabled selected>-- Компания --</option>
+      <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
+    </select>
+    <p-calendar class='customHelperDatetimePicker'
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterStart"
+                name="dateFilterStart"
+                [maxDate]="maxDateToFilterStart"
+                (onSelect)="changeCompany()">
+    </p-calendar>
+    <p-calendar class='customHelperDatetimePicker'
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterEnd"
+                name="dateFilterEnd"
+                [maxDate]="maxDateToFilterEnd"
+                (onSelect)="changeCompany()">
+    </p-calendar>
+  </form>
+  <div class="main__component__body">
+    <div class="overflow-container">
+      <canvas  baseChart width="400" height="250"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"></canvas>
+    </div>
+  </div>
+</div>

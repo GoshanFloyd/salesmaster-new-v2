@@ -56,7 +56,7 @@ export class ActivityAddComponent {
     );
   }
 
-  public init(client_id: number, deal?: number ){
+  public init(client_id: number, deal?: number ) {
     this._clientService.getClientById(client_id).subscribe(
       data => {
         this._dealID = deal ? deal : null;
@@ -66,12 +66,12 @@ export class ActivityAddComponent {
     );
   }
 
-  private resetForm(){
+  private resetForm() {
     this._formAddActivity.controls['type_title'].setValue(null);
     this._formAddActivity.controls['description'].setValue(null);
   }
 
-  public onChangeFileEvent(event: any){
+  public onChangeFileEvent(event: any) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
@@ -79,7 +79,7 @@ export class ActivityAddComponent {
     }
   }
 
-  public createActivity(event: Event){
+  public createActivity(event: Event) {
 
     event.preventDefault();
 

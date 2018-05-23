@@ -27,12 +27,9 @@
         <!--<span class="oi" data-glyph="loop"></span>-->
       <!--</a>-->
 
-      <div class="avatar-small-header" [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}">
-
+      <div class="avatar-small-header" *ngIf='user.avatar' [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}">
       </div>
-
       <a class="fast-cabinet-link" [routerLink]="'/profile'">{{user.user.first_name + ' ' + user.user.last_name}}</a>
-
       <a href="" class="fast-logout-link">
         <span class="oi" data-glyph="account-logout"></span>
       </a>

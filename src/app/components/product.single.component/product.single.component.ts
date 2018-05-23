@@ -10,9 +10,9 @@ import {ProductService} from '../../services/product.service';
 
 export class ProductSingleComponent {
 
-  private _currentProduct: ProductModel;
+  private _currentProduct: ProductModel = null;
 
-  private _childrenProducts: Array<ProductModel>;
+  private _childrenProducts: Array<ProductModel> = [];
 
   constructor (private _productService: ProductService) {}
 

@@ -52,7 +52,6 @@ import {TaskSingleComponent} from './components/task.single.component/task.singl
 import {TaskAddComponent} from './components/task.add.component/task.add.component';
 import {CalendarModule, ToggleButtonModule} from 'primeng/primeng';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ChartModule} from 'primeng/chart';
 import {CentrifugeService} from './services/centrifuge.service';
 import {LoadingComponent} from './components/loading.component/loading.component';
 import {LoadingService} from './services/loading.service';
@@ -72,6 +71,10 @@ import {ProductSingleComponent} from './components/product.single.component/prod
 import {CalltextComponent} from './components/calltext.component/calltext.component';
 import {EmployeeProfileComponent} from './components/employee.profile.component/employee.profile.component';
 import {ImageCropperComponent} from 'ng2-img-cropper';
+import {HelperUrlService} from './services/helper.url.service';
+import {AnalyticsGraphActivityComponent} from './components/analytics.graph-activity.component/analytics.graph-activity.component';
+import {ChartsModule} from 'ng2-charts';
+import {AnalyticService} from './services/analytic.service';
 
 
 const appRoutes: Routes = [
@@ -131,6 +134,7 @@ const appRoutes: Routes = [
           { path: 'main', component: AnalyticMainComponent },
           { path: 'main/activity', component: AnalyticListActivityComponent },
           { path: 'main/deals', component: AnalyticListDealsComponent },
+          { path: 'main/graph-activity', component: AnalyticsGraphActivityComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },
@@ -218,7 +222,8 @@ const appRoutes: Routes = [
     ProductSingleComponent,
     CalltextComponent,
     EmployeeProfileComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    AnalyticsGraphActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -230,8 +235,8 @@ const appRoutes: Routes = [
     CalendarModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    ChartModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ChartsModule
   ],
   providers: [
     TokenGuard,
@@ -254,6 +259,8 @@ const appRoutes: Routes = [
     DocumentService,
     DirectoryService,
     ProductBrandService,
+    HelperUrlService,
+    AnalyticService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]
