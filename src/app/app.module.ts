@@ -75,6 +75,7 @@ import {HelperUrlService} from './services/helper.url.service';
 import {AnalyticsGraphActivityComponent} from './components/analytics.graph-activity.component/analytics.graph-activity.component';
 import {ChartsModule} from 'ng2-charts';
 import {AnalyticService} from './services/analytic.service';
+import {AnalyticsGraphDealsComponent} from './components/analytics.graph-deals.component/analytics.graph-deals.component';
 
 
 const appRoutes: Routes = [
@@ -135,6 +136,7 @@ const appRoutes: Routes = [
           { path: 'main/activity', component: AnalyticListActivityComponent },
           { path: 'main/deals', component: AnalyticListDealsComponent },
           { path: 'main/graph-activity', component: AnalyticsGraphActivityComponent },
+          { path: 'main/graph-deal', component: AnalyticsGraphDealsComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },
@@ -223,7 +225,8 @@ const appRoutes: Routes = [
     CalltextComponent,
     EmployeeProfileComponent,
     ImageCropperComponent,
-    AnalyticsGraphActivityComponent
+    AnalyticsGraphActivityComponent,
+    AnalyticsGraphDealsComponent
   ],
   imports: [
     BrowserModule,

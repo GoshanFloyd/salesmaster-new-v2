@@ -1,25 +1,21 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivityTypeService} from '../../services/activitytype.service';
-import {AnalyticService} from '../../services/analytic.service';
 import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
-import {ActivityTypeModel} from '../../models/acitivitytype.model';
-import {Observable} from 'rxjs/Observable';
-import {BaseChartDirective} from 'ng2-charts';
 import {DATEPICKER_RU_LOCALE} from '../../variables/variables';
-
-export interface ILineChartData {
-  data: Array<number>;
-  label: string;
-}
+import {ILineChartData} from '../analytics.graph-activity.component/analytics.graph-activity.component';
+import {DealStageModel} from '../../models/dealstage.model';
+import {DealStageService} from '../../services/dealstage.service';
+import {Observable} from 'rxjs/Observable';
+import {AnalyticService} from '../../services/analytic.service';
+import {BaseChartDirective} from 'ng2-charts';
 
 @Component({
   moduleId: module.id,
-  templateUrl: './analytics.graph-activity.component.html',
-  selector: 'app-analytics-graph-activity'
+  templateUrl: './analytics.graph-deals.component.html',
+  selector: 'app-analytics-graph-deals'
 })
 
-export class AnalyticsGraphActivityComponent implements OnInit {
+export class AnalyticsGraphDealsComponent implements OnInit {
 
   public ruLocale: any = DATEPICKER_RU_LOCALE;
 
@@ -38,22 +34,22 @@ export class AnalyticsGraphActivityComponent implements OnInit {
 
   public currentCompanyID: number = this.user.getDefaultCompany().id;
 
-  public activitiesTypes: Array<ActivityTypeModel> = [];
+  public dealsStages: Array<DealStageModel> = [];
 
   @ViewChild(BaseChartDirective)
   public chart: BaseChartDirective;
 
-  constructor (private _activityTypeService: ActivityTypeService,
-               private _analyticService: AnalyticService,
-               private _userRepository: UserRepository) {}
+  constructor (private _userRepository: UserRepository,
+               private _dealStagesService: DealStageService,
+               private _analyticService: AnalyticService) {}
 
   ngOnInit() {
     this.dateFilterStart.setDate(this.dateFilterEnd.getDate() - 10);
-    this.getTypes(this.currentCompanyID).subscribe(
+    this.getStages(this.currentCompanyID).subscribe(
       data => {
         this.getAnalytiс();
       }
-    )
+    );
   }
 
   get user(): UserModel {
@@ -83,28 +79,11 @@ export class AnalyticsGraphActivityComponent implements OnInit {
   }
 
   public changeCompany() {
-    this.getTypes(this.currentCompanyID).subscribe(
+    this.getStages(this.currentCompanyID).subscribe(
       data => {
         this.getAnalytiс();
       }
     )
-  }
-
-  private getTypes(company_id: number): Observable<any> {
-    return Observable.create(observer => {
-      this._activityTypeService.getActivitiesTypes({
-        'company_id': company_id
-      }).subscribe(
-        data => {
-          this.activitiesTypes = ActivityTypeModel.getTypesArray(data);
-          observer.next();
-        },
-        err => {
-          observer.error(err);
-        },
-        () => observer.complete()
-      )
-    });
   }
 
   private getDatesString(date: Date): string {
@@ -117,12 +96,48 @@ export class AnalyticsGraphActivityComponent implements OnInit {
     ].join('-');
   }
 
-  private generateArray(data: any) {
+  private getStages(company_id: number): Observable<any> {
+    return Observable.create(observer => {
+      this._dealStagesService.getStages({
+        'company_id': company_id
+      }).subscribe(
+        data => {
+          this.dealsStages = DealStageModel.fromArray(data);
+          observer.next();
+        },
+        err => {
+          observer.error(err);
+        },
+        () => observer.complete()
+      )
+    });
+  }
 
+  private getAnalytiс() {
+
+    this._analyticService.getAnalytic({
+      'output': 'json',
+      'subject': 'deal',
+      'company_id': this.currentCompanyID,
+      'start': this.getDatesString(this.dateFilterStart),
+      'end': this.getDatesString(this.DateFilterEnd),
+      'is_by_day': true
+    }).subscribe(
+      data => {
+        console.log(data);
+        if(data && data.length > 0) {
+          this.generateArray(data)
+        }
+      },
+      err => console.log(err)
+    )
+  }
+
+  private generateArray(data: any) {
     this.lineChartData = [];
     this.lineChartLabels = [];
 
-    for (let type of this.activitiesTypes) {
+    for (let type of this.dealsStages) {
 
       let obj: ILineChartData = {
         data: [],
@@ -130,11 +145,30 @@ export class AnalyticsGraphActivityComponent implements OnInit {
       }
 
       for (let d of data) {
-        obj.data.push(d[type.title])
+        obj.data.push(d['stages'][type.title])
       }
 
       this.lineChartData.push(obj);
     }
+
+    let doneDeals: ILineChartData = {
+      data: [],
+      label: 'Завершено'
+    }
+
+    let failDeals: ILineChartData = {
+      data: [],
+      label: 'Завершено'
+    }
+
+    for (let d of data) {
+      doneDeals.data.push(d['Завершено'])
+      failDeals.data.push(d['Провалено'])
+    }
+
+    this.lineChartData.push(doneDeals);
+    this.lineChartData.push(failDeals);
+
 
     for (let day of data) {
       this.lineChartLabels.push(day.created_day);
@@ -143,24 +177,5 @@ export class AnalyticsGraphActivityComponent implements OnInit {
     this.chart.datasets = this.lineChartData;
     this.chart.labels = this.lineChartLabels;
     this.chart.ngOnInit();
-  }
-
-  private getAnalytiс() {
-
-    this._analyticService.getAnalytic({
-      'output': 'json',
-      'subject': 'activity',
-      'company_id': this.currentCompanyID,
-      'start': this.getDatesString(this.dateFilterStart),
-      'end': this.getDatesString(this.DateFilterEnd),
-      'is_by_day': true
-    }).subscribe(
-      data => {
-        if(data && data.length > 0) {
-          this.generateArray(data)
-        }
-      },
-      err => console.log(err)
-    )
-  }
-}
+    }
+ }

@@ -9,7 +9,7 @@ export class AnalyticService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  getActivitiesAnalytic(obj?: any) {
+  public getAnalytic(obj?: any) {
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
