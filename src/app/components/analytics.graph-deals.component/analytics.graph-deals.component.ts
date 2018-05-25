@@ -124,7 +124,6 @@ export class AnalyticsGraphDealsComponent implements OnInit {
       'is_by_day': true
     }).subscribe(
       data => {
-        console.log(data);
         if(data && data.length > 0) {
           this.generateArray(data)
         }
@@ -136,6 +135,7 @@ export class AnalyticsGraphDealsComponent implements OnInit {
   private generateArray(data: any) {
     this.lineChartData = [];
     this.lineChartLabels = [];
+
 
     for (let type of this.dealsStages) {
 
@@ -158,17 +158,16 @@ export class AnalyticsGraphDealsComponent implements OnInit {
 
     let failDeals: ILineChartData = {
       data: [],
-      label: 'Завершено'
+      label: 'Провалено'
     }
 
     for (let d of data) {
-      doneDeals.data.push(d['Завершено'])
-      failDeals.data.push(d['Провалено'])
+      doneDeals.data.push(d['completed'])
+      failDeals.data.push(d['failed'])
     }
 
     this.lineChartData.push(doneDeals);
     this.lineChartData.push(failDeals);
-
 
     for (let day of data) {
       this.lineChartLabels.push(day.created_day);

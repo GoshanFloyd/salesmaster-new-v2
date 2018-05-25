@@ -74,7 +74,9 @@ export class ActivityEditComponent {
         this._formEditActivity.controls['description'].setValue(null);
         this._formEditActivity.controls['type_title'].setValue(null);
         this.onUpdate.emit(true);
-        this._notificationService.sendNotification('Активность обновлена');
+        this._notificationService.sendNotification({
+          title: 'Активность обновлена'
+        });
       },
       err => console.log(err)
     )

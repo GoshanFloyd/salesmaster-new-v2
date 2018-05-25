@@ -136,9 +136,11 @@ export class DealSingleComponent implements OnInit{
           this.productInDeal = this.currentDeal.product.map(x => x.id);
         },
         err => console.log(err)
-      )
+      );
     } else {
-      this._notificationService.sendNotification('Данный продукт уже присутствует в сделке');
+      this._notificationService.sendNotification({
+        title: 'Данный продукт уже присутствует в сделке'
+      });
     }
   }
 
@@ -151,15 +153,17 @@ export class DealSingleComponent implements OnInit{
     const updatedDeal = {
       id: this.currentDeal.id,
       product: [id]
-    }
+    };
 
     this._dealServie.updateDeal(updatedDeal).subscribe(
       data => {
         this.currentDeal = new DealModel(data);
         this.productInDeal = this.currentDeal.product.map(x => x.id);
-        this._notificationService.sendNotification('Продукт удален');
+        this._notificationService.sendNotification({
+          title: 'Продукт удален'
+        });
       },
       err => console.log(err)
-    )
+    );
   }
 }

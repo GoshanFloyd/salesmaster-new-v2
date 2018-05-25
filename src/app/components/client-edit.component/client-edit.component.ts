@@ -218,7 +218,9 @@ export class ClientEditComponent implements OnInit {
         this._clientRepository.getContactsLight({
           company_title: this.editableClient.controls['company'].value
         });
-        this._notificationService.sendNotification('Клиент обновлен');
+        this._notificationService.sendNotification({
+          title: 'Клиент обновлен'
+        });
         this._router.navigate(['contacts/main/'+this._id]);
       },
       err => console.log(err)

@@ -1,11 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ApplicationRef, Component, OnInit, ViewChild} from '@angular/core';
 import {UserRepository} from '../../repositories/user.repository';
 import {TaskService} from '../../services/task.service';
 import {TaskModel} from '../../models/task.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Task} from 'protractor/built/taskScheduler';
 
 @Component({
   moduleId: module.id,
@@ -15,7 +16,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class TaskSingleComponent implements OnInit{
 
-  public currentTask: TaskModel = null;
+  private _currentTask: TaskModel = null;
   public formDoneTask: FormGroup = new FormGroup({
     result: new FormControl(null, Validators.required)
   });
@@ -26,7 +27,23 @@ export class TaskSingleComponent implements OnInit{
                private _taskService: TaskService,
                private _activateRoute: ActivatedRoute,
                private _notificationService: NotificationService,
-               private _router: Router) {}
+               private _router: Router,
+               private _appRef: ApplicationRef) {
+
+    this._router.events.subscribe(
+      data => {
+        if(data instanceof NavigationEnd) {
+          if(this.currentTask && this._activateRoute.snapshot.params['id'] != this.currentTask.id.toString()) {
+            this.getTask();
+          }
+        }
+      }
+    )
+  }
+
+  get currentTask(): TaskModel {
+    return this._currentTask;
+  }
 
   ngOnInit() {
     this.getTask();
@@ -35,8 +52,8 @@ export class TaskSingleComponent implements OnInit{
   private getTask() {
     this._taskService.getTask(this._activateRoute.snapshot.params['id']).subscribe(
       data => {
-        this.currentTask = new TaskModel(data);
-        console.log(this.currentTask.priority);
+        this._currentTask = new TaskModel(data);
+        this._appRef.tick();
       },
       err => console.log(err)
     );
@@ -47,26 +64,32 @@ export class TaskSingleComponent implements OnInit{
   }
 
   public deleteTask() {
-    if (this.currentTask.employee_owner.id === this.user.id) {
-      this._taskService.deleteTask(this.currentTask.id).subscribe(
+    if (this._currentTask.employee_owner.id === this.user.id) {
+      this._taskService.deleteTask(this._currentTask.id).subscribe(
         data => {
-          this._notificationService.sendNotification('Задача удалена');
+          this._notificationService.sendNotification({
+            title: 'Задача удалена'
+          });
           this._router.navigate(['/tasks/main']);
         },
         err => console.log(err)
       );
     } else {
-      this._notificationService.sendNotification('Данную задачу удалить нельзя');
+      this._notificationService.sendNotification({
+        title: 'Данную задачу удалить нельзя'
+      });
     }
   }
 
   public approveTask() {
-    if (this.currentTask.employee_owner.id === this.user.id) {
-      this._taskService.updateTask(this.currentTask.id, {
+    if (this._currentTask.employee_owner.id === this.user.id) {
+      this._taskService.updateTask(this._currentTask.id, {
         'status': 'done'
       }).subscribe(
         data => {
-          this._notificationService.sendNotification('Задача одобрена');
+          this._notificationService.sendNotification({
+            title: 'Задача одобрена'
+          });
           this.getTask();
         },
         err => console.log(err)
@@ -82,7 +105,7 @@ export class TaskSingleComponent implements OnInit{
 
     let task = {};
 
-    if (this.currentTask.employee_owner.id === this.user.id) {
+    if (this._currentTask.employee_owner.id === this.user.id) {
       task = {
         'result': this.formDoneTask.controls['result'].value,
         'status': 'done'
@@ -94,12 +117,16 @@ export class TaskSingleComponent implements OnInit{
       };
     }
 
-    this._taskService.updateTask(this.currentTask.id, task).subscribe(
+    this._taskService.updateTask(this._currentTask.id, task).subscribe(
       data => {
-        if (this.currentTask.employee_owner.id === this.user.id) {
-          this._notificationService.sendNotification('Задача была выполнена');
+        if (this._currentTask.employee_owner.id === this.user.id) {
+          this._notificationService.sendNotification({
+            title: 'Задача была выполнена'
+          });
         } else {
-          this._notificationService.sendNotification(`Задача отправлена на проверку ${this.currentTask.employee_owner.fullname}`);
+          this._notificationService.sendNotification({
+            title: `Задача отправлена на проверку ${this._currentTask.employee_owner.fullname}`
+          });
         }
         this.modalDoneTask.hideModal();
         this.getTask();

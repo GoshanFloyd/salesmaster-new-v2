@@ -31,8 +31,8 @@
 
         <dt>Статус:</dt>
         <dd [ngSwitch]="task.status">
-          <span *ngSwitchCase="'in_process'">В работе</span>
-          <span *ngSwitchCase="'done'">Выполнена</span>
+          <span *ngSwitchCase="'in_progress'">В работе</span>
+          <span *ngSwitchCase="'completed'">Выполнена</span>
           <span *ngSwitchCase="'failed'">Провалена</span>
           <span *ngSwitchCase="'verifying'">На проверке</span>
         </dd>
@@ -55,7 +55,7 @@
         <dt>Deadline:</dt>
         <dd>{{task.datetime_deadline_format}}</dd>
       </dl>
-      <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_process'">Выполнить</button>
+      <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_progress'">Выполнить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'">Одобрить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'">Продлить на 1 день</button>
     </div>

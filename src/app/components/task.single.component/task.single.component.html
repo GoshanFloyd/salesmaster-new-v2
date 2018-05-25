@@ -47,8 +47,8 @@
             <dt>Статус:</dt>
             <dd *ngIf="currentTask?.status">
               <div [ngSwitch]="currentTask.status">
-                <span *ngSwitchCase="'in_process'">В работе</span>
-                <span *ngSwitchCase="'done'">Выполнена</span>
+                <span *ngSwitchCase="'in_progress'">В работе</span>
+                <span *ngSwitchCase="'completed'">Выполнена</span>
                 <span *ngSwitchCase="'failed'">Провалена</span>
                 <span *ngSwitchCase="'verifying'">На проверке</span>
               </div>
@@ -59,7 +59,7 @@
                   class="button-danger mt-small" (click)="deleteTask()">Удалить</button>
           <button *ngIf="currentTask?.status && currentTask.status == 'failed' && currentTask.employee_owner.id == user.id"
                   class="button-help mt-small">Продлить</button>
-          <button *ngIf="currentTask?.employee_doer && currentTask.employee_doer.id == user.id && currentTask.status == 'in_process'"
+          <button *ngIf="currentTask?.employee_doer && currentTask.employee_doer.id == user.id && currentTask.status == 'in_progress'"
                   class="button-standard mt-small" (click)="showModalDoneTask()">Выполнить</button>
           <button  *ngIf="currentTask?.employee_owner && currentTask.employee_owner.id == user.id && currentTask.status == 'verifying'"
             class="button-help mt-small" (click)="approveTask()">Одобрить</button>
@@ -70,7 +70,7 @@
 </div>
 
 <app-modal-standard #modalDoneTask [title]="'Выполнить задачу'">
-  <form [formGroup]="formDoneTask" (submit)="doneTask()">
+  <form *ngIf="currentTask" [formGroup]="formDoneTask" (submit)="doneTask()">
     <div class="form-row">
       <label for="task-done-description">Результат выполненной задачи:</label>
       <textarea formControlName="result" class="textarea-add" name="task-done-description" id="task-done-description" rows="10">

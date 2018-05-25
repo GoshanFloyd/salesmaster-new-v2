@@ -91,7 +91,9 @@ export class ActivityAddComponent {
 
     this._activityService.createActivity(this._formData).subscribe(
       data => {
-        this._notificationService.sendNotification('Активность добавлена.')
+        this._notificationService.sendNotification({
+          title: 'Активность добавлена.'
+        });
         this.resetForm();
         this._formData = new FormData();
         this.onCreate.emit(true);

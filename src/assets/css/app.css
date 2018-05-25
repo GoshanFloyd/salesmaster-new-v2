@@ -1999,13 +1999,13 @@ body .search-controls {
     box-sizing: border-box !important;
     padding: 5px 10px; }
 
-.task_in_process {
+.task_in_progress {
   background-color: #00a8e6 !important; }
 
 .task_verifying {
   background-color: #faa732 !important; }
 
-.task_done {
+.task_completed {
   background-color: #82bb42 !important; }
 
 .task_failed {

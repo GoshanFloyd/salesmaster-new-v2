@@ -131,8 +131,12 @@ export class ClientAddComponent {
           company_title: this.newClient.controls['company'].value
         });
         this._router.navigate(['/contacts/main']);
-        this._notificationService.sendNotification('Добавлен клиент',
-          `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`);
+        this._notificationService.sendNotification({
+          title: 'Добавлен клиент',
+          options: {
+            body: `Добавлен клиент с наименованием ${this.newClient.controls['title'].value}`
+          }
+          });
       },
       err => console.log(err)
     );

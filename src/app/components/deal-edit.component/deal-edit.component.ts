@@ -43,7 +43,7 @@ export class DealEditComponent {
         this.prepareForm(this.currentDeal);
       },
       err => console.log(err)
-    )
+    );
   }
 
   private prepareForm(deal: DealModel) {
@@ -67,15 +67,17 @@ export class DealEditComponent {
       'description': this.dealEditForm.controls['description'].value,
       'status': this.dealEditForm.controls['status'].value,
       'total': this.dealEditForm.controls['total'].value
-    }
+    };
 
     this._dealService.updateDeal(deal).subscribe(
       data => {
-        this._notificationService.sendNotification('Сделка обновлена');
+        this._notificationService.sendNotification({
+          title: 'Сделка обновлена'
+        });
         this._router.navigate([`/contacts/main/${this.currentDeal.client.id}`]);
       },
       err => console.log(err)
-    )
+    );
   }
 
   public returnMainPage() {

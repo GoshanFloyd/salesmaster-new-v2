@@ -3,22 +3,23 @@ import {UserRepository} from '../repositories/user.repository';
 import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DealModel} from '../models/deal.model';
+import {UserModel} from '../models/user.model';
+import {Router} from '@angular/router';
 
 declare let Centrifuge: any;
 
 @Injectable()
 export class CentrifugeService {
 
-  private _centrifuge: any;
-
   private readonly baseProtocol = 'https://';
   private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _userRepository: UserRepository,
                private _notificationService: NotificationService,
-               private _httpClient: HttpClient) {}
+               private _httpClient: HttpClient,
+               private _router: Router) {}
 
-  private user() {
+  private user(): UserModel {
     return this._userRepository.getMyUser();
   }
 
@@ -42,38 +43,67 @@ export class CentrifugeService {
   }
 
   private initToken(data: any) {
-    // var centrifuge = new Centrifuge({
-    //   url: 'https://test.salesmaster.me/centrifugo/connection/',
-    //   project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
-    //   user: this._userRepository.getMyUser().id.toString(),
-    //   timestamp: data.timestamp.toString(),
-    //   token: data.token
-    // });
-    //
-    //
-    // var public_callbacks = {
-    //   "message": function(dataset) {
-    //     console.log('DATASET: '+JSON.stringify(dataset));
-    //   },
-    //   "join": function(message) {
-    //     console.log('JOIN: '+JSON.stringify(message));
-    //   },
-    //   "leave": function(message) {
-    //     console.log('LEAVE: '+JSON.stringify(message));
-    //   },
-    //   "subscribe": function(context) {
-    //     console.log('SUBSCRIBE: '+JSON.stringify(context));
-    //   },
-    //   "error": function(errContext) {
-    //     console.log('ERROR: '+JSON.stringify(errContext));
-    //   },
-    //   "unsubscribe": function(context) {
-    //     console.log('UNSUBSCRIBE: '+JSON.stringify(context));
-    //   }
-    // }
-    //
-    // var subscription = centrifuge.subscribe("task:expiring_task:$"+this._userRepository.getMyUser().id.toString(), public_callbacks);
-    //
-    // centrifuge.connect();
+    const centrifuge = new Centrifuge({
+      url: 'https://test.salesmaster.me/centrifugo/connection/',
+      project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
+      user: this._userRepository.getMyUser().id.toString(),
+      timestamp: data.timestamp.toString(),
+      token: data.token
+    });
+
+    centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
+    centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
+
+    centrifuge.connect();
+  }
+
+  private getExpiringTasksCallbacks() {
+    const self = this;
+
+    const public_callbacks = {
+      'message': function(dataset) {
+        console.log(dataset);
+        self._notificationService.sendNotification({
+          title: 'Истекает срок выполнения задачи',
+          options: {
+            body: `${dataset.data.task_title} - ${new Date(dataset.data.datetime_deadline).toDateString()}`,
+            icon: '../../../assets/images/expiting_task.png'
+          },
+          click: {
+            clickParameter: dataset.data,
+            onClickAction: obj => {
+              self._router.navigateByUrl('tasks/main/'+obj.task_id);
+            }
+          }
+        });
+      }
+    };
+
+    return public_callbacks;
+  }
+
+  private getDelayingTasksCallbacks() {
+
+    const self = this;
+
+    const public_callbacks = {
+      'message': function(dataset) {
+        console.log(dataset);
+        self._notificationService.sendNotification({
+          title: 'Имеется просроченная задача',
+          options: {
+            body: dataset.data.task_title
+          },
+          click: {
+            clickParameter: dataset.data,
+            onClickAction: obj => {
+              self._router.navigateByUrl('tasks/main/'+obj.task_id);
+            }
+          }
+        });
+      }
+    };
+
+    return public_callbacks;
   }
 }

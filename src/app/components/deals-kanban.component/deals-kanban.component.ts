@@ -47,9 +47,13 @@ export class DealsKanbanComponent {
     dragula.dropModel.subscribe((value) => {
       this._dealService.updateDeal(this.findDealsById(value[1].id).objectUpdate).subscribe(data => {
         const updatedDeal = new DealModel(data);
-        this._notificationService.sendNotification('Сделка обновлена',
-          `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`)
-      })
+        this._notificationService.sendNotification({
+          title: 'Сделка обновлена',
+          options: {
+            body: `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`
+          }},
+        );
+      });
     });
   }
 
