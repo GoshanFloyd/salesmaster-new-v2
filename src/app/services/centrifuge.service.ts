@@ -34,12 +34,12 @@ export class CentrifugeService {
   }
 
   public init(): void {
-    this.getToken(this._userRepository.getMyUser().id).subscribe(
-      data => {
-        this.initToken(data);
-      },
-      err => console.log(err)
-    );
+    // this.getToken(this._userRepository.getMyUser().id).subscribe(
+    //   data => {
+    //     this.initToken(data);
+    //   },
+    //   err => console.log(err)
+    // );
   }
 
   private initToken(data: any) {
@@ -64,7 +64,7 @@ export class CentrifugeService {
       'message': function(dataset) {
         console.log(dataset);
         self._notificationService.sendNotification({
-          title: 'Истекает срок выполнения задачи',
+          title: 'Истекает срок задачи',
           options: {
             body: `${dataset.data.task_title} - ${new Date(dataset.data.datetime_deadline).toDateString()}`,
             icon: '../../../assets/images/expiting_task.png'
@@ -90,7 +90,7 @@ export class CentrifugeService {
       'message': function(dataset) {
         console.log(dataset);
         self._notificationService.sendNotification({
-          title: 'Имеется просроченная задача',
+          title: 'Просроченная задача',
           options: {
             body: dataset.data.task_title
           },

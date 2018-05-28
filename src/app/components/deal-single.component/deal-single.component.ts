@@ -25,9 +25,6 @@ export class DealSingleComponent implements OnInit{
   @ViewChild('activityAddModal') private modalAddActivity: ModalStandardComponent;
   @ViewChild('activityAddComponent') private activityAddComponent: ActivityAddComponent;
 
-  @ViewChild('activityEditModal') private modalEditActivity: ModalStandardComponent;
-  @ViewChild('activityEditComponent') private activityEditComponent: ActivityEditComponent;
-
   @ViewChild('productAddModal') private modalAddProduct: ModalStandardComponent;
   @ViewChild('productListComponent') private productListComponent: ProductListComponent;
 
@@ -44,7 +41,7 @@ export class DealSingleComponent implements OnInit{
 
   public _formCloseDeal = new FormGroup({
 
-  })
+  });
 
   constructor (
     private _activateRoute: ActivatedRoute,
@@ -62,11 +59,15 @@ export class DealSingleComponent implements OnInit{
           data => {
             this._companyID = data.company.id;
             this.getActivities(this._dealID)
-              .subscribe(data => {})
+              .subscribe(data => {} );
           }
-        )
+        );
       }
     );
+  }
+
+  get clientID(): number {
+    return this._clientID;
   }
 
   private getCompany(id: number) {
@@ -79,7 +80,7 @@ export class DealSingleComponent implements OnInit{
         this.currentDeal = new DealModel(value);
         this.productInDeal = this.currentDeal.product.map(x => x.id);
         return value;
-      })
+      });
   }
 
   private getActivities(deal_id: number) {
@@ -90,7 +91,7 @@ export class DealSingleComponent implements OnInit{
         .fromArray(value)
         .sort((n1: ActivityModel, n2: ActivityModel) => n2.datetime_created.getTime() - n1.datetime_created.getTime())
       return value;
-    })
+    });
   }
 
   public showModalAdd() {
@@ -105,14 +106,8 @@ export class DealSingleComponent implements OnInit{
     }
   }
 
-  public showEditModal(activity: ActivityModel) {
-    this.activityEditComponent.init(activity, this._clientID);
-    this.modalEditActivity.showModal();
-  }
-
   public afterEditActivity(value: boolean) {
     if (value) {
-      this.modalEditActivity.hideModal();
       this.getActivities(this._dealID).subscribe(data => {});
     }
   }
@@ -128,7 +123,7 @@ export class DealSingleComponent implements OnInit{
       const updatedDeal = {
         id: this.currentDeal.id,
         product: [product.id]
-      }
+      };
 
       this._dealServie.updateDeal(updatedDeal).subscribe(
         data => {

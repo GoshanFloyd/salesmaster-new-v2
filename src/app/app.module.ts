@@ -76,6 +76,8 @@ import {AnalyticsGraphActivityComponent} from './components/analytics.graph-acti
 import {ChartsModule} from 'ng2-charts';
 import {AnalyticService} from './services/analytic.service';
 import {AnalyticsGraphDealsComponent} from './components/analytics.graph-deals.component/analytics.graph-deals.component';
+import {ActivityItemComponent} from './components/activity.item.component/activity.item.component';
+import {DealSelectComponent} from './components/deal.select.component/deal.select.component';
 
 
 const appRoutes: Routes = [
@@ -226,7 +228,9 @@ const appRoutes: Routes = [
     EmployeeProfileComponent,
     ImageCropperComponent,
     AnalyticsGraphActivityComponent,
-    AnalyticsGraphDealsComponent
+    AnalyticsGraphDealsComponent,
+    ActivityItemComponent,
+    DealSelectComponent
   ],
   imports: [
     BrowserModule,

@@ -39,31 +39,13 @@
           <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
             <div class="client-view__component__activities-list">
               <button class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
-              <button class="button-standard mt-small" (click)="showModalAdd()">Добавить активность</button>
-              <div *ngFor="let activity of activitiesOfCurrentDeal"  class="client-view__component__activities-list__item">
-                <article>
-                  {{activity.description}}
-                </article>
-                <dl>
-                  <dt>Вид активности:</dt>
-                  <dd>{{activity.type_title}}</dd>
-
-                  <dt>Автор:</dt>
-                  <dd><a href="#">{{activity.employee.fullname}}</a></dd>
-
-                  <dt>Дата создания:</dt>
-                  <dd>{{activity.string_datetime_created}}</dd>
-
-                  <dt *ngIf="activity.document">Прикрепленный файл:</dt>
-                  <dd *ngIf="activity.document" ><a [href]="activity.document" target="_blank">Скачать</a></dd>
-
-                  <dt>Действия:</dt>
-                  <dd>
-                    <button class="button-help" (click)="showEditModal(activity)">Редактировать</button>
-                  </dd>
-                </dl>
-              </div>
-
+              <button class="button-standard mtb-small" (click)="showModalAdd()">Добавить активность</button>
+              <app-activity-item
+                                 *ngFor="let activity of activitiesOfCurrentDeal"
+                                 [activity]="activity"
+                                 [clientID]="clientID"
+                                 (onChangeActivity)="afterEditActivity($event)">
+              </app-activity-item>
             </div>
           </div>
         </div>
@@ -126,10 +108,6 @@
 
 <app-modal-standard #activityAddModal [title]="'Добавить активность к текущему проекту'">
   <app-activity-add #activityAddComponent (onCreate)="afterCreateActivity($event)"></app-activity-add>
-</app-modal-standard>
-
-<app-modal-standard #activityEditModal [title]="'Редактирование активности в текущем проекте'">
-  <app-edit-activity #activityEditComponent (onUpdate)="afterEditActivity($event)"></app-edit-activity>
 </app-modal-standard>
 
 <app-modal-standard #productAddModal [title]="'Добавить продукт к текущему проекту'">

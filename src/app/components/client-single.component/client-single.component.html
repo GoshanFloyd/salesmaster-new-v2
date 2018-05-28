@@ -82,33 +82,39 @@
         </div>
         <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
           <div class="client-view__component__activities-list">
-            <button class="button-standard" (click)="showAddModal()">Добавить активность</button>
-            <div *ngFor="let activity of clientActivities" class="client-view__component__activities-list__item">
-              <article>
-                {{activity.description}}
-              </article>
-              <dl>
-                <dt>Вид активности:</dt>
-                <dd>{{activity.type_title}}</dd>
+            <button class="button-standard mtb-small" (click)="showAddModal()">Добавить активность</button>
+            <!--<div *ngFor="let activity of clientActivities" class="client-view__component__activities-list__item">-->
+              <!--<article>-->
+                <!--{{activity.description}}-->
+              <!--</article>-->
+              <!--<dl>-->
+                <!--<dt>Вид активности:</dt>-->
+                <!--<dd>{{activity.type_title}}</dd>-->
 
-                <dt>Автор:</dt>
-                <dd><a href="#">{{activity.employee.fullname}}</a></dd>
+                <!--<dt>Автор:</dt>-->
+                <!--<dd><a href="#">{{activity.employee.fullname}}</a></dd>-->
 
-                <dt>Дата создания:</dt>
-                <dd>{{activity.string_datetime_created}}</dd>
+                <!--<dt>Дата создания:</dt>-->
+                <!--<dd>{{activity.string_datetime_created}}</dd>-->
 
-                <dt *ngIf="activity.document">Прикрепленный файл:</dt>
-                <dd *ngIf="activity.document">
-                  <a accept="text/plain,application/pdf,application/excel,application/vnd.ms-excel,application/msword,image/jpeg,image/png,image/gif,application/powerpoint,text/html" [href]="activity.document" target="_blank" >Скачать</a>
-                </dd>
+                <!--<dt *ngIf="activity.document">Прикрепленный файл:</dt>-->
+                <!--<dd *ngIf="activity.document">-->
+                  <!--<a accept="text/plain,application/pdf,application/excel,application/vnd.ms-excel,application/msword,image/jpeg,image/png,image/gif,application/powerpoint,text/html" [href]="activity.document" target="_blank" >Скачать</a>-->
+                <!--</dd>-->
 
-                <dt>Действия:</dt>
-                <dd>
-                  <button class="button-help" (click)="showEditModal(activity)">Редактировать</button>
-                </dd>
-              </dl>
-            </div>
+                <!--<dt>Действия:</dt>-->
+                <!--<dd>-->
+                  <!--<button class="button-help" (click)="showEditModal(activity)">Редактировать</button>-->
+                <!--</dd>-->
+              <!--</dl>-->
+            <!--</div>-->
 
+            <app-activity-item *ngFor="let activity of clientActivities"
+                               [activity]="activity"
+                               [clientID]="clientID"
+                               (onChangeActivity)="onEditActivity($event)"
+                               (onTransitActivity)="onTransitActivity($event)">
+            </app-activity-item>
           </div>
         </div>
       </div>
@@ -118,10 +124,6 @@
 <div class="col-sm-1 col-md-2 col-lg-2">
   <app-deals-kanban #dealComponent></app-deals-kanban>
 </div>
-
-<app-modal-standard #modalActivityEdit [title]="'Редактирование активности'">
-  <app-edit-activity #activityEditMainComponent (onUpdate)="onEditActivity($event)"></app-edit-activity>
-</app-modal-standard>
 
 <app-modal-standard #modalActivityAdd [title]="'Добавить активность текущему клиенту'">
   <app-activity-add #activityAddMainComponent (onCreate)="onCreateActivity($event)"></app-activity-add>

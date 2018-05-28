@@ -11,6 +11,7 @@ import {ModalStandardComponent} from '../modal.standard/modal.standard.component
 import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
 import {UserRepository} from '../../repositories/user.repository';
 import {ActivityEditComponent} from '../activity-edit.component/activity-edit.component';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -25,9 +26,6 @@ export class ClientSingleComponent implements AfterViewChecked {
   @ViewChild('modalActivityAdd') private modalActivityAdd: ModalStandardComponent;
   @ViewChild('activityAddMainComponent') private addActivityComponent: ActivityAddComponent;
 
-  @ViewChild('modalActivityEdit') private modalActivityEdit: ModalStandardComponent;
-  @ViewChild('activityEditMainComponent') private editActivityComponent: ActivityEditComponent;
-
   private id: number = null;
 
   public clientActivities: Array<ActivityModel> = [];
@@ -35,7 +33,8 @@ export class ClientSingleComponent implements AfterViewChecked {
   constructor (private _clientRepository: ClientsRepository,
                private _activateRoute: ActivatedRoute,
                private _activityService: ActivityService,
-               private _userRepository: UserRepository) {
+               private _userRepository: UserRepository,
+               private _notificationService: NotificationService) {
 
     this._activateRoute.params.subscribe((data) => {
       this.initClient();
@@ -48,6 +47,10 @@ export class ClientSingleComponent implements AfterViewChecked {
         this.dealKanbanComponent.initKanban(data.id, data.company.id);
       }
     });
+  }
+
+  get clientID(): number {
+    return this.id;
   }
 
   private initClient() {
@@ -66,7 +69,7 @@ export class ClientSingleComponent implements AfterViewChecked {
           .sort((n1: ActivityModel, n2: ActivityModel) => n2.datetime_created.getTime() - n1.datetime_created.getTime());
         },
       err => console.log(err)
-    )
+    );
   }
 
   get client(): Observable<ClientModel> {
@@ -82,18 +85,21 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   public onEditActivity(value: boolean) {
     if (value) {
-      this.modalActivityEdit.hideModal();
       this.getClientActivities(this.id);
+    }
+  }
+
+  public onTransitActivity(value: any) {
+    if (value) {
+      this.getClientActivities(this.id);
+      this._notificationService.sendNotification( {
+        title: 'Активность перенесена'
+      });
     }
   }
 
   public showAddModal() {
     this.addActivityComponent.init(this.id);
     this.modalActivityAdd.showModal();
-  }
-
-  public showEditModal(activity: ActivityModel) {
-    this.editActivityComponent.init(activity, this.id);
-    this.modalActivityEdit.showModal();
   }
 }

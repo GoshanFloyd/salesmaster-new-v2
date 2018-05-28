@@ -1829,12 +1829,10 @@ body .client-view__component .client-view__component__list > dd {
     text-decoration: none !important; }
 body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item {
   box-sizing: border-box !important;
-  margin-top: 10px;
+  margin-top: 10px !important;
   background-color: #f1f1f1;
   padding: 10px;
   color: #444; }
-  body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item:first-child {
-    margin-top: 0; }
   body .client-view__component .client-view__component__activities-list .client-view__component__activities-list__item article {
     font-size: 0.85em;
     word-wrap: break-word; }
@@ -1999,13 +1997,13 @@ body .search-controls {
     box-sizing: border-box !important;
     padding: 5px 10px; }
 
-.task_in_progress {
+.task_in_process {
   background-color: #00a8e6 !important; }
 
 .task_verifying {
   background-color: #faa732 !important; }
 
-.task_completed {
+.task_done {
   background-color: #82bb42 !important; }
 
 .task_failed {

@@ -1,0 +1,8 @@
+<div class="client-select__component">
+  <ul>
+    <li *ngFor="let deal of listDeals">
+      <span>{{deal.title}}</span>
+      <button class="button-standard" (click)="setDeal(deal)">Выбрать</button>
+    </li>
+  </ul>
+</div>
