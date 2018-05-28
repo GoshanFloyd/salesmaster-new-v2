@@ -78,6 +78,8 @@ import {AnalyticService} from './services/analytic.service';
 import {AnalyticsGraphDealsComponent} from './components/analytics.graph-deals.component/analytics.graph-deals.component';
 import {ActivityItemComponent} from './components/activity.item.component/activity.item.component';
 import {DealSelectComponent} from './components/deal.select.component/deal.select.component';
+import {ReportsPageComponent} from './components/reports.page/reports.page.component';
+import {ReportsMainComponent} from './components/reports.main.component/reports.main.component';
 
 
 const appRoutes: Routes = [
@@ -176,7 +178,22 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: 'reports',
+    children: [
+      {
+        path: '', component: ReportsPageComponent, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: ReportsMainComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  { path: '**', redirectTo: '' },
+
 ];
 
 @NgModule({
@@ -230,7 +247,9 @@ const appRoutes: Routes = [
     AnalyticsGraphActivityComponent,
     AnalyticsGraphDealsComponent,
     ActivityItemComponent,
-    DealSelectComponent
+    DealSelectComponent,
+    ReportsPageComponent,
+    ReportsMainComponent
   ],
   imports: [
     BrowserModule,

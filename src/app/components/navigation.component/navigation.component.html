@@ -35,8 +35,8 @@
         Продукты
       </a>
     </li>
-    <li>
-      <a href="">
+    <li [class]="isActiveRoute('/reports') ? 'active' : '' ">
+      <a [routerLink]='["/reports"]'>
         <span class="oi" data-glyph="book"></span>
         Отчеты
       </a>

@@ -1,0 +1,34 @@
+<div class="grid-wrapper">
+  <div class="grid-nav">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="grid-aside">
+    <div class="grid-header">
+      <app-header></app-header>
+    </div>
+    <div class="grid-content display-flex">
+      <div class="grid-row">
+        <div class="col-sm-1 col-md-4 col-lg-4">
+          <div class="client-list__component main__component">
+            <div class="main__component__header display-flex display-flex-row">
+              <h3 class="display-flex-1">Меню раздела отчетов:</h3>
+            </div>
+            <div class="main__component__body">
+              <ul class="client-list__component__list">
+                <li><a [routerLink]="'main'">Основная отчет по активностям</a></li>
+                <li><a [routerLink]="'main/activity'">Аналитика по активностям</a></li>
+                <li><a [routerLink]="'main/deals'">Аналитика по проектам</a></li>
+                <li><a [routerLink]="'main/graph-activity'">График активностей</a></li>
+                <li><a [routerLink]="'main/graph-deal'">График проектов</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-1 col-md-75 col-lg-75">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
