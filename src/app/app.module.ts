@@ -80,6 +80,7 @@ import {ActivityItemComponent} from './components/activity.item.component/activi
 import {DealSelectComponent} from './components/deal.select.component/deal.select.component';
 import {ReportsPageComponent} from './components/reports.page/reports.page.component';
 import {ReportsMainComponent} from './components/reports.main.component/reports.main.component';
+import {ReportService} from './services/report.service';
 
 
 const appRoutes: Routes = [
@@ -287,6 +288,7 @@ const appRoutes: Routes = [
     ProductBrandService,
     HelperUrlService,
     AnalyticService,
+    ReportService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

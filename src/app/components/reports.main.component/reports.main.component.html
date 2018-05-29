@@ -1,1 +1,68 @@
-Hello
+<div class="client-list__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Отчет по активностям:</h3>
+  </div>
+  <form class="main__component__helper-panel">
+    <select  name="company_filter" [(ngModel)]="currentCompanyID" (change)="changeCompany()">
+      <option value="" disabled selected>-- Компания --</option>
+      <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
+    </select>
+    <select  name="user_filter" [(ngModel)]="currentUserID" (change)="changeUser()">
+      <option [ngValue]="null">Все пользователи</option>
+      <option *ngFor="let u of currentCompanyUsers" [ngValue]="u.id">{{u.fullname}}</option>
+    </select>
+    <p-calendar class='customHelperDatetimePicker'
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterStart"
+                name="dateFilterStart"
+                [maxDate]="maxDateToFilterStart"
+                (onSelect)="changeCompany()">
+    </p-calendar>
+    <p-calendar class='customHelperDatetimePicker'
+                [locale]="ruLocale"
+                [(ngModel)]="dateFilterEnd"
+                name="dateFilterEnd"
+                [maxDate]="maxDateToFilterEnd"
+                (onSelect)="changeCompany()">
+    </p-calendar>
+    <button class="button-standard" [disabled]="!isFileEnable" (click)="getReports('excel')">Скачать файл</button>
+  </form>
+  <div class="main__component__body">
+    <div class="overflow-container">
+      <div class="overflow-container-x">
+        <table class="table-main">
+          <thead>
+          <tr>
+            <th>Описание:</th>
+            <th>Клиент:</th>
+            <th>Компания:</th>
+            <th>Тип активности:</th>
+            <th>Автор:</th>
+            <th>Сделка:</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let p of activitiesReportList">
+            <td>{{p.description}}</td>
+            <td>{{p.client.title}}</td>
+            <td>{{p.company}}</td>
+            <td>{{p.type.title}}</td>
+            <td>{{p.employee.fullname}}</td>
+            <td>{{p.deal.title}}</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <th>Заголовок:</th>
+            <th>Описание:</th>
+            <th>Клиент:</th>
+            <th>Статус:</th>
+            <th>Стадия:</th>
+            <th>Автор:</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

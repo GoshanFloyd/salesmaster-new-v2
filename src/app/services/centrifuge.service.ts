@@ -34,12 +34,12 @@ export class CentrifugeService {
   }
 
   public init(): void {
-    // this.getToken(this._userRepository.getMyUser().id).subscribe(
-    //   data => {
-    //     this.initToken(data);
-    //   },
-    //   err => console.log(err)
-    // );
+    this.getToken(this._userRepository.getMyUser().id).subscribe(
+      data => {
+        this.initToken(data);
+      },
+      err => console.log(err)
+    );
   }
 
   private initToken(data: any) {

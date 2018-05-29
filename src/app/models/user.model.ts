@@ -38,6 +38,10 @@ export class UserModel {
     this._gender = obj && obj.gender ? obj.gender : null;
   }
 
+  get fullname(): string {
+    return `${this.user.first_name} ${this.user.last_name}`;
+  }
+
   get id(): number {
     return this._id;
   }
