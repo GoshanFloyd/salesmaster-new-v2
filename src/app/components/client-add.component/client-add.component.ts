@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {UserRepository} from '../../repositories/user.repository';
 import {FORMS_YURLICO, TYPE_EMAIL, TYPE_FIZLICO, TYPE_PHONE, TYPE_YURLICO} from '../../variables/variables';
 import {UserModel} from '../../models/user.model';
@@ -17,7 +17,7 @@ import {NotificationService} from '../../services/notification.service';
 })
 
 
-export class ClientAddComponent {
+export class ClientAddComponent implements OnInit {
 
   @ViewChild(ClientSelectComponent) private clientSelectComponent: ClientSelectComponent;
   @ViewChild(ModalStandardComponent) private modalStandard: ModalStandardComponent;
@@ -45,13 +45,17 @@ export class ClientAddComponent {
       street: new FormControl(null),
       postcode: new FormControl(null),
       requisite: new FormControl(null),
-      fizlico_type: new FormControl(null, Validators.required),
+      fizlico_type: new FormControl(null),
       yurlico_type: new FormControl(null, ),
       yurlico_form: new FormControl(null, ),
       customfields: new FormArray([]),
       phones: new FormArray([]),
       emails: new FormArray([])
     });
+  }
+
+  ngOnInit() {
+    this.newClient.controls['fizlico_type'].setValidators([Validators.required]);
   }
 
   get user(): UserModel {
@@ -63,28 +67,24 @@ export class ClientAddComponent {
 
     if (value === 'fizlico') {
 
-      console.log('Fiz');
-
+      this.newClient.addControl('fizlico_type', new FormControl('fizlico_type'))
       this.newClient.controls['fizlico_type'].setValidators([Validators.required]);
 
-      this.newClient.controls['yurlico_type'].setValidators(null);
-      this.newClient.controls['yurlico_form'].setValidators(null);
+      this.newClient.removeControl('yurlico_type');
+      this.newClient.removeControl('yurlico_form');
 
-    }
-
-    if (value === 'yurlico') {
-
-      console.log('Yur');
+    } else {
 
       this.newClient.controls['fizlico_type'].setValidators(null);
+      this.newClient.removeControl('fizlico_type');
+
+      this.newClient.addControl('yurlico_type', new FormControl('fizlico_type'))
+      this.newClient.addControl('yurlico_form', new FormControl('fizlico_type'))
 
       this.newClient.controls['yurlico_type'].setValidators([Validators.required]);
       this.newClient.controls['yurlico_form'].setValidators([Validators.required]);
     }
 
-    this.newClient.updateValueAndValidity();
-
-    console.log(this.newClient);
   }
 
 
@@ -147,6 +147,17 @@ export class ClientAddComponent {
   }
 
   public openSelectParentComponent(company: string) {
+
+    Object.keys(this.newClient.controls).forEach(key => {
+
+      const controlErrors: ValidationErrors = this.newClient.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+        });
+      }
+    });
+
     if (this.parentClient) {
       this.parentClient = null;
     } else {

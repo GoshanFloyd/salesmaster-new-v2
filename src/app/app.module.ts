@@ -81,6 +81,7 @@ import {DealSelectComponent} from './components/deal.select.component/deal.selec
 import {ReportsPageComponent} from './components/reports.page/reports.page.component';
 import {ReportsMainComponent} from './components/reports.main.component/reports.main.component';
 import {ReportService} from './services/report.service';
+import {ReportsClientComponent} from './components/reports.client.component/reports.client.component';
 
 
 const appRoutes: Routes = [
@@ -250,7 +251,8 @@ const appRoutes: Routes = [
     ActivityItemComponent,
     DealSelectComponent,
     ReportsPageComponent,
-    ReportsMainComponent
+    ReportsMainComponent,
+    ReportsClientComponent
   ],
   imports: [
     BrowserModule,

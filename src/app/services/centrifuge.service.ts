@@ -14,6 +14,8 @@ export class CentrifugeService {
   private readonly baseProtocol = 'https://';
   private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
+  private centrifuge: any;
+
   constructor (private _userRepository: UserRepository,
                private _notificationService: NotificationService,
                private _httpClient: HttpClient,
@@ -43,7 +45,7 @@ export class CentrifugeService {
   }
 
   private initToken(data: any) {
-    const centrifuge = new Centrifuge({
+    this.centrifuge = new Centrifuge({
       url: 'https://test.salesmaster.me/centrifugo/connection/',
       project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
       user: this._userRepository.getMyUser().id.toString(),
@@ -51,10 +53,10 @@ export class CentrifugeService {
       token: data.token
     });
 
-    centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
-    centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
+    this.centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
+    this.centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
 
-    centrifuge.connect();
+    this.centrifuge.connect();
   }
 
   private getExpiringTasksCallbacks() {
@@ -105,5 +107,11 @@ export class CentrifugeService {
     };
 
     return public_callbacks;
+  }
+
+  public disconnectCentrifuge(): void {
+    if(this.centrifuge){
+      this.centrifuge.disconnect();
+    }
   }
 }

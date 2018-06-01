@@ -11,8 +11,8 @@
     <select name="statusSort" [(ngModel)]="statusSort">
       <option [ngValue]="null" disabled selected>-- Выберите статус --</option>
       <option [ngValue]="'failed'">Проваленные задачи</option>
-      <option [ngValue]="'done'">Выполненные задачи</option>
-      <option [ngValue]="'in_process'">Задачи в работе</option>
+      <option [ngValue]="'completed'">Выполненные задачи</option>
+      <option [ngValue]="'in_progress'">Задачи в работе</option>
       <option [ngValue]="'verifying'">Задачи на проверке</option>
     </select>
   </form>

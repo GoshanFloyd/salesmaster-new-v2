@@ -142,11 +142,11 @@ export const TYPE_EMAIL = [
 
 export const TASKS_STATUS = [
   {
-    type: 'in_process',
+    type: 'in_progress',
     value: 'В работе'
   },
   {
-    type: 'done',
+    type: 'completed',
     value: 'Выполненная задача'
   },
   {

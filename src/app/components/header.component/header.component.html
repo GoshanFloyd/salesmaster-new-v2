@@ -17,9 +17,9 @@
       <!--</button>-->
     <!--</form>-->
     <div class="col-sm-1 col-md-1 col-lg-1 display-flex display-flex-middle display-flex-right helper-header-panel">
-      <!--<a class="fast-task" href="">-->
-        <!--<span class="oi" data-glyph="task"></span>-->
-      <!--</a>-->
+      <a class="fast-task" (click)="showAddTaslModal($event)">
+        <span class="oi" data-glyph="task"></span>
+      </a>
       <a class="fast-client" [routerLink]="'/contacts/main/add'">
         <span class="oi" data-glyph="plus"></span>
       </a>
@@ -30,9 +30,13 @@
       <div class="avatar-small-header" *ngIf='user.avatar' [ngStyle]="{'background-image': 'url(' + user.avatar + ')'}">
       </div>
       <a class="fast-cabinet-link" [routerLink]="'/profile'">{{user.user.first_name + ' ' + user.user.last_name}}</a>
-      <a href="" class="fast-logout-link">
+      <a [routerLink]="'/login'" class="fast-logout-link">
         <span class="oi" data-glyph="account-logout"></span>
       </a>
     </div>
   </div>
 </div>
+
+<app-modal-standard #modalAddTask [title]="'Добавить задачу'">
+  <app-task-add #addTaskComponent (onCreate)="onCreateTask($event)"></app-task-add>
+</app-modal-standard>

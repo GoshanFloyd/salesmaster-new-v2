@@ -39,7 +39,7 @@ export class TaskAddComponent {
     title: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
     priority: new FormControl('middle', Validators.required),
-    status: new FormControl('in_process', Validators.required),
+    status: new FormControl('in_progress', Validators.required),
     datetime_deadline: new FormControl(null, Validators.required)
   });
 
@@ -92,7 +92,7 @@ export class TaskAddComponent {
       'Z';
   }
 
-  private clearForm(){
+  private clearForm() {
     this._formNewTask.controls.employee_doer.setValue(null);
     this._formNewTask.controls.title.setValue(null);
     this._formNewTask.controls.description.setValue(null);
@@ -120,6 +120,8 @@ export class TaskAddComponent {
 
     this._taskService.createTask(task).subscribe(
       data => {
+        console.log(task);
+        console.log(data);
         this.onCreate.emit(true);
       },
       err => console.log(err)

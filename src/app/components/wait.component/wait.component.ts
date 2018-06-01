@@ -15,7 +15,7 @@ import {LoadingService} from '../../services/loading.service';
 
 export class WaitComponent implements OnInit {
 
-  private _mainURL: string = '/products/main';
+  private _mainURL: string = '/contacts/main';
 
   constructor(private _authService: AuthService,
               private _router: Router,

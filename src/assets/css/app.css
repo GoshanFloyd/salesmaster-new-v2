@@ -1283,7 +1283,7 @@ th {
 
 .overflow-container-x {
   overflow-x: auto;
-  overflow-y: hidden; }
+  overflow-y: auto; }
 
 .customHelperDatetimePicker span {
   width: 100% !important; }
