@@ -45,15 +45,17 @@ export class DealsKanbanComponent {
               private _userService: UserService) {
 
     dragula.dropModel.subscribe((value) => {
-      this._dealService.updateDeal(this.findDealsById(value[1].id).objectUpdate).subscribe(data => {
-        const updatedDeal = new DealModel(data);
-        this._notificationService.sendNotification({
-          title: 'Сделка обновлена',
-          options: {
-            body: `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`
-          }},
-        );
-      });
+      if (this.findDealsById(parseInt(value[1].id))) {
+        this._dealService.updateDeal(this.findDealsById(parseInt(value[1].id)).objectUpdate).subscribe(data => {
+          const updatedDeal = new DealModel(data);
+          this._notificationService.sendNotification({
+            title: 'Сделка обновлена',
+            options: {
+              body: `Сделка с наименованием ${updatedDeal.title} перенесена на стадию ${this.findStage(updatedDeal.stage_id).title}`
+            }},
+          );
+        });
+      }
     });
   }
 
@@ -90,7 +92,6 @@ export class DealsKanbanComponent {
     }).subscribe(data => {
       this._dealStages = [];
       this._dealStages = DealStageModel.fromArray(data);
-      console.log(this._dealStages);
       for (const stage of this._dealStages) {
         this._dealArraySortbale[stage.id] = [];
       }
@@ -108,7 +109,7 @@ export class DealsKanbanComponent {
         this._userList = UserModel.fromArray(data);
       },
       err => console.log(err)
-    )
+    );
   }
 
   private getDealsByEmployee(employee_id: number) {
@@ -118,14 +119,14 @@ export class DealsKanbanComponent {
     }).subscribe(data => {
       this._dealsList = DealModel.fromArray(data);
       for (let deal of this._dealsList) {
-        if(this._dealArraySortbale[deal.stage_id]) {
+        if (this._dealArraySortbale[deal.stage_id]) {
           this._dealArraySortbale[deal.stage_id].push(deal);
         } else {
           this._dealArraySortbale[deal.stage_id] = [];
           this._dealArraySortbale[deal.stage_id].push(deal);
         }
       }
-    })
+    });
   }
 
   private getDeals(client_id: number): void {
@@ -136,19 +137,20 @@ export class DealsKanbanComponent {
       for (let deal of this._dealsList) {
         this._dealArraySortbale[deal.stage_id].push(deal);
       }
-    })
+    });
   }
 
   private findDealsById(id: number): DealModel {
-    for (let stage of this._dealStages) {
-      for (let deal of this._dealArraySortbale[stage.id]) {
-        if (id == deal.id) {
-          deal.stage_id = stage.id;
-          return deal;
+    if (typeof id === 'number') {
+      for (const stage of this._dealStages) {
+        for (let deal of this._dealArraySortbale[stage.id]) {
+          if (id === deal.id) {
+            deal.stage_id = stage.id;
+            return deal;
+          }
         }
       }
     }
-    return null;
   }
 
   private findStage(id: number): DealStageModel {
@@ -181,7 +183,7 @@ export class DealsKanbanComponent {
       'employee': this._userRepository.getMyUser().id,
       'client': this._client_id,
       'stages': this._dealStages
-    }
+    };
     this.modalAddDeal.showModal();
   }
 

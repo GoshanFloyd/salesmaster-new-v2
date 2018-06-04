@@ -94,6 +94,27 @@ export class ClientModel{
     return clientArray;
   }
 
+  public static getTypeMail(type: string): string {
+    if(type == 'corporate'){
+      return 'Корпоративная почта';
+    }
+    if(type == 'personal'){
+      return 'Персональная почта'
+    }
+  }
+
+  public static getTypePhone(type: string): string {
+    if(type == 'job'){
+      return 'Рабочий телефон'
+    }
+    if(type == 'private'){
+      return 'Личный телефон'
+    }
+    if(type == 'home'){
+      return 'Домашний телефон'
+    }
+  }
+
   get id(): number {
     return this._id;
   }

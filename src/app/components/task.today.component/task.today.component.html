@@ -55,10 +55,34 @@
         <dt>Deadline:</dt>
         <dd>{{task.datetime_deadline_format}}</dd>
       </dl>
-      <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_progress'">Выполнить</button>
+      <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_progress'" (click)="openDoneTaskModal(task)">Выполнить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'">Одобрить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'">Продлить на 1 день</button>
     </div>
   </div>
 </div>
+
+<app-modal-standard #modalDoneTask [title]="'Выполнить задачу'">
+  <form *ngIf="currentTask" [formGroup]="formDoneTask" (submit)="doneTask()">
+    <div class="form-row">
+      <label for="task-done-description">Результат выполненной задачи:</label>
+      <textarea formControlName="result" class="textarea-add" name="task-done-description" id="task-done-description" rows="10">
+      </textarea>
+      <div class="error-block">
+              <span *ngIf="formDoneTask.controls['result'].hasError('required')">
+                Необходимо указать результат выполненной задачи.
+              </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <input [disabled]="formDoneTask.invalid" type="submit" value="Выполнить задачу" class="button-standard">
+      </div>
+    </div>
+  </form>
+</app-modal-standard>
+
+<app-modal-standard #modalToExtendTask>
+
+</app-modal-standard>
 

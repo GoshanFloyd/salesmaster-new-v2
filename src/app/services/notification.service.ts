@@ -22,12 +22,14 @@ export class NotificationService {
   }
 
   private checkPermission(): void {
-    if (Notification.permission !== 'granted') {
+    if (Notification.permission != 'granted') {
       Notification.requestPermission();
     }
   }
 
   public sendNotification (data: ISendNotification) {
+
+    this.checkPermission();
 
     let optionsNotifications = {};
 

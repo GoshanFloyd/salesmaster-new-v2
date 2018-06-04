@@ -39,14 +39,12 @@ export class DealSingleComponent implements OnInit{
 
   public productInDeal: Array<number> = [];
 
-  public _formCloseDeal = new FormGroup({
-
-  });
+  public statusCloseDeal: boolean = true;
 
   constructor (
     private _activateRoute: ActivatedRoute,
     private _clientService: ClientsService,
-    private _dealServie: DealService,
+    private _dealService: DealService,
     private _activityService: ActivityService,
     private _notificationService: NotificationService) {}
 
@@ -75,7 +73,7 @@ export class DealSingleComponent implements OnInit{
   }
 
   private getDeal(id: number): Observable<DealModel> {
-    return this._dealServie.getDeal(id)
+    return this._dealService.getDeal(id)
       .map(value => {
         this.currentDeal = new DealModel(value);
         this.productInDeal = this.currentDeal.product.map(x => x.id);
@@ -125,7 +123,7 @@ export class DealSingleComponent implements OnInit{
         product: [product.id]
       };
 
-      this._dealServie.updateDeal(updatedDeal).subscribe(
+      this._dealService.updateDeal(updatedDeal).subscribe(
         data => {
           this.currentDeal = new DealModel(data);
           this.productInDeal = this.currentDeal.product.map(x => x.id);
@@ -150,7 +148,7 @@ export class DealSingleComponent implements OnInit{
       product: [id]
     };
 
-    this._dealServie.updateDeal(updatedDeal).subscribe(
+    this._dealService.updateDeal(updatedDeal).subscribe(
       data => {
         this.currentDeal = new DealModel(data);
         this.productInDeal = this.currentDeal.product.map(x => x.id);
@@ -160,5 +158,30 @@ export class DealSingleComponent implements OnInit{
       },
       err => console.log(err)
     );
+  }
+
+  public closeDeal(event: Event) {
+    event.preventDefault();
+    this._dealService.updateDeal({
+      id: this._dealID,
+      status: this.statusCloseDeal ? 'completed' : 'failed'
+    }).subscribe(
+      data => {
+        console.log(data);
+        this.getDeal(this._dealID).subscribe(
+          data => {
+            this.getCompany(this._clientID).subscribe(
+              data => {
+                this._companyID = data.company.id;
+                this.getActivities(this._dealID)
+                  .subscribe(data => {} );
+              }
+            );
+          }
+        );
+      },
+      err => console.log(err),
+      () => this.modalCloseDeal.hideModal()
+    )
   }
 }

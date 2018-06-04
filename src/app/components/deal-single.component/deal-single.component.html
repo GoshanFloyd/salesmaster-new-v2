@@ -38,7 +38,7 @@
           </div>
           <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
             <div class="client-view__component__activities-list">
-              <button class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
+              <button *ngIf="currentDeal?.status == 'in_process'" class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
               <button class="button-standard mtb-small" (click)="showModalAdd()">Добавить активность</button>
               <app-activity-item
                                  *ngFor="let activity of activitiesOfCurrentDeal"
@@ -115,13 +115,9 @@
 </app-modal-standard>
 
 <app-modal-standard #closeDealModal [title]="'Закрыть текущий проект?'">
-  <form class="activity-add__component">
-    <p-toggleButton onLabel="Успешно завершен" offLabel="Провален"
-                    onIcon="fa-check-square" offIcon="fa-square"></p-toggleButton>
-    <div class="form-row">
-      <label for="activity-add-description">Описание активности</label>
-      <textarea class="textarea-add" id="activity-add-description" rows="10"></textarea>
-    </div>
+  <form class="activity-add__component" (submit)="closeDeal($event)">
+    <p-toggleButton onLabel="Успешно завершен" offLabel="Провален" name="statusDealClose"
+                    onIcon="fa-check-square" offIcon="fa-square" [ngModel]="statusCloseDeal"></p-toggleButton>
     <div class="form-row">
       <input type="submit" value="Закрыть проект" class="button-standard">
     </div>

@@ -102,4 +102,12 @@ export class ClientSingleComponent implements AfterViewChecked {
     this.addActivityComponent.init(this.id);
     this.modalActivityAdd.showModal();
   }
+
+  public getTypePhone(type: string){
+    return ClientModel.getTypePhone(type);
+  }
+
+  public getTypeMail(type: string){
+    return ClientModel.getTypeMail(type);
+  }
 }

@@ -61,17 +61,26 @@
               <span *ngSwitchCase="'gos_uchr'">Государственное учреждение</span>
             </dd>
 
+            <dt>Реквизиты:</dt>
+            <dd >{{ (client | async)?.requisite}}</dd>
+
+            <dt>Адрес:</dt>
+            <dd>{{ (client | async)?.street}}</dd>
+
+            <dt>Почтовый индекс:</dt>
+            <dd >{{ (client | async)?.postcode}}</dd>
+
             <dt *ngIf="(client | async)?.parent.id">Клиент-родитель:</dt>
             <dd *ngIf="(client | async)?.parent.id"><a [routerLink]="'/contacts/main/' + (client | async)?.parent.id">{{(client | async)?.parent.title}}</a></dd>
 
             <dt *ngIf="(client | async)?.phones && (client | async)?.phones.length > 0">Номера телфонов:</dt>
             <dd>
-              <span *ngFor="let phone of (client | async)?.phones">{{phone.type}} - <a [href]="'tel:'+phone.number">{{phone.number}}</a> <br></span>
+              <span *ngFor="let phone of (client | async)?.phones">{{getTypePhone(phone.type)}} - <a [href]="'tel:'+phone.number">{{phone.owner_name}} - {{phone.number}}</a> <br></span>
             </dd>
 
             <dt *ngIf="(client | async)?.emails && (client | async)?.emails.length > 0">Электронная почта:</dt>
             <dd>
-              <span *ngFor="let mail of (client | async)?.emails">{{mail.type}} - <a [href]="'mailto:'+mail.address">{{mail.address}}</a> <br></span>
+              <span *ngFor="let mail of (client | async)?.emails">{{getTypeMail(mail.type)}} - <a [href]="'mailto:'+mail.address">{{mail.owner_name}} - {{mail.address}}</a> <br></span>
             </dd>
 
             <dt *ngIf="(client | async)?.customfields && (client | async)?.customfields.length > 0">Кастомные поля:</dt>
