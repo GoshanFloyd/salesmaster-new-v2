@@ -167,7 +167,6 @@ export class DealSingleComponent implements OnInit{
       status: this.statusCloseDeal ? 'completed' : 'failed'
     }).subscribe(
       data => {
-        console.log(data);
         this.getDeal(this._dealID).subscribe(
           data => {
             this.getCompany(this._clientID).subscribe(

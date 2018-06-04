@@ -64,7 +64,6 @@ export class CentrifugeService {
 
     const public_callbacks = {
       'message': function(dataset) {
-        console.log(dataset);
         self._notificationService.sendNotification({
           title: 'Истекает срок задачи',
           options: {
@@ -90,7 +89,6 @@ export class CentrifugeService {
 
     const public_callbacks = {
       'message': function(dataset) {
-        console.log(dataset);
         self._notificationService.sendNotification({
           title: 'Просроченная задача',
           options: {

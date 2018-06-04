@@ -133,7 +133,6 @@ export class TasksMainComponent implements OnInit{
         self._router.navigate(['/tasks/main/' + calEvent.id]);
       },
       dayClick: function(date, jsEvent, view) {
-        console.log(date);
         self.showCreateModal();
         self.taskAddComponent.init();
       }

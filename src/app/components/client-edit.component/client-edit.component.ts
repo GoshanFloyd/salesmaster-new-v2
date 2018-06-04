@@ -212,7 +212,6 @@ export class ClientEditComponent implements OnInit {
   }
 
   public editClient() {
-    console.log(this.editableClient.value);
     this._clientService.updateClient(this.client.id, this.editableClient.value).subscribe(
       data => {
         this._clientRepository.getContactsLight({

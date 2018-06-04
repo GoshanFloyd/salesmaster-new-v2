@@ -17,7 +17,12 @@ interface ISendNotification {
 
 @Injectable()
 export class NotificationService {
+
+  public sound: any;
+
   constructor () {
+    this.sound = new Audio('../../assets/sounds/notify.mp3');
+    this.sound.volume = 0.2;
     this.checkPermission();
   }
 
@@ -30,6 +35,8 @@ export class NotificationService {
   public sendNotification (data: ISendNotification) {
 
     this.checkPermission();
+
+    this.sound.play();
 
     let optionsNotifications = {};
 

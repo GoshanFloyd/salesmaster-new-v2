@@ -105,8 +105,6 @@ export class TaskAddComponent {
 
     event.preventDefault();
 
-    console.log(this.getDeadlineDate(this._formNewTask.controls['datetime_deadline'].value));
-
     const task = {
       'employee_owner': this._formNewTask.controls['employee_owner'].value,
       'employee_doer': this._formNewTask.controls['employee_doer'].value,
@@ -120,8 +118,6 @@ export class TaskAddComponent {
 
     this._taskService.createTask(task).subscribe(
       data => {
-        console.log(task);
-        console.log(data);
         this.onCreate.emit(true);
       },
       err => console.log(err)

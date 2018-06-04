@@ -148,16 +148,6 @@ export class ClientAddComponent implements OnInit {
 
   public openSelectParentComponent(company: string) {
 
-    Object.keys(this.newClient.controls).forEach(key => {
-
-      const controlErrors: ValidationErrors = this.newClient.get(key).errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-        });
-      }
-    });
-
     if (this.parentClient) {
       this.parentClient = null;
     } else {

@@ -1997,21 +1997,21 @@ body .search-controls {
     box-sizing: border-box !important;
     padding: 5px 10px; }
 
-.task_in_process {
+.task_in_progress {
   background-color: #00a8e6 !important; }
 
 .task_verifying {
   background-color: #faa732 !important; }
 
-.task_done {
+.task_completed {
   background-color: #82bb42 !important; }
 
 .task_failed {
   background-color: #da314b !important; }
 
-.task_in_process_background {
+.task_in_progress_background {
   box-shadow: 0 0 10px rgba(0, 168, 230, 0.5) !important; }
-  .task_in_process_background .main__component__header {
+  .task_in_progress_background .main__component__header {
     background: rgba(0, 168, 230, 0.5) !important; }
 
 .task_verifying_background {
@@ -2019,9 +2019,9 @@ body .search-controls {
   .task_verifying_background .main__component__header {
     background: rgba(250, 167, 50, 0.5) !important; }
 
-.task_done_background {
+.task_completed_background {
   box-shadow: 0 0 10px rgba(130, 187, 66, 0.5) !important; }
-  .task_done_background .main__component__header {
+  .task_completed_background .main__component__header {
     background: rgba(130, 187, 66, 0.5) !important; }
 
 .task_failed_background {

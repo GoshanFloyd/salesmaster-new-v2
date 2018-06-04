@@ -67,7 +67,6 @@ export class EmployeeProfileComponent implements OnInit {
 
   public updateImage(){
     var blob = this.dataURItoBlob(this.data.image);
-    console.log(blob);
 
     let formdata = new FormData();
 
