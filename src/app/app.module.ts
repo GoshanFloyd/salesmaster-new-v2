@@ -157,6 +157,7 @@ const appRoutes: Routes = [
         path: '', component: FileManagerPageComponent, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: FileManagerComponent },
+          { path: 'main/:company_id', component: FileManagerComponent },
           { path: 'main/directory/:id', component: DirectorySingleComponent },
           { path: '**', redirectTo: 'main' }
         ]

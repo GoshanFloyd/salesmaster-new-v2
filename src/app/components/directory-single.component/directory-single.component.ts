@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DocumentService} from '../../services/document.service';
 import {UserModel} from '../../models/user.model';
 import {UserRepository} from '../../repositories/user.repository';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DocumentModel} from '../../models/document.model';
 import {DirectoryService} from '../../services/directory.service';
 import {DirectoryModel} from '../../models/directory.model';
@@ -39,7 +39,9 @@ export class DirectorySingleComponent implements OnInit {
   constructor (private _documentService: DocumentService,
                private _directoryService: DirectoryService,
                private _userRepository: UserRepository,
-               private _activateRoute: ActivatedRoute) {}
+               private _activateRoute: ActivatedRoute,
+               private _router: Router
+  ) {}
 
   ngOnInit() {
     this._currentDirectoryID = this._activateRoute.snapshot.params['id'];
@@ -98,6 +100,10 @@ export class DirectorySingleComponent implements OnInit {
       let file: File = fileList[0];
       this._formData.append('file', file, file.name);
     }
+  }
+
+  public backToStorage() {
+    this._router.navigateByUrl(`/file-manager/main/${this.currentDirectory.company.id}`);
   }
 
   public uploadDocument(event: Event): void {

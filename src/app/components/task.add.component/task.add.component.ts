@@ -52,6 +52,10 @@ export class TaskAddComponent {
     this.getUsers();
   }
 
+  public setDeadline(date: Date) {
+    this._formNewTask.controls['datetime_deadline'].setValue(date);
+  }
+
   public onChangeDoer(event: Event) {
     this.isMyTask = !this.isMyTask;
     if (this.isMyTask) {
@@ -118,6 +122,7 @@ export class TaskAddComponent {
 
     this._taskService.createTask(task).subscribe(
       data => {
+        this._formNewTask.reset();
         this.onCreate.emit(true);
       },
       err => console.log(err)

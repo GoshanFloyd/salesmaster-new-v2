@@ -2,6 +2,7 @@
   <div class="client-view__component main__component">
     <div class="main__component__header display-flex display-flex-row">
       <h3 class="display-flex-1">{{currentDirectory ? currentDirectory.title : null }}</h3>
+      <button class="main__component__header__helper-button mr-small" (click)="backToStorage()"><span class="oi" data-glyph="arrow-thick-left"></span></button>
       <button class="main__component__header__helper-button mr-small" (click)="openUploadModal()"><span class="oi" data-glyph="plus"></span></button>
     </div>
     <div class="main__component__body">

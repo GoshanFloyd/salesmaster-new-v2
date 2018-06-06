@@ -5,6 +5,7 @@ import {UserModel} from '../../models/user.model';
 import {UserRepository} from '../../repositories/user.repository';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {DirectoryAddComponent} from '../directory-add.component/directory-add.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -25,9 +26,13 @@ export class FileManagerComponent implements OnInit {
   public showPrivateDirectories: boolean = false;
 
   constructor (private _directoryService: DirectoryService,
-               private _userRepository: UserRepository) {}
+               private _userRepository: UserRepository,
+               private _activateRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    if (this._activateRoute.snapshot.params['company_id']) {
+      this.currentCompanyID = parseInt(this._activateRoute.snapshot.params['company_id']);
+    }
     this.getDirectories();
   }
 

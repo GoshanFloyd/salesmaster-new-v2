@@ -17,7 +17,7 @@
         <div class="col-sm-10 col-md-10 col-lg-10" *ngFor="let d of directoriesList">
           <div class="file-manager-directory-link">
             <span class="oi" data-glyph="folder"></span>
-            <a [routerLink]="'directory/'+d.id">{{d.title}}</a>
+            <a [routerLink]="'/file-manager/main/directory/'+d.id">{{d.title}}</a>
           </div>
         </div>
       </div>

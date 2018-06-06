@@ -25,7 +25,7 @@ type EventType = {
   host: { class: 'grid-row' }
 })
 
-export class TasksMainComponent implements OnInit{
+export class TasksMainComponent implements OnInit {
 
   @ViewChild('modalCreateTask') private modalCreateTask: ModalStandardComponent;
   @ViewChild('taskAddComponent') private taskAddComponent: TaskAddComponent;
@@ -133,6 +133,14 @@ export class TasksMainComponent implements OnInit{
         self._router.navigate(['/tasks/main/' + calEvent.id]);
       },
       dayClick: function(date, jsEvent, view) {
+
+        const oldDate = new Date();
+
+        const newDate = new Date(date.format());
+        newDate.setHours(oldDate.getHours() + 2);
+        newDate.setMinutes(oldDate.getMinutes());
+
+        self.taskAddComponent.setDeadline(newDate);
         self.showCreateModal();
         self.taskAddComponent.init();
       }
