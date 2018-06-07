@@ -79,8 +79,6 @@ export class AnalyticsGraphDealsComponent implements OnInit {
   }
 
   public changeCompany() {
-    console.log(this.dateFilterEnd);
-    console.log(this.dateFilterStart);
     this.getStages(this.currentCompanyID).subscribe(
       data => {
         this.getAnalytiс();
