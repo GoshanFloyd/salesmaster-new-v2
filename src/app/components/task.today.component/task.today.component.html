@@ -56,7 +56,7 @@
         <dd>{{task.datetime_deadline_format}}</dd>
       </dl>
       <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_progress'" (click)="openDoneTaskModal(task)">Выполнить</button>
-      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'">Одобрить</button>
+      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'" (click)="verifyTask(task)">Одобрить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'">Продлить на 1 день</button>
     </div>
   </div>

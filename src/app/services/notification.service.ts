@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {SoundService} from './sound.service';
 
 declare const Notification: any;
 
@@ -18,11 +19,8 @@ interface ISendNotification {
 @Injectable()
 export class NotificationService {
 
-  public sound: any;
-
-  constructor () {
-    this.sound = new Audio('../../assets/sounds/notify.mp3');
-    this.sound.volume = 0.2;
+  constructor (private _soundService: SoundService) {
+    this._soundService.setSound();
     this.checkPermission();
   }
 
@@ -34,9 +32,8 @@ export class NotificationService {
 
   public sendNotification (data: ISendNotification) {
 
+    this._soundService.playSound();
     this.checkPermission();
-
-    this.sound.play();
 
     let optionsNotifications = {};
 

@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from './services/auth.service';
-import {NavigationEnd, Router} from '@angular/router';
-import {CentrifugeService} from './services/centrifuge.service';
-import {LoadingService} from './services/loading.service';
-import {HelperUrlService} from './services/helper.url.service';
+import { Router} from '@angular/router';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -12,33 +9,26 @@ import {HelperUrlService} from './services/helper.url.service';
 
 export class AppComponent implements OnInit {
 
-  public _isVisible: boolean;
+  private _items: MenuItem[];
 
-  constructor (private _authService: AuthService,
-               private _router: Router,
-               private _loadingService: LoadingService,
-               private _helperUrlService: HelperUrlService) {
+  constructor (private _router: Router) {
   }
 
   ngOnInit( ) {
 
-    // this._router.events.subscribe(
-    //   data => {
-    //     if (data instanceof NavigationEnd){
-    //       console.log(data);
-    //     }
-    //   }
-    // );
-
-    // this._helperUrlService.requestGet('clients',{
-    //   company_id: 31
-    // }).subscribe(
-    //   data => {
-    //     console.log(data)
-    //   },
-    //   err => console.log(err)
-    // )
+    this._items = [
+      {
+        label: 'Добавить клиента',
+        command: (event) => {
+          this._router.navigateByUrl('/contacts/main/add');
+        }
+      }
+    ];
 
     this._router.navigate(['/'], { queryParams: { pathname: window.location.pathname }});
+  }
+
+  get itemsMenu(): MenuItem[] {
+    return this._items;
   }
 }

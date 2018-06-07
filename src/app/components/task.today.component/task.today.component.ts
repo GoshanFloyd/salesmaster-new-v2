@@ -66,25 +66,25 @@ export class TaskTodayComponent implements OnInit {
     });
   }
 
-  public getTodayTask() {
+  public getTodayTask(): void {
     this._taskService.getTasks({
       'deadline_in_0': this.todayDate,
       'deadline_in_1': this.todayDate,
       'both_id': this.user.id
     }).subscribe(
       data => {
-        this._taskList = TaskModel.fromArray(data)
+        this._taskList = TaskModel.fromArray(data);
       },
       err => console.log(err)
     )
   }
 
-  public openDoneTaskModal(task: TaskModel) {
+  public openDoneTaskModal(task: TaskModel): void {
     this.currentTask = task;
     this.modalDoneTask.showModal();
   }
 
-  public doneTask() {
+  public doneTask(): void {
     let task = {};
 
     if (this.currentTask.employee_owner.id === this.user.id) {
@@ -115,5 +115,19 @@ export class TaskTodayComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  public verifyTask(task: TaskModel): void {
+    this._taskService.updateTask(task.id,{
+      'status': 'completed'
+    }).subscribe(
+      data => {
+        this.getTodayTask();
+        this._notificationService.sendNotification({
+          title: 'Вы одобрили задачу'
+        });
+      },
+      err => console.log(err)
+    )
   }
 }

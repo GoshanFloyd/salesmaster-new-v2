@@ -71,7 +71,6 @@ import {ProductSingleComponent} from './components/product.single.component/prod
 import {CalltextComponent} from './components/calltext.component/calltext.component';
 import {EmployeeProfileComponent} from './components/employee.profile.component/employee.profile.component';
 import {ImageCropperComponent} from 'ng2-img-cropper';
-import {HelperUrlService} from './services/helper.url.service';
 import {AnalyticsGraphActivityComponent} from './components/analytics.graph-activity.component/analytics.graph-activity.component';
 import {ChartsModule} from 'ng2-charts';
 import {AnalyticService} from './services/analytic.service';
@@ -82,7 +81,8 @@ import {ReportsPageComponent} from './components/reports.page/reports.page.compo
 import {ReportsMainComponent} from './components/reports.main.component/reports.main.component';
 import {ReportService} from './services/report.service';
 import {ReportsClientComponent} from './components/reports.client.component/reports.client.component';
-
+import {SoundService} from './services/sound.service';
+import {ContextMenuModule} from 'primeng/contextmenu';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -266,7 +266,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     NoopAnimationsModule,
     ToggleButtonModule,
-    ChartsModule
+    ChartsModule,
+    ContextMenuModule
   ],
   providers: [
     TokenGuard,
@@ -289,9 +290,9 @@ const appRoutes: Routes = [
     DocumentService,
     DirectoryService,
     ProductBrandService,
-    HelperUrlService,
     AnalyticService,
     ReportService,
+    SoundService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]
