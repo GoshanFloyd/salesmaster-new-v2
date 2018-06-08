@@ -206,5 +206,123 @@ HTTP-запросами.
   `_company` - Массив компаний, которые имеют доступ к данному типу активности. Тип: `CompanyArray`. Модификатор доступа: `private`.  
   `_title` - Заголовок типа активности. Заголовок стадии сделки. Тип: `string`. Модификатор доступа: `private`.  
   
+  ### Методы класса
+  `get id(): number` - Возвращает ID типа активности.  
+  `get company(): CompanyArray` - Возвращает массив компаний.  
+  `get title(): string` - Возвращает заголовок типа активности.  
+  `public static getTypesArray(array: any): ActivityTypeModel[]` - Возвращает массив типов активностей в виде массива моделей.
+  
+## Модель `DirectoryModel`
+  ### Поля модели
+  `_id` - Уникальный идентификатор директории. Тип: `number`. Модификатор доступа: `private`.  
+  `_company` - Компания, к которой принадлежит директория. Тип: `ICompany`. Модификатор доступа: `private`  
+  `_employee` - Автор директории. Тип: `IEmployee`. Модификатор доступа: `private`.  
+  `_title` - Заголовок директории. Тип: `string`. Модификатор доступа: `private`.  
+  `_is_private` - Признак, является ли директория приватной. Тип: `boolean`. Модификатор доступа: `private`.  
+  
+  ### Методы класса  
+  `static fromArray(array: any): Array<DirectoryModel>` - Возвращает массив директорий в виде массива моделей.  
+  `get id(): number` - Возращает ID директории.  
+  `get company(): ICompany` - Возвращает компанию директории.  
+  `get employee(): IEmployee` - Возвращает автора директории.  
+  `get title(): string` - Возвращает заголовок директории.  
+  `get is_private(): boolean` - Возвращает `true`, если директория приватна.  
+  
+## Модель `DocumentModel`
+  ### Поля модели
+  `_id` - Уникальный идентификатор документа. Тип: `number`. Модификатор доступа: `private`.  
+  `_directory_title` - Заголовок директории, где находится документ. Тип: `string`. Модификатор доступа: `private`.  
+  `_employee` - Автор документа. Тип: `IEmployee`. Модификатор доступа: `private`.  
+  `_file` - URL-ссылка на документ. Тип: `string`. Модификатор доступа: `private`.  
+  `_title` - Наименование документа. Тип: `string`. Модификатор доступа: `private`.  
+  `_extension` - Расширение документа. Тип: `string`. Модификатор доступа: `private`.  
+  `_download_count` - Количество скачиваний документа. Тип: `string`. Модификатор доступа: `private`.  
+  
+  ### Методы класса
+  `static fromArray(array: any): Array<DocumentModel>` - Возвращает массив документов в виде массива моделей.  
+  `public getDownloadLink(): string` - Возвращает URL-ссылку на документ.  
+  `get id(): number` - Возвращает ID документа.  
+  `get directory_title(): string` - Возвращает заголовок директории, где находится документ.  
+  `get employee(): IEmployee` - Возвращает автора директории.  
+  `get file(): string` - Возвращает URL-ссылку на документ.  
+  `get title(): string` - Возвращает наименование документа.  
+  `get extension(): string` - Возвращает расширение документа.  
+  `get download_count(): number` - Возвращает количество скачивания документа.  
+  
+## Модель `ProductModel`
+  ### Поля модели
+  `_id` - Уникальный идентификатор продукта. Тип: `number`. Модификатор доступа: `private`.  
+  `_company` - Компания, к которой относится данный продукт. Тип: `CompanyObject`. Модификатор доступа: `private`.  
+  `_brand_title` - Наименование бренда продукта. Тип: `string`. Модификатор доступа: `private`.  
+  `_parent_id` - ID родительского продукта. Тип: `number`. Модификатор доступа: `private`.  
+  `_title` - Наименование продукта. Тип: `string`. Модификатор доступа: `private`.  
+  `_description` - Описание продукта. Тип: `string`. Модификатор доступа: `private`.  
+  `_vendor_code` - Артикул продукта. Тип: `string`. Модификатор доступа: `private`.  
+  `_total` - Стоимость продукта. Тип: `number`. Модификатор доступа: `private`.  
+  `_currency` - Валюта. Тип: `string`. Модификатор доступа: `private`.  
+  `_image` - URL-ссылка на изображение продукта. Тип: `string`. Модификатор доступа: `private`.  
+  `_call_text` - Текст обзвона. Тип: `string`. Модификатор доступа: `private`.  
+  
+  ### Методы класса
+  `static fromArray(array: any): Array<ProductModel>` - Возвращает массив продуктов в виде массива моделей.  
+  `public getVisibleTitle(): string` - Возвращает наименование бренда и наименование продукта.  
+  `public getVisiblePrice(): string` - Возвращает стоимость продукта и валюту, в которой она высчитывается.  
+  `get id(): number` - Возращает ID продукта.  
+  `get company(): CompanyObject` - Возвращает компанию, к которой привязан продукт.  
+  `get brand_title(): string` - Возвращает заголовок бренда.  
+  `get parent_id(): number` - Возвращает ID продукта-родителя.  
+  `get title(): string` - Возвращает наименование продукта.  
+  `get description(): string` - Возвращает описание продукта.  
+  `get vendor_code(): string` - Возвращает артикул продукта.  
+  `get total(): number` - Возвращает стоимость продукта.  
+  `get currency(): string` - Возвращает валюту, в которой считывается стоимость продукта.  
+  `get image(): string` - Возвращает URL-ссылку на изображение продукта.  
+  `get call_text(): string` - Возвращает текст обзвона по продукту.
+  
+## Модель `ProductBrandModel`
+  ### Поля модели
+  `_id` - Уникальный идентификатор бренда. Тип: `number`. Модификатор доступа: `private`.  
+  `_title` - Наименования бренда. Тип: `string`. Модификатор доступа: `private`.  
+  `_direction` - Направление бренда. Тип: `string`. Модификатор доступа: `private`.  
+  
+  ### Методы класса
+  `static fromArray(array: Array<IProductBrandCreate>) : Array<ProductBrandModel>` - Возвращает массив брендов в виде массива моделей.  
+  `get id(): number` - Возвращает ID бренда.  
+  `get title(): string` - Возвращает наименование бренда.  
+  `get direction(): string` - Возвращает направление продукта.  
+  
+### Модель `TaskModel` 
+  ### Поля модели
+  `_id` - Уникальный идентификатор задачи. Тип: `number`. Модификатор доступа: `private`.  
+  `_employee_owner` - Автор задачи. Тип: `EmployeeType`. Модификатор доступа: `private`.          
+  `_employee_doer` - Исполнитель задачи. Тип: `EmployeeType`. Модификатор доступа: `private`.  
+  `_client` - Клиент, по которому поставлена задача. Опционально. Тип: `ClientType`. Модификатор доступа: `private`.  
+  `_title` - Заголовок задачи. Тип: `string`. Модификатор доступа: `private`.  
+  `_description` - Описание задачи.  Тип: `string`. Модификатор доступа: `private`.  
+  `_comments` - Комментарии к задаче.  Тип: `string`. Модификатор доступа: `private`.  
+  `_result` - Результат выполнения задачи.  Тип: `string`. Модификатор доступа: `private`.  
+  `_priority` - Приоритет выполнения задачи. Все виды приоритетов описаны в константе `TASKS_PRIORITY`.  Тип: `string`. Модификатор доступа: `private`.  
+  `_status` - Статус выполнения задачи. Все виды статусов описаны в константе `TASKS_STATUS`.  Тип: `string`. Модификатор доступа: `private`.  
+  `_datetime_deadline` - Дата окончания (deadline) задачи. Тип: `Date`. Модификатор доступа: `private`.  
+  `_datetime_created` - Дата создания задачи. Тип: `Date`. Модификатор доступа: `private`.  
+  `_datetime_updated` - Дата редактирования задачи. Тип: `Date`. Модификатор доступа: `private`.  
+  
+  ### Методы класса
+  `static fromArray(array: any): Array<TaskModel>` - Возвращает массив задач в виде массива моделей.  
+  `get id(): number` - Возвращает ID задачи.  
+  `get employee_owner(): EmployeeType` - Возвращает автора задачи.  
+  `get employee_doer(): EmployeeType` - Возвращает исполнителя задачи.  
+  `get client(): ClientType` - Возвращает клиента, к которому прикреплена задача.  
+  `get title(): string` - Возвращает заголовок задачи.  
+  `get description(): string` - Возвращает описание задачи.  
+  `get comments(): string` - Возвращает комментарии к задаче.  
+  `get result(): string` - Возвращает результат задачи.  
+  `get priority(): string` - Возвращает приоритет задачи.  
+  `get status(): string` - Возвращает статус задачи.  
+  `get datetime_deadline(): Date` - Возвращает дату окончания задачи.  
+  `get datetime_created(): Date` - Возвращает дату создания задачи.  
+  `get datetime_updated(): Date` - Возращает дату редатирования задачи.  
+  `get datetime_created_format(): string` - Возращает дату задачи в строковом виде.  
+  `get datetime_deadline_format(): string` - Возращает дату окончания задачи в строковом виде.                 
  
 

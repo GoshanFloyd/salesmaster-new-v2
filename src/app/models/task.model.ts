@@ -56,11 +56,11 @@ export class TaskModel {
   }
 
   get employee_owner(): EmployeeType {
-    return this._employee_owner
+    return this._employee_owner;
   }
 
   get employee_doer(): EmployeeType {
-    return this._employee_doer
+    return this._employee_doer;
   }
 
   get client(): ClientType {
@@ -71,7 +71,7 @@ export class TaskModel {
     return this._title;
   }
 
-  get desription(): string {
+  get description(): string {
     return this._description;
   }
 
@@ -104,7 +104,7 @@ export class TaskModel {
   }
 
   get datetime_created_format(): string {
-    return new Date(this._datetime_created).toLocaleString("ru", {
+    return new Date(this._datetime_created).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -114,7 +114,7 @@ export class TaskModel {
   }
 
   get datetime_deadline_format(): string {
-    return new Date(this._datetime_deadline).toLocaleString("ru", {
+    return new Date(this._datetime_deadline).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
