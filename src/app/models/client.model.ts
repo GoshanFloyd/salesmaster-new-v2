@@ -148,7 +148,7 @@ export class ClientModel{
   }
 
   get postcode(): string {
-    return this._postcode
+    return this._postcode;
   }
 
   get requisite(): string {

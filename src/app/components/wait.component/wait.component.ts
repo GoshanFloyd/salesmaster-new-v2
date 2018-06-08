@@ -3,9 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserRepository} from '../../repositories/user.repository';
 import {CentrifugeService} from '../../services/centrifuge.service';
-import {ClientsService} from '../../services/clients.service';
 import {ClientsRepository} from '../../repositories/clients.repository';
-import {LoadingService} from '../../services/loading.service';
 
 @Component({
   moduleId: module.id,
@@ -22,8 +20,7 @@ export class WaitComponent implements OnInit {
               private _activeRoute: ActivatedRoute,
               private _userRepository: UserRepository,
               private _centrifugeService: CentrifugeService,
-              private _clientsRepository: ClientsRepository,
-              private _loadingService: LoadingService) { }
+              private _clientsRepository: ClientsRepository) { }
 
   ngOnInit() {
     this._activeRoute.queryParams
@@ -32,7 +29,7 @@ export class WaitComponent implements OnInit {
         if (this._authService.isVerify) {
           if (this._userRepository.user) {
             this._router.navigateByUrl(currentURL);
-            this._clientsRepository.getContacts({
+            this._clientsRepository.getContactsLight({
               company_id: this._userRepository.user.company[0].id
             });
             this._centrifugeService.init();
@@ -40,7 +37,7 @@ export class WaitComponent implements OnInit {
             this._userRepository.initMyUser().subscribe(
               res => {
                 this._router.navigateByUrl(currentURL);
-                this._clientsRepository.getContacts({
+                this._clientsRepository.getContactsLight({
                   company_id: this._userRepository.user.company[0].id
                 });
                 this._centrifugeService.init();
@@ -59,7 +56,7 @@ export class WaitComponent implements OnInit {
                   this._userRepository.initMyUser().subscribe(
                     res => {
                       this._router.navigateByUrl(currentURL);
-                      this._clientsRepository.getContacts({
+                      this._clientsRepository.getContactsLight({
                         company_id: this._userRepository.user.company[0].id
                       });
                       this._centrifugeService.init();

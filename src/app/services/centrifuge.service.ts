@@ -62,7 +62,7 @@ export class CentrifugeService {
   private getExpiringTasksCallbacks() {
     const self = this;
 
-    const public_callbacks = {
+    return {
       'message': function(dataset) {
         self._notificationService.sendNotification({
           title: 'Истекает срок задачи',
@@ -79,15 +79,13 @@ export class CentrifugeService {
         });
       }
     };
-
-    return public_callbacks;
   }
 
   private getDelayingTasksCallbacks() {
 
     const self = this;
 
-    const public_callbacks = {
+    return {
       'message': function(dataset) {
         self._notificationService.sendNotification({
           title: 'Просроченная задача',
@@ -103,12 +101,10 @@ export class CentrifugeService {
         });
       }
     };
-
-    return public_callbacks;
   }
 
   public disconnectCentrifuge(): void {
-    if(this.centrifuge){
+    if (this.centrifuge) {
       this.centrifuge.disconnect();
     }
   }

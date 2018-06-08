@@ -92,7 +92,7 @@ export class UserModel {
     let newArray: Array<UserModel> = [];
 
     for (let item of array) {
-      newArray.push(new UserModel(item))
+      newArray.push(new UserModel(item));
     }
 
     return newArray;

@@ -24,6 +24,7 @@ export class ClientsRepository {
     this._loadingService.showLoader();
     this._clientService.getContacts(obj).subscribe(
       data => {
+        console.log(data);
         this._clients_main.next(ClientModel.getClientArray(data));
         this._loadingService.hideLoader();
         },
@@ -38,7 +39,6 @@ export class ClientsRepository {
     this._clientService.getClientsLightWeight(obj).subscribe(
       data => {
         this._clients_main_light.next(ClientLightModel.getClientArray(data));
-        this._loadingService.hideLoader();
       },
       err => {
         console.log(err);

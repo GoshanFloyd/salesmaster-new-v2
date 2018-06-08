@@ -21,6 +21,25 @@ export class AuthenticationProvider implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
+        if (err.status === 400 && err.error.non_field_errors) {
+          this._notificationService.sendNotification({
+              title: 'Произошла ошибка',
+              options: {
+                body: 'Ваш аккаунт заблокирован.'
+              }
+            },
+          );
+          this._router.navigate(['login']);
+        }
+        if (err.status === 401 && err.error.detail === 'Error decoding signature.') {
+          this._notificationService.sendNotification({
+            title: 'Произошла ошибка',
+            options: {
+              body:  'Ваш пароль был изменен, ваш аккаунт заблокирован.'
+            }},
+          );
+          this._router.navigate(['login']);
+        }
         if (err.status === 401) {
           this._notificationService.sendNotification({
             title: 'Произошла ошибка',
@@ -34,7 +53,7 @@ export class AuthenticationProvider implements HttpInterceptor {
           this._notificationService.sendNotification({
             title: 'Произошла ошибка',
             options: {
-              body:  'Данные пользователя устарели. Пожалуйста, войдите в CRM заново.'
+              body:  'Ошибка на стороне сервера. Пожалуйста, свяжитесь с системным администратором.'
             }},
           );
         }
