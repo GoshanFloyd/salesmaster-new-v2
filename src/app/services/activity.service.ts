@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {ActivityModel} from '../models/activity.model';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ActivityService {
@@ -24,13 +25,26 @@ export class ActivityService {
 
   public createActivity(obj?: any) {
 
+    let subject = new Subject<any>();
+
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<ActivityModel>(`${this.baseProtocol}${this.baseURL}activities`, obj, {
-      headers: header
+    const req = new HttpRequest('POST',`${this.baseProtocol}${this.baseURL}activities`, obj, {
+      headers: header,
+      reportProgress: true
     });
+
+    this._httpClient.request(req).subscribe(event => {
+      if (event.type === HttpEventType.UploadProgress) {
+        const percentDone = Math.round(100 * event.loaded / event.total);
+        subject.next(percentDone);
+      } else if (event instanceof HttpResponse) {
+        subject.complete();
+      }
+    });
+    return subject.asObservable();
   }
 
   public updateActivity(id: number, obj: any) {
@@ -41,6 +55,6 @@ export class ActivityService {
 
     return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}activities/${id}`, obj, {
       headers: header
-    })
+    });
   }
 }

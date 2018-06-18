@@ -32,3 +32,14 @@
   font-family: "PT Sans Caption", Arial, sans-serif !important;
   font-size: 1.4em !important;
 }
+
+.modal-loader {
+  height: 4px;
+  width: 100%;
+}
+
+.modal-loader-line {
+  width: 0;
+  height: 100% !important;
+  background-color: #0073e6;
+}

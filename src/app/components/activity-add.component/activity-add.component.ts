@@ -23,7 +23,7 @@ type metadataAddActivity = {
 
 export class ActivityAddComponent {
 
-  @Output() onCreate = new EventEmitter<boolean>()
+  @Output() onCreate = new EventEmitter<boolean|number>();
 
   public activitiesTypes: ActivityTypeModel[] = [];
 
@@ -91,13 +91,19 @@ export class ActivityAddComponent {
 
     this._activityService.createActivity(this._formData).subscribe(
       data => {
-        this._notificationService.sendNotification({
-          title: 'Активность добавлена.'
-        });
-        this.resetForm();
-        this._formData = new FormData();
-        this.onCreate.emit(true);
+        this.onCreate.emit(data);
+        if (data === 100) {
+          this._notificationService.sendNotification({
+            title: 'Активность добавлена.'
+          });
+          this.resetForm();
+          this._formData = new FormData();
+          this.onCreate.emit(true);
+        }
+      },
+      err => {
+        console.log(err);
       }
-    )
+    );
   }
 }

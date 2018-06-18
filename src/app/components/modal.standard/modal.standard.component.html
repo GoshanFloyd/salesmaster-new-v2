@@ -2,5 +2,8 @@
   <div class="modal-container">
     <h3>{{ title || 'Типичный заголовок модали'}}</h3>
     <ng-content></ng-content>
+    <div class="modal-loader">
+      <div class="modal-loader-line" [style.width.%]="percentLoad"></div>
+    </div>
   </div>
 </div>

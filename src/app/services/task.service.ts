@@ -39,7 +39,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<TaskModel>(`${this.baseProtocol}${this.baseURL}tasks`, obj, {
+    return this._httpClient.post<any>(`${this.baseProtocol}${this.baseURL}tasks`, obj, {
       headers: header
     });
   }
@@ -52,7 +52,7 @@ export class TaskService {
 
     return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, obj, {
       headers: header
-    })
+    });
   }
 
   public deleteTask(id: number) {

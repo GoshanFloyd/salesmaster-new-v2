@@ -76,8 +76,14 @@ export class ClientSingleComponent implements AfterViewChecked {
     return this._clientRepository.current_client;
   }
 
-  public onCreateActivity(value: boolean) {
-    if (value) {
+  public onCreateActivity(value: boolean|number) {
+
+    if (typeof value == 'number'){
+      this.modalActivityAdd.percentLoad = value;
+    }
+
+    if (typeof value == 'boolean') {
+      this.modalActivityAdd.percentLoad = 0;
       this.modalActivityAdd.hideModal();
       this.getClientActivities(this.id);
     }

@@ -8,7 +8,9 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ModalStandardComponent implements OnInit {
 
   @Input() title: string;
-  private isVisible: boolean = false;
+  private _isVisible: boolean = false;
+
+  private _percentLoad: number = 0;
 
   constructor() { }
 
@@ -16,14 +18,26 @@ export class ModalStandardComponent implements OnInit {
   }
 
   public showModal() {
-    this.isVisible = true;
+    this._isVisible = true;
   }
 
   public hideModal() {
-    this.isVisible = false;
+    this._isVisible = false;
   }
 
   public toggleModal() {
-    this.isVisible = !this.isVisible;
+    this._isVisible = !this._isVisible;
+  }
+
+  get isVisible(): boolean {
+    return this._isVisible;
+  }
+
+  get percentLoad(): number {
+    return this._percentLoad;
+  }
+
+  set percentLoad(percent: number) {
+    this._percentLoad = percent;
   }
 }

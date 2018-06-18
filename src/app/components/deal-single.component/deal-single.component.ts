@@ -97,8 +97,12 @@ export class DealSingleComponent implements OnInit{
     this.modalAddActivity.showModal();
   }
 
-  public afterCreateActivity(value: boolean) {
-    if (value) {
+  public afterCreateActivity(value: boolean|number) {
+    if (typeof value === 'number') {
+      this.modalAddActivity.percentLoad = value;
+    }
+    if (typeof value === 'boolean') {
+      this.modalAddActivity.percentLoad = 0;
       this.modalAddActivity.hideModal();
       this.getActivities(this._dealID).subscribe(data => {});
     }
