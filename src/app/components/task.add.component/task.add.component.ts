@@ -101,7 +101,7 @@ export class TaskAddComponent {
     this._formNewTask.controls.title.setValue(null);
     this._formNewTask.controls.description.setValue(null);
     this._formNewTask.controls.priority.setValue('middle');
-    this._formNewTask.controls.status.setValue('in_process');
+    this._formNewTask.controls.status.setValue('in_progress');
     this._formNewTask.controls.datetime_deadline.setValue(null);
   }
 
@@ -119,6 +119,8 @@ export class TaskAddComponent {
       'status': this._formNewTask.controls['status'].value,
       'datetime_deadline': this.getDeadlineDate(this._formNewTask.controls['datetime_deadline'].value)
     };
+
+    console.log(task);
 
     this._taskService.createTask(task).subscribe(
       data => {

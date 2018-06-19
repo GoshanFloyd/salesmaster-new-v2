@@ -94,7 +94,7 @@ export class ClientEditComponent implements OnInit {
         this.changeClientType(this.client.type);
       },
       err => console.log(err)
-    )
+    );
   }
 
   private prepareParentClient(id: number) {
@@ -103,34 +103,37 @@ export class ClientEditComponent implements OnInit {
       data => {
         this.parentClient = new ClientModel(data);
       }
-    )
+    );
   }
 
   private preparePhones(): void {
-    for(let phones of this.client.phones) {
+    for (const phones of this.client.phones) {
       (this.editableClient.controls['phones'] as FormArray).push(new FormGroup({
         owner_name: new FormControl(phones.owner_name, Validators.required),
         number: new FormControl(phones.number, Validators.required),
-        type: new FormControl(phones.type)
+        type: new FormControl(phones.type),
+        id: new FormControl(phones.id)
       }));
     }
   }
 
   private prepareEmails(): void {
-    for(let emails of this.client.emails) {
+    for (const emails of this.client.emails) {
       (this.editableClient.controls['emails'] as FormArray).push(new FormGroup({
         owner_name: new FormControl(emails.owner_name, Validators.required),
         address: new FormControl(emails.address, Validators.email),
-        type: new FormControl(emails.type)
+        type: new FormControl(emails.type),
+        id: new FormControl(emails.id)
       }));
     }
   }
 
   private prepareCustomFields(): void {
-    for(let fields of this.client.customfields) {
+    for (const fields of this.client.customfields) {
       (this.editableClient.controls['customfields'] as FormArray).push(new FormGroup({
         key: new FormControl(fields.key),
-        value: new FormControl(fields.value)
+        value: new FormControl(fields.value),
+        id: new FormControl(fields.id)
       }));
     }
   }
@@ -138,19 +141,19 @@ export class ClientEditComponent implements OnInit {
   public changeClientType(event: any){
     const value = event.target ? event.target.value : event;
 
-    if (value == 'fizlico') {
-      this.editableClient.controls['fizlico_type'].setValidators([Validators.required])
+    if (value === 'fizlico') {
+      this.editableClient.controls['fizlico_type'].setValidators([Validators.required]);
 
       this.editableClient.controls['yurlico_type'].setValidators(null);
-      this.editableClient.controls['yurlico_form'].setValidators(null)
+      this.editableClient.controls['yurlico_form'].setValidators(null);
 
     }
 
-    if (value == 'yurlico') {
-      this.editableClient.controls['fizlico_type'].setValidators(null)
+    if (value === 'yurlico') {
+      this.editableClient.controls['fizlico_type'].setValidators(null);
 
       this.editableClient.controls['yurlico_type'].setValidators([Validators.required]);
-      this.editableClient.controls['yurlico_form'].setValidators([Validators.required])
+      this.editableClient.controls['yurlico_form'].setValidators([Validators.required]);
     }
 
     this.editableClient.updateValueAndValidity();
@@ -158,15 +161,33 @@ export class ClientEditComponent implements OnInit {
   }
 
   public deletePhone(index: number) {
-    (this.editableClient.controls['phones'] as FormArray).removeAt(index);
+    this._clientService.updateClient(this.client.id, {
+      phones: [(this.editableClient.controls['phones'] as FormArray).controls[index].value]
+    }).subscribe(
+      data => {
+        (this.editableClient.controls['phones'] as FormArray).removeAt(index);
+      }
+    );
   }
 
   public deleteEmail(index: number) {
-    (this.editableClient.controls['emails'] as FormArray).removeAt(index);
+    this._clientService.updateClient(this.client.id, {
+      emails: [(this.editableClient.controls['emails'] as FormArray).controls[index].value]
+    }).subscribe(
+      data => {
+        (this.editableClient.controls['emails'] as FormArray).removeAt(index);
+      }
+    );
   }
 
   public deleteCustomfield(index: number) {
-    (this.editableClient.controls['customfields'] as FormArray).removeAt(index);
+    this._clientService.updateClient(this.client.id, {
+      customfields: [(this.editableClient.controls['customfields'] as FormArray).controls[index].value]
+    }).subscribe(
+      data => {
+        (this.editableClient.controls['customfields'] as FormArray).removeAt(index)
+      }
+    );
   }
 
   public addPhone(): void {
@@ -194,7 +215,7 @@ export class ClientEditComponent implements OnInit {
 
   public openSelectParentComponent(company: string) {
     if(this.parentClient) {
-      this.parentClient = null
+      this.parentClient = null;
     } else {
       this.clientSelectComponent.getClientParent(company);
       this.modalStandard.showModal();
@@ -207,11 +228,18 @@ export class ClientEditComponent implements OnInit {
     this.parentClient = parentClient;
   }
 
-  public returnMainPage(){
-    this._router.navigate(['contacts/main/'+this._id]);
+  public returnMainPage() {
+    this._router.navigate(['contacts/main/' + this._id]);
+  }
+
+  // @TODO edit phones and other metadata
+  private checkEditablePhones() {
   }
 
   public editClient() {
+
+
+
     this._clientService.updateClient(this.client.id, this.editableClient.value).subscribe(
       data => {
         this._clientRepository.getContactsLight({
@@ -220,7 +248,7 @@ export class ClientEditComponent implements OnInit {
         this._notificationService.sendNotification({
           title: 'Клиент обновлен'
         });
-        this._router.navigate(['contacts/main/'+this._id]);
+        this._router.navigate(['contacts/main/' + this._id]);
       },
       err => console.log(err)
     )

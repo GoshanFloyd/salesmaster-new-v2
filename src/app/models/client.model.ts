@@ -13,25 +13,31 @@ type ParentField = {
   id: number;
 };
 
-type PhoneArrayField = Array<{
+type TPhone = {
   id: number;
   owner_name: string;
   type: string;
   number: string;
-}>;
+};
 
-type EmailArrayField = Array<{
+type TEmail = {
   id: number;
   owner_name: string;
   type: string;
   address: string;
-}>;
+};
 
-type CustomFieldsArrayField = Array<{
+type TCustomField = {
   id: number;
   key: string;
   value: string;
-}>;
+};
+
+type PhoneArrayField = Array<TPhone>;
+
+type EmailArrayField = Array<TEmail>;
+
+type CustomFieldsArrayField = Array<TCustomField>;
 
 export class ClientModel{
   private _id: number;
@@ -87,31 +93,31 @@ export class ClientModel{
 
     let clientArray: ClientModel[] = [];
 
-    for(let item of array) {
-      clientArray.push(new ClientModel(item))
+    for(const item of array) {
+      clientArray.push(new ClientModel(item));
     }
 
     return clientArray;
   }
 
   public static getTypeMail(type: string): string {
-    if(type == 'corporate'){
+    if (type === 'corporate') {
       return 'Корпоративная почта';
     }
-    if(type == 'personal'){
-      return 'Персональная почта'
+    if (type === 'personal') {
+      return 'Персональная почта';
     }
   }
 
   public static getTypePhone(type: string): string {
-    if(type == 'job'){
-      return 'Рабочий телефон'
+    if (type === 'job') {
+      return 'Рабочий телефон';
     }
-    if(type == 'private'){
-      return 'Личный телефон'
+    if (type === 'private') {
+      return 'Личный телефон';
     }
-    if(type == 'home'){
-      return 'Домашний телефон'
+    if (type === 'home') {
+      return 'Домашний телефон';
     }
   }
 
@@ -188,7 +194,7 @@ export class ClientModel{
   }
 
   get datetime_created_format(): string {
-    return new Date(this._datetime_created).toLocaleString("ru", {
+    return new Date(this._datetime_created).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -203,5 +209,11 @@ export class ClientModel{
 
   get isNewClient(): boolean {
     return Date.now() - this.datetime_created.getTime() > 900000 ? false : true;
+  }
+
+  public checkEditPhones(phone: TPhone): any {
+    return this.phones.filter((p) => {
+      return p.id == phone.id && p.number != phone.number && p.type != phone.type
+    })
   }
 }
