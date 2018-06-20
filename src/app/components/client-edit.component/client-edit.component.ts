@@ -166,6 +166,7 @@ export class ClientEditComponent implements OnInit {
     }).subscribe(
       data => {
         (this.editableClient.controls['phones'] as FormArray).removeAt(index);
+        this.prepareForm(this._id);
       }
     );
   }
@@ -176,6 +177,7 @@ export class ClientEditComponent implements OnInit {
     }).subscribe(
       data => {
         (this.editableClient.controls['emails'] as FormArray).removeAt(index);
+        this.prepareForm(this._id);
       }
     );
   }
@@ -185,7 +187,8 @@ export class ClientEditComponent implements OnInit {
       customfields: [(this.editableClient.controls['customfields'] as FormArray).controls[index].value]
     }).subscribe(
       data => {
-        (this.editableClient.controls['customfields'] as FormArray).removeAt(index)
+        (this.editableClient.controls['customfields'] as FormArray).removeAt(index);
+        this.prepareForm(this._id);
       }
     );
   }
@@ -233,14 +236,87 @@ export class ClientEditComponent implements OnInit {
   }
 
   // @TODO edit phones and other metadata
-  private checkEditablePhones() {
+  private checkEditablePhones(): any {
+
+    const phones: Array<any> = [];
+
+    for(let phone of (this.editableClient.controls['phones'] as FormArray).controls){
+      if (phone.value.id){
+        const searchPhone = this.client.phones.find(x => x.id === phone.value.id);
+
+        console.log(phone,searchPhone);
+
+        if (searchPhone.number != phone.value.number ||
+          searchPhone.type != phone.value.type ||
+          searchPhone.owner_name != phone.value.owner_name) {
+          phones.push(phone.value)
+        }
+        else {
+          continue;
+        }
+      } else {
+        phones.push(phone.value)
+      }
+    }
+
+    return phones;
+  }
+
+  private checkEditableEmails(): any {
+
+    const emails: Array<any> = [];
+
+    for(let email of (this.editableClient.controls['emails'] as FormArray).controls){
+      if (email.value.id){
+        const searchEmail = this.client.emails.find(x => x.id === email.value.id);
+
+        if (searchEmail.address != email.value.address ||
+          searchEmail.type != email.value.type ||
+          searchEmail.owner_name != email.value.owner_name) {
+          emails.push(email.value)
+        }
+        else {
+          continue;
+        }
+      } else {
+        emails.push(email.value)
+      }
+    }
+
+    return emails;
+  }
+
+  private checkEditableCustomFields(): any {
+
+    const customfields: Array<any> = [];
+
+    for(let field of (this.editableClient.controls['customfields'] as FormArray).controls){
+      if (field.value.id){
+        const searchField = this.client.customfields.find(x => x.id === field.value.id);
+
+        if(searchField.key != field.value.key || searchField.value != field.value.value){
+          customfields.push(field.value)
+        }
+        else {
+          continue;
+        }
+      } else {
+        customfields.push(field.value)
+      }
+    }
+
+    return customfields;
   }
 
   public editClient() {
 
+    let editClient = this.editableClient.value;
 
+    editClient.phones = this.checkEditablePhones();
+    editClient.emails = this.checkEditableEmails();
+    editClient.customfields = this.checkEditableCustomFields();
 
-    this._clientService.updateClient(this.client.id, this.editableClient.value).subscribe(
+    this._clientService.updateClient(this.client.id, editClient).subscribe(
       data => {
         this._clientRepository.getContactsLight({
           company_title: this.editableClient.controls['company'].value
