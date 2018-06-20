@@ -83,6 +83,7 @@ import {ReportService} from './services/report.service';
 import {ReportsClientComponent} from './components/reports.client.component/reports.client.component';
 import {SoundService} from './services/sound.service';
 import {ContextMenuModule} from 'primeng/contextmenu';
+import {TaskCommentsComponent} from './components/task.comments.component/task.comments.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -253,7 +254,8 @@ const appRoutes: Routes = [
     DealSelectComponent,
     ReportsPageComponent,
     ReportsMainComponent,
-    ReportsClientComponent
+    ReportsClientComponent,
+    TaskCommentsComponent
   ],
   imports: [
     BrowserModule,

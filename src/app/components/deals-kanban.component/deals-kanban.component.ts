@@ -59,6 +59,16 @@ export class DealsKanbanComponent {
     });
   }
 
+  get userList(): Array<UserModel> {
+    return this._userList.filter(x => {
+      if (x.company.find(y => y.id == this._currentCompanyID)) {
+        return true
+      } else {
+        return false;
+      }
+    });
+  }
+
   get user() {
     return this._userRepository.getMyUser();
   }

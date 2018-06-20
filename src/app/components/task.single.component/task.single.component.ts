@@ -6,7 +6,6 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Task} from 'protractor/built/taskScheduler';
 
 @Component({
   moduleId: module.id,
@@ -32,13 +31,13 @@ export class TaskSingleComponent implements OnInit{
 
     this._router.events.subscribe(
       data => {
-        if(data instanceof NavigationEnd) {
-          if(this.currentTask && this._activateRoute.snapshot.params['id'] != this.currentTask.id.toString()) {
+        if (data instanceof NavigationEnd) {
+          if (this.currentTask && this._activateRoute.snapshot.params['id'] !== this.currentTask.id.toString()) {
             this.getTask();
           }
         }
       }
-    )
+    );
   }
 
   get currentTask(): TaskModel {
@@ -108,7 +107,7 @@ export class TaskSingleComponent implements OnInit{
     if (this._currentTask.employee_owner.id === this.user.id) {
       task = {
         'result': this.formDoneTask.controls['result'].value,
-        'status': 'done'
+        'status': 'completed'
       };
     } else {
       task = {
