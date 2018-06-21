@@ -3,7 +3,7 @@
     <div class="client-view__component main__component">
       <div class="main__component__header display-flex display-flex-row">
         <h3 class="display-flex-1">Описание проекта</h3>
-        <button class="main__component__header__helper-button"><span class="oi" data-glyph="pencil"></span></button>
+        <button *ngIf="currentDeal" class="main__component__header__helper-button" [routerLink]="'/contacts/main/deal/'+currentDeal.id+'/edit'"><span class="oi" data-glyph="pencil"></span></button>
       </div>
       <div class="main__component__body">
         <div class="grid-row height-100">
@@ -38,7 +38,7 @@
           </div>
           <div class="col-sm-1 col-md-2 col-lg-2 overflow-y">
             <div class="client-view__component__activities-list">
-              <button *ngIf="currentDeal?.status == 'in_process'" class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
+              <button *ngIf="currentDeal?.status == 'in_progress'" class="button-help" (click)="showModalCloseDeal()">Закрыть проект</button>
               <button class="button-standard mtb-small" (click)="showModalAdd()">Добавить активность</button>
               <app-activity-item
                                  *ngFor="let activity of activitiesOfCurrentDeal"
@@ -117,7 +117,7 @@
 <app-modal-standard #closeDealModal [title]="'Закрыть текущий проект?'">
   <form class="activity-add__component" (submit)="closeDeal($event)">
     <p-toggleButton onLabel="Успешно завершен" offLabel="Провален" name="statusDealClose"
-                    onIcon="fa-check-square" offIcon="fa-square" [ngModel]="statusCloseDeal"></p-toggleButton>
+                    onIcon="fa-check-square" offIcon="fa-square" [ngModel]="statusCloseDeal" (onChange)="changeStatus($event)"></p-toggleButton>
     <div class="form-row">
       <input type="submit" value="Закрыть проект" class="button-standard">
     </div>

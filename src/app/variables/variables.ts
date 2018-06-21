@@ -1,6 +1,6 @@
 export const DEALS_STATUS = [
   {
-    type: 'in_process',
+    type: 'in_progress',
     value: 'В работе'
   },
   {

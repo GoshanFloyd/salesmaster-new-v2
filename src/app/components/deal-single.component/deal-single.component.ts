@@ -53,6 +53,7 @@ export class DealSingleComponent implements OnInit{
     this._dealID = this._activateRoute.snapshot.params['deal_id'];
     this.getDeal(this._dealID).subscribe(
       data => {
+        console.log(data);
         this.getCompany(this._clientID).subscribe(
           data => {
             this._companyID = data.company.id;
@@ -164,8 +165,11 @@ export class DealSingleComponent implements OnInit{
     );
   }
 
+  public changeStatus(event: any) {
+    this.statusCloseDeal = !this.statusCloseDeal;
+  }
+
   public closeDeal(event: Event) {
-    event.preventDefault();
     this._dealService.updateDeal({
       id: this._dealID,
       status: this.statusCloseDeal ? 'completed' : 'failed'
@@ -185,6 +189,6 @@ export class DealSingleComponent implements OnInit{
       },
       err => console.log(err),
       () => this.modalCloseDeal.hideModal()
-    )
+    );
   }
 }
