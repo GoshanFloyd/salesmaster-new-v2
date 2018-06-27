@@ -17,6 +17,7 @@ export class NavigationComponent {
   constructor(private _offline: OfflineService) {
     this._offline.status.subscribe(
       data => {
+        console.log(data);
         this.status = data;
       }
     )
