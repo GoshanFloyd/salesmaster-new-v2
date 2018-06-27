@@ -54,4 +54,8 @@
       <!--</a>-->
     <!--</li>-->
   </ul>
+
+  <div class="offline-service-checker">
+    <span [style.backgroundColor]="status == 'up' ? 'green' : 'red'"></span>{{status == 'up' ? 'Вы подключены' : 'Вы отключены'}}
+  </div>
 </div>

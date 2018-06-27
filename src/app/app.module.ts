@@ -84,6 +84,7 @@ import {ReportsClientComponent} from './components/reports.client.component/repo
 import {SoundService} from './services/sound.service';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {TaskCommentsComponent} from './components/task.comments.component/task.comments.component';
+import {OfflineService} from './services/offline.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -295,6 +296,7 @@ const appRoutes: Routes = [
     AnalyticService,
     ReportService,
     SoundService,
+    OfflineService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]
