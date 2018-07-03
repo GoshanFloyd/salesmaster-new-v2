@@ -2035,4 +2035,33 @@ body .search-controls {
   .second_check_label > input[type=checkbox] {
     vertical-align: middle; }
 
+.comment__component {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  max-height: 90px;
+  height: 100% !important;
+  margin-bottom: 10px; }
+  .comment__component .comment__avatar-block {
+    flex: 1 0 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center; }
+  .comment__component .comment__content-block {
+    box-sizing: border-box;
+    padding: 5px 0 0 10px !important;
+    overflow: auto; }
+    .comment__component .comment__content-block::-webkit-scrollbar {
+      width: 5px;
+      background-color: #F5F5F5; }
+      @media (max-width: 768px) {
+        .comment__component .comment__content-block::-webkit-scrollbar {
+          width: 10px; } }
+    .comment__component .comment__content-block::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 168, 230, 0.5); }
+  .comment__component .comment_author-block {
+    width: 100%;
+    text-align: left;
+    margin: 0 0 5px 0 !important; }
+
 /*# sourceMappingURL=app.css.map */

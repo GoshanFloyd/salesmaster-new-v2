@@ -5,7 +5,7 @@ import {TaskModel} from '../../models/task.model';
 @Component({
   moduleId: module.id,
   templateUrl: './task.comments.component.html',
-  selector: 'app-task-comments'
+  selector: 'app-task-comments',
 })
 
 export class TaskCommentsComponent {

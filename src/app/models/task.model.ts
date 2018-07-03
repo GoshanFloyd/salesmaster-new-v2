@@ -1,4 +1,10 @@
 
+export interface IComment {
+  id?: number;
+  employee: number;
+  text: string;
+}
+
 type EmployeeType = {
   fullname: string;
   id: number;
@@ -17,7 +23,7 @@ export class TaskModel {
   private _client: ClientType;
   private _title: string;
   private _description: string;
-  private _comments: string;
+  private _comments: Array<IComment>;
   private _result: string;
   private _priority: string;
   private _status: string;
@@ -75,7 +81,7 @@ export class TaskModel {
     return this._description;
   }
 
-  get comments(): string {
+  get comments(): Array<IComment> {
     return this._comments;
   }
 

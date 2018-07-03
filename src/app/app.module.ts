@@ -86,6 +86,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import {TaskCommentsComponent} from './components/task.comments.component/task.comments.component';
 import {OfflineService} from './services/offline.service';
 import {appRoutes} from './app.routes';
+import {CommentComponent} from './components/comment.component/comment.component';
 
 @NgModule({
   declarations: [
@@ -142,7 +143,8 @@ import {appRoutes} from './app.routes';
     ReportsPageComponent,
     ReportsMainComponent,
     ReportsClientComponent,
-    TaskCommentsComponent
+    TaskCommentsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
