@@ -130,7 +130,8 @@
               <div class="list-fields__component__controls"
                    *ngFor="let item of newClient.controls.phones.controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
-                <input type="text" placeholder="Телефон" name="number" formControlName="number">
+                <p-inputMask formGroupName="number" mask="8-(999)-999-99-99"></p-inputMask>
+                <!--<input type="text" placeholder="Телефон" name="number" formControlName="number">-->
                 <div class="error-block" >
                   <span *ngIf="newClient.controls.phones.controls[i].controls['number'].hasError('required')">
                     Укажите телефон

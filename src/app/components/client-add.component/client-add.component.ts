@@ -92,7 +92,7 @@ export class ClientAddComponent implements OnInit {
 
     (this.newClient.controls['phones'] as FormArray).push(new FormGroup({
       owner_name: new FormControl(null, Validators.required),
-      number: new FormControl(null, Validators.required),
+      number: new FormControl(null),
       type: new FormControl(this.type_phones[0].type)
     }));
   }

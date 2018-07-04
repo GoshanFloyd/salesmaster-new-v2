@@ -1945,6 +1945,17 @@ body .list-fields__component .list-fields__component__controls {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap; }
+  body .list-fields__component .list-fields__component__controls p-inputMask {
+    flex: 1 1 45%;
+    width: 45%;
+    box-sizing: border-box;
+    padding: 0 !important; }
+    body .list-fields__component .list-fields__component__controls p-inputMask input {
+      flex: none !important;
+      margin: 0;
+      width: 100% !important;
+      height: 100% !important;
+      box-sizing: border-box; }
   body .list-fields__component .list-fields__component__controls input[type='text'] {
     flex: 1 1 45%;
     width: 45%;

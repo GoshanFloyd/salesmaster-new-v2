@@ -68,7 +68,7 @@
     </div>
   </div>
 </div>
-<app-task-comments class="col-sm-1 col-md-2 col-lg-2" [currentTask]="currentTask"></app-task-comments>
+<!--<app-task-comments class="col-sm-1 col-md-2 col-lg-2" [currentTask]="currentTask"></app-task-comments>-->
 
 <app-modal-standard #modalDoneTask [title]="'Выполнить задачу'">
   <form *ngIf="currentTask" [formGroup]="formDoneTask" (submit)="doneTask()">
