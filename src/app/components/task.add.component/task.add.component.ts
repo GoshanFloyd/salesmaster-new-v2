@@ -39,7 +39,7 @@ export class TaskAddComponent {
     title: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
     priority: new FormControl('middle', Validators.required),
-    status: new FormControl('in_progress', Validators.required),
+    status: new FormControl('in_progress'),
     datetime_deadline: new FormControl(null, Validators.required)
   });
 
@@ -119,8 +119,6 @@ export class TaskAddComponent {
       'status': this._formNewTask.controls['status'].value,
       'datetime_deadline': this.getDeadlineDate(this._formNewTask.controls['datetime_deadline'].value)
     };
-
-    console.log(task);
 
     this._taskService.createTask(task).subscribe(
       data => {

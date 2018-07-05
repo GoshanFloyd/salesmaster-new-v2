@@ -116,6 +116,8 @@ export class TaskSingleComponent implements OnInit{
       };
     }
 
+    console.log(task);
+
     this._taskService.updateTask(this._currentTask.id, task).subscribe(
       data => {
         if (this._currentTask.employee_owner.id === this.user.id) {

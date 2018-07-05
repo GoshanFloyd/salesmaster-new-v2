@@ -34,6 +34,7 @@
           <thead>
           <tr>
             <th>Описание:</th>
+            <th>Дата</th>
             <th>Клиент:</th>
             <th>Компания:</th>
             <th>Тип активности:</th>
@@ -44,6 +45,7 @@
           <tbody>
           <tr *ngFor="let p of activitiesReportList">
             <td>{{p.description}}</td>
+            <td>{{getDatesFormat(p.datetime_created)}}</td>
             <td>{{p.client.title}}</td>
             <td>{{p.company}}</td>
             <td>{{p.type.title}}</td>
@@ -54,6 +56,7 @@
           <tfoot>
           <tr>
             <th>Заголовок:</th>
+            <th>Дата:</th>
             <th>Описание:</th>
             <th>Клиент:</th>
             <th>Статус:</th>

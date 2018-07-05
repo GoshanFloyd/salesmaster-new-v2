@@ -131,6 +131,16 @@ export class ReportsMainComponent implements OnInit {
     });
   }
 
+  public getDatesFormat(x: string) {
+    return new Date(x).toLocaleString("ru", {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+  }
+
   public getReports(type: string = 'json'): void {
     let params = {};
 
