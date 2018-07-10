@@ -15,8 +15,8 @@ export class ClientLightModel {
 
     let clientArray: ClientLightModel[] = [];
 
-    for(let item of array) {
-      clientArray.push(new ClientLightModel(item.id, item.title, item.datetime_created))
+    for (let item of array) {
+      clientArray.push(new ClientLightModel(item.id, item.title, item.datetime_created));
     }
 
     return clientArray;
@@ -44,5 +44,19 @@ export class ClientLightModel {
 
   set datetime_created(datetime_created: Date) {
     this._datetime_created = datetime_created;
+  }
+
+  get isNewClient(): boolean {
+    return !(Date.now() - this.datetime_created.getTime() > 900000);
+  }
+
+  get datetime_created_string(): string {
+    return new Date(this._datetime_created).toLocaleString('ru', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
   }
 }

@@ -87,6 +87,7 @@ import {TaskCommentsComponent} from './components/task.comments.component/task.c
 import {OfflineService} from './services/offline.service';
 import {appRoutes} from './app.routes';
 import {CommentComponent} from './components/comment.component/comment.component';
+import {ClientsDatePipe} from './pipes/clients-date.pipe';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import {CommentComponent} from './components/comment.component/comment.component
     ReportsMainComponent,
     ReportsClientComponent,
     TaskCommentsComponent,
-    CommentComponent
+    CommentComponent,
+    ClientsDatePipe
   ],
   imports: [
     BrowserModule,

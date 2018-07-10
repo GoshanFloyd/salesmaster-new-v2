@@ -16,6 +16,7 @@ export class ClientsListComponent {
 
   public searchString: string = '';
   public company_filter: number;
+  public dateFilterClients: string = 'start_new';
   public my_client_filter: boolean = false;
 
   constructor (public _userRepository: UserRepository,

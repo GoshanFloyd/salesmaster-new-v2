@@ -9,6 +9,10 @@
       <option value="" disabled selected>-- Компания --</option>
       <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
     </select>
+    <!--<select name="date_filter_client_option" [(ngModel)]="dateFilterClients">-->
+      <!--<option [ngValue]="'start_new'">Сначала новые клиенты</option>-->
+      <!--<option [ngValue]="'start_old'">Сначала старые клиенты</option>-->
+    <!--</select>-->
     <!--<label >-->
       <!--<span>Мои клиенты</span>-->
       <!--<input type="checkbox" value="Мои клиенты" name="my_client_filter" [(ngModel)]="my_client_filter">-->
@@ -24,8 +28,7 @@
   </form>
   <div class="main__component__body">
     <ul class="client-list__component__list">
-      <!--| myClients: my_client_filter-->
-      <li *ngFor="let item of clients | async  | searchClient: searchString "><a [routerLink]='item.id'>{{item.title}}<span class="new-caption__helper" *ngIf="item.isNewClient">New</span> </a></li>
+      <li *ngFor="let item of clients | async | searchClient: searchString"><a [routerLink]='item.id'>{{item.title}}<span class="new-caption__helper" *ngIf="item.isNewClient">New</span> </a></li>
     </ul>
   </div>
 </div>
