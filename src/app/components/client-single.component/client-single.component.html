@@ -28,7 +28,7 @@
 
             <dt *ngIf="(client | async)?.type == 'fizlico'">Тип физического лица:</dt>
             <dd [ngSwitch]="(client | async)?.fizlico_type">
-              <span *ngSwitchCase="'yp'">Индивидуальны предприниматель</span>
+              <span *ngSwitchCase="'yp'">Индивидуальный предприниматель</span>
               <span *ngSwitchCase="'lpr'">ЛПР (Лицо принимающее решение)</span>
               <span *ngSwitchCase="'lvr'">ЛВР (Лицо влияющее на решение)</span>
             </dd>
