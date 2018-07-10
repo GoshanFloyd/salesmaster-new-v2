@@ -28,7 +28,7 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   private id: number = null;
 
-  public clientActivities: Array<ActivityModel> = [];
+  private _clientActivities: Array<ActivityModel> = [];
 
   public showOnlyMyActivity: boolean = true;
 
@@ -67,7 +67,7 @@ export class ClientSingleComponent implements AfterViewChecked {
       'deal_null': true
     }).subscribe(
       data => {
-        this.clientActivities = ActivityModel.fromArray(data)
+        this._clientActivities = ActivityModel.fromArray(data)
           .sort((n1: ActivityModel, n2: ActivityModel) => n2.datetime_created.getTime() - n1.datetime_created.getTime());
         },
       err => console.log(err)
@@ -121,5 +121,15 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   public toggleActivityMode(e: any) {
     this.showOnlyMyActivity = e.checked;
+  }
+
+  get clientActivities(): Array<ActivityModel> {
+    let array: Array<ActivityModel> = this._clientActivities;
+
+    if(this.showOnlyMyActivity) {
+      array = array.filter(x => x.employee.id == this._userRepository.user.id);
+    }
+
+    return array;
   }
 }
