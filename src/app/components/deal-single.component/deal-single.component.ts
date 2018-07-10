@@ -57,7 +57,7 @@ export class DealSingleComponent implements OnInit{
           data => {
             this._companyID = data.company.id;
             this.getActivities(this._dealID)
-              .subscribe(data => {} );
+              .subscribe(result => {} );
           }
         );
       }
@@ -69,7 +69,7 @@ export class DealSingleComponent implements OnInit{
   }
 
   private getCompany(id: number) {
-    return this._clientService.getClientById(id)
+    return this._clientService.getClientById(id);
   }
 
   private getDeal(id: number): Observable<DealModel> {
@@ -120,7 +120,7 @@ export class DealSingleComponent implements OnInit{
   }
 
   public addProductToDeal(product: ProductModel) {
-    if(!this.productInDeal.find(x => x == product.id)) {
+    if (!this.productInDeal.find(x => x === product.id)) {
 
       const updatedDeal = {
         id: this.currentDeal.id,
