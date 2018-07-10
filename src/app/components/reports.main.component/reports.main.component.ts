@@ -104,13 +104,13 @@ export class ReportsMainComponent implements OnInit {
   public changeCompany(): void {
     this.getUsers(this.currentCompanyID).subscribe(
       data => {
-        this.getReports()
+        this.getReports();
       }
     );
   }
 
   public changeUser(): void {
-    this.getReports()
+    this.getReports();
   }
 
   private getUsers(company_id: number): Observable<Array<UserModel>>{
@@ -147,14 +147,14 @@ export class ReportsMainComponent implements OnInit {
     params['company_id'] = this.currentCompanyID;
     params['output'] = type;
 
-    if(this.currentUserID) {
+    if (this.currentUserID) {
       params['employee_id'] = this.currentUserID;
     }
 
     params['start'] = this.getDatesString(this.dateFilterStart);
     params['end'] = this.getDatesString(this.DateFilterEnd);
 
-    if (type == 'json') {
+    if (type === 'json') {
       this._reportService.getAnalyticsReport(params).subscribe(
         data => {
           this.activitiesReportList = data;
@@ -165,12 +165,12 @@ export class ReportsMainComponent implements OnInit {
           }
         },
         err => console.log(err)
-      )
+      );
     } else {
       this._reportService.getAnalyticsReport(params, 'blob').subscribe(
         data => {
           const blob: Blob = new Blob([data], {type: 'application/excel'});
-          const fileName: string = 'Отчет по активностям.xls';
+          const fileName = 'Отчет по активностям.xls';
           const objectUrl: string = URL.createObjectURL(blob);
           const a: HTMLAnchorElement = document.createElement('a') as HTMLAnchorElement;
 
@@ -183,7 +183,7 @@ export class ReportsMainComponent implements OnInit {
           URL.revokeObjectURL(objectUrl);
         },
         err => console.log(err)
-      )
+      );
     }
   }
 

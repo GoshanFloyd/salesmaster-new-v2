@@ -46,7 +46,7 @@
           <tr *ngFor="let p of activitiesReportList">
             <td>{{p.description}}</td>
             <td>{{getDatesFormat(p.datetime_created)}}</td>
-            <td>{{p.client.title}}</td>
+            <td><a [routerLink]="'/contacts/main/'+p.client.id">{{p.client.title}}</a></td>
             <td>{{p.company}}</td>
             <td>{{p.type.title}}</td>
             <td>{{p.employee.fullname}}</td>
