@@ -1652,7 +1652,7 @@ body .login__component {
       box-shadow: 0 11px 65px 0 #0a185f; }
 body .logo-block {
   box-sizing: border-box !important;
-  padding: 25px;
+  padding: 25px 25px 0 25px;
   background: #0073e6; }
 body .main-nav__component .main-nav__component__menu {
   margin: 0 !important;
@@ -1952,7 +1952,7 @@ body .list-fields__component .list-fields__component__controls {
     padding: 0 !important; }
     body .list-fields__component .list-fields__component__controls p-inputMask input {
       flex: none !important;
-      margin: 0;
+      margin: 0 !important;
       width: 100% !important;
       height: 100% !important;
       box-sizing: border-box; }
