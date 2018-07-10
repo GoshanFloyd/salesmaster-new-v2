@@ -9,7 +9,8 @@
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Наименование клиента:</dt>
             <dd>
-              <input class="input-add" type="text" name="title" placeholder="Наименование клиента" formControlName="title">
+              <input class="input-add" type="text" name="title" placeholder="Наименование клиента" formControlName="title"
+              pTooltip='Укажите наимененования клиента. Пример: ТОО "Рога и Копыта"'>
             </dd>
             <div class="error-block">
               <span  *ngIf="newClient.controls['title'].hasError('required')">
@@ -20,7 +21,8 @@
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Компания:</dt>
             <dd>
-              <select class="select-add" name="company" formControlName="company">
+              <select class="select-add" name="company" formControlName="company"
+                      pTooltip='Выберете компанию, в какую клиент будет добавлен для дальнейшей работы'>
                 <option disabled selected value="null"> -- Выберите компанию --</option>
                 <option *ngFor="let item of user.company" [ngValue]="item.title">{{item.title}}</option>
               </select>
@@ -40,7 +42,8 @@
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Тип клиента:</dt>
             <dd>
-              <select class="select-add" name="type" formControlName="type" (change)="changeClientType($event)">
+              <select class="select-add" name="type" formControlName="type" (change)="changeClientType($event)"
+                      pTooltip='Укажите - является ли клиент частным или юридическим лицом'>
                 <option disabled selected value="null"> -- Выберите тип клиента --</option>
                 <option value="fizlico">Физическое лицо</option>
                 <option value="yurlico">Юридическое лицо</option>
@@ -50,7 +53,8 @@
           <div *ngIf="newClient.controls['type'].value == 'fizlico'" class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Тип физ.лица:</dt>
             <dd>
-              <select class="select-add" name="fizlico_type" formControlName="fizlico_type">
+              <select class="select-add" name="fizlico_type" formControlName="fizlico_type"
+                      pTooltip='Уточните тип физического лица'>
                 <option  value="null" disabled selected> -- Выберите тип физ.лица --</option>
                 <option *ngFor="let type of types_fizlico" [ngValue]="type.type">{{type.value}}</option>
               </select>
@@ -64,7 +68,8 @@
           <div *ngIf="newClient.controls['type'].value == 'yurlico'" class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Тип юр.лица:</dt>
             <dd>
-              <select class="select-add" name="yurlico_type" formControlName="yurlico_type">
+              <select class="select-add" name="yurlico_type" formControlName="yurlico_type"
+                      pTooltip='Уточните тип юридического лица'>
                 <option disabled selected value="null"> -- Выберите тип юр.лица --</option>
                 <option *ngFor="let type of types_yurlico" [ngValue]="type.type">{{type.value}}</option>
               </select>
@@ -78,7 +83,8 @@
           <div *ngIf="newClient.controls['type'].value == 'yurlico'" class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Форма юр.лица:</dt>
             <dd>
-              <select class="select-add" name="yurlico_form" formControlName="yurlico_form">
+              <select class="select-add" name="yurlico_form" formControlName="yurlico_form"
+                      pTooltip='Уточните форму управления юридического лица'>
                 <option disabled selected value="null"> -- Выберите форму юр.лица --</option>
                 <option *ngFor="let form of forms_yurlico" [ngValue]="form.type">{{form.value}}</option>
               </select>
@@ -90,7 +96,8 @@
             </div>
           </div>
           <div class="client-view__component_list client-list__component_form-row mt-small" data-custom-close="modal-1" >
-            <button class="button-standard" (click)="openSelectParentComponent(company)">
+            <button class="button-standard" (click)="openSelectParentComponent(company)"
+                    pTooltip="Нажмите чтобы добавить или удалить клиента-родителя">
               {{ parentClient ? 'Удалить клиента-родителя' : 'Добавить клиента-родителя'}}
             </button>
           </div>
@@ -107,19 +114,22 @@
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Почтовый индекс:</dt>
             <dd>
-              <input class="input-add" type="text" placeholder="Почтовый индекс" name="postcode" formControlName="postcode">
+              <input class="input-add" type="text" placeholder="Почтовый индекс" name="postcode" formControlName="postcode"
+                     pTooltip="Укажите наиболее точный почтовый индекс клиента">
             </dd>
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Реквизиты:</dt>
             <dd>
-              <textarea class="textarea-add" name="requisite" formControlName="requisite"></textarea>
+              <textarea class="textarea-add" name="requisite" formControlName="requisite"
+                        pTooltip="Укажите реквизиты клиента"></textarea>
             </dd>
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small">
             <dt>Адрес:</dt>
             <dd>
-              <textarea class="textarea-add" name="street" formControlName="street"></textarea>
+              <textarea class="textarea-add" name="street" formControlName="street"
+                        pTooltip="Укажите точный адрес клиента"></textarea>
             </dd>
           </div>
         </div>
@@ -129,8 +139,10 @@
             <dd formArrayName="phones">
               <div class="list-fields__component__controls"
                    *ngFor="let item of newClient.controls.phones.controls; let i = index;" [formGroupName]="i">
-                <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
-                <input type="text" placeholder="Телефон" name="number" formControlName="number">
+                <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name"
+                       pTooltip="Укажите лицо и его должность, которому принадлежит данный номер. Пример: Иван Иванов, директор">
+                <input type="text" placeholder="Телефон" name="number" formControlName="number"
+                       pTooltip="Укажите номер телефона. Пример: +7 (777) 777-77-77 или +7 (727) 777-77-77">
                 <div class="error-block" >
                   <span *ngIf="newClient.controls.phones.controls[i].controls['number'].hasError('required')">
                     Укажите телефон
@@ -152,8 +164,10 @@
             <dd formArrayName="emails">
               <div class="list-fields__component__controls"
                    *ngFor="let item of newClient.controls.emails.controls; let i = index;" [formGroupName]="i">
-                <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
-                <input type="text" placeholder="email" name="address" formControlName="address">
+                <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name"
+                       pTooltip="Укажите лицо и его должность, которому принадлежит данный почтовый ящик. Пример: Иван Иванов, директор">
+                <input type="text" placeholder="email" name="address" formControlName="address"
+                       pTooltip="Укажите адрес почтовый ящика. Пример: example@mail.com">
                 <div class="error-block" >
                   <span *ngIf="newClient.controls.emails.controls[i].controls['address'].hasError('email')">
                     Введите корректный email-адресс
@@ -175,8 +189,10 @@
             <dd formArrayName="customfields">
               <div class="list-fields__component__controls"
                    *ngFor="let item of newClient.controls.customfields.controls; let i = index;" [formGroupName]="i">
-                <input type="text" placeholder="Ключ"  name="key" formControlName="key">
-                <input type="text" placeholder="значение" name="value" formControlName="value">
+                <input type="text" placeholder="Ключ"  name="key" formControlName="key"
+                       pTooltip="Укажите какое-либо определение информации, которое вы хотите сохранить. Пример: Адрес сайта клиента или День рождение глав. врача">
+                <input type="text" placeholder="значение" name="value" formControlName="value"
+                       pTooltip="Укажите информацию, которую вы хотите сохранить. Пример: www.site.com или 28 ноября 1970 года.">
                 <button class="button-danger" (click)="deleteCustomfield(i)"><span class="oi" data-glyph="x"></span></button>
               </div>
               <button (click)="addCustomfield()" class="button-standard"><span class="oi" data-glyph="plus"></span></button>

@@ -1,7 +1,8 @@
 <form class="activity-add__component" [formGroup]="_formAddActivity" (submit)="createActivity($event)">
   <div class="form-row">
     <label for="activity-add-title">Тип активности:</label>
-    <select class="input-add" id="activity-add-title" formControlName="type_title">
+    <select class="input-add" id="activity-add-title" formControlName="type_title"
+            pTooltip="Укажите тип/вид активности, который наиболее соответствует вашему действию с клиентом">
       <option value="null" disabled selected>-- Выберите тип активности --</option>
       <option *ngFor="let type of activitiesTypes" [value]="type.title">{{type.title}}</option>
     </select>
@@ -13,7 +14,8 @@
   </div>
   <div class="form-row">
     <label for="activity-add-description">Описание активности</label>
-    <textarea class="textarea-add" id="activity-add-description" rows="10" formControlName="description"></textarea>
+    <textarea class="textarea-add" id="activity-add-description" rows="10" formControlName="description"
+              pTooltip="Как можно более подробно опишите ваше действие, которое вы совершили по отношению к клиенту"></textarea>
     <div class="error-block">
       <span *ngIf="_formAddActivity.controls['description'].hasError('required')">
         Необходимо указать описание активности!
@@ -22,7 +24,8 @@
   </div>
   <div class="form-row">
     <label for="activity-add-file">Файл активности</label>
-    <input id="activity-add-file" type="file" (change)="onChangeFileEvent($event)">
+    <input id="activity-add-file" type="file" (change)="onChangeFileEvent($event)"
+           pTooltip="Выберете файл, который будет прикреплен к активности">
   </div>
   <div class="form-row">
     <input [disabled]="_formAddActivity.invalid" type="submit" value="Добавить активность" class="button-standard">

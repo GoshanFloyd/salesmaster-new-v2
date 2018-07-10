@@ -1,16 +1,16 @@
 <div class="client-view__component__activities-list__item">
-  <article>
+  <article pTooltip="Описание данной активности">
     {{activity ? activity.description : ''}}
   </article>
   <dl>
     <dt>Вид активности:</dt>
-    <dd>{{activity ? activity.type_title : ''}}</dd>
+    <dd pTooltip="Bид данной активности">{{activity ? activity.type_title : ''}}</dd>
 
     <dt>Автор:</dt>
-    <dd><a href="#">{{activity ? activity.employee.fullname : ''}}</a></dd>
+    <dd pTooltip="Пользователь, создавший данную активность"><a href="#">{{activity ? activity.employee.fullname : ''}}</a></dd>
 
     <dt>Дата создания:</dt>
-    <dd>{{activity ? activity.string_datetime_created : ''}}</dd>
+    <dd pTooltip="Дата создания данной активности">{{activity ? activity.string_datetime_created : ''}}</dd>
 
     <dt *ngIf="activity && activity.document">Прикрепленный файл:</dt>
     <dd *ngIf="activity && activity.document">
@@ -19,8 +19,8 @@
 
     <dt>Действия:</dt>
     <dd>
-      <button class="button-help" (click)="showEditModal(activity)" pTooltip="Редактирование выбранной активности">Редактировать</button>
-      <button class="button-help mt-small" (click)="showTransitActivityModal()" *ngIf="activity && !activity.deal?.id">Перенести активность</button>
+      <button class="button-help" (click)="showEditModal(activity)" pTooltip="Нажмите, чтобы отредактировать активность">Редактировать</button>
+      <button class="button-help mt-small" pTooltip="Нажмите, чтобы перенести активность в выбранный проект" (click)="showTransitActivityModal()" *ngIf="activity && !activity.deal?.id">Перенести активность</button>
     </dd>
   </dl>
 </div>

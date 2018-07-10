@@ -1,7 +1,8 @@
 <form class="deal-add__component" [formGroup]="_formNewDeal" (submit)="addDeal()">
   <div class="form-row">
     <label for="deal-add-title">Заголовок проекта:</label>
-    <input formControlName="title"  class="input-add" id="deal-add-title" type="text" placeholder="Введите наименования проекта">
+    <input formControlName="title"  class="input-add" id="deal-add-title" type="text" placeholder="Введите наименования проекта"
+           pTooltip="Укажите наименование вашего проекта">
     <div class="error-block">
       <span *ngIf="_formNewDeal.controls['title'].hasError('required')">
         Необходимо указать наименование проекта!
@@ -10,7 +11,8 @@
   </div>
   <div class="form-row">
     <label for="deal-add-stage">Стадия проекта:</label>
-    <select class="input-add" id="deal-add-stage" formControlName="stage_id">
+    <select class="input-add" id="deal-add-stage" formControlName="stage_id"
+            pTooltip="Укажите стадию, в которую вы хотите добавить новый проект">
       <option value="null" selected disabled>-- Выберите стадию проекта --</option>
       <option *ngFor="let stage of metadata?.stages" [value]="stage.id">{{stage.title}}</option>
     </select>
@@ -22,7 +24,8 @@
   </div>
   <div class="form-row">
     <label for="deal-add-description">Описание проекта:</label>
-    <textarea formControlName="description" class="textarea-add" id="deal-add-description" cols="10" rows="10"></textarea>
+    <textarea formControlName="description" class="textarea-add" id="deal-add-description" cols="10" rows="10"
+              pTooltip="Укажите максимально подробное описание проекта"></textarea>
     <div class="error-block">
       <span *ngIf="_formNewDeal.controls['description'].hasError('required')">
         Необходимо указать описание проекта!
@@ -31,7 +34,8 @@
   </div>
   <div class="form-row">
     <label for="deal-add-total">Потенциальная стоимость проекта:</label>
-    <input placeholder="Введите потенциальную сумму проекта" formControlName="total"  class="input-add" id="deal-add-total" type="text">
+    <input placeholder="Введите потенциальную сумму проекта" formControlName="total"  class="input-add" id="deal-add-total" type="text"
+           pTooltip="Укажите потенциальную стоимость проекта">
   </div>
   <div class="form-row">
     <input [disabled]="_formNewDeal.invalid" class="button-standard" type="submit" value="Сохранить">
