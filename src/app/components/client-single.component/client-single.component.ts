@@ -30,6 +30,8 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   public clientActivities: Array<ActivityModel> = [];
 
+  public showOnlyMyActivity: boolean = true;
+
   constructor (private _clientRepository: ClientsRepository,
                private _activateRoute: ActivatedRoute,
                private _activityService: ActivityService,
@@ -115,5 +117,9 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   public getTypeMail(type: string){
     return ClientModel.getTypeMail(type);
+  }
+
+  public toggleActivityMode(e: any) {
+    this.showOnlyMyActivity = e.checked;
   }
 }

@@ -1427,12 +1427,14 @@ th {
 .button-standard, .button-danger, .button-help, body .list-fields__component .list-fields__component__controls button {
   width: 100%;
   box-sizing: border-box;
-  color: white;
-  background: #00a8e6;
+  color: white !important;
+  background: #00a8e6 !important;
   border: 0 !important;
-  padding: 10px 6px;
+  padding: 10px 6px !important;
   text-transform: uppercase;
-  transition: all 0.3s; }
+  transition: all 0.3s;
+  font-size: 0.7em !important;
+  border-radius: 0 !important; }
   .button-standard:hover, .button-danger:hover, .button-help:hover, body .list-fields__component .list-fields__component__controls button:hover {
     background: rgba(0, 168, 230, 0.8); }
   .button-standard:disabled, .button-danger:disabled, .button-help:disabled, body .list-fields__component .list-fields__component__controls button:disabled {
