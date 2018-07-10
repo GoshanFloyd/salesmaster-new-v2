@@ -19,7 +19,7 @@
 
     <dt>Действия:</dt>
     <dd>
-      <button class="button-help" (click)="showEditModal(activity)">Редактировать</button>
+      <button class="button-help" (click)="showEditModal(activity)" pTooltip="Редактирование выбранной активности">Редактировать</button>
       <button class="button-help mt-small" (click)="showTransitActivityModal()" *ngIf="activity && !activity.deal?.id">Перенести активность</button>
     </dd>
   </dl>

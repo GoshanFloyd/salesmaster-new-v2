@@ -50,7 +50,7 @@ import {AnalyticMainComponent} from './components/analytic.main.component/analyt
 import {AnalyticListActivityComponent} from './components/analytic.list-activity.component/analytic.list-activity.component';
 import {TaskSingleComponent} from './components/task.single.component/task.single.component';
 import {TaskAddComponent} from './components/task.add.component/task.add.component';
-import {CalendarModule, InputMaskModule, ToggleButtonModule} from 'primeng/primeng';
+import {CalendarModule, InputMaskModule, ToggleButtonModule, TooltipModule} from 'primeng/primeng';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {CentrifugeService} from './services/centrifuge.service';
 import {LoadingComponent} from './components/loading.component/loading.component';
@@ -159,7 +159,8 @@ import {CommentComponent} from './components/comment.component/comment.component
     ToggleButtonModule,
     ChartsModule,
     ContextMenuModule,
-    InputMaskModule
+    InputMaskModule,
+    TooltipModule
   ],
   providers: [
     TokenGuard,

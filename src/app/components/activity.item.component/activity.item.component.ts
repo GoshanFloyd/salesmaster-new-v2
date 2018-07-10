@@ -5,6 +5,7 @@ import {ActivityEditComponent} from '../activity-edit.component/activity-edit.co
 import {DealSelectComponent} from '../deal.select.component/deal.select.component';
 import {DealModel} from '../../models/deal.model';
 import {ActivityService} from '../../services/activity.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -27,7 +28,8 @@ export class ActivityItemComponent {
   @ViewChild('modalActivityTransit') private activityTransitModal: ModalStandardComponent;
   @ViewChild('dealSelectComponent') private dealSelectComponent: DealSelectComponent;
 
-  constructor (private _activityService: ActivityService) {}
+  constructor (private _activityService: ActivityService,
+               private _notificationService: NotificationService) {}
 
   public onEditActivity(value: boolean) {
     if (value) {
@@ -37,8 +39,18 @@ export class ActivityItemComponent {
   }
 
   public showEditModal(activity: ActivityModel) {
-    this.activityEditComponent.init(activity, this.clientID);
-    this.activityEditModal.showModal();
+    if (this.isEditActivityTimeInterval(activity)) {
+      this.activityEditComponent.init(activity, this.clientID);
+      this.activityEditModal.showModal();
+    } else {
+      this._notificationService.sendNotification(
+        {
+          title: 'Редактирование запрещено',
+          options: {
+            body: 'С момента создании активности прошло 24 часа.'
+          }
+        });
+    }
   }
 
   public showTransitActivityModal(): void {
@@ -55,6 +67,16 @@ export class ActivityItemComponent {
         this.activityTransitModal.hideModal();
       },
       err => console.log(err)
-    )
+    );
+  }
+
+  public isEditActivityTimeInterval(activity: ActivityModel): boolean {
+
+    const activityStartDate = new Date(activity.datetime_created);
+
+    const currentDate: Date = new Date();
+    const activityDate = new Date(activityStartDate.setDate(activityStartDate.getDate() + 1));
+
+    return activityDate > currentDate;
   }
 }
