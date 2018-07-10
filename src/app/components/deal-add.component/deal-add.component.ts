@@ -33,12 +33,13 @@ export class DealAddComponent {
     let newDeal = this._formNewDeal.value;
     newDeal['employee'] = this.metadata.employee;
     newDeal['client'] = this.metadata.client;
+    newDeal['total'] = parseInt( newDeal['total'].replace(/\D+/g, ''));
 
     this._dealService.createDeal(newDeal).subscribe(
       data => {
         this.onAddDeal.emit(true);
       },
       err => console.log(err)
-    )
+    );
   }
 }

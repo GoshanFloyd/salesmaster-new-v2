@@ -53,7 +53,6 @@ export class DealSingleComponent implements OnInit{
     this._dealID = this._activateRoute.snapshot.params['deal_id'];
     this.getDeal(this._dealID).subscribe(
       data => {
-        console.log(data);
         this.getCompany(this._clientID).subscribe(
           data => {
             this._companyID = data.company.id;
