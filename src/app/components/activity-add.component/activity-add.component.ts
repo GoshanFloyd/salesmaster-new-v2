@@ -27,6 +27,8 @@ export class ActivityAddComponent {
 
   public activitiesTypes: ActivityTypeModel[] = [];
 
+  public disableAddButton: boolean = false;
+
   private _userID: number;
   private _dealID: number;
   private _client: ClientModel;
@@ -89,6 +91,8 @@ export class ActivityAddComponent {
     this._formData.append('type_title', this._formAddActivity.controls['type_title'].value);
     this._formData.append('description', this._formAddActivity.controls['description'].value);
 
+    this.disableAddButton = true;
+
     this._activityService.createActivity(this._formData).subscribe(
       data => {
         this.onCreate.emit(data);
@@ -99,9 +103,11 @@ export class ActivityAddComponent {
           this.resetForm();
           this._formData = new FormData();
           this.onCreate.emit(true);
+          this.disableAddButton = false;
         }
       },
       err => {
+        this.disableAddButton = false;
         console.log(err);
       }
     );

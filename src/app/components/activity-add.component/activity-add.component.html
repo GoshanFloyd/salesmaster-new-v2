@@ -28,6 +28,6 @@
            pTooltip="Выберете файл, который будет прикреплен к активности">
   </div>
   <div class="form-row">
-    <input [disabled]="_formAddActivity.invalid" type="submit" value="Добавить активность" class="button-standard">
+    <input [disabled]="_formAddActivity.invalid || disableAddButton" type="submit" value="Добавить активность" class="button-standard">
   </div>
 </form>
