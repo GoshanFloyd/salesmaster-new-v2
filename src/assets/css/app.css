@@ -1067,6 +1067,8 @@ th {
   flex: 1 auto;
   height: 100% !important;
   box-sizing: border-box !important; }
+  .grid-row.grid-height-auto {
+    height: auto !important; }
   @media (max-width: 768px) {
     .grid-row .col-sm-1 {
       box-sizing: border-box !important;

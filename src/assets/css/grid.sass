@@ -7,6 +7,9 @@
   height: 100% !important
   @include border-box
 
+  &.grid-height-auto
+    height: auto !important
+
   @for $i from 1 through 10
     $width: percentage(1 / $i)
 
