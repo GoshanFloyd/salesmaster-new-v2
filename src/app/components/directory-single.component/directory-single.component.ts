@@ -10,7 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpResponse} from '@angular/common/http';
-import {IPercentResponse} from '../../interfaces/percent.interface';
+import {TPercentResponse} from '../../interfaces/percent.interface';
 
 @Component({
   moduleId: module.id,
@@ -117,9 +117,9 @@ export class DirectorySingleComponent implements OnInit {
 
     this._documentService.uploadDocument(this._formData).subscribe(
       data => {
-        if (typeof(data) === IPercentResponse) {
-          console.log('progress load', data);
-        }
+        // if (typeof(data) === TPercentResponse) {
+        //   console.log('progress load', data);
+        // }
         if (data instanceof HttpResponse) {
           this._formData = new FormData();
           this._formUploadDocument.reset();

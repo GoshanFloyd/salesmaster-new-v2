@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {DocumentModel} from '../models/document.model';
 import {Subject} from 'rxjs/Subject';
-import {IPercentResponse} from '../interfaces/percent.interface';
+import { TPercentResponse} from '../interfaces/percent.interface';
 
 @Injectable()
 export class DocumentService {
@@ -51,7 +51,7 @@ export class DocumentService {
     this._httpClient.request(req).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         const percentDone = Math.round(100 * event.loaded / event.total);
-        const response: IPercentResponse = {
+        const response: TPercentResponse = {
           type: 'document_loading',
           data: percentDone
         }
