@@ -31,7 +31,7 @@ export class ActivityService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    const req = new HttpRequest('POST',`${this.baseProtocol}${this.baseURL}activities`, obj, {
+    const req = new HttpRequest('POST', `${this.baseProtocol}${this.baseURL}activities`, obj, {
       headers: header,
       reportProgress: true
     });

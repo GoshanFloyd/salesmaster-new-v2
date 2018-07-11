@@ -72,6 +72,9 @@ export class ClientEditComponent implements OnInit {
   private prepareForm(client_id: number): void {
     this._clientService.getClientById(client_id).subscribe(
       data => {
+
+        this.editableClient.reset();
+
         this.client = new ClientModel(data);
         this.editableClient.controls['title'].setValue(this.client.title);
         this.editableClient.controls['company'].setValue(this.client.company.title);
@@ -107,6 +110,9 @@ export class ClientEditComponent implements OnInit {
   }
 
   private preparePhones(): void {
+    while ((this.editableClient.controls['phones'] as FormArray).length !== 0) {
+      (this.editableClient.controls['phones'] as FormArray).removeAt(0)
+    }
     for (const phones of this.client.phones) {
       (this.editableClient.controls['phones'] as FormArray).push(new FormGroup({
         owner_name: new FormControl(phones.owner_name, Validators.required),
@@ -118,6 +124,9 @@ export class ClientEditComponent implements OnInit {
   }
 
   private prepareEmails(): void {
+    while ((this.editableClient.controls['emails'] as FormArray).length !== 0) {
+      (this.editableClient.controls['emails'] as FormArray).removeAt(0)
+    }
     for (const emails of this.client.emails) {
       (this.editableClient.controls['emails'] as FormArray).push(new FormGroup({
         owner_name: new FormControl(emails.owner_name, Validators.required),
@@ -129,6 +138,9 @@ export class ClientEditComponent implements OnInit {
   }
 
   private prepareCustomFields(): void {
+    while ((this.editableClient.controls['customfields'] as FormArray).length !== 0) {
+      (this.editableClient.controls['customfields'] as FormArray).removeAt(0)
+    }
     for (const fields of this.client.customfields) {
       (this.editableClient.controls['customfields'] as FormArray).push(new FormGroup({
         key: new FormControl(fields.key),
@@ -165,7 +177,6 @@ export class ClientEditComponent implements OnInit {
       phones: [(this.editableClient.controls['phones'] as FormArray).controls[index].value]
     }).subscribe(
       data => {
-        (this.editableClient.controls['phones'] as FormArray).removeAt(index);
         this.prepareForm(this._id);
       }
     );
@@ -176,7 +187,6 @@ export class ClientEditComponent implements OnInit {
       emails: [(this.editableClient.controls['emails'] as FormArray).controls[index].value]
     }).subscribe(
       data => {
-        (this.editableClient.controls['emails'] as FormArray).removeAt(index);
         this.prepareForm(this._id);
       }
     );
@@ -187,7 +197,6 @@ export class ClientEditComponent implements OnInit {
       customfields: [(this.editableClient.controls['customfields'] as FormArray).controls[index].value]
     }).subscribe(
       data => {
-        (this.editableClient.controls['customfields'] as FormArray).removeAt(index);
         this.prepareForm(this._id);
       }
     );
@@ -235,7 +244,6 @@ export class ClientEditComponent implements OnInit {
     this._router.navigate(['contacts/main/' + this._id]);
   }
 
-  // @TODO edit phones and other metadata
   private checkEditablePhones(): any {
 
     const phones: Array<any> = [];

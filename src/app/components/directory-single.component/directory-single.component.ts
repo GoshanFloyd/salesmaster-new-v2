@@ -9,11 +9,13 @@ import {DirectoryModel} from '../../models/directory.model';
 import {Observable} from 'rxjs/Observable';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {HttpResponse} from '@angular/common/http';
+import {IPercentResponse} from '../../interfaces/percent.interface';
 
 @Component({
   moduleId: module.id,
   selector: 'app-directory-single',
-  templateUrl: "./directory-single.component.html",
+  templateUrl: './directory-single.component.html',
   styleUrls: ['../file-manager.component/file-manager.css'],
   host: {class: 'grid-row'}
 })
@@ -58,7 +60,7 @@ export class DirectorySingleComponent implements OnInit {
   }
 
   get documentsList(): Array<DocumentModel> {
-    let arr: Array<DocumentModel> = this._documentsList;
+    const arr: Array<DocumentModel> = this._documentsList;
 
     return arr;
   }
@@ -71,7 +73,7 @@ export class DirectorySingleComponent implements OnInit {
           observer.next(this.currentDirectory);
         },
         err => {
-          observer.error(err)
+          observer.error(err);
         },
         () => observer.complete()
       );
@@ -95,9 +97,9 @@ export class DirectorySingleComponent implements OnInit {
 
   public onChangeFileEvent(event: any){
     this.isFile = true;
-    let fileList: FileList = event.target.files;
+    const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      let file: File = fileList[0];
+      const file: File = fileList[0];
       this._formData.append('file', file, file.name);
     }
   }
@@ -113,12 +115,17 @@ export class DirectorySingleComponent implements OnInit {
     this._formData.append('employee', this.user.id.toString());
     this._formData.append('title', this._formUploadDocument.controls['title'].value);
 
-    this._documentService.createDocument(this._formData).subscribe(
+    this._documentService.uploadDocument(this._formData).subscribe(
       data => {
-        this._formData = new FormData();
-        this._formUploadDocument.reset();
-        this.modalUpload.hideModal();
-        this.getDocuments();
+        if (typeof(data) === IPercentResponse) {
+          console.log('progress load', data);
+        }
+        if (data instanceof HttpResponse) {
+          this._formData = new FormData();
+          this._formUploadDocument.reset();
+          this.modalUpload.hideModal();
+          this.getDocuments();
+        }
       },
       err => console.log(err)
     );
