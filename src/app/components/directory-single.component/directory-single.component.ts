@@ -10,7 +10,7 @@ import {Observable} from 'rxjs/Observable';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpResponse} from '@angular/common/http';
-import {TPercentResponse} from '../../interfaces/percent.interface';
+import {PercentRepsponse} from '../../classes/percent.class';
 
 @Component({
   moduleId: module.id,
@@ -33,6 +33,8 @@ export class DirectorySingleComponent implements OnInit {
   public currentDirectory: DirectoryModel = null;
 
   private _documentsList: Array<DocumentModel> = [];
+
+  public disableLoadButton: boolean = false;
 
   public _formUploadDocument: FormGroup = new FormGroup({
     title: new FormControl(null, Validators.required)
@@ -115,19 +117,26 @@ export class DirectorySingleComponent implements OnInit {
     this._formData.append('employee', this.user.id.toString());
     this._formData.append('title', this._formUploadDocument.controls['title'].value);
 
+    this.disableLoadButton = true;
+
     this._documentService.uploadDocument(this._formData).subscribe(
       data => {
-        // if (typeof(data) === TPercentResponse) {
-        //   console.log('progress load', data);
-        // }
+        if (data instanceof PercentRepsponse) {
+          this.modalUpload.percentLoad = data.data;
+        }
         if (data instanceof HttpResponse) {
           this._formData = new FormData();
           this._formUploadDocument.reset();
           this.modalUpload.hideModal();
           this.getDocuments();
+          this.disableLoadButton = false;
+          this.modalUpload.percentLoad = 0;
         }
       },
-      err => console.log(err)
+      err => {
+        console.log(err);
+        this.disableLoadButton = false;
+      }
     );
   }
 }

@@ -34,7 +34,7 @@
       <input (change)="onChangeFileEvent($event)" class="input-add" name="file-body" id="file-body" type="file">
     </div>
     <div class="form-row">
-      <input [disabled]="_formUploadDocument.invalid || !isFile" class="button-standard" type="submit" value="Добавить файл">
+      <input [disabled]="_formUploadDocument.invalid || !isFile || disableLoadButton" class="button-standard" type="submit" value="Добавить файл">
     </div>
   </form>
 </app-modal-standard>
