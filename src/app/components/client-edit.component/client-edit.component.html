@@ -130,7 +130,7 @@
               <div class="list-fields__component__controls"
                    *ngFor="let item of editableClient.controls.phones.controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
-                <input type="text" placeholder="Телефон" name="number" formControlName="number">
+                <p-inputMask [formControlName]="'number'" mask="+7 (999) 999-99-99" placeholder="Номер телефона" pTooltip="Укажите номер телефона. Пример: +7 (777) 777-77-77 или +7 (727) 777-77-77"></p-inputMask>
                 <div class="error-block" >
                   <span *ngIf="editableClient.controls.phones.controls[i].controls['number'].hasError('required')">
                     Укажите телефон
