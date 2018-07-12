@@ -1,7 +1,30 @@
 <div class="comment__component">
   <!--<div class="comment__avatar-block" style="background-image: url('../../../assets/images/logo-small.png')"></div>-->
   <div class="comment__content-block">
-    <h4 class="comment_author-block">Автор комментария: {{comment.employee.fullname}}</h4>
+    <h4 class="comment_author-block">Автор комментария: {{comment.employee.fullname}} - {{ownerID === comment.employee.id ? 'Исполнитель' : 'Наблюдатель'}}</h4>
     {{comment.text}}
   </div>
+  <button class="button-standard col-lg-1 col-md-1 col-sm-1"
+          (click)="openEditCommentModal()"
+          *ngIf="ownerID === comment.employee.id">Редактировать</button>
 </div>
+
+<app-modal-standard #editCommentModal [title]="'Редактирование комментария'">
+  <form *ngIf="taskID" [formGroup]="formEditComment" (submit)="editComment()">
+    <div class="form-row">
+      <label for="task-done-description">Комментарий к задаче:</label>
+      <textarea formControlName="text" class="textarea-add" name="text" id="task-done-description" rows="10">
+      </textarea>
+      <div class="error-block">
+              <span *ngIf="formEditComment.controls['text'].hasError('required')">
+                Необходимо указать комментарий.
+              </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <input [disabled]="formEditComment.invalid || editButtonEnable" type="submit" value="Изменить комментарий" class="button-standard">
+      </div>
+    </div>
+  </form>
+</app-modal-standard>

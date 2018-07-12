@@ -2053,10 +2053,11 @@ body .search-controls {
 .comment__component {
   width: 100%;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   margin-bottom: 10px;
   padding: 5px 10px !important;
-  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.4); }
+  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box !important; }
   .comment__component .comment__avatar-block {
     flex: 1 0 70px;
     border-radius: 50%;
@@ -2066,7 +2067,8 @@ body .search-controls {
     box-sizing: border-box;
     padding: 5px 0 0 0 !important;
     overflow: auto;
-    font-size: 0.8em; }
+    font-size: 0.8em;
+    margin-bottom: 5px !important; }
     .comment__component .comment__content-block::-webkit-scrollbar {
       width: 5px;
       background-color: #F5F5F5; }

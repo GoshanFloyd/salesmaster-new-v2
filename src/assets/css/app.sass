@@ -742,12 +742,13 @@ body
 .comment__component
   width: 100%
   display: flex
-  flex-flow: row
+  flex-flow: column
   //max-height: 70px
   //height: 100% !important
   margin-bottom: 10px
   padding: 5px 10px !important
   box-shadow: 1px 1px 9px rgba(0,0,0,0.4)
+  box-sizing: border-box !important
 
   .comment__avatar-block
     flex: 1 0 70px
@@ -761,6 +762,7 @@ body
     overflow: auto
     font-size: .8em
     @include style-scrollbar
+    margin-bottom: 5px !important
 
   .comment_author-block
     width: 100%

@@ -6,7 +6,12 @@
   <div class="main__component__body">
     <div class="grid-row height-100">
       <div class="col-sm-1 col-md-1 col-lg-1">
-        <app-comment *ngFor="let c of comments" [comment]="c"></app-comment>
+        <app-comment *ngFor="let c of comments"
+                     [comment]="c"
+                     [ownerID]="currentTask.employee_owner.id"
+                     [taskID]="currentTask.id"
+                     (onEditComment)="updateEditableComments($event)">
+        </app-comment>
       </div>
     </div>
   </div>

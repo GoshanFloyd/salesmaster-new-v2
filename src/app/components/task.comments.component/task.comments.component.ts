@@ -62,4 +62,13 @@ export class TaskCommentsComponent {
       }
     )
   }
+
+  public updateEditableComments() {
+    this._taskService.getTask(this.currentTask.id).subscribe(
+      data => {
+        this.currentTask = new TaskModel(data);
+      },
+      err => console.log(err)
+    )
+  }
 }
