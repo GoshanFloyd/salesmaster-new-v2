@@ -6,7 +6,7 @@
   </div>
   <button class="button-standard col-lg-1 col-md-1 col-sm-1"
           (click)="openEditCommentModal()"
-          *ngIf="ownerID === comment.employee.id">Редактировать</button>
+          *ngIf="user.id === comment.employee.id">Редактировать</button>
 </div>
 
 <app-modal-standard #editCommentModal [title]="'Редактирование комментария'">

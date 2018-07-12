@@ -3,6 +3,8 @@ import {TaskService} from '../../services/task.service';
 import {IComment, TaskModel} from '../../models/task.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
+import {UserRepository} from '../../repositories/user.repository';
+import {UserModel} from '../../models/user.model';
 
 @Component({
   moduleId: module.id,
@@ -26,7 +28,12 @@ export class CommentComponent {
     'text': new FormControl(null, Validators.required)
   });
 
-  constructor(private _taskServise: TaskService) {}
+  constructor(private _taskServise: TaskService,
+              private _userRepository: UserRepository) {}
+
+  get user(): UserModel {
+    return this._userRepository.user;
+  }
 
   public openEditCommentModal() {
     this.formEditComment.controls['text'].setValue(this.comment.text);
