@@ -2054,18 +2054,19 @@ body .search-controls {
   width: 100%;
   display: flex;
   flex-flow: row;
-  max-height: 90px;
-  height: 100% !important;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  padding: 5px !important;
+  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.4); }
   .comment__component .comment__avatar-block {
-    flex: 1 0 90px;
+    flex: 1 0 70px;
     border-radius: 50%;
     background-size: cover;
     background-position: center center; }
   .comment__component .comment__content-block {
     box-sizing: border-box;
-    padding: 5px 0 0 10px !important;
-    overflow: auto; }
+    padding: 5px 0 0 0 !important;
+    overflow: auto;
+    font-size: 0.8em; }
     .comment__component .comment__content-block::-webkit-scrollbar {
       width: 5px;
       background-color: #F5F5F5; }

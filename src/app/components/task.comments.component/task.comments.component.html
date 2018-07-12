@@ -1,15 +1,34 @@
 <div class="client-view__component main__component">
   <div class="main__component__header display-flex display-flex-row">
     <h3 class="display-flex-1">Комментарии к задаче</h3>
+    <button class="main__component__header__helper-button" (click)="openAddCommentModal($event)"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <div class="main__component__body">
     <div class="grid-row height-100">
       <div class="col-sm-1 col-md-1 col-lg-1">
-        <app-comment></app-comment>
-        <app-comment></app-comment>
-        <app-comment></app-comment>
+        <app-comment *ngFor="let c of comments" [comment]="c"></app-comment>
       </div>
     </div>
   </div>
 </div>
+
+<app-modal-standard #addCommentModal [title]="'Добавить комментарий к задаче'">
+  <form *ngIf="currentTask" [formGroup]="formAddComment" (submit)="addComment()">
+    <div class="form-row">
+      <label for="task-done-description">Комментарий к задаче:</label>
+      <textarea formControlName="text" class="textarea-add" name="text" id="task-done-description" rows="10">
+      </textarea>
+      <div class="error-block">
+              <span *ngIf="formAddComment.controls['text'].hasError('required')">
+                Необходимо указать комментарий.
+              </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <input [disabled]="formAddComment.invalid" type="submit" value="Добавить задачу" class="button-standard">
+      </div>
+    </div>
+  </form>
+</app-modal-standard>
 

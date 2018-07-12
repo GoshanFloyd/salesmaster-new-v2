@@ -1,6 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {TaskService} from '../../services/task.service';
-import {TaskModel} from '../../models/task.model';
+import {IComment, TaskModel} from '../../models/task.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserRepository} from '../../repositories/user.repository';
+import {UserModel} from '../../models/user.model';
+import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 
 @Component({
   moduleId: module.id,
@@ -12,5 +16,29 @@ export class TaskCommentsComponent {
 
   @Input() public currentTask: TaskModel;
 
-  constructor (_taskService: TaskService) {}
+  @ViewChild('addCommentModal') private addCommentModal: ModalStandardComponent;
+
+  public formAddComment = new FormGroup({
+    'text': new FormControl(null, Validators.required)
+  })
+
+  constructor (private _taskService: TaskService,
+               private _userRepository: UserRepository) {}
+
+  get user(): UserModel {
+    return this._userRepository.user;
+  }
+
+  get comments(): Array<IComment> {
+    return this.currentTask && this.currentTask.comments ? this.currentTask.comments : [];
+  }
+
+  public openAddCommentModal(event: Event) {
+    event.preventDefault();
+    this.addCommentModal.showModal();
+  }
+
+  public addComment() {
+
+  }
 }
