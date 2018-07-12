@@ -1,6 +1,6 @@
 <div class="client-list__component main__component">
   <div class="main__component__header display-flex display-flex-row">
-    <h3 class="display-flex-1">Список клиентов</h3>
+    <h3 class="display-flex-1">Список клиентов: {{(clients | async)?.length}}</h3>
     <button class="main__component__header__helper-button" [routerLink]="'/contacts/main/add'"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <form class="main__component__helper-panel">

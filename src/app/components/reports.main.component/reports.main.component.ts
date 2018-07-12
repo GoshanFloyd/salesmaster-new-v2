@@ -38,6 +38,8 @@ export interface IActivityReport {
 
 export class ReportsMainComponent implements OnInit {
 
+  public isLoadingData: boolean = false;
+
   public activitiesReportList: Array<IActivityReport> = [];
 
   public isFileEnable: boolean = false;
@@ -60,7 +62,7 @@ export class ReportsMainComponent implements OnInit {
     this.dateFilterStart.setDate(this.dateFilterEnd.getDate() - 10);
     this.getUsers(this.currentCompanyID).subscribe(
       data => {
-        this.getReports()
+        this.getReports();
       }
     );
   }
@@ -96,8 +98,8 @@ export class ReportsMainComponent implements OnInit {
     let dd = date.getDate();
 
     return [date.getFullYear(),
-      (mm>9 ? '' : '0') + mm,
-      (dd>9 ? '' : '0') + dd
+      (mm > 9 ? '' : '0') + mm,
+      (dd > 9 ? '' : '0') + dd
     ].join('-');
   }
 
@@ -132,7 +134,7 @@ export class ReportsMainComponent implements OnInit {
   }
 
   public getDatesFormat(x: string) {
-    return new Date(x).toLocaleString("ru", {
+    return new Date(x).toLocaleString('ru', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -158,11 +160,7 @@ export class ReportsMainComponent implements OnInit {
       this._reportService.getAnalyticsReport(params).subscribe(
         data => {
           this.activitiesReportList = data;
-          if (this.activitiesReportList.length > 0) {
-            this.isFileEnable = true;
-          } else {
-            this.isFileEnable = false;
-          }
+          this.isFileEnable = this.activitiesReportList.length > 0;
         },
         err => console.log(err)
       );
