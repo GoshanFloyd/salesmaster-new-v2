@@ -1,7 +1,7 @@
 <div class="comment__component">
   <!--<div class="comment__avatar-block" style="background-image: url('../../../assets/images/logo-small.png')"></div>-->
   <div class="comment__content-block">
-    <h4 class="comment_author-block">Автор комментария: {{comment.employee.fullname}} - {{ownerID === comment.employee.id ? 'Исполнитель' : 'Наблюдатель'}}</h4>
+    <h4 class="comment_author-block">Автор комментария: {{comment.employee.fullname}} - {{ownerID === comment.employee.id ? 'Автор задачи' : doerID === comment.employee.id ? 'Исполнитель' : 'Наблюдатель'}}</h4>
     {{comment.text}}
   </div>
   <button class="button-standard col-lg-1 col-md-1 col-sm-1"

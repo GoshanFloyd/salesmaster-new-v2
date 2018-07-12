@@ -16,6 +16,7 @@ export class CommentComponent {
 
   @Input() public comment: IComment;
   @Input() public ownerID: number;
+  @Input() public doerID: number;
   @Input() public taskID: number;
 
   @ViewChild('editCommentModal') private editCommentModal: ModalStandardComponent;

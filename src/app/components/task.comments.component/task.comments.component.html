@@ -9,6 +9,7 @@
         <app-comment *ngFor="let c of comments"
                      [comment]="c"
                      [ownerID]="currentTask.employee_owner.id"
+                     [doerID]="currentTask.employee_doer.id"
                      [taskID]="currentTask.id"
                      (onEditComment)="updateEditableComments($event)">
         </app-comment>
