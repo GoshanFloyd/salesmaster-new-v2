@@ -55,6 +55,7 @@ export class CentrifugeService {
 
     this.centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
     this.centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
+    this.centrifuge.subscribe('admin', this.adminChannel());
 
     this.centrifuge.connect();
   }
@@ -97,6 +98,23 @@ export class CentrifugeService {
             onClickAction: obj => {
               self._router.navigateByUrl('tasks/main/'+obj.task_id);
             }
+          }
+        });
+      }
+    };
+  }
+
+  private adminChannel() {
+
+    const self = this;
+
+    return {
+      'message': function (dataset) {
+        console.log(dataset);
+        self._notificationService.sendNotification({
+          title: dataset.data.subject,
+          options: {
+            body: dataset.data.message
           }
         });
       }
