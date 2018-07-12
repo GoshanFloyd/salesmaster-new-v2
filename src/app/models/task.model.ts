@@ -1,7 +1,10 @@
 
 export interface IComment {
   id?: number;
-  employee: number;
+  employee: {
+    id: number,
+    fullname: string;
+  };
   text: string;
 }
 

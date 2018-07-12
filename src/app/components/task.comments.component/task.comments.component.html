@@ -26,7 +26,7 @@
     </div>
     <div class="form-row">
       <div class="form-row">
-        <input [disabled]="formAddComment.invalid" type="submit" value="Добавить задачу" class="button-standard">
+        <input [disabled]="formAddComment.invalid || formAddCommentEnabled" type="submit" value="Добавить комментарий" class="button-standard">
       </div>
     </div>
   </form>

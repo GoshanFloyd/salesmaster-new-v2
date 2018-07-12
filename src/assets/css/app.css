@@ -2055,7 +2055,7 @@ body .search-controls {
   display: flex;
   flex-flow: row;
   margin-bottom: 10px;
-  padding: 5px !important;
+  padding: 5px 10px !important;
   box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.4); }
   .comment__component .comment__avatar-block {
     flex: 1 0 70px;

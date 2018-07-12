@@ -21,6 +21,7 @@ export class TaskCommentsComponent {
   public formAddComment = new FormGroup({
     'text': new FormControl(null, Validators.required)
   })
+  public formAddCommentEnabled: boolean = false;
 
   constructor (private _taskService: TaskService,
                private _userRepository: UserRepository) {}
@@ -39,6 +40,26 @@ export class TaskCommentsComponent {
   }
 
   public addComment() {
+    this.formAddCommentEnabled = true;
 
+    const newComment = {
+      'text': this.formAddComment.controls['text'].value,
+      'employee': this.user.id
+    }
+
+    this._taskService.updateTask(this.currentTask.id, {
+      comments: [newComment]
+    }).subscribe(
+      data => {
+        this.currentTask = new TaskModel(data);
+        this.addCommentModal.hideModal();
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        this.formAddCommentEnabled = false;
+      }
+    )
   }
 }
