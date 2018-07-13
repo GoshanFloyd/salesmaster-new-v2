@@ -25,7 +25,8 @@
                 "glob": "favicon.ico",
                 "input": "src",
                 "output": "/"
-              }
+              },
+              "src/manifest.json"
             ],
             "styles": [
               "src/assets/css/app.css",
@@ -62,7 +63,8 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -118,7 +120,8 @@
                 "glob": "favicon.ico",
                 "input": "src",
                 "output": "/"
-              }
+              },
+              "src/manifest.json"
             ]
           }
         },

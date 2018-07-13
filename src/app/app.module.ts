@@ -88,6 +88,8 @@ import {OfflineService} from './services/offline.service';
 import {appRoutes} from './app.routes';
 import {CommentComponent} from './components/comment.component/comment.component';
 import {ClientsDatePipe} from './pipes/clients-date.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -163,7 +165,8 @@ import {ClientsDatePipe} from './pipes/clients-date.pipe';
     ContextMenuModule,
     InputMaskModule,
     TooltipModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     TokenGuard,
