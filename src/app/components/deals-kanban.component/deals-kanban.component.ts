@@ -29,7 +29,7 @@ export class DealsKanbanComponent {
 
   private _client_id: number = null;
   private _company_id: number = null;
-  private _type: string;
+  public _type: string;
 
   public _dealArraySortbale: any = {};
 

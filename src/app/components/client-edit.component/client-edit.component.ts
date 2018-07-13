@@ -34,7 +34,7 @@ export class ClientEditComponent implements OnInit {
   public client: ClientModel = null;
   public parentClient: ClientModel = null;
 
-  private editableClient: FormGroup;
+  public editableClient: FormGroup;
 
   constructor (private _activateRouter: ActivatedRoute,
                private _clientService: ClientsService,

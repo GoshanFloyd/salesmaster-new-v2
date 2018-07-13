@@ -13,7 +13,7 @@ export class ProductListComponent {
 
   @Output() onSetProduct = new EventEmitter<ProductModel>();
 
-  private productsList: Array<ProductModel> = []
+  public productsList: Array<ProductModel> = [];
 
   public searchString: string;
 
@@ -22,10 +22,10 @@ export class ProductListComponent {
   public init(company_id: number): void {
     this.getProducts(company_id).subscribe(
       data => {
-        this.productsList = ProductModel.fromArray(data)
+        this.productsList = ProductModel.fromArray(data);
       },
       err => console.log(err)
-    )
+    );
   }
 
   private getProducts(id: number) {

@@ -126,16 +126,16 @@
         <div class="col-sm-1 col-md-4 col-lg-4">
           <div class="client-view__component__list client-list__component__form-row mt-small list-fields__component">
             <dt>Телефоны:</dt>
-            <dd formArrayName="phones">
+            <dd formArrayName="phones"  *ngIf="editableClient && editableClient.controls && editableClient.controls['phones']">
               <div class="list-fields__component__controls"
-                   *ngFor="let item of editableClient.controls.phones.controls; let i = index;" [formGroupName]="i">
+                   *ngFor="let item of editableClient.controls['phones'].controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
                 <p-inputMask [formControlName]="'number'" mask="+7 (999) 999-99-99" placeholder="Номер телефона" pTooltip="Укажите номер телефона. Пример: +7 (777) 777-77-77 или +7 (727) 777-77-77"></p-inputMask>
                 <div class="error-block" >
-                  <span *ngIf="editableClient.controls.phones.controls[i].controls['number'].hasError('required')">
+                  <span *ngIf="editableClient.controls['phones'].controls[i].controls['number'].hasError('required')">
                     Укажите телефон
                   </span>
-                  <span *ngIf="editableClient.controls.phones.controls[i].controls['owner_name'].hasError('required')">
+                  <span *ngIf="editableClient.controls['phones'].controls[i].controls['owner_name'].hasError('required')">
                     Укажите наименования телефонного контакта клиента
                   </span>
                 </div>
@@ -149,16 +149,16 @@
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small list-fields__component">
             <dt>Emails:</dt>
-            <dd formArrayName="emails">
+            <dd formArrayName="emails"  *ngIf="editableClient && editableClient.controls && editableClient.controls['emails']">
               <div class="list-fields__component__controls"
-                   *ngFor="let item of editableClient.controls.emails.controls; let i = index;" [formGroupName]="i">
+                   *ngFor="let item of editableClient.controls['emails'].controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Имя" name="owner_name" formControlName="owner_name">
                 <input type="text" placeholder="email" name="address" formControlName="address">
                 <div class="error-block" >
-                  <span *ngIf="editableClient.controls.emails.controls[i].controls['address'].hasError('email')">
+                  <span *ngIf="editableClient.controls['emails'].controls[i].controls['address'].hasError('email')">
                     Введите корректный email-адресс
                   </span>
-                  <span *ngIf="editableClient.controls.emails.controls[i].controls['owner_name'].hasError('required')">
+                  <span *ngIf="editableClient.controls['emails'].controls[i].controls['owner_name'].hasError('required')">
                     Укажите наименования контакта email-адреса
                   </span>
                 </div>
@@ -172,9 +172,9 @@
           </div>
           <div class="client-view__component__list client-list__component__form-row mt-small list-fields__component">
             <dt>Кастомные поля:</dt>
-            <dd formArrayName="customfields">
+            <dd formArrayName="customfields" *ngIf="editableClient && editableClient.controls && editableClient.controls['customfields']">
               <div class="list-fields__component__controls"
-                   *ngFor="let item of editableClient.controls.customfields.controls; let i = index;" [formGroupName]="i">
+                   *ngFor="let item of editableClient.controls['customfields'].controls; let i = index;" [formGroupName]="i">
                 <input type="text" placeholder="Ключ"  name="key" formControlName="key">
                 <input type="text" placeholder="значение" name="value" formControlName="value">
                 <button class="button-danger" (click)="deleteCustomfield(i)"><span class="oi" data-glyph="x"></span></button>

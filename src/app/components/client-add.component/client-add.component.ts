@@ -30,7 +30,7 @@ export class ClientAddComponent implements OnInit {
 
   public newClient: FormGroup;
 
-  private parentClient: ClientModel = null;
+  public parentClient: ClientModel = null;
 
   constructor( private _userRepository: UserRepository,
                private _clientRepository: ClientsRepository,
@@ -67,7 +67,7 @@ export class ClientAddComponent implements OnInit {
 
     if (value === 'fizlico') {
 
-      this.newClient.addControl('fizlico_type', new FormControl('fizlico_type'))
+      this.newClient.addControl('fizlico_type', new FormControl('fizlico_type'));
       this.newClient.controls['fizlico_type'].setValidators([Validators.required]);
 
       this.newClient.removeControl('yurlico_type');
@@ -78,8 +78,8 @@ export class ClientAddComponent implements OnInit {
       this.newClient.controls['fizlico_type'].setValidators(null);
       this.newClient.removeControl('fizlico_type');
 
-      this.newClient.addControl('yurlico_type', new FormControl('fizlico_type'))
-      this.newClient.addControl('yurlico_form', new FormControl('fizlico_type'))
+      this.newClient.addControl('yurlico_type', new FormControl('fizlico_type'));
+      this.newClient.addControl('yurlico_form', new FormControl('fizlico_type'));
 
       this.newClient.controls['yurlico_type'].setValidators([Validators.required]);
       this.newClient.controls['yurlico_form'].setValidators([Validators.required]);

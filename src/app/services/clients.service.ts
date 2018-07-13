@@ -12,7 +12,7 @@ export class ClientsService {
 
   constructor (private _httpClient: HttpClient) { }
 
-  public createClient(obj: any): Observable<ClientModel> {
+  public createClient(obj: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -22,7 +22,7 @@ export class ClientsService {
     );
   }
 
-  public getContacts(obj?: any): Observable<ClientModel[]> {
+  public getContacts(obj?: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -34,7 +34,7 @@ export class ClientsService {
     });
   }
 
-  public getClientById(id: number): Observable<ClientModel> {
+  public getClientById(id: number) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -54,7 +54,7 @@ export class ClientsService {
     } else {
       lightweight = {
         'lightweight': true
-      }
+      };
     }
 
     const header = new HttpHeaders({
@@ -68,7 +68,7 @@ export class ClientsService {
   }
 
 
-  public getClientLightWeightById(id: number): Observable<ClientLightModel> {
+  public getClientLightWeightById(id: number) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -79,7 +79,7 @@ export class ClientsService {
     });
   }
 
-  public updateClient(id:number, obj: any): Observable<any> {
+  public updateClient(id: number, obj: any) {
 
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -87,6 +87,6 @@ export class ClientsService {
 
     return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}clients/${id}`, obj, {
       headers: header
-    })
+    });
   }
 }

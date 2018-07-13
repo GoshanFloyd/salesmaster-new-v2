@@ -11,7 +11,7 @@ export class DealStageService {
 
   constructor (private _httpClient: HttpClient) {}
 
-  getStages(obj: any): Observable<DealStageModel[]> {
+  getStages(obj: any) {
     const header = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });

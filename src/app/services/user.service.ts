@@ -10,7 +10,7 @@ export class UserService {
   private readonly baseProtocol = 'https://';
   private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
-  public getMyUser(id: number): Observable<UserModel> {
+  public getMyUser(id: number) {
 
     const headers = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -21,7 +21,7 @@ export class UserService {
     });
   }
 
-  public getUsers(obj?: any): Observable<UserModel[]> {
+  public getUsers(obj?: any) {
 
     const headers = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -33,7 +33,7 @@ export class UserService {
     });
   }
 
-  public updateUser(id: number, obj: any): Observable<any> {
+  public updateUser(id: number, obj: any) {
     const headers = new HttpHeaders({
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });

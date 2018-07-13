@@ -70,7 +70,7 @@ import {ProductBrandService} from './services/product.brand.service';
 import {ProductSingleComponent} from './components/product.single.component/product.single.component';
 import {CalltextComponent} from './components/calltext.component/calltext.component';
 import {EmployeeProfileComponent} from './components/employee.profile.component/employee.profile.component';
-import {ImageCropperComponent} from 'ng2-img-cropper';
+import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
 import {AnalyticsGraphActivityComponent} from './components/analytics.graph-activity.component/analytics.graph-activity.component';
 import {ChartsModule} from 'ng2-charts';
 import {AnalyticService} from './services/analytic.service';
@@ -136,7 +136,6 @@ import {ClientsDatePipe} from './pipes/clients-date.pipe';
     ProductSingleComponent,
     CalltextComponent,
     EmployeeProfileComponent,
-    ImageCropperComponent,
     AnalyticsGraphActivityComponent,
     AnalyticsGraphDealsComponent,
     ActivityItemComponent,
@@ -156,6 +155,7 @@ import {ClientsDatePipe} from './pipes/clients-date.pipe';
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     CalendarModule,
+    ImageCropperModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     ToggleButtonModule,

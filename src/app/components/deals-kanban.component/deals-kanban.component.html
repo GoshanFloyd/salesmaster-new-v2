@@ -1,6 +1,6 @@
 <div class="deals__component main__component">
   <div class="main__component__header display-flex display-flex-row">
-    <h3 class="display-flex-1">Проекты клиента {{(client | async)?.title}}</h3>
+    <h3 class="display-flex-1">Проекты клиента</h3>
     <label *ngIf="_type != 'standard'">
       Сортировка по компаниям:
       <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="_currentCompanyID" (change)="onChangeCompany(_currentCompanyID)">
@@ -45,10 +45,10 @@
                 <dd>{{item.employee.fullname}}</dd>
 
                 <dt>Клиент:</dt>
-                <dd>{{item.client.title}}</dd>
+                <dd *ngIf="item.client && item.client.id">{{item.client.title}}</dd>
 
                 <button class="button-help mtb-small small-font" [routerLink]="'/contacts/main/deal/'+item.id+'/edit'">Редактировать</button>
-                <button class="button-standard  small-font" [routerLink]='"/contacts/main/"+item.client.id+"/deal/"+item.id'>Подробнее</button>
+                <button *ngIf="item.client && item.client.id" class="button-standard  small-font" [routerLink]='"/contacts/main/"+item.client.id+"/deal/"+item.id'>Подробнее</button>
               </div>
             </div>
           </div>

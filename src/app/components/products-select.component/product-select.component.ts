@@ -3,9 +3,9 @@ import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
 import {ProductBrandService} from '../../services/product.brand.service';
 import {IProductBrandCreate, ProductBrandModel} from '../../models/product-brand.model';
-import {Observable} from 'rxjs/Observable';
 import {ProductService} from '../../services/product.service';
 import {ProductModel} from '../../models/product.model';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -56,7 +56,7 @@ export class ProductSelectComponent implements OnInit {
     );
   }
 
-  public getBrands(): Observable<Array<ProductBrandModel>> {
+  public getBrands() {
     return Observable.create(observer => {
       this._productBrandService.getBrands().subscribe(
         data => {

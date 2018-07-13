@@ -12,13 +12,13 @@ export class ClientsRepository {
               private _loadingService: LoadingService) { }
 
   private _clients_main: BehaviorSubject<Array<ClientModel>> = new BehaviorSubject([]);
-  public clients__main: Observable<Array<ClientModel>> = this._clients_main.asObservable();
+  public clients__main = this._clients_main.asObservable();
 
   private _current_client: BehaviorSubject<ClientModel> = new BehaviorSubject<ClientModel>(null);
-  public current_client: Observable<ClientModel> = this._current_client.asObservable();
+  public current_client = this._current_client.asObservable();
 
   private _clients_main_light: BehaviorSubject<Array<ClientLightModel>> = new BehaviorSubject([]);
-  public clients_main_light: Observable<Array<ClientLightModel>> = this._clients_main_light.asObservable();
+  public clients_main_light = this._clients_main_light.asObservable();
 
   public getContacts (obj?: any) {
     this._loadingService.showLoader();
