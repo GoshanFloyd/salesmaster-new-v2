@@ -166,7 +166,7 @@ import { environment } from '../environments/environment';
     InputMaskModule,
     TooltipModule,
     ProgressBarModule,
-    ServiceWorkerModule.register('/ngsw-worker.js')
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     TokenGuard,

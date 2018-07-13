@@ -1,6 +1,6 @@
 {
-  "name": "salesmaster-cli-new",
-  "short_name": "salesmaster-cli-new",
+  "name": "salesmaster-crm",
+  "short_name": "salesmaster-crm",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

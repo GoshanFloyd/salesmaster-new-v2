@@ -31,6 +31,15 @@ export class AppComponent implements OnInit {
       });
     }
 
+    this.swUpdate.available.subscribe(event => {
+      console.log('current version is', event.current);
+      console.log('available version is', event.available);
+    });
+    this.swUpdate.activated.subscribe(event => {
+      console.log('old version was', event.previous);
+      console.log('new version is', event.current);
+    });
+
     this._items = [
       {
         label: 'Добавить клиента',

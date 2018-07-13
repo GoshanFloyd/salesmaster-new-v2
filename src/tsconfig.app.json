@@ -2,15 +2,12 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./",
     "module": "es2015",
-    "types": [ "node" ],
-    "typeRoots": [ "../node_modules/@types" ],
-    "target" : "es5",
-    "lib": ["es6", "es2017", "dom", "scripthost"]
+    "types": ["node"],
+    "typeRoots": [ "../node_modules/@types" ]
   },
   "exclude": [
-    "test.ts",
+    "src/test.ts",
     "**/*.spec.ts"
   ]
 }
