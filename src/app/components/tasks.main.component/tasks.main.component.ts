@@ -6,6 +6,8 @@ import {TaskModel} from '../../models/task.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {Router} from '@angular/router';
 import {TaskAddComponent} from '../task.add.component/task.add.component';
+import {UserModel} from '../../models/user.model';
+import {UserService} from '../../services/user.service';
 
 declare const $: any;
 declare const fullCalendar: any;
@@ -32,8 +34,13 @@ export class TasksMainComponent implements OnInit {
 
   private _tasks: Array<TaskModel> = [];
   private _events: Array<EventType> = [];
+  private _users: Array<UserModel> = [];
+
+  public currentUserID: number = this._userRepository.user.id;
+  public currentCompanyID: number = this._userRepository.user.getDefaultCompany().id;
 
   constructor (private _userRepository: UserRepository,
+               private _userService: UserService,
                private _taskService: TaskService,
                private _notificationService: NotificationService,
                private _router: Router) {
@@ -41,7 +48,32 @@ export class TasksMainComponent implements OnInit {
 
   ngOnInit() {
     this.initCalendar();
-    this.getTasks(this._userRepository.getMyUser().id);
+    if (this.user.type !== 'manager') {
+      this.getUsers();
+    }
+    this.getTasks(this.currentUserID);
+  }
+
+  get user(): UserModel {
+    return this._userRepository.user;
+  }
+
+  get users(): Array<UserModel> {
+
+    const arr: Array<UserModel> = this._users.filter(x => {
+      return x.company.find(y => y.id == this.currentCompanyID) ? true : false
+    });
+
+    return arr;
+  }
+
+  private getUsers(): void {
+    this._userService.getUsers().subscribe(
+      data => {
+        this._users = UserModel.fromArray(data);
+      },
+      err => console.log(err)
+    )
   }
 
   private getTasks(id: number): void {
@@ -103,16 +135,16 @@ export class TasksMainComponent implements OnInit {
       events: self._events,
       customButtons: {
         onlyMyDoerTasks: {
-          text: 'Где я исполнитель',
+          text: 'Где исполнитель',
           click: function() {
-            self.initData(self._tasks.filter(x => x.employee_doer.id === self._userRepository.getMyUser().id));
+            self.initData(self._tasks.filter(x => x.employee_doer.id === self.currentUserID));
             self.reloadCalendar();
           }
         },
         onlyMyOwnerTasks: {
-          text: 'Где я автор',
+          text: 'Где автор',
           click: function() {
-            self.initData(self._tasks.filter(x => x.employee_owner.id === self._userRepository.getMyUser().id));
+            self.initData(self._tasks.filter(x => x.employee_owner.id === self.currentUserID));
             self.reloadCalendar();
           }
         },
@@ -145,5 +177,9 @@ export class TasksMainComponent implements OnInit {
         self.taskAddComponent.init();
       }
     });
+  }
+
+  public setCurrentUser(id: number) {
+    this.getTasks(id);
   }
 }

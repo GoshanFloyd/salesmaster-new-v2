@@ -3,6 +3,18 @@
     <div class="client-add__component client-view__component main__component">
       <div class="main__component__header display-flex display-flex-row">
         <h3 class="display-flex-1">Календарь задач</h3>
+        <label>
+          Сортировка по компаниям:
+          <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID">
+            <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
+          </select>
+        </label>
+        <label class="ml-small" *ngIf="users.length > 0">
+          Сортировка по пользователям:
+          <select class="select-add not_full_height" name="currentUserID" [(ngModel)]="currentUserID" (change)="setCurrentUser(currentUserID)">
+            <option *ngFor="let u of users" [ngValue]="u.id" >{{u.user.first_name + ' ' + u.user.last_name}}</option>
+          </select>
+        </label>
       </div>
       <div class="main__component__body">
         <div id="calendar">
