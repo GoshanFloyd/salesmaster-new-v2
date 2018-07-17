@@ -122,7 +122,15 @@ export class TaskAddComponent {
 
     this._taskService.createTask(task).subscribe(
       data => {
-        this._formNewTask.reset();
+        this._formNewTask = new FormGroup({
+          employee_owner: new FormControl(this._userRepository.getMyUser().id),
+          employee_doer: new FormControl(null, Validators.required),
+          title: new FormControl(null, Validators.required),
+          description: new FormControl(null, Validators.required),
+          priority: new FormControl('middle', Validators.required),
+          status: new FormControl('in_progress'),
+          datetime_deadline: new FormControl(null, Validators.required)
+        });
         this.onCreate.emit(true);
       },
       err => console.log(err)

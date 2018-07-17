@@ -81,6 +81,7 @@ export class TasksMainComponent implements OnInit {
       'both_id': id
     }).subscribe(
       data => {
+        console.log(data);
         this._tasks = TaskModel.fromArray(data);
         this.initData(this._tasks);
         this.reloadCalendar();
