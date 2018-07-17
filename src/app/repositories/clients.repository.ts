@@ -20,6 +20,9 @@ export class ClientsRepository {
   private _clients_main_light: BehaviorSubject<Array<ClientLightModel>> = new BehaviorSubject([]);
   public clients_main_light = this._clients_main_light.asObservable();
 
+  public currentSearchString: string = '';
+  public currentCompanyID: number = null;
+
   public getContacts (obj?: any) {
     this._loadingService.showLoader();
     this._clientService.getContacts(obj).subscribe(
@@ -57,5 +60,18 @@ export class ClientsRepository {
 
   public createClient(client: any) {
     return this._clientService.createClient(client);
+  }
+
+  public setCurrentCompanyID(id: number) {
+    this.currentCompanyID = id;
+  }
+
+  public setCurrentSearchString(searchString: string) {
+    this.currentSearchString = searchString;
+  }
+
+  public clearInfo() {
+    this.currentCompanyID = null;
+    this.currentSearchString = '';
   }
 }

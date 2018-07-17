@@ -4,27 +4,11 @@
     <button class="main__component__header__helper-button" [routerLink]="'/contacts/main/add'"><span class="oi" data-glyph="plus"></span></button>
   </div>
   <form class="main__component__helper-panel">
-    <input type="text" placeholder="Ваш запрос..." [(ngModel)]="searchString" name="search_string">
+    <input type="text" placeholder="Ваш запрос..." [(ngModel)]="searchString" name="search_string" (change)="changeSearchString()">
     <select (change)="changeCompany($event)" name="company_filter" [(ngModel)]="company_filter">
       <option value="" disabled selected>-- Компания --</option>
       <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
     </select>
-    <!--<select name="date_filter_client_option" [(ngModel)]="dateFilterClients">-->
-      <!--<option [ngValue]="'start_new'">Сначала новые клиенты</option>-->
-      <!--<option [ngValue]="'start_old'">Сначала старые клиенты</option>-->
-    <!--</select>-->
-    <!--<label >-->
-      <!--<span>Мои клиенты</span>-->
-      <!--<input type="checkbox" value="Мои клиенты" name="my_client_filter" [(ngModel)]="my_client_filter">-->
-    <!--</label>-->
-    <!--<select>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-      <!--<option value="">Option 1</option>-->
-    <!--</select>-->
-    <!--<input type="submit" value="Найти">-->
   </form>
   <div class="main__component__body">
     <ul class="client-list__component__list">

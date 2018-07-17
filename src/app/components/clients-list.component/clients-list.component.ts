@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {UserRepository} from '../../repositories/user.repository';
 import {ClientsRepository} from '../../repositories/clients.repository';
 import {UserModel} from '../../models/user.model';
-import {ClientModel} from '../../models/client.model';
 import {Observable} from 'rxjs/Observable';
 import {ClientLightModel} from '../../models/client.light.model.';
 
@@ -21,7 +20,8 @@ export class ClientsListComponent {
 
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
-    this.company_filter = this.user.company[0].id;
+    this.company_filter = this._clientsRepository.currentCompanyID;
+    this.searchString = this._clientsRepository.currentSearchString;
   }
 
   get user(): UserModel {
@@ -32,7 +32,12 @@ export class ClientsListComponent {
     return this._clientsRepository.clients_main_light;
   }
 
+  public changeSearchString() {
+    this._clientsRepository.setCurrentSearchString(this.searchString);
+  }
+
   public changeCompany(event: any) {
+    this._clientsRepository.setCurrentCompanyID(this.company_filter);
     this._clientsRepository.getContactsLight({
       company_id: this.company_filter
     });

@@ -3,11 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {UserRepository} from '../repositories/user.repository';
+import {ClientsRepository} from '../repositories/clients.repository';
 
 @Injectable()
 export class AuthService {
   constructor(private httpClient: HttpClient,
-              private _userRepository: UserRepository) { }
+              private _userRepository: UserRepository,
+              private _clientRepository: ClientsRepository) { }
 
   public auth_token: string = localStorage.getItem('auth_token_salesmaster') || null;
   public isVerify = false;
@@ -22,6 +24,7 @@ export class AuthService {
     }).map((result) => {
       const r: any = result;
       if (r.token) {
+        this._clientRepository.clearInfo();
         this.auth_token = r.token;
         localStorage.setItem('auth_token_salesmaster', this.auth_token);
         this.isVerify = true;
