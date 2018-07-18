@@ -18,7 +18,9 @@ type MetaDataInputObject = {
 export class DealAddComponent {
 
   @Input() metadata: MetaDataInputObject;
-  @Output() onAddDeal = new EventEmitter<boolean>()
+  @Output() onAddDeal = new EventEmitter<boolean>();
+
+  public addDealButtonEnable: boolean = false;
 
   public _formNewDeal = new FormGroup({
     title: new FormControl(null, Validators.required),
@@ -30,16 +32,21 @@ export class DealAddComponent {
   constructor (private _dealService: DealService) {}
 
   public addDeal() {
+
     let newDeal = this._formNewDeal.value;
+
     newDeal['employee'] = this.metadata.employee;
     newDeal['client'] = this.metadata.client;
     newDeal['total'] = parseInt( newDeal['total'].replace(/\D+/g, ''));
+
+    this.addDealButtonEnable = true;
 
     this._dealService.createDeal(newDeal).subscribe(
       data => {
         this.onAddDeal.emit(true);
       },
-      err => console.log(err)
+      err => console.log(err),
+      () => this.addDealButtonEnable = false
     );
   }
 }

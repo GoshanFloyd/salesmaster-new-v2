@@ -102,7 +102,7 @@
             </button>
           </div>
           <div class="client-view__component_list client-list__component_form-row mt-small">
-            <input [disabled]="newClient.invalid" type="submit" (click)="createClient()" class="button-standard" value="Сохранить">
+            <input [disabled]="newClient.invalid || clientAddButtonDisable" type="submit" (click)="createClient()" class="button-standard" value="Сохранить">
           </div>
           <div class="client-view__component_list client-list__component_form-row mt-small">
             <button class="button-danger" (click)="returnMainPage()">

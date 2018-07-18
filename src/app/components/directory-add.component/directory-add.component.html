@@ -26,6 +26,6 @@
                     onIcon="fa-eye" offIcon="fa-eye-slash" formControlName="is_private"></p-toggleButton>
   </div>
   <div class="form-row">
-    <input [disabled]="_formNewDirectory.invalid" class="button-standard" type="submit" value="Добавить директорию">
+    <input [disabled]="_formNewDirectory.invalid || directoryAddButtonEnable" class="button-standard" type="submit" value="Добавить директорию">
   </div>
 </form>

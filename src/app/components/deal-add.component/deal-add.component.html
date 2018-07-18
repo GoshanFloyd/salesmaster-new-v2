@@ -38,6 +38,6 @@
            pTooltip="Укажите потенциальную стоимость проекта">
   </div>
   <div class="form-row">
-    <input [disabled]="_formNewDeal.invalid" class="button-standard" type="submit" value="Сохранить">
+    <input [disabled]="_formNewDeal.invalid || addDealButtonEnable" class="button-standard" type="submit" value="Сохранить">
   </div>
 </form>

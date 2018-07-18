@@ -32,6 +32,8 @@ export class ClientAddComponent implements OnInit {
 
   public parentClient: ClientModel = null;
 
+  public clientAddButtonDisable: boolean = false;
+
   constructor( private _userRepository: UserRepository,
                private _clientRepository: ClientsRepository,
                private _router: Router,
@@ -125,6 +127,9 @@ export class ClientAddComponent implements OnInit {
   }
 
   public createClient() {
+
+    this.clientAddButtonDisable = true;
+
     this._clientRepository.createClient(this.newClient.value).subscribe(
       data => {
         this._clientRepository.getContactsLight({
@@ -138,7 +143,8 @@ export class ClientAddComponent implements OnInit {
           }
           });
       },
-      err => console.log(err)
+      err => console.log(err),
+      () => this.clientAddButtonDisable = false
     );
   }
 

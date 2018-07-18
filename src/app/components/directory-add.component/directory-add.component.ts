@@ -14,6 +14,8 @@ export class DirectoryAddComponent {
 
   @Output() onAddDirectory = new EventEmitter<boolean>();
 
+  public directoryAddButtonEnable: boolean = false;
+
   public _formNewDirectory: FormGroup = new FormGroup({
     title: new FormControl(null, Validators.required),
     is_private: new FormControl(false),
@@ -31,15 +33,18 @@ export class DirectoryAddComponent {
       'is_private': this._formNewDirectory.controls['is_private'].value,
       'title': this._formNewDirectory.controls['title'].value,
       'employee': this.user.id
-    }
+    };
+
+    this.directoryAddButtonEnable = true;
 
     this._directoryService.createDirectory(newDirectory).subscribe(
       data => {
         this.onAddDirectory.emit(true);
         this._formNewDirectory.reset();
       },
-      err => this.onAddDirectory.emit(false)
-    )
+      err => this.onAddDirectory.emit(false),
+      () => this.directoryAddButtonEnable = false
+    );
   }
 
   get user(): UserModel {
