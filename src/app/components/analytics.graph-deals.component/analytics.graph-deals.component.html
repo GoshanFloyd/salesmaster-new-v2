@@ -11,14 +11,12 @@
                 [locale]="ruLocale"
                 [(ngModel)]="dateFilterStart"
                 name="dateFilterStart"
-                [maxDate]="maxDateToFilterStart"
                 (onSelect)="changeCompany()">
     </p-calendar>
     <p-calendar class='customHelperDatetimePicker'
                 [locale]="ruLocale"
                 [(ngModel)]="dateFilterEnd"
                 name="dateFilterEnd"
-                [maxDate]="maxDateToFilterEnd"
                 (onSelect)="changeCompany()">
     </p-calendar>
   </form>

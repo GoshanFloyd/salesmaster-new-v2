@@ -14,13 +14,11 @@
     <p-calendar class='customHelperDatetimePicker'
                 [locale]="ruLocale"
                 [(ngModel)]="dateFilterStart"
-                [maxDate]="maxDateToFilterStart"
                 (onSelect)="getActivity()"
                 name="dateFilterStart"></p-calendar>
     <p-calendar class="customHelperDatetimePicker"
                 [locale]="ruLocale"
                 [(ngModel)]="dateFilterEnd"
-                [maxDate]="maxDateToFilterEnd"
                 (onSelect)="getActivity()"
                 name="dateFilterEnd"></p-calendar>
     <select name="activity_type" [(ngModel)]="currentActivityType">

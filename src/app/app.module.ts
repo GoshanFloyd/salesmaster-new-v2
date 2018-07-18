@@ -70,7 +70,7 @@ import {ProductBrandService} from './services/product.brand.service';
 import {ProductSingleComponent} from './components/product.single.component/product.single.component';
 import {CalltextComponent} from './components/calltext.component/calltext.component';
 import {EmployeeProfileComponent} from './components/employee.profile.component/employee.profile.component';
-import {ImageCropperComponent, ImageCropperModule} from 'ng2-img-cropper';
+import {ImageCropperModule} from 'ng2-img-cropper';
 import {AnalyticsGraphActivityComponent} from './components/analytics.graph-activity.component/analytics.graph-activity.component';
 import {ChartsModule} from 'ng2-charts';
 import {AnalyticService} from './services/analytic.service';
@@ -166,6 +166,7 @@ import { environment } from '../environments/environment';
     InputMaskModule,
     TooltipModule,
     ProgressBarModule,
+
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
