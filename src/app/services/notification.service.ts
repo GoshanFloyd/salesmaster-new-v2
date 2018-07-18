@@ -39,7 +39,7 @@ export class NotificationService {
 
     optionsNotifications['body'] = data.options && data.options.body ? data.options.body : '';
     optionsNotifications['tag'] = data.options && data.options.body ? data.options.tag : '';
-    optionsNotifications['icon'] = data.options && data.options.body ? data.options.icon : '';
+    optionsNotifications['icon'] = data.options && data.options.body ? data.options.icon : '../../../assets/icons/192x192.png';
 
     let notification = new Notification(data.title, optionsNotifications);
 

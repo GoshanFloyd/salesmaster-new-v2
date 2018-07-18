@@ -11,9 +11,23 @@
   width: 100%;
   height: 100%;
   text-align: center;
+  position: relative;
 }
 
-.file-manager-directory-link > span {
+.document_directory_link_delete {
+  position: absolute;
+  top: -5px;
+  right: 0;
+  color: #da314b;
+  font-size: 1.3em !important;
+  margin: 0 !important;
+}
+
+.document_directory_link_delete:hover {
+  cursor: pointer !important;
+}
+
+.file-manager-directory-link > span.oi {
   font-size: 2em;
   display: inline-block;
   margin: 5px auto;

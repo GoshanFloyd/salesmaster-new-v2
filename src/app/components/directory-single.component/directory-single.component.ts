@@ -11,6 +11,7 @@ import {ModalStandardComponent} from '../modal.standard/modal.standard.component
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpResponse} from '@angular/common/http';
 import {PercentRepsponse} from '../../classes/percent.class';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -44,7 +45,8 @@ export class DirectorySingleComponent implements OnInit {
                private _directoryService: DirectoryService,
                private _userRepository: UserRepository,
                private _activateRoute: ActivatedRoute,
-               private _router: Router
+               private _router: Router,
+               private _notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -138,5 +140,23 @@ export class DirectorySingleComponent implements OnInit {
         this.disableLoadButton = false;
       }
     );
+  }
+
+  public deleteDocument(id: number) {
+
+    const confirmDelete = confirm('Вы действительно хотите удалить выбранный файл?');
+
+    if (confirmDelete) {
+      this._documentService.deleteDocument(id).subscribe(data => {
+          this.getDocuments();
+          this._notificationService.sendNotification({
+            title: 'Выбранный файл удален'
+          });
+        },
+        err => console.log(err)
+      );
+    } else {
+      return null;
+    }
   }
 }

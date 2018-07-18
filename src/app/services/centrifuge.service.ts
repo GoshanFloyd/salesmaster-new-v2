@@ -69,7 +69,7 @@ export class CentrifugeService {
           title: 'Истекает срок задачи',
           options: {
             body: `${dataset.data.task_title} - ${new Date(dataset.data.datetime_deadline).toDateString()}`,
-            icon: '../../../assets/images/expiting_task.png'
+            icon: ''
           },
           click: {
             clickParameter: dataset.data,

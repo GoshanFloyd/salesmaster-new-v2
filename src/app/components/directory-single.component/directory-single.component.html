@@ -9,6 +9,7 @@
       <div class="grid-row grid-height-auto">
         <div class="col-sm-10 col-md-10 col-lg-10" *ngFor="let d of documentsList">
           <div class="file-manager-directory-link">
+            <span class="document_directory_link_delete" (click)="deleteDocument(d.id)">&times;</span>
             <span class="oi" data-glyph="file"></span>
             <a [href]="d.getDownloadLink()" download target="_blank">{{d.title}}</a>
           </div>
