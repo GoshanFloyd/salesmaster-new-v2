@@ -66,7 +66,7 @@ export class DealEditComponent {
       'title': this.dealEditForm.controls['title'].value,
       'description': this.dealEditForm.controls['description'].value,
       'status': this.dealEditForm.controls['status'].value,
-      'total': this.dealEditForm.controls['total'].value
+      'total': parseInt( this.dealEditForm.controls['total'].value.replace(/\D+/g, ''))
     };
 
     this._dealService.updateDeal(deal).subscribe(
