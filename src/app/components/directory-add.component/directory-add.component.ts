@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserModel} from '../../models/user.model';
 import {UserRepository} from '../../repositories/user.repository';
 import {DirectoryService} from '../../services/directory.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -23,7 +24,8 @@ export class DirectoryAddComponent {
   });
 
   constructor (private _userRepository: UserRepository,
-               private _directoryService: DirectoryService) {}
+               private _directoryService: DirectoryService,
+               private _notificationService: NotificationService) {}
 
   public addDirectory(event: Event) {
     event.preventDefault();
@@ -42,7 +44,15 @@ export class DirectoryAddComponent {
         this.onAddDirectory.emit(true);
         this._formNewDirectory.reset();
       },
-      err => this.onAddDirectory.emit(false),
+      err => {
+        if (err.error.error === `Directory (title=${newDirectory.title}) already exists`) {
+          this._notificationService.sendNotification({
+            title: 'Директория с таким названием уже существует'
+          });
+        }
+        this.onAddDirectory.emit(false);
+        this.directoryAddButtonEnable = false;
+      },
       () => this.directoryAddButtonEnable = false
     );
   }

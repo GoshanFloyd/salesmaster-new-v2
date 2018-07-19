@@ -36,7 +36,6 @@ export class ReportService {
       if (event.type === HttpEventType.UploadProgress) {
         const percentDone = Math.round(100 * event.loaded / event.total);
         const response: PercentRepsponse = new PercentRepsponse('report_activity_loading', percentDone);
-        console.log(response);
         subject.next(response);
       } else if (event instanceof HttpResponse) {
         subject.next(event.body);

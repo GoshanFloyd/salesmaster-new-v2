@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
 import {ClientModel} from '../models/client.model';
 import {ClientLightModel} from '../models/client.light.model.';
 

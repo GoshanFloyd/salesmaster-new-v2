@@ -58,6 +58,10 @@ export class ClientModel{
   private _customfields: CustomFieldsArrayField;
   private _datetime_created: Date;
   private _datetime_updated: Date;
+  private _activities_count: number;
+  private _deals_count: number;
+  private _is_has_all_deals_by_user: boolean;
+  private _is_has_completed_deals_by_user: boolean;
 
   constructor(obj?: any) {
     this._id = obj && obj.id ? obj.id : null;
@@ -87,6 +91,10 @@ export class ClientModel{
     this._customfields = obj && obj.customfields ? obj.customfields : [];
     this._datetime_created = obj && obj.datetime_created ? new Date(obj.datetime_created) : null;
     this._datetime_updated = obj && obj.datetime_updated ? new Date(obj.datetime_updated) : null;
+    this._activities_count = obj && obj.activities_count ? obj.activities_count : 0;
+    this._deals_count = obj && obj.deals_count ? obj.deals_count : 0;
+    this._is_has_all_deals_by_user = obj && 'is_has_all_deals_by_user' in obj ? obj.is_has_all_deals_by_user : null;
+    this._is_has_completed_deals_by_user = obj && 'is_has_completed_deals_by_user' in obj ? obj.is_has_completed_deals_by_user : null;
   }
 
   public static getClientArray(array: any): ClientModel[] {
@@ -211,9 +219,25 @@ export class ClientModel{
     return Date.now() - this.datetime_created.getTime() > 900000 ? false : true;
   }
 
+  get activities_count(): number {
+    return this._activities_count;
+  }
+
+  get deals_count(): number {
+    return this._deals_count;
+  }
+
+  get is_has_all_deals_by_user(): boolean {
+    return this._is_has_all_deals_by_user;
+  }
+
+  get is_has_completed_deals_by_user(): boolean {
+    return this._is_has_completed_deals_by_user;
+  }
+
   public checkEditPhones(phone: TPhone): any {
     return this.phones.filter((p) => {
       return p.id == phone.id && p.number != phone.number && p.type != phone.type
-    })
+    });
   }
 }
