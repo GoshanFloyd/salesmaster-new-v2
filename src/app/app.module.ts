@@ -90,6 +90,7 @@ import {CommentComponent} from './components/comment.component/comment.component
 import {ClientsDatePipe} from './pipes/clients-date.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {EmployeeInfoComponent} from './components/employee.info.component/employee.info.component';
 
 @NgModule({
   declarations: [
@@ -147,7 +148,8 @@ import { environment } from '../environments/environment';
     ReportsClientComponent,
     TaskCommentsComponent,
     CommentComponent,
-    ClientsDatePipe
+    ClientsDatePipe,
+    EmployeeInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -18,7 +18,7 @@
             <dd>{{(client | async)?.datetime_created_format}}</dd>
 
             <dt>Автор:</dt>
-            <dd ><a href="#">{{ (client | async)?.employee.fullname}}</a></dd>
+            <dd *ngIf="client | async as clientInfo"><a (click)="showEmployeeInfo($event, clientInfo?.employee.id)">{{ (client | async)?.employee.fullname}}</a></dd>
 
             <dt *ngIf="(client | async)?.type">Тип клиента:</dt>
             <dd [ngSwitch]="(client | async)?.type">
@@ -126,4 +126,8 @@
 <app-modal-standard #modalActivityAdd [title]="'Добавить активность текущему клиенту'">
   <app-activity-add #activityAddMainComponent (onCreate)="onCreateActivity($event)"></app-activity-add>
 </app-modal-standard>
+
+<app-employee-info #employeeInfoComponent>
+
+</app-employee-info>
 

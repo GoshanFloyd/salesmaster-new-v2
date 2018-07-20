@@ -186,7 +186,7 @@ export const DATEPICKER_RU_LOCALE = {
 };
 
 export const EMPLOYEE_TYPES = {
-  'admin': 'Админ',
+  'admin': 'Администратор',
   'president': 'Президент',
   'gen_director': 'Генеральный директор',
   'loc_director': 'Локальный директор',

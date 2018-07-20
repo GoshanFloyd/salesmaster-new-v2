@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserModel} from '../models/user.model';
 import {Observable} from 'rxjs/Observable';
+import {IEmployeeInfo} from '../components/employee.info.component/employee.info.component';
 
 @Injectable()
 export class UserService {
@@ -40,6 +41,16 @@ export class UserService {
 
     return this.httpClient.patch<UserModel[]>(`${this.baseProtocol}${this.baseURL}employees/${id}`, obj, {
       headers: headers,
+    });
+  }
+
+  public getUserInfo(id: number) {
+    const headers = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this.httpClient.get<Array<IEmployeeInfo>>(`${this.baseProtocol}${this.baseURL}employees?id=${id}&for_profile=true`, {
+      headers: headers
     });
   }
 }

@@ -1,0 +1,73 @@
+.box__employee-info{
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.box__employee-info div {
+  box-sizing: border-box !important;
+}
+
+.box__employee-info .box__employee-info__header {
+  padding: 20px;
+  height: 120px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  background: #0073e6;
+}
+
+.box__employee-info__header .box__employee-info__header__nickname {
+  margin-top: 0 !important;
+  margin-bottom: 5px;
+  font-size: 25px;
+  font-weight: 300;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  color: white;
+}
+
+.box__employee-info__header .box__employee-info__header__type {
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+  color: white;
+}
+
+.box__employee-info .box__employee-info__image {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  margin-left: -45px;
+}
+
+.box__employee-info .box__employee-info__image img {
+  width: 90px;
+  height: 90px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+
+.box__employee-info__footer {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top: 1px solid #f4f4f4;
+  padding: 10px;
+  margin-top: 25px !important;
+  background-color: #fff;
+}
+
+.box__employee-info__description-header {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+.box__employee-info__description-text {
+  width: 100%;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+}

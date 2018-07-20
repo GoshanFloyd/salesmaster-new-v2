@@ -1,0 +1,27 @@
+<app-modal-standard #employeeInfoModal [title]="'Информация о выбранном пользователе'">
+  <div class="box__employee-info">
+    <div class="box__employee-info__header">
+      <h3 class="box__employee-info__header__nickname">{{employeeInfo ? employeeInfo.user.first_name + ' ' + employeeInfo.user.last_name : ''}}</h3>
+      <h5  class="box__employee-info__header__type">{{ employeeInfo ? employeesTypes[employeeInfo.type] : ''}}</h5>
+    </div>
+    <div class="box__employee-info__image">
+      <img [src]="employeeInfo ? employeeInfo.avatar : '../../../assets/images/logo-small.png'" alt="">
+    </div>
+    <div class="box__employee-info__footer">
+      <div class="grid-row">
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.activities_count : 0}}</h5>
+          <span class="box__employee-info__description-text">Активностей</span>
+        </div>
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.deals_count : 0}}</h5>
+          <span class="box__employee-info__description-text">Проектов</span>
+        </div>
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.clients_count : 0}}</h5>
+          <span class="box__employee-info__description-text">Клиентов</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal-standard>

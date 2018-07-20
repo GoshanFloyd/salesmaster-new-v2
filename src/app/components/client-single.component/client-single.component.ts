@@ -4,14 +4,13 @@ import {ActivatedRoute} from '@angular/router';
 import {ClientModel} from '../../models/client.model';
 import {Observable} from 'rxjs/Observable';
 import {DealsKanbanComponent} from '../deals-kanban.component/deals-kanban.component';
-import {ClientsService} from '../../services/clients.service';
 import {ActivityService} from '../../services/activity.service';
 import {ActivityModel} from '../../models/activity.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {ActivityAddComponent} from '../activity-add.component/activity-add.component';
 import {UserRepository} from '../../repositories/user.repository';
-import {ActivityEditComponent} from '../activity-edit.component/activity-edit.component';
 import {NotificationService} from '../../services/notification.service';
+import {EmployeeInfoComponent} from '../employee.info.component/employee.info.component';
 
 @Component({
   moduleId: module.id,
@@ -22,6 +21,8 @@ import {NotificationService} from '../../services/notification.service';
 export class ClientSingleComponent implements AfterViewChecked {
 
   @ViewChild('dealComponent') private dealKanbanComponent: DealsKanbanComponent;
+
+  @ViewChild('employeeInfoComponent') private employeeInfoComponent: EmployeeInfoComponent;
 
   @ViewChild('modalActivityAdd') private modalActivityAdd: ModalStandardComponent;
   @ViewChild('activityAddMainComponent') private addActivityComponent: ActivityAddComponent;
@@ -127,9 +128,15 @@ export class ClientSingleComponent implements AfterViewChecked {
     let array: Array<ActivityModel> = this._clientActivities;
 
     if(this.showOnlyMyActivity) {
-      array = array.filter(x => x.employee.id == this._userRepository.user.id);
+      array = array.filter(x => x.employee.id === this._userRepository.user.id);
     }
 
     return array;
+  }
+
+  public showEmployeeInfo(event: Event, id: number) {
+    event.preventDefault();
+
+    this.employeeInfoComponent.getEmployeeInfo(id);
   }
 }
