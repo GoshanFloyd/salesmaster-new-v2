@@ -16,6 +16,12 @@
             <div class="grid-row height-100">
               <div class="col-sm-1 col-md-5 col-lg-5">
                 <dl class="client-view__component__list">
+
+                  <dt>Аватар:</dt>
+                  <dd class="helper-text-center">
+                    <img class="simple-avatar-image" *ngIf="user.avatar" [src]="user?.avatar" [alt]="user?.user.email+' avatar'">
+                  </dd>
+
                   <dt>Ф.И.О:</dt>
                   <dd>{{user?.user.first_name + ' ' + user?.user.last_name}}</dd>
 
@@ -24,14 +30,10 @@
 
                   <dt>Пол:</dt>
                   <dd>{{user?.genderString}}</dd>
-
-                  <dt>Аватар:</dt>
-                  <dd class="helper-text-center">
-                    <img class="simple-avatar-image" [src]="user?.avatar" [alt]="user?.user.email+' avatar'">
-
-                    <button class="button-standard" (click)="showUploadModal()">Изменить фото </button>
-                  </dd>
                 </dl>
+                <button class="button-standard" (click)="showUploadModal()">Изменить фото </button>
+
+                <button class="button-standard mt-small" (click)="openChangePasswordModal()">Сменить пароль</button>
               </div>
               <div class="col-sm-1 col-md-5 col-lg-5">
                 <div class="client-view__component__list">
@@ -56,4 +58,36 @@
     <input id="custom-input" type="file" (change)="fileChangeListener($event)">
   </div>
   <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+</app-modal-standard>
+
+<app-modal-standard #changePasswordModal [title]="'Сменить пароль текущему пользователю'">
+  <form class="deal-add__component" (submit)="changePassword($event)">
+    <div class="form-row">
+      <label for="changedPassword">Новый пароль:</label>
+      <input class="input-add"
+             [(ngModel)]="changedPassword"
+             id="changedPassword"
+             name="changedPassword"
+             type="password"
+             placeholder="Введите новый пароль">
+    </div>
+    <div class="form-row">
+      <label for="changedRepeatPassword">Повторите новый пароль:</label>
+      <input class="input-add"
+             [(ngModel)]="changedRepeatPassword"
+             id="changedRepeatPassword"
+             name="changedRepeatPassword"
+             type="password"
+             placeholder="Повторите новый пароль">
+    </div>
+    <div class="error-block">
+      <span *ngIf="correctRepeatPassword()">
+        Пароли должны совпадать <br>
+        Длина пароля должна быть не меньше 10 символов
+      </span>
+    </div>
+    <div class="form-row">
+      <input [disabled]="correctRepeatPassword()" class="button-standard" type="submit" value="Сменить пароль">
+    </div>
+  </form>
 </app-modal-standard>

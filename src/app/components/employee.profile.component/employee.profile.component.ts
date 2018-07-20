@@ -5,6 +5,7 @@ import {UserModel} from '../../models/user.model';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {unescape} from 'querystring';
 import {UserService} from '../../services/user.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -16,14 +17,19 @@ export class EmployeeProfileComponent implements OnInit {
 
   @ViewChild('uploadAvatarModal') private uploadAvatarModal: ModalStandardComponent;
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
+  @ViewChild('changePasswordModal') private changePasswordModal: ModalStandardComponent;
 
   public data: any;
   public cropperSettings: CropperSettings;
 
+  public changedPassword: string = '';
+  public changedRepeatPassword: string = '';
+
   private avatar: File;
 
   constructor (private _userRepository: UserRepository,
-               private _userService: UserService) {}
+               private _userService: UserService,
+               private _notificationService: NotificationService) {}
 
   ngOnInit() {
     this.initCropSettings();
@@ -78,7 +84,7 @@ export class EmployeeProfileComponent implements OnInit {
         this.uploadAvatarModal.hideModal();
       },
       err => console.log(err)
-    )
+    );
   }
 
   public dataURItoBlob(dataURI) {
@@ -94,10 +100,46 @@ export class EmployeeProfileComponent implements OnInit {
 
     // write the bytes of the string to a typed array
     var ia = new Uint8Array(byteString.length);
+
     for (var i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type:mimeString});
+    return new Blob([ia], {type: mimeString});
+  }
+
+  public openChangePasswordModal(): void {
+    this.changePasswordModal.showModal();
+  }
+
+  public correctRepeatPassword(): boolean {
+    return !(this.changedPassword == this.changedRepeatPassword) ||
+      this.changedPassword == '' ||
+      this.changedRepeatPassword == '' ||
+      this.changedPassword.length < 10 ||
+      this.changedRepeatPassword.length < 10;
+  }
+
+  public changePassword(event: Event): void {
+    event.preventDefault();
+
+    this._userService.updateUser(this.user.id, {
+      user: {
+        password: this.changedPassword
+      }
+    }).subscribe(
+      data => {
+        this.changedPassword = '';
+        this.changedRepeatPassword = '';
+        this._notificationService.sendNotification({
+          title: 'Поздравляем!',
+          options: {
+            body: 'Вы успешно поменяли пароль'
+          }
+        });
+        this.changePasswordModal.hideModal();
+      },
+      err => console.log(err)
+    )
   }
 }
