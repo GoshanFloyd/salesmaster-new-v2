@@ -6,6 +6,7 @@ import {UserModel} from '../../models/user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {NotificationService} from '../../services/notification.service';
+import {TaskDeadlineComponent} from '../task.deadline.component/task.deadline.component';
 
 @Component({
   moduleId: module.id,
@@ -16,6 +17,7 @@ import {NotificationService} from '../../services/notification.service';
 export class TaskTodayComponent implements OnInit {
 
   @ViewChild('modalDoneTask') public modalDoneTask: ModalStandardComponent;
+  @ViewChild('taskDeadlineModal') public taskDeadlineModal: TaskDeadlineComponent;
 
   public currentTask: TaskModel = null;
 
@@ -24,6 +26,8 @@ export class TaskTodayComponent implements OnInit {
   });
 
   private _taskList: Array<TaskModel> = [];
+
+  public deadlineTask: TaskModel = null;
 
   public userSort: number = null;
   public statusSort: string = null;
@@ -129,5 +133,16 @@ export class TaskTodayComponent implements OnInit {
       },
       err => console.log(err)
     )
+  }
+
+  public openDeadlineModal(task: TaskModel) {
+    this.deadlineTask = task;
+    this.taskDeadlineModal.showDeadlineModal();
+  }
+
+  public updateAfterNewDeadline(event: boolean) {
+    if (event) {
+      this.getTodayTask();
+    }
   }
 }

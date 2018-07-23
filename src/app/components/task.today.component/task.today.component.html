@@ -57,7 +57,7 @@
       </dl>
       <button *ngIf="task.employee_doer.id == user.id && task.status == 'in_progress'" (click)="openDoneTaskModal(task)">Выполнить</button>
       <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'verifying'" (click)="verifyTask(task)">Одобрить</button>
-      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'">Продлить на 1 день</button>
+      <button class="mt-small" *ngIf="task.employee_owner.id == user.id && task.status == 'failed'" (click)="openDeadlineModal(task)">Продлить</button>
     </div>
   </div>
 </div>
@@ -82,7 +82,5 @@
   </form>
 </app-modal-standard>
 
-<app-modal-standard #modalToExtendTask>
-
-</app-modal-standard>
+<app-task-deadline #taskDeadlineModal (onUpdateDeadline)="updateAfterNewDeadline($event)" [task]="deadlineTask"></app-task-deadline>
 
