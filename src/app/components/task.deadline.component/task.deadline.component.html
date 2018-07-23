@@ -1,3 +1,9 @@
 <app-modal-standard #taskDeadlineModal [title]="'Продлить задачу'">
-
+  <p-calendar class='customHelperDatetimePicker'
+              [locale]="ruLocale"
+              [(ngModel)]="dateDeadline"
+              [inline]="true"
+              [showTime]="true"
+              name="dateDeadline"></p-calendar>
+  <button class="button-standard" (click)="updateDeadlineDate()">Продлить задачу</button>
 </app-modal-standard>

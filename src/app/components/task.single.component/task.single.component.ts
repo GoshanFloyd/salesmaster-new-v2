@@ -6,6 +6,7 @@ import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {TaskDeadlineComponent} from '../task.deadline.component/task.deadline.component';
 
 @Component({
   moduleId: module.id,
@@ -21,6 +22,7 @@ export class TaskSingleComponent implements OnInit{
   });
 
   @ViewChild('modalDoneTask') private modalDoneTask: ModalStandardComponent;
+  @ViewChild('taskDeadlineComponent') private taskDeadlineComponent: TaskDeadlineComponent;
 
   constructor (private _userRepository: UserRepository,
                private _taskService: TaskService,
@@ -116,8 +118,6 @@ export class TaskSingleComponent implements OnInit{
       };
     }
 
-    console.log(task);
-
     this._taskService.updateTask(this._currentTask.id, task).subscribe(
       data => {
         if (this._currentTask.employee_owner.id === this.user.id) {
@@ -134,5 +134,15 @@ export class TaskSingleComponent implements OnInit{
       },
       err => console.log(err)
     );
+  }
+
+  public showDeadlineModal() {
+    this.taskDeadlineComponent.showDeadlineModal();
+  }
+
+  public updateTask(event: boolean) {
+    if (event) {
+      this.getTask();
+    }
   }
 }
