@@ -91,6 +91,7 @@ import {ClientsDatePipe} from './pipes/clients-date.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {EmployeeInfoComponent} from './components/employee.info.component/employee.info.component';
+import {TaskDeadlineComponent} from './components/task.deadline.component/task.deadline.component';
 
 @NgModule({
   declarations: [
@@ -149,7 +150,8 @@ import {EmployeeInfoComponent} from './components/employee.info.component/employ
     TaskCommentsComponent,
     CommentComponent,
     ClientsDatePipe,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    TaskDeadlineComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,8 @@
   <div class="client-view__component main__component">
     <div class="main__component__header display-flex display-flex-row">
       <h3 class="display-flex-1">Описание клиента {{(client | async)?.title}}</h3>
-      <button class="main__component__header__helper-button"><span class="oi" data-glyph="pencil" [routerLink]="'/contacts/main/'+(client | async)?.id+'/edit'"></span></button>
+      <button class="main__component__header__helper-button" pTooltip="Редактирование клиента"><span class="oi" data-glyph="pencil" [routerLink]="'/contacts/main/'+(client | async)?.id+'/edit'"></span></button>
+      <button class="main__component__header__helper-button color-red" *ngIf="enableDeleteCurrentClient()" pTooltip="Удаление клиента" (click)="deleteClient(clientID)"><span class="oi" data-glyph="x"></span></button>
     </div>
     <div class="main__component__body">
       <div class="grid-row height-100">

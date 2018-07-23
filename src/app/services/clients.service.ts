@@ -88,4 +88,15 @@ export class ClientsService {
       headers: header
     });
   }
+
+  public deleteClient(id: number) {
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.delete<any>(`${this.baseProtocol}${this.baseURL}clients/${id}`, {
+      headers: header,
+    });
+  }
 }

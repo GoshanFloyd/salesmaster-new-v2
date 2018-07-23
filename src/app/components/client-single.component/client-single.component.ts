@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, ViewChild} from '@angular/core';
 import {ClientsRepository} from '../../repositories/clients.repository';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ClientModel} from '../../models/client.model';
 import {Observable} from 'rxjs/Observable';
 import {DealsKanbanComponent} from '../deals-kanban.component/deals-kanban.component';
@@ -11,6 +11,8 @@ import {ActivityAddComponent} from '../activity-add.component/activity-add.compo
 import {UserRepository} from '../../repositories/user.repository';
 import {NotificationService} from '../../services/notification.service';
 import {EmployeeInfoComponent} from '../employee.info.component/employee.info.component';
+import {UserModel} from '../../models/user.model';
+import {ClientsService} from '../../services/clients.service';
 
 @Component({
   moduleId: module.id,
@@ -28,6 +30,7 @@ export class ClientSingleComponent implements AfterViewChecked {
   @ViewChild('activityAddMainComponent') private addActivityComponent: ActivityAddComponent;
 
   private id: number = null;
+  private _companyID: number;
 
   private _clientActivities: Array<ActivityModel> = [];
 
@@ -37,7 +40,9 @@ export class ClientSingleComponent implements AfterViewChecked {
                private _activateRoute: ActivatedRoute,
                private _activityService: ActivityService,
                private _userRepository: UserRepository,
-               private _notificationService: NotificationService) {
+               private _notificationService: NotificationService,
+               private _clientService: ClientsService,
+               private _router: Router) {
 
     this._activateRoute.params.subscribe((data) => {
       this.initClient();
@@ -46,10 +51,12 @@ export class ClientSingleComponent implements AfterViewChecked {
 
   ngAfterViewChecked() {
     this._clientRepository.current_client.subscribe(data => {
-      if (data) {
-        this.dealKanbanComponent.initKanban(data.id, data.company.id);
+        if (data) {
+          this._companyID = data.company.id;
+          this.dealKanbanComponent.initKanban(data.id, data.company.id);
+        }
       }
-    });
+    );
   }
 
   get clientID(): number {
@@ -79,13 +86,21 @@ export class ClientSingleComponent implements AfterViewChecked {
     return this._clientRepository.current_client;
   }
 
+  get user(): UserModel {
+    return this._userRepository.getMyUser();
+  }
+
+  public enableDeleteCurrentClient(): boolean {
+    return !(this.user.type === 'manager' || this.user.type === 'outsider');
+  }
+
   public onCreateActivity(value: boolean|number) {
 
-    if (typeof value == 'number'){
+    if (typeof value === 'number'){
       this.modalActivityAdd.percentLoad = value;
     }
 
-    if (typeof value == 'boolean') {
+    if (typeof value === 'boolean') {
       this.modalActivityAdd.percentLoad = 0;
       this.modalActivityAdd.hideModal();
       this.getClientActivities(this.id);
@@ -127,7 +142,7 @@ export class ClientSingleComponent implements AfterViewChecked {
   get clientActivities(): Array<ActivityModel> {
     let array: Array<ActivityModel> = this._clientActivities;
 
-    if(this.showOnlyMyActivity) {
+    if (this.showOnlyMyActivity) {
       array = array.filter(x => x.employee.id === this._userRepository.user.id);
     }
 
@@ -138,5 +153,22 @@ export class ClientSingleComponent implements AfterViewChecked {
     event.preventDefault();
 
     this.employeeInfoComponent.getEmployeeInfo(id);
+  }
+
+  public deleteClient(id: number): void {
+    if (confirm('Вы уверены, что хотите удалить данного клиента?')) {
+      this._clientService.deleteClient(id).subscribe(
+        data => {
+          this._notificationService.sendNotification({
+            title: 'Клиент был удален'
+          });
+          this._clientRepository.getContactsLight({
+            company_id: this._companyID
+          });
+          this._router.navigateByUrl(`/contacts/main`);
+        },
+        err => console.log(err)
+      );
+    }
   }
 }

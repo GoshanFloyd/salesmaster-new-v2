@@ -1329,7 +1329,12 @@ th {
     .main__component .main__component__header > .main__component__header__helper-button {
       background: transparent !important;
       border: 0 !important;
-      max-width: 25px; }
+      max-width: 25px;
+      margin: 0 5px !important; }
+      .main__component .main__component__header > .main__component__header__helper-button.color-red {
+        color: #da314b; }
+      .main__component .main__component__header > .main__component__header__helper-button.color-green {
+        color: #82bb42; }
       .main__component .main__component__header > .main__component__header__helper-button span {
         vertical-align: middle !important; }
   .main__component .main__component__helper-panel {

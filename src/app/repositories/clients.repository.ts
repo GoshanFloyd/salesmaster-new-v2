@@ -54,7 +54,9 @@ export class ClientsRepository {
       data => {
         this._current_client.next(new ClientModel(data));
       },
-      err => console.log(err)
+      err => {
+        console.log(err);
+      }
     );
   }
 
