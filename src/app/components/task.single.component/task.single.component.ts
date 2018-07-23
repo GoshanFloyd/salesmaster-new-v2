@@ -83,7 +83,7 @@ export class TaskSingleComponent implements OnInit{
   public approveTask() {
     if (this._currentTask.employee_owner.id === this.user.id) {
       this._taskService.updateTask(this._currentTask.id, {
-        'status': 'done'
+        'status': 'completed'
       }).subscribe(
         data => {
           this._notificationService.sendNotification({
