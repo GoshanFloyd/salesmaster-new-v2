@@ -1,0 +1,30 @@
+.grid-flex-start {
+  align-items: flex-start !important;
+}
+
+.list-file__mode {
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.list-file__mode img {
+  max-width: 32px;
+  width: 32px;
+  max-height: 42px !important;
+  margin-right: 15px;
+}
+
+.list-file__mode a {
+  text-decoration: none !important;
+}
+
+.col-border-list{
+  border-bottom: 1px solid #c0c0c06e;
+}
+
+.col-border-list:last-child {
+  border-bottom: none !important;
+}

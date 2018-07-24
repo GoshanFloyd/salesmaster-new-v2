@@ -2,16 +2,27 @@
   <div class="client-view__component main__component">
     <div class="main__component__header display-flex display-flex-row">
       <h3 class="display-flex-1">{{currentDirectory ? currentDirectory.title : null }}</h3>
+      <label for="search_file">Поиск: <input placeholder="Ваш запрос..." [(ngModel)]="searchFileName" name="search_file" id="search_file" class="input-add" type="text"></label>
       <button class="main__component__header__helper-button mr-small" (click)="backToStorage()"><span class="oi" data-glyph="arrow-thick-left"></span></button>
       <button class="main__component__header__helper-button mr-small" (click)="openUploadModal()"><span class="oi" data-glyph="plus"></span></button>
+      <p-toggleButton class="check-ng-input" onLabel="Вид 'Список'" offLabel="Вид 'Сетка'"
+                      onIcon="fa fa-list-ul" offIcon="fa fa-th-large" (onChange)="changeTypeSort($event)"></p-toggleButton>
     </div>
     <div class="main__component__body">
-      <div class="grid-row grid-height-auto">
+      <div *ngIf="typeFileVisibleSort == 'box'" class="grid-row grid-height-auto">
         <div class="col-sm-10 col-md-10 col-lg-10" *ngFor="let d of documentsList">
           <div class="file-manager-directory-link">
             <span class="document_directory_link_delete" (click)="deleteDocument(d.id)">&times;</span>
-            <span class="oi" data-glyph="file"></span>
+            <img [src]="getImageFile(d)" alt="">
             <a [href]="d.getDownloadLink()" download target="_blank">{{d.title}}</a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="typeFileVisibleSort == 'list'" class="grid-row grid-height-auto">
+        <div class="col-sm-1 col-md-1 col-lg-1 col-border-list" *ngFor="let d of documentsList">
+          <div class="list-file__mode">
+            <img [src]="getImageFile(d)" alt="">
+            <a [href]="d.getDownloadLink()" download target="_blank"> {{d.title}}</a>
           </div>
         </div>
       </div>

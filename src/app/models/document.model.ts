@@ -61,7 +61,7 @@ export class DocumentModel {
   }
 
   get extension(): string {
-    return this._extension;
+    return this._extension.toLowerCase();
   }
 
   get download_count(): number {

@@ -33,6 +33,12 @@
   margin: 5px auto;
 }
 
+.file-manager-directory-link > img {
+  max-width: 32px;
+  width: 32px;
+  max-height: 42px !important;
+}
+
 .file-manager-directory-link > a {
   display: block;
   text-decoration: none;

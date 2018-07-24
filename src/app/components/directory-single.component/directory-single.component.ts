@@ -17,7 +17,10 @@ import {NotificationService} from '../../services/notification.service';
   moduleId: module.id,
   selector: 'app-directory-single',
   templateUrl: './directory-single.component.html',
-  styleUrls: ['../file-manager.component/file-manager.css'],
+  styleUrls: [
+    '../file-manager.component/file-manager.css',
+    './directory-single.component.css'
+  ],
   host: {class: 'grid-row'}
 })
 
@@ -36,6 +39,10 @@ export class DirectorySingleComponent implements OnInit {
   private _documentsList: Array<DocumentModel> = [];
 
   public disableLoadButton: boolean = false;
+
+  public typeFileVisibleSort: string = 'box';
+
+  public searchFileName: string = null;
 
   public _formUploadDocument: FormGroup = new FormGroup({
     title: new FormControl(null, Validators.required)
@@ -66,7 +73,12 @@ export class DirectorySingleComponent implements OnInit {
   get documentsList(): Array<DocumentModel> {
     const arr: Array<DocumentModel> = this._documentsList;
 
-    return arr;
+
+    if (this.searchFileName && this.searchFileName.length > 0) {
+      return arr.filter(x => x.title.toLowerCase().indexOf(this.searchFileName.toLowerCase()) !== -1);
+    } else {
+      return arr;
+    }
   }
 
   public getCurrentDirectory(): Observable<DirectoryModel> {
@@ -158,5 +170,36 @@ export class DirectorySingleComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  public changeTypeSort(event: any) {
+    if (event.checked) {
+      this.typeFileVisibleSort = 'list';
+    } else {
+      this.typeFileVisibleSort = 'box';
+    }
+  }
+
+  public getImageFile(d: DocumentModel): string {
+    if (d.extension === 'pdf') {
+      return '../../../../assets/icons/files-icons/file-pdf-regular.svg';
+    }
+    if (d.extension === 'doc' || d.extension === 'docx') {
+      return '../../../../assets/icons/files-icons/file-word-regular.svg';
+    }
+    if (d.extension === 'xls' || d.extension === 'xlsx') {
+      return '../../../../assets/icons/files-icons/file-excel-regular.svg';
+    }
+    if (d.extension === 'pptx' || d.extension === 'ppt') {
+      return '../../../../assets/icons/files-icons/file-powerpoint-regular.svg';
+    }
+    if (d.extension === 'rar' || d.extension === 'zip') {
+      return '../../../../assets/icons/files-icons/file-archive-regular.svg';
+    }
+    if (d.extension === 'jpg' || d.extension === 'jpeg' || d.extension === 'png') {
+      return '../../../../assets/icons/files-icons/image-regular.svg';
+    }
+
+    return '../../../../assets/icons/files-icons/file-alt-regular.svg';
   }
 }

@@ -21,22 +21,14 @@ export class AuthenticationProvider implements HttpInterceptor {
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
+        console.log(err);
         if (err.status === 400 && err.error.non_field_errors) {
           this._notificationService.sendNotification({
               title: 'Произошла ошибка',
               options: {
-                body: 'Ваш аккаунт заблокирован.'
+                body: 'Невозможно войти с предоставленными учетными данными.'
               }
             },
-          );
-          this._router.navigate(['login']);
-        }
-        if (err.status === 401 && err.error.detail === 'Error decoding signature.') {
-          this._notificationService.sendNotification({
-            title: 'Произошла ошибка',
-            options: {
-              body:  'Ваш пароль был изменен, ваш аккаунт заблокирован.'
-            }},
           );
           this._router.navigate(['login']);
         }
