@@ -29,6 +29,8 @@ import {AnalyticListActivityComponent} from './components/analytic.list-activity
 import {TaskSingleComponent} from './components/task.single.component/task.single.component';
 import {TokenGuard} from './guards/token.guard';
 import {Routes} from '@angular/router';
+import {ClientHandbookComponent} from './components/client.handbook.component/client.handbook.component';
+import {HandbookPage} from './components/handbook.page/handbook.page';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -133,6 +135,21 @@ export const appRoutes: Routes = [
         path: '', component: ReportsPageComponent, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: ReportsMainComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  {
+    path: 'handbook',
+    children: [
+      {
+        path: '', component: HandbookPage, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: ClientHandbookComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },

@@ -64,12 +64,4 @@ export class ClientLightModel {
       minute: 'numeric'
     });
   }
-
-  // get TooltiptText(): string {
-  //   return `Количество активностей: ${this.activities_count}
-  //           Количество проектов: ${this.deals_count}
-  //           Присутствуют ли ваши проекты: ${this.is_has_all_deals_by_user ? 'Да' : 'Нет'}
-  //           Присутствуют ли ваши закрытые проекты: ${this.is_has_completed_deals_by_user ? 'Да' : 'Нет'}
-  //   `;
-  // }
 }

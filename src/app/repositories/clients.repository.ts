@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ClientsService} from '../services/clients.service';
-import {ClientModel} from '../models/client.model';
+import {ClientModel, IClientHandbook} from '../models/client.model';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
 import {LoadingService} from '../services/loading.service';
 import {ClientLightModel} from '../models/client.light.model.';
 

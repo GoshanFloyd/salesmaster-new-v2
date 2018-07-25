@@ -39,6 +39,14 @@ type EmailArrayField = Array<TEmail>;
 
 type CustomFieldsArrayField = Array<TCustomField>;
 
+export interface IClientHandbook {
+  id: number;
+  title: string;
+  phones: PhoneArrayField;
+  emails: EmailArrayField;
+  customfields: CustomFieldsArrayField;
+}
+
 export class ClientModel{
   private _id: number;
   private _region_id: number;

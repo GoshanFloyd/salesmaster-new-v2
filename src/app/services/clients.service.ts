@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ClientModel} from '../models/client.model';
+import {ClientModel, IClientHandbook} from '../models/client.model';
 import {ClientLightModel} from '../models/client.light.model.';
 
 @Injectable()
@@ -66,6 +66,27 @@ export class ClientsService {
     });
   }
 
+  public getClientsHandbook(obj?: any) {
+
+    let digest = null;
+
+    if (obj) {
+      obj['digest'] = true;
+    } else {
+      digest = {
+        'digest': true
+      };
+    }
+
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.get<Array<IClientHandbook>>(`${this.baseProtocol}${this.baseURL}clients`, {
+      headers: header,
+      params: obj ? obj : digest
+    });
+  }
 
   public getClientLightWeightById(id: number) {
 

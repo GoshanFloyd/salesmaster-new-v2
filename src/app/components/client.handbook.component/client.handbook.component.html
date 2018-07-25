@@ -1,0 +1,44 @@
+<div class="client-list__component main__component">
+  <div class="main__component__header display-flex display-flex-row">
+    <h3 class="display-flex-1">Справочник по контактам:</h3>
+    <label class="mr-small" for="search_contacts">Поиск: <input placeholder="Ваш запрос..." [(ngModel)]="searchString" name="search_contacts" id="search_contacts" class="input-add" type="text"></label>
+    <label>
+      Сортировка по компаниям:
+      <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID" (change)="onChangeCompany(currentCompanyID)">
+        <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
+      </select>
+    </label>
+  </div>
+  <div class="main__component__body">
+    <p-table [value]="clients">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Наименование клиента</th>
+          <th>Телефоны</th>
+          <th>Почтовые адреса</th>
+          <th>Кастомные поля</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-client>
+        <tr>
+          <td>{{client.title}}</td>
+          <td>
+            <div *ngFor="let p of client.phones">
+              {{p.owner_name}} - {{p.number}}
+            </div>
+          </td>
+          <td>
+            <div *ngFor="let e of client.emails">
+              {{e.owner_name}} - {{e.address}}
+            </div>
+          </td>
+          <td>
+            <div *ngFor="let cf of client.customfields">
+              {{cf.key}} - {{cf.value}}
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

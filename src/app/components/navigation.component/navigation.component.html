@@ -50,6 +50,12 @@
         Файловый менеджер
       </a>
     </li>
+    <li [class]="isActiveRoute('/handbook') ? 'active' : '' ">
+      <a [routerLink]='["/handbook"]'>
+        <span class="oi" data-glyph="bookmark"></span>
+        Справочник
+      </a>
+    </li>
     <!--<li>-->
       <!--<a href="">-->
         <!--<span class="oi" data-glyph="monitor"></span>-->

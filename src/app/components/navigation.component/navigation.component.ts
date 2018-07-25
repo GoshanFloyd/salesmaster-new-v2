@@ -22,7 +22,7 @@ export class NavigationComponent {
       data => {
         this.status = data;
       }
-    )
+    );
   }
 
   public isActiveRoute(link: string): boolean {

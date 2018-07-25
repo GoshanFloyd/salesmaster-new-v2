@@ -93,6 +93,10 @@ import { environment } from '../environments/environment';
 import {EmployeeInfoComponent} from './components/employee.info.component/employee.info.component';
 import {TaskDeadlineComponent} from './components/task.deadline.component/task.deadline.component';
 import {ProductAddComponent} from './components/product.add.component/product.add.component';
+import {ClientHandbookComponent} from './components/client.handbook.component/client.handbook.component';
+import {HandbookPage} from './components/handbook.page/handbook.page';
+import {NgClass} from '@angular/common';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -153,7 +157,9 @@ import {ProductAddComponent} from './components/product.add.component/product.ad
     ClientsDatePipe,
     EmployeeInfoComponent,
     TaskDeadlineComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    HandbookPage,
+    ClientHandbookComponent
   ],
   imports: [
     BrowserModule,
@@ -172,7 +178,7 @@ import {ProductAddComponent} from './components/product.add.component/product.ad
     InputMaskModule,
     TooltipModule,
     ProgressBarModule,
-
+    TableModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
