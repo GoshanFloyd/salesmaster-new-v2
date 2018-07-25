@@ -60,7 +60,6 @@ export class EmployeeInfoComponent {
     this._employeeID = id;
     this._userService.getUserInfo(this._employeeID).subscribe(
       data => {
-        console.log(data);
         this.employeeInfo = data[0];
         this.employeeInfoModal.showModal();
       },

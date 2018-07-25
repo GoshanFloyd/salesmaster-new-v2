@@ -47,7 +47,7 @@
             <td><a [routerLink]="'/contacts/main/'+p.client.id">{{p.client.title}}</a></td>
             <td>{{p.company}}</td>
             <td>{{p.type.title}}</td>
-            <td>{{p.employee.fullname}}</td>
+            <td><a href="" (click)="showEmployeeInfo($event, p.employee.id)">{{p.employee.fullname}}</a></td>
             <td>{{p.deal.title}}</td>
           </tr>
           </tbody>
@@ -67,3 +67,5 @@
     </div>
   </div>
 </div>
+
+<app-employee-info #employeeInfoComponent></app-employee-info>

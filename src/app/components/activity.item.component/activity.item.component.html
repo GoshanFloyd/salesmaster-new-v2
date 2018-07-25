@@ -7,7 +7,7 @@
     <dd pTooltip="Bид данной активности">{{activity ? activity.type_title : ''}}</dd>
 
     <dt>Автор:</dt>
-    <dd pTooltip="Пользователь, создавший данную активность"><a href="#">{{activity ? activity.employee.fullname : ''}}</a></dd>
+    <dd pTooltip="Пользователь, создавший данную активность"><a (click)="showEmployeeInfo($event, activity.employee.id)">{{activity ? activity.employee.fullname : ''}}</a></dd>
 
     <dt>Дата создания:</dt>
     <dd pTooltip="Дата создания данной активности">{{activity ? activity.string_datetime_created : ''}}</dd>
@@ -32,3 +32,5 @@
 <app-modal-standard #modalActivityTransit [title]="'Перенести активность в проект'">
   <app-deal-select #dealSelectComponent (onSetDeal)="transitActivity($event)"></app-deal-select>
 </app-modal-standard>
+
+<app-employee-info #employeeInfoComponent></app-employee-info>

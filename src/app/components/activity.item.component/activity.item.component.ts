@@ -6,6 +6,7 @@ import {DealSelectComponent} from '../deal.select.component/deal.select.componen
 import {DealModel} from '../../models/deal.model';
 import {ActivityService} from '../../services/activity.service';
 import {NotificationService} from '../../services/notification.service';
+import {EmployeeInfoComponent} from '../employee.info.component/employee.info.component';
 
 @Component({
   moduleId: module.id,
@@ -27,6 +28,8 @@ export class ActivityItemComponent {
 
   @ViewChild('modalActivityTransit') private activityTransitModal: ModalStandardComponent;
   @ViewChild('dealSelectComponent') private dealSelectComponent: DealSelectComponent;
+
+  @ViewChild('employeeInfoComponent') private employeeInfoComponent: EmployeeInfoComponent;
 
   constructor (private _activityService: ActivityService,
                private _notificationService: NotificationService) {}
@@ -78,5 +81,11 @@ export class ActivityItemComponent {
     const activityDate = new Date(activityStartDate.setDate(activityStartDate.getDate() + 1));
 
     return activityDate > currentDate;
+  }
+
+  public showEmployeeInfo(event: Event, id: number) {
+    event.preventDefault();
+
+    this.employeeInfoComponent.getEmployeeInfo(id);
   }
 }

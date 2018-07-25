@@ -21,6 +21,18 @@
           <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.clients_count : 0}}</h5>
           <span class="box__employee-info__description-text">Клиентов</span>
         </div>
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.tasks_count[1].doer_count__completed : 0}}</h5>
+          <span class="box__employee-info__description-text">Выполненных задач</span>
+        </div>
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.tasks_count[1].doer_count__in_progress : 0}}</h5>
+          <span class="box__employee-info__description-text">Задач в работе</span>
+        </div>
+        <div class="col-sm-1 col-md-3 col-lg-3">
+          <h5 class="box__employee-info__description-header">{{employeeInfo ? employeeInfo.tasks_count[1].doer_count__failed : 0}}</h5>
+          <span class="box__employee-info__description-text">Проваленых задач</span>
+        </div>
       </div>
     </div>
   </div>

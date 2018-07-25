@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
 import {DATEPICKER_RU_LOCALE} from '../../variables/variables';
 import {UserService} from '../../services/user.service';
 import {Observable} from 'rxjs/Observable';
 import {ReportService} from '../../services/report.service';
+import {EmployeeInfoComponent} from '../employee.info.component/employee.info.component';
 
 export interface IActivityReport {
   id: number;
@@ -37,6 +38,8 @@ export interface IActivityReport {
 })
 
 export class ReportsMainComponent implements OnInit {
+
+  @ViewChild('employeeInfoComponent') private employeeInfoComponent: EmployeeInfoComponent;
 
   public isLoadingData: boolean = false;
 
@@ -185,4 +188,9 @@ export class ReportsMainComponent implements OnInit {
     }
   }
 
+  public showEmployeeInfo(event: Event, id: number) {
+    event.preventDefault();
+
+    this.employeeInfoComponent.getEmployeeInfo(id);
+  }
 }
