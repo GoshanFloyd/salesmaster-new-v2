@@ -92,6 +92,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {EmployeeInfoComponent} from './components/employee.info.component/employee.info.component';
 import {TaskDeadlineComponent} from './components/task.deadline.component/task.deadline.component';
+import {ProductAddComponent} from './components/product.add.component/product.add.component';
 
 @NgModule({
   declarations: [
@@ -151,7 +152,8 @@ import {TaskDeadlineComponent} from './components/task.deadline.component/task.d
     CommentComponent,
     ClientsDatePipe,
     EmployeeInfoComponent,
-    TaskDeadlineComponent
+    TaskDeadlineComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
