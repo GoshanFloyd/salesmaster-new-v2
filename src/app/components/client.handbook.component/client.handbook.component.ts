@@ -23,7 +23,7 @@ export class ClientHandbookComponent implements OnInit {
                private _userRepository: UserRepository) {}
 
   get clients(): Array<IClientHandbook> {
-    return this._clients;
+    return this._clients.filter(x => x.title.toLowerCase().indexOf(this.searchString.toLowerCase()) !== -1);
   }
 
   get user(): UserModel {
