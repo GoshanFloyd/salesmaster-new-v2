@@ -97,6 +97,8 @@ import {ClientHandbookComponent} from './components/client.handbook.component/cl
 import {HandbookPage} from './components/handbook.page/handbook.page';
 import {NgClass} from '@angular/common';
 import {TableModule} from 'primeng/table';
+import {HelpPage} from './components/help.page/help.page';
+import {HelpMainComponent} from './components/help.main.component/help.main.component';
 
 @NgModule({
   declarations: [
@@ -159,7 +161,9 @@ import {TableModule} from 'primeng/table';
     TaskDeadlineComponent,
     ProductAddComponent,
     HandbookPage,
-    ClientHandbookComponent
+    ClientHandbookComponent,
+    HelpPage,
+    HelpMainComponent
   ],
   imports: [
     BrowserModule,

@@ -55,7 +55,7 @@ export class CentrifugeService {
 
     this.centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
     this.centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
-    this.centrifuge.subscribe('admin', this.adminChannel());
+    this.centrifuge.subscribe('admins', this.adminChannel());
 
     this.centrifuge.connect();
   }

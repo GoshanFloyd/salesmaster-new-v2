@@ -56,6 +56,12 @@
         Справочник
       </a>
     </li>
+    <li [class]="isActiveRoute('/help') ? 'active' : '' ">
+      <a [routerLink]='["/help"]'>
+        <span class="oi" data-glyph="question-mark"></span>
+        Помощь
+      </a>
+    </li>
     <!--<li>-->
       <!--<a href="">-->
         <!--<span class="oi" data-glyph="monitor"></span>-->

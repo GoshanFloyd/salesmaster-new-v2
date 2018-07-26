@@ -31,6 +31,8 @@ import {TokenGuard} from './guards/token.guard';
 import {Routes} from '@angular/router';
 import {ClientHandbookComponent} from './components/client.handbook.component/client.handbook.component';
 import {HandbookPage} from './components/handbook.page/handbook.page';
+import {HelpPage} from './components/help.page/help.page';
+import {HelpMainComponent} from './components/help.main.component/help.main.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -150,6 +152,21 @@ export const appRoutes: Routes = [
         path: '', component: HandbookPage, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: ClientHandbookComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  {
+    path: 'help',
+    children: [
+      {
+        path: '', component: HelpPage, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: HelpMainComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },

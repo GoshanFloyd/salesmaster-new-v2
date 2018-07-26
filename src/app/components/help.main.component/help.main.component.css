@@ -1,0 +1,47 @@
+.help-article {
+  font-size: 1.1em;
+  line-height: 1.4em;
+  margin: 20px 0 0 0;
+  text-align: justify;
+}
+
+.help-article > a{
+  text-decoration: none !important;
+  color: #1c3a99;
+  font-weight: bold;
+}
+
+.help_contacts_block h3 {
+  display: block;
+  width: 100%;
+  margin: 0 0 15px 0;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.help_contacts_block dt,
+.help_contacts_block dd {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.help_contacts_block dt {
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+.help_contacts_block dt:not(:first-child) {
+  margin-top: 15px;
+}
+
+.help_contacts_block dt > span {
+  font-weight: bold;
+}
+
+.help_contacts_block dd {
+  line-height: 1.3em;
+  margin: 5px 0 0 0 !important;
+  font-size: 1em;
+}
