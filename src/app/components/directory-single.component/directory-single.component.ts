@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {DocumentService} from '../../services/document.service';
 import {UserModel} from '../../models/user.model';
 import {UserRepository} from '../../repositories/user.repository';
@@ -20,13 +20,14 @@ import {NotificationService} from '../../services/notification.service';
   styleUrls: [
     '../file-manager.component/file-manager.css',
     './directory-single.component.css'
-  ],
-  host: {class: 'grid-row'}
+  ]
 })
 
 export class DirectorySingleComponent implements OnInit {
 
   @ViewChild('modalUpload') private modalUpload: ModalStandardComponent;
+
+  @HostBinding('class') private class = 'grid-row';
 
   private _currentDirectoryID: number;
 
