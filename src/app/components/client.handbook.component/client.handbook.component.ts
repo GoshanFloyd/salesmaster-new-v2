@@ -3,6 +3,7 @@ import {ClientsService} from '../../services/clients.service';
 import {CustomFieldsArrayField, EmailArrayField, IClientHandbook, PhoneArrayField} from '../../models/client.model';
 import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
+import {Logger} from '../../classes/logger';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +21,8 @@ export class ClientHandbookComponent implements OnInit {
   @HostBinding('class') private classList = 'col-sm-1 col-md-1 col-lg-1';
 
   constructor (private _clientService: ClientsService,
-               private _userRepository: UserRepository) {}
+               private _userRepository: UserRepository) {
+  }
 
   get clients(): Array<IClientHandbook> {
     return this._clients.filter(x =>

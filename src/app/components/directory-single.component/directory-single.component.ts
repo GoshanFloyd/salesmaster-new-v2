@@ -127,7 +127,7 @@ export class DirectorySingleComponent implements OnInit {
   public uploadDocument(event: Event): void {
     event.preventDefault();
 
-    this._formData.append('directory_title', this.currentDirectory.title);
+    this._formData.append('directory_id', this.currentDirectory.id.toString());
     this._formData.append('employee', this.user.id.toString());
     this._formData.append('title', this._formUploadDocument.controls['title'].value);
 
