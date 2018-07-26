@@ -33,11 +33,11 @@ type TCustomField = {
   value: string;
 };
 
-type PhoneArrayField = Array<TPhone>;
+export type PhoneArrayField = Array<TPhone>;
 
-type EmailArrayField = Array<TEmail>;
+export type EmailArrayField = Array<TEmail>;
 
-type CustomFieldsArrayField = Array<TCustomField>;
+export type CustomFieldsArrayField = Array<TCustomField>;
 
 export interface IClientHandbook {
   id: number;
