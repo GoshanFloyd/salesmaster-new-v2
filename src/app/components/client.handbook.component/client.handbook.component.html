@@ -21,7 +21,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-client>
         <tr>
-          <td>{{client.title}}</td>
+          <td><a [routerLink]="'/contacts/main/'+client.id">{{client.title}}</a></td>
           <td>
             <div *ngFor="let p of client.phones">
               {{p.owner_name}} - {{p.number}}
