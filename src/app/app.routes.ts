@@ -33,6 +33,8 @@ import {ClientHandbookComponent} from './components/client.handbook.component/cl
 import {HandbookPage} from './components/handbook.page/handbook.page';
 import {HelpPage} from './components/help.page/help.page';
 import {HelpMainComponent} from './components/help.main.component/help.main.component';
+import {SiteRequestPage} from './components/site.request.page/site.request.page';
+import {SiteRequestComponent} from './components/site.request.component/site.request.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -167,6 +169,21 @@ export const appRoutes: Routes = [
         path: '', component: HelpPage, canActivate: [TokenGuard],
         children: [
           { path: 'main', component: HelpMainComponent },
+          { path: '**', redirectTo: 'main' }
+        ]
+      },
+      {
+        path: '**', redirectTo: 'main'
+      }
+    ]
+  },
+  {
+    path: 'site-request',
+    children: [
+      {
+        path: '', component: SiteRequestPage, canActivate: [TokenGuard],
+        children: [
+          { path: 'main', component: SiteRequestComponent },
           { path: '**', redirectTo: 'main' }
         ]
       },

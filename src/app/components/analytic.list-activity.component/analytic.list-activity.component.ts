@@ -46,7 +46,7 @@ export class AnalyticListActivityComponent implements OnInit {
     }).subscribe(
       data => {
         this._activitiesList = ActivityModel.fromArray(data);
-        this.getActivitiesTypes(this.currentCompany)
+        this.getActivitiesTypes(this.currentCompany);
       },
       err => console.log(err)
     );

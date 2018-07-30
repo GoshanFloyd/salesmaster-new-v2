@@ -99,6 +99,9 @@ import {NgClass} from '@angular/common';
 import {TableModule} from 'primeng/table';
 import {HelpPage} from './components/help.page/help.page';
 import {HelpMainComponent} from './components/help.main.component/help.main.component';
+import {ColdClientService} from './services/cold.client.service';
+import {SiteRequestPage} from './components/site.request.page/site.request.page';
+import {SiteRequestComponent} from './components/site.request.component/site.request.component';
 
 @NgModule({
   declarations: [
@@ -163,7 +166,9 @@ import {HelpMainComponent} from './components/help.main.component/help.main.comp
     HandbookPage,
     ClientHandbookComponent,
     HelpPage,
-    HelpMainComponent
+    HelpMainComponent,
+    SiteRequestPage,
+    SiteRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -210,6 +215,7 @@ import {HelpMainComponent} from './components/help.main.component/help.main.comp
     ReportService,
     SoundService,
     OfflineService,
+    ColdClientService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

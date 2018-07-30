@@ -50,6 +50,12 @@
         Файловый менеджер
       </a>
     </li>
+    <li [class]="isActiveRoute('/site-request') ? 'active' : '' ">
+      <a [routerLink]='["/site-request"]'>
+        <span class="oi" data-glyph="comment-square"></span>
+        Заявки с сайта
+      </a>
+    </li>
     <li [class]="isActiveRoute('/handbook') ? 'active' : '' ">
       <a [routerLink]='["/handbook"]'>
         <span class="oi" data-glyph="bookmark"></span>

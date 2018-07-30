@@ -11,7 +11,7 @@ type TypeUserInfo = {
 type GroupItem = {
   id: number,
   title: string
-}
+};
 
 type TypeGroupArray = Array<GroupItem>;
 

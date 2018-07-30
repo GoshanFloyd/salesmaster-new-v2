@@ -1,0 +1,19 @@
+<div class="col-sm-1 col-md-2 col-lg-2">
+  <div class="client-list__component main__component">
+    <div class="main__component__header display-flex display-flex-row">
+      <h3 class="display-flex-1">Список клиентов</h3>
+    </div>
+    <form class="main__component__helper-panel">
+      <select (change)="changeCompany($event)" name="company_filter" [(ngModel)]="currentCompany">
+        <option value="" disabled selected>-- Компания --</option>
+        <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
+      </select>
+    </form>
+    <div class="main__component__body">
+      <ul class="client-list__component__list">
+        <li *ngFor="let item of coldClients"><a>{{item.fullname}}<span class="new-caption__helper" *ngIf="!item.was_processed">Не обработана</span> </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
