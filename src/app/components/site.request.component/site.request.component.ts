@@ -15,6 +15,8 @@ export class SiteRequestComponent implements OnInit {
 
   public currentCompany: number;
 
+  public currentColdClient: ColdClientModel = null;
+
   private _coldClients: Array<ColdClientModel> = [];
 
   @HostBinding('class') private class: string = 'grid-row';
@@ -59,5 +61,9 @@ export class SiteRequestComponent implements OnInit {
           observer.complete();
         });
     });
+  }
+
+  public setCurrentColdClient(c: ColdClientModel) {
+    this.currentColdClient = c;
   }
 }

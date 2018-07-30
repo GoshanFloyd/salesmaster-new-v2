@@ -11,7 +11,7 @@
     </form>
     <div class="main__component__body">
       <ul class="client-list__component__list">
-        <li *ngFor="let item of coldClients"><a>{{item.fullname}}<span class="new-caption__helper" *ngIf="!item.was_processed">Не обработана</span> </a></li>
+        <li *ngFor="let item of coldClients" (click)="setCurrentColdClient(item)"><a>{{item.fullname}}<span class="new-caption__helper" *ngIf="!item.was_processed">Не обработана</span> </a></li>
       </ul>
     </div>
   </div>
