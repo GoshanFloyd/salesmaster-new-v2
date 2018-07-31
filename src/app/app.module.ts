@@ -102,6 +102,7 @@ import {HelpMainComponent} from './components/help.main.component/help.main.comp
 import {ColdClientService} from './services/cold.client.service';
 import {SiteRequestPage} from './components/site.request.page/site.request.page';
 import {SiteRequestComponent} from './components/site.request.component/site.request.component';
+import {SiteRequestSingleComponent} from './components/site.request.single.component/site.request.single.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +169,8 @@ import {SiteRequestComponent} from './components/site.request.component/site.req
     HelpPage,
     HelpMainComponent,
     SiteRequestPage,
-    SiteRequestComponent
+    SiteRequestComponent,
+    SiteRequestSingleComponent
   ],
   imports: [
     BrowserModule,

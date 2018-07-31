@@ -8,6 +8,11 @@
         <option value="" disabled selected>-- Компания --</option>
         <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
       </select>
+      <select name="filterType" [(ngModel)]="filterType">
+        <option value="" disabled selected>-- Выберите тип фильтрации --</option>
+        <option [ngValue]="'all'">Все заявки</option>
+        <option [ngValue]="'my'">Мои заявки</option>
+      </select>
     </form>
     <div class="main__component__body">
       <ul class="client-list__component__list">
@@ -15,5 +20,8 @@
       </ul>
     </div>
   </div>
+</div>
+<div class="col-sm-1 col-md-2 col-lg-2">
+  <app-site-request-single [currentColdClient]="currentColdClient"></app-site-request-single>
 </div>
 

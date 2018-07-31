@@ -1,7 +1,7 @@
 
-interface IColdClientObjectCreate {
+export interface IColdClientObjectCreate {
   id: number;
-  company: ICompany;
+  company: ICompany | null;
   was_processed: boolean;
   site_url: string;
   fullname: string;
@@ -11,11 +11,17 @@ interface IColdClientObjectCreate {
   extra: string;
   datetime_created: string;
   datetime_updated: string;
+  employee: IUser | null;
 }
 
 interface ICompany {
   id: number;
   title: string;
+}
+
+interface IUser {
+  id: number;
+  fullname: string;
 }
 
 export class ColdClientModel {
@@ -31,6 +37,7 @@ export class ColdClientModel {
   private _extra: string;
   private _datetime_created: Date;
   private _datetime_updated: Date;
+  private _employee: IUser;
 
   constructor (obj: IColdClientObjectCreate) {
     this._id = obj.id;
@@ -44,6 +51,7 @@ export class ColdClientModel {
     this._extra = obj.extra;
     this._datetime_created = new Date(obj.datetime_created);
     this._datetime_updated = new Date(obj.datetime_updated);
+    this._employee = obj.employee;
   }
 
   public static fromArray(array: any): Array<ColdClientModel> {
@@ -98,5 +106,9 @@ export class ColdClientModel {
 
   get datetime_updated(): Date {
     return this._datetime_updated;
+  }
+
+  get employee(): IUser {
+    return this._employee;
   }
 }

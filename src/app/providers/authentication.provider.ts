@@ -24,9 +24,9 @@ export class AuthenticationProvider implements HttpInterceptor {
         console.log(err);
         if (err.status === 400 && err.error.non_field_errors) {
           this._notificationService.sendNotification({
-              title: 'Произошла ошибка',
+              title: 'Время сессии истекло',
               options: {
-                body: 'Невозможно войти с предоставленными учетными данными.'
+                body: 'Необходимо перезайти в CRM.'
               }
             },
           );

@@ -14,7 +14,7 @@ import {ColdClientModel} from '../../models/cold.client.model';
 export class SiteRequestComponent implements OnInit {
 
   public currentCompany: number;
-
+  public filterType: string = 'all';
   public currentColdClient: ColdClientModel = null;
 
   private _coldClients: Array<ColdClientModel> = [];
@@ -36,6 +36,15 @@ export class SiteRequestComponent implements OnInit {
   }
 
   get coldClients(): Array<ColdClientModel> {
+
+    if (this.filterType == 'all') {
+      return this._coldClients;
+    }
+
+    if (this.filterType == 'my') {
+      return this._coldClients.filter(x => x.employee != null && x.employee.id == this.user.id);
+    }
+
     return this._coldClients;
   }
 
