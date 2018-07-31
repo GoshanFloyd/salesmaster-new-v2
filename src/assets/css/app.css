@@ -1275,6 +1275,9 @@ th {
   background: #da6170;
   color: white;
   padding: 3px 5px; }
+  .new-caption__helper.user_badge {
+    background: #56fd62;
+    color: black; }
 
 .overflow-container, .overflow-container-x {
   height: 100%;
