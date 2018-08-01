@@ -111,4 +111,14 @@ export class ColdClientModel {
   get employee(): IUser {
     return this._employee;
   }
+
+  get datetime_created_format(): string {
+    return new Date(this._datetime_created).toLocaleString('ru', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+  }
 }
