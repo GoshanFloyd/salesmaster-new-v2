@@ -4,6 +4,7 @@ import {UserModel} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import {ColdClientService} from '../../services/cold.client.service';
 import {ColdClientModel} from '../../models/cold.client.model';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,8 @@ export class SiteRequestComponent implements OnInit {
   @HostBinding('class') private class: string = 'grid-row';
 
   constructor(private _userRepository: UserRepository,
-              private _coldClientService: ColdClientService) {}
+              private _coldClientService: ColdClientService,
+              private _notificationService: NotificationService) {}
 
   ngOnInit() {
     this.currentCompany = this.user.getDefaultCompany().id;
@@ -73,6 +75,20 @@ export class SiteRequestComponent implements OnInit {
   }
 
   public setCurrentColdClient(c: ColdClientModel) {
-    this.currentColdClient = c;
+    if (!c.employee || c.employee.id == this.user.id) {
+      this.currentColdClient = c;
+    } else {
+      this._notificationService.sendNotification({
+        title: 'Данна заявка уже обрабатывается другим пользователем.'
+      })
+    };
+  }
+
+  public refreshColdClient(event: boolean) {
+    if (event) {
+      this.getColdClients({
+        company_id: this.currentCompany
+      }).subscribe();
+    }
   }
 }

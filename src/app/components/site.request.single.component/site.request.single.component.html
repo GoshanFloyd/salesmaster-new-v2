@@ -1,8 +1,26 @@
-<div class="client-list__component main__component">
+<div class="client-view__component main__component">
   <div class="main__component__header display-flex display-flex-row">
-    <h3 class="display-flex-1">Заявка:</h3>
+    <h3 class="display-flex-1">Заявка с сайта {{currentColdClient.site_url}}</h3>
   </div>
   <div class="main__component__body">
+    <div class="grid-row height-100">
+      <div class="col-sm-1 col-md-1 col-lg-1">
+        <dl class="client-view__component__list">
+          <dt>Наименование клиента:</dt>
+          <dd>{{currentColdClient.fullname}}</dd>
 
+          <dt>Телефон:</dt>
+          <dd>{{currentColdClient.phone}}</dd>
+
+          <dt>Email:</dt>
+          <dd>{{currentColdClient.email}}</dd>
+
+          <dt>Текст сообщения:</dt>
+          <dd>{{currentColdClient.note}}</dd>
+
+
+        </dl>
+      </div>
+    </div>
   </div>
 </div>
