@@ -95,7 +95,6 @@ export class ActivityAddComponent {
 
     this._activityService.createActivity(this._formData).subscribe(
       data => {
-        console.log(data);
         this.onCreate.emit(data);
         if (data === 100) {
           this._notificationService.sendNotification({
