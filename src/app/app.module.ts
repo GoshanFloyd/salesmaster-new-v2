@@ -103,6 +103,7 @@ import {ColdClientService} from './services/cold.client.service';
 import {SiteRequestPage} from './components/site.request.page/site.request.page';
 import {SiteRequestComponent} from './components/site.request.component/site.request.component';
 import {SiteRequestSingleComponent} from './components/site.request.single.component/site.request.single.component';
+import {NgxJsonViewerModule} from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [
@@ -190,6 +191,7 @@ import {SiteRequestSingleComponent} from './components/site.request.single.compo
     TooltipModule,
     ProgressBarModule,
     TableModule,
+    NgxJsonViewerModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

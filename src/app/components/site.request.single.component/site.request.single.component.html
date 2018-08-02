@@ -20,6 +20,11 @@
 
           <dt>Текст сообщения:</dt>
           <dd>{{currentColdClient.note}}</dd>
+
+          <dt>Дополнительные поля:</dt>
+          <dd>
+            <ngx-json-viewer [json]="currentColdClient.extra" [expanded]="false"></ngx-json-viewer>
+          </dd>
         </dl>
       </div>
     </div>

@@ -14,7 +14,6 @@ export class SiteRequestSingleComponent {
   @Input('currentColdClient') set currentColdClient(c: ColdClientModel) {
     if (c) {
       this._currentColdClient = c;
-      console.log(this.currentColdClient);
       if (!this._currentColdClient.was_processed && !this._currentColdClient.employee) {
         this.setMyColdClient();
       }

@@ -96,8 +96,14 @@ export class ColdClientModel {
     return this._note;
   }
 
-  get extra(): string {
-    return this._extra;
+  get extra(): object {
+    if (this._extra == null) {
+      return {
+        status: 'Нет дополнительных полей'
+      };
+    } else {
+      return JSON.parse(this._extra);
+    }
   }
 
   get datetime_created(): Date {
