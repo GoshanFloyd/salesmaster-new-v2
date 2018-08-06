@@ -194,3 +194,14 @@ export const EMPLOYEE_TYPES = {
   'manager': 'Менеджер',
   'outsider': 'Посторонний'
 };
+
+export const CLIENT_TYPE = [
+  {
+    type: 'fizlico',
+    title: 'Физическое лицо'
+  },
+  {
+    type: 'yurlico',
+    title: 'Юридическое лицо'
+  }
+];

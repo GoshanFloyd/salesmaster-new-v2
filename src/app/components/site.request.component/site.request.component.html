@@ -27,6 +27,6 @@
   </div>
 </div>
 <div class="col-sm-1 col-md-2 col-lg-2">
-  <app-site-request-single *ngIf="currentColdClient" [currentColdClient]="currentColdClient" (onSetMyClient)="refreshColdClient($event)"></app-site-request-single>
+  <app-site-request-single *ngIf="currentColdClient" [currentColdClient]="currentColdClient" (onConvert)="refreshColdClientAfterConnect($event)" (onSetMyClient)="refreshColdClient($event)"></app-site-request-single>
 </div>
 

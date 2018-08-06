@@ -26,7 +26,11 @@
             <ngx-json-viewer [json]="currentColdClient.extra" [expanded]="false"></ngx-json-viewer>
           </dd>
         </dl>
+
+        <button class="button-standard" (click)="openConvertColdClient($event)">Конвертировать заявку в клиента</button>
       </div>
     </div>
   </div>
 </div>
+
+<app-site-convert-client #clientConvertComponent [coldClientID]="currentColdClient.id" (onConvertColdClient)="afterConvertColdClient($event)"></app-site-convert-client>

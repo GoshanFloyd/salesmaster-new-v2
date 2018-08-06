@@ -1,0 +1,59 @@
+<app-modal-standard #modalSiteConvertClient [title]="'Конвертация заявки в клиента'">
+  <form class="activity-add__component" [formGroup]="formConvertClient" (submit)="convertClient($event)">
+    <div class="form-row">
+      <label for="convert_type">Тип клиента:</label>
+      <select class="input-add" id="convert_type" [formControlName]="'type'"
+              pTooltip="Укажите тип клиента" (change)="changeTypeClient($event)">
+        <option [value]="null" disabled selected>-- Выберите тип клиента --</option>
+        <option *ngFor="let type of clientsTypes" [value]="type.type">{{type.title}}</option>
+      </select>
+      <div class="error-block">
+      <span *ngIf="formConvertClient.controls['type'].hasError('required')">
+        Необходимо указать тип клиента!
+      </span>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="this.formConvertClient.controls['type'].value === 'fizlico'">
+      <label for="convert_fizlico_type">Тип физического клиента:</label>
+      <select class="input-add" id="convert_fizlico_type" [formControlName]="'fizlico_type'"
+              pTooltip="Укажите тип физического клиента">
+        <option [value]="null" disabled selected>-- Выберите тип физического клиента --</option>
+        <option *ngFor="let type of clientsFizLicoTypes" [value]="type.type">{{type.value}}</option>
+      </select>
+      <div class="error-block">
+      <span *ngIf="formConvertClient.controls['fizlico_type'].hasError('required')">
+        Необходимо указать тип физического клиента!
+      </span>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="this.formConvertClient.controls['type'].value === 'yurlico'">
+      <label for="convert_yurlico_type">Тип юридического клиента:</label>
+      <select class="input-add" id="convert_yurlico_type" [formControlName]="'yurlico_type'"
+              pTooltip="Укажите тип юридического клиента">
+        <option [value]="null" disabled selected>-- Выберите тип юридического клиента --</option>
+        <option *ngFor="let type of clientsYurLicoType" [value]="type.type">{{type.value}}</option>
+      </select>
+      <div class="error-block">
+      <span *ngIf="formConvertClient.controls['yurlico_type'].hasError('required')">
+        Необходимо указать тип юридического клиента!
+      </span>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="this.formConvertClient.controls['type'].value === 'yurlico'">
+      <label for="convert_yurlico_form">Форма юридического клиента:</label>
+      <select class="input-add" id="convert_yurlico_form" [formControlName]="'yurlico_form'"
+              pTooltip="Укажите форму юридического клиента">
+        <option [value]="null" disabled selected>-- Выберите форму юридического клиента --</option>
+        <option *ngFor="let type of clientsYurLicoForms" [value]="type.type">{{type.value}}</option>
+      </select>
+      <div class="error-block">
+      <span *ngIf="formConvertClient.controls['yurlico_form'].hasError('required')">
+        Необходимо указать форму юридического клиента!
+      </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <input [disabled]="formConvertClient.invalid" type="submit" value="Конвертировать" class="button-standard">
+    </div>
+  </form>
+</app-modal-standard>

@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {ColdClientService} from '../../services/cold.client.service';
 import {ColdClientModel} from '../../models/cold.client.model';
 import {UserRepository} from '../../repositories/user.repository';
 import {UserModel} from '../../models/user.model';
+import {SiteConvertClientComponent} from '../site.convert-client.component/site.convert-client.component';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,9 @@ import {UserModel} from '../../models/user.model';
 })
 
 export class SiteRequestSingleComponent {
+
+  @ViewChild('clientConvertComponent') private clientConvertComponent: SiteConvertClientComponent;
+
   @Input('currentColdClient') set currentColdClient(c: ColdClientModel) {
     if (c) {
       this._currentColdClient = c;
@@ -21,6 +25,7 @@ export class SiteRequestSingleComponent {
   }
 
   @Output('onSetMyClient') public setMyClient = new EventEmitter<boolean>();
+  @Output('onConvert') public onConvert = new EventEmitter<boolean>();
 
   private _currentColdClient: ColdClientModel = null;
 
@@ -47,5 +52,19 @@ export class SiteRequestSingleComponent {
       err => console.log(err)
     );
   }
+
+  public openConvertColdClient(event: Event) {
+    event.preventDefault();
+
+    this.clientConvertComponent.openModal();
+  }
+
+
+  public afterConvertColdClient(event: boolean) {
+    if (event) {
+      this.onConvert.emit(true);
+    }
+  }
 }
+
 

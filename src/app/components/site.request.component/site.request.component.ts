@@ -91,4 +91,13 @@ export class SiteRequestComponent implements OnInit {
       }).subscribe();
     }
   }
+
+  public refreshColdClientAfterConnect(event: boolean) {
+    if (event) {
+      this.currentColdClient = null;
+      this.getColdClients({
+        company_id: this.currentCompany
+      }).subscribe();
+    }
+  }
 }

@@ -21,6 +21,16 @@ export class ColdClientService {
     });
   }
 
+  public convertColdClient(id: number, obj: any) {
+    const header = new HttpHeaders({
+      'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
+    });
+
+    return this._httpClient.put<any>(`${this.baseProtocol}${this.baseURL}cold_clients/${id}`,  obj, {
+      headers: header
+    });
+  }
+
   public searchColdClients(obj?: any) {
 
     const header = new HttpHeaders({

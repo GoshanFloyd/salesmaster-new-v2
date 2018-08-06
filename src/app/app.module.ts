@@ -104,6 +104,7 @@ import {SiteRequestPage} from './components/site.request.page/site.request.page'
 import {SiteRequestComponent} from './components/site.request.component/site.request.component';
 import {SiteRequestSingleComponent} from './components/site.request.single.component/site.request.single.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
+import {SiteConvertClientComponent} from './components/site.convert-client.component/site.convert-client.component';
 
 @NgModule({
   declarations: [
@@ -171,7 +172,8 @@ import {NgxJsonViewerModule} from 'ngx-json-viewer';
     HelpMainComponent,
     SiteRequestPage,
     SiteRequestComponent,
-    SiteRequestSingleComponent
+    SiteRequestSingleComponent,
+    SiteConvertClientComponent
   ],
   imports: [
     BrowserModule,
