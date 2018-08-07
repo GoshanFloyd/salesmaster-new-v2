@@ -1,6 +1,6 @@
 {
   "name": "salesmaster-crm",
-  "version": "3.15.1",
+  "version": "3.16.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
