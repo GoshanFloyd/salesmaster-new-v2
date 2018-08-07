@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {UserRepository} from '../repositories/user.repository';
 import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {DealModel} from '../models/deal.model';
 import {UserModel} from '../models/user.model';
 import {Router} from '@angular/router';
 
@@ -55,7 +54,7 @@ export class CentrifugeService {
 
     this.centrifuge.subscribe('task:delayed_task:$' + this.user().id.toString(), this.getDelayingTasksCallbacks());
     this.centrifuge.subscribe('task:expiring_task:$' + this.user().id.toString(), this.getExpiringTasksCallbacks());
-    this.centrifuge.subscribe('admins', this.adminChannel());
+    this.centrifuge.subscribe('admin', this.adminChannel());
 
     this.centrifuge.connect();
   }
@@ -74,7 +73,7 @@ export class CentrifugeService {
           click: {
             clickParameter: dataset.data,
             onClickAction: obj => {
-              self._router.navigateByUrl('tasks/main/'+obj.task_id);
+              self._router.navigateByUrl('tasks/main/' + obj.task_id);
             }
           }
         });
@@ -96,7 +95,7 @@ export class CentrifugeService {
           click: {
             clickParameter: dataset.data,
             onClickAction: obj => {
-              self._router.navigateByUrl('tasks/main/'+obj.task_id);
+              self._router.navigateByUrl('tasks/main/' + obj.task_id);
             }
           }
         });
@@ -110,7 +109,6 @@ export class CentrifugeService {
 
     return {
       'message': function (dataset) {
-        console.log(dataset);
         self._notificationService.sendNotification({
           title: dataset.data.subject,
           options: {

@@ -1,0 +1,25 @@
+<app-modal-standard #adminMessageModal [title]="'Сообщение от администрации'">
+  <form class="activity-add__component" [formGroup]="formAdminMessage" (submit)="sendAdminMessage($event)">
+    <div class="form-row">
+      <label for="admin-subject">Заголовок сообщения:</label>
+      <textarea class="textarea-add" id="admin-subject" rows="10" formControlName="subject"></textarea>
+      <div class="error-block">
+      <span *ngIf="formAdminMessage.controls['subject'].hasError('required')">
+        Необходимо указать заголовок сообщения
+      </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="admin-message">Тело сообщения:</label>
+      <textarea class="textarea-add" id="admin-message" rows="10" formControlName="message"></textarea>
+      <div class="error-block">
+      <span *ngIf="formAdminMessage.controls['message'].hasError('required')">
+        Необходимо указать заголовок сообщения
+      </span>
+      </div>
+    </div>
+    <div class="form-row">
+      <input [disabled]="formAdminMessage.invalid" type="submit" value="Отправить сообщение" class="button-standard">
+    </div>
+  </form>
+</app-modal-standard>

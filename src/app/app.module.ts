@@ -106,6 +106,8 @@ import {SiteRequestSingleComponent} from './components/site.request.single.compo
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {SiteConvertClientComponent} from './components/site.convert-client.component/site.convert-client.component';
 import {TaskRepository} from './repositories/task.repository';
+import {AdminMessageComponent} from './components/admin.message.component/admin.message.component';
+import {AdminMessageService} from './services/admin.message.service';
 
 @NgModule({
   declarations: [
@@ -174,7 +176,8 @@ import {TaskRepository} from './repositories/task.repository';
     SiteRequestPage,
     SiteRequestComponent,
     SiteRequestSingleComponent,
-    SiteConvertClientComponent
+    SiteConvertClientComponent,
+    AdminMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -224,6 +227,7 @@ import {TaskRepository} from './repositories/task.repository';
     OfflineService,
     ColdClientService,
     TaskRepository,
+    AdminMessageService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

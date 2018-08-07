@@ -21,6 +21,9 @@
       <p-toggleButton onLabel="Выключить звук" offLabel="Включить звук"
                       onIcon="fa fa-volume-up" offIcon="fa fa-volume-off" [(ngModel)]="soundStatus" (onChange)="changeSoundStatus($event)"></p-toggleButton>
 
+      <a class="fast-task" *ngIf="user.type === 'admin'" (click)="showAdminMessageModal($event)">
+        <span class="oi" data-glyph="warning"></span>
+      </a>
       <a class="fast-task" (click)="showAddTaslModal($event)">
         <span class="oi" data-glyph="task"></span>
       </a>
@@ -44,3 +47,5 @@
 <app-modal-standard #modalAddTask [title]="'Добавить задачу'">
   <app-task-add #addTaskComponent (onCreate)="onCreateTask($event)"></app-task-add>
 </app-modal-standard>
+
+<app-admin-message #adminMessageComponent></app-admin-message>

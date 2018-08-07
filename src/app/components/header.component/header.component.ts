@@ -4,6 +4,7 @@ import {ModalStandardComponent} from '../modal.standard/modal.standard.component
 import {TaskAddComponent} from '../task.add.component/task.add.component';
 import {NotificationService} from '../../services/notification.service';
 import {SoundService} from '../../services/sound.service';
+import {AdminMessageComponent} from '../admin.message.component/admin.message.component';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +18,7 @@ export class HeaderComponent {
 
   @ViewChild('modalAddTask') public addTaskModal: ModalStandardComponent;
   @ViewChild('addTaskComponent') public addTask: TaskAddComponent;
+  @ViewChild('adminMessageComponent') private adminMessageComponent: AdminMessageComponent;
 
   constructor(private _userRepository: UserRepository,
               private _notificationService: NotificationService,
@@ -48,5 +50,9 @@ export class HeaderComponent {
   public changeSoundStatus(event: any){
     this._soundService.toggleSound();
     this.soundStatus = this._soundService.isEnableSound;
+  }
+
+  public showAdminMessageModal(event: Event) {
+    this.adminMessageComponent.showModal();
   }
 }
