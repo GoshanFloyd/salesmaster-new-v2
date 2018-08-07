@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {OfflineService} from '../../services/offline.service';
 import { environment } from '../../../environments/environment';
+import {EnviromentEnable} from '../../classes/enviroment.enable';
 
 @Component({
   moduleId: module.id,
@@ -14,6 +15,7 @@ import { environment } from '../../../environments/environment';
 export class NavigationComponent {
 
   public readonly VERSION: string = environment.VERSION;
+  public readonly enviroment = new EnviromentEnable();
 
   public status: any;
 

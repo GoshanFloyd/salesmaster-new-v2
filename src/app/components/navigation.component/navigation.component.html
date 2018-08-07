@@ -50,7 +50,7 @@
         Файловый менеджер
       </a>
     </li>
-    <li [class]="isActiveRoute('/site-request') ? 'active' : '' ">
+    <li *ngIf="enviroment.productionDisable()" [class]="isActiveRoute('/site-request') ? 'active' : '' ">
       <a [routerLink]='["/site-request"]'>
         <span class="oi" data-glyph="comment-square"></span>
         Заявки с сайта

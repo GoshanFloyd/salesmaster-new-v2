@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserRepository} from '../../repositories/user.repository';
 import {CentrifugeService} from '../../services/centrifuge.service';
 import {ClientsRepository} from '../../repositories/clients.repository';
+import {TaskRepository} from '../../repositories/task.repository';
 
 @Component({
   moduleId: module.id,
@@ -20,18 +21,21 @@ export class WaitComponent implements OnInit {
               private _activeRoute: ActivatedRoute,
               private _userRepository: UserRepository,
               private _centrifugeService: CentrifugeService,
-              private _clientsRepository: ClientsRepository) { }
+              private _clientsRepository: ClientsRepository,
+              private _taskRepository: TaskRepository) { }
 
   ngOnInit() {
     this._activeRoute.queryParams
       .subscribe(params => {
-        const currentURL: string = params.pathname != '/' && params.pathname ? params.pathname : this._mainURL;
+        const currentURL: string = params.pathname !== '/' && params.pathname ? params.pathname : this._mainURL;
         if (this._authService.isVerify) {
           if (this._userRepository.user) {
             this._router.navigateByUrl(currentURL);
             this._clientsRepository.getContactsLight({
               company_id: this._userRepository.user.company[0].id
             });
+            this._taskRepository.currentTaskCompanyID = this._userRepository.user.getDefaultCompany().id;
+            this._taskRepository.currentTaskUserID = this._userRepository.user.id;
             this._centrifugeService.init();
           } else {
             this._userRepository.initMyUser().subscribe(
@@ -40,6 +44,8 @@ export class WaitComponent implements OnInit {
                 this._clientsRepository.getContactsLight({
                   company_id: this._userRepository.user.company[0].id
                 });
+                this._taskRepository.currentTaskCompanyID = this._userRepository.user.getDefaultCompany().id;
+                this._taskRepository.currentTaskUserID = this._userRepository.user.id;
                 this._centrifugeService.init();
               },
               err => {
@@ -59,6 +65,8 @@ export class WaitComponent implements OnInit {
                       this._clientsRepository.getContactsLight({
                         company_id: this._userRepository.user.company[0].id
                       });
+                      this._taskRepository.currentTaskCompanyID = this._userRepository.user.getDefaultCompany().id;
+                      this._taskRepository.currentTaskUserID = this._userRepository.user.id;
                       this._centrifugeService.init();
                     },
                     err => {

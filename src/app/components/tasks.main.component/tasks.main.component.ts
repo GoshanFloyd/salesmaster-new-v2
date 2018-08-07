@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {TaskAddComponent} from '../task.add.component/task.add.component';
 import {UserModel} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
+import {TaskRepository} from '../../repositories/task.repository';
 
 declare const $: any;
 declare const fullCalendar: any;
@@ -36,17 +37,20 @@ export class TasksMainComponent implements OnInit {
   private _events: Array<EventType> = [];
   private _users: Array<UserModel> = [];
 
-  public currentUserID: number = this._userRepository.user.id;
-  public currentCompanyID: number = this._userRepository.user.getDefaultCompany().id;
+  public currentUserID: number;
+  public currentCompanyID: number;
 
   constructor (private _userRepository: UserRepository,
                private _userService: UserService,
                private _taskService: TaskService,
                private _notificationService: NotificationService,
-               private _router: Router) {
+               private _router: Router,
+               private _taskRepository: TaskRepository) {
   }
 
   ngOnInit() {
+    this.currentUserID = this._taskRepository.currentTaskUserID;
+    this.currentCompanyID = this._taskRepository.currentTaskCompanyID;
     this.initCalendar();
     if (this.user.type !== 'manager') {
       this.getUsers();
@@ -180,6 +184,13 @@ export class TasksMainComponent implements OnInit {
   }
 
   public setCurrentUser(id: number) {
-    this.getTasks(id);
+    this._taskRepository.currentTaskUserID = id;
+    this.currentUserID = this._taskRepository.currentTaskUserID;
+    this.getTasks(this.currentUserID);
+  }
+
+  public setCurrentCompany(id: number) {
+    this._taskRepository.currentTaskCompanyID = id;
+    this.currentCompanyID = this._taskRepository.currentTaskCompanyID;
   }
 }

@@ -105,6 +105,7 @@ import {SiteRequestComponent} from './components/site.request.component/site.req
 import {SiteRequestSingleComponent} from './components/site.request.single.component/site.request.single.component';
 import {NgxJsonViewerModule} from 'ngx-json-viewer';
 import {SiteConvertClientComponent} from './components/site.convert-client.component/site.convert-client.component';
+import {TaskRepository} from './repositories/task.repository';
 
 @NgModule({
   declarations: [
@@ -222,6 +223,7 @@ import {SiteConvertClientComponent} from './components/site.convert-client.compo
     SoundService,
     OfflineService,
     ColdClientService,
+    TaskRepository,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationProvider, multi: true }
   ],
   bootstrap: [AppComponent]

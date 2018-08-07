@@ -5,7 +5,7 @@
         <h3 class="display-flex-1">Календарь задач</h3>
         <label>
           Сортировка по компаниям:
-          <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID">
+          <select class="select-add not_full_height" name="currentCompanyID" [(ngModel)]="currentCompanyID" (change)="setCurrentCompany(currentCompanyID)">
             <option *ngFor="let c of user.company" [ngValue]="c.id" >{{c.title}}</option>
           </select>
         </label>
