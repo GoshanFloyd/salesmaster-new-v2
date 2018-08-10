@@ -17,5 +17,20 @@ export const pagesSettings = {
   },
   'file-manager': {
 
+  },
+  'products': {
+
+  },
+  'reports': {
+
+  },
+  'handbook': {
+
+  },
+  'help': {
+
+  },
+  'site-request': {
+
   }
 };
