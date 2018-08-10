@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {DealStageModel} from '../models/dealstage.model';
 import {Observable} from 'rxjs/Observable';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class DealStageService {

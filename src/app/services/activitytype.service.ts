@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ActivityTypeModel} from '../models/acitivitytype.model';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class ActivityTypeService {

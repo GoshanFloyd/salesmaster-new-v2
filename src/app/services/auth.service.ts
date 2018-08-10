@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {UserRepository} from '../repositories/user.repository';
 import {ClientsRepository} from '../repositories/clients.repository';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class AuthService {

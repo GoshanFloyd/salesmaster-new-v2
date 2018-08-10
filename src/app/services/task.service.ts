@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TaskModel} from '../models/task.model';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class TaskService {

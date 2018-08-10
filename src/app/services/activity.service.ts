@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {ActivityModel} from '../models/activity.model';
 import { Subject } from 'rxjs/Subject';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class ActivityService {

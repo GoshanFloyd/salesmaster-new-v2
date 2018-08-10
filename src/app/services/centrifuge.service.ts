@@ -4,7 +4,7 @@ import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserModel} from '../models/user.model';
 import {Router} from '@angular/router';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 declare let Centrifuge: any;
 

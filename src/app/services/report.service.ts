@@ -3,7 +3,7 @@ import {HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpRes
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {PercentRepsponse} from '../classes/percent.class';
-import {UrlSettings} from '../classes/urlSettings';
+import {UrlSettings} from '../settings/urlSettings';
 
 @Injectable()
 export class ReportService {
