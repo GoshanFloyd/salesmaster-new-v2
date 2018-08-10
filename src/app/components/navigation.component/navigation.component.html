@@ -32,7 +32,7 @@
         Задачи
       </a>
     </li>
-    <li [class]="isActiveRoute('/products') ? 'active' : '' ">
+    <li *ngIf="enviroment.productionDisable()" [class]="isActiveRoute('/products') ? 'active' : '' ">
       <a [routerLink]='["/products"]'>
         <span class="oi" data-glyph="box"></span>
         Продукты
