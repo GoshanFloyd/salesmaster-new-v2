@@ -2,12 +2,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {DealStageModel} from '../models/dealstage.model';
 import {Observable} from 'rxjs/Observable';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class DealStageService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -16,7 +14,7 @@ export class DealStageService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DealStageModel[]>(`${this.baseProtocol}${this.baseURL}deal_stages`, {
+    return this._httpClient.get<DealStageModel[]>(`${UrlSettings.getBackendUrl()}deal_stages`, {
       headers: header,
       params: obj ? obj : null,
     });

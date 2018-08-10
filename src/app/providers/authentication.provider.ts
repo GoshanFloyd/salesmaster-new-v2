@@ -13,9 +13,6 @@ export class AuthenticationProvider implements HttpInterceptor {
               private _notificationService: NotificationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-    // console.log(request as HttpRequest<any>);
-
     return next.handle(request).do((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
       }

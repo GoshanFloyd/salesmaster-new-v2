@@ -3,12 +3,10 @@ import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from 
 import {DocumentModel} from '../models/document.model';
 import {Subject} from 'rxjs/Subject';
 import {PercentRepsponse} from '../classes/percent.class';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class DocumentService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -18,7 +16,7 @@ export class DocumentService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DocumentModel[]>(`${this.baseProtocol}${this.baseURL}documents`, {
+    return this._httpClient.get<DocumentModel[]>(`${UrlSettings.getBackendUrl()}documents`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -30,7 +28,7 @@ export class DocumentService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<DocumentModel>(`${this.baseProtocol}${this.baseURL}documents`, obj, {
+    return this._httpClient.post<DocumentModel>(`${UrlSettings.getBackendUrl()}documents`, obj, {
       headers: header
     });
   }
@@ -43,7 +41,7 @@ export class DocumentService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    const req = new HttpRequest('POST', `${this.baseProtocol}${this.baseURL}documents`, obj, {
+    const req = new HttpRequest('POST', `${UrlSettings.getBackendUrl()}documents`, obj, {
       headers: header,
       reportProgress: true
     });
@@ -68,7 +66,7 @@ export class DocumentService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}documents/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}documents/${id}`, obj, {
       headers: header
     });
   }
@@ -78,7 +76,7 @@ export class DocumentService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.delete<any>(`${this.baseProtocol}${this.baseURL}documents/${id}`, {
+    return this._httpClient.delete<any>(`${UrlSettings.getBackendUrl()}documents/${id}`, {
       headers: header
     });
   }

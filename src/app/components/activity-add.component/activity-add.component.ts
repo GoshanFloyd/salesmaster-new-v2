@@ -13,7 +13,7 @@ type metadataAddActivity = {
   employee: number,
   deal_id: number,
   company: number
-}
+};
 
 @Component({
   moduleId: module.id,

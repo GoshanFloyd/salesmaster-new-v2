@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
 import {DealModel} from '../models/deal.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class DealService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   private header = new HttpHeaders({
     'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
@@ -21,7 +18,7 @@ export class DealService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DealModel>(`${this.baseProtocol}${this.baseURL}deals/${id}`, {
+    return this._httpClient.get<DealModel>(`${UrlSettings.getBackendUrl()}deals/${id}`, {
       headers: header
     });
   }
@@ -32,7 +29,7 @@ export class DealService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DealModel[]>(`${this.baseProtocol}${this.baseURL}deals`, {
+    return this._httpClient.get<DealModel[]>(`${UrlSettings.getBackendUrl()}deals`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -44,7 +41,7 @@ export class DealService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post(`${this.baseProtocol}${this.baseURL}deals`, obj, {
+    return this._httpClient.post(`${UrlSettings.getBackendUrl()}deals`, obj, {
       headers: header
     });
   }
@@ -55,7 +52,7 @@ export class DealService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch(`${this.baseProtocol}${this.baseURL}deals/${obj.id}`, obj, {
+    return this._httpClient.patch(`${UrlSettings.getBackendUrl()}deals/${obj.id}`, obj, {
       headers: header
     });
   }

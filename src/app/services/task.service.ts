@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TaskModel} from '../models/task.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class TaskService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -16,7 +14,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<TaskModel[]>(`${this.baseProtocol}${this.baseURL}tasks`, {
+    return this._httpClient.get<TaskModel[]>(`${UrlSettings.getBackendUrl()}tasks`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -28,7 +26,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<TaskModel>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, {
+    return this._httpClient.get<TaskModel>(`${UrlSettings.getBackendUrl()}tasks/${id}`, {
       headers: header
     });
   }
@@ -39,7 +37,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<any>(`${this.baseProtocol}${this.baseURL}tasks`, obj, {
+    return this._httpClient.post<any>(`${UrlSettings.getBackendUrl()}tasks`, obj, {
       headers: header
     });
   }
@@ -50,7 +48,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}tasks/${id}`, obj, {
       headers: header
     });
   }
@@ -61,7 +59,7 @@ export class TaskService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.delete<any>(`${this.baseProtocol}${this.baseURL}tasks/${id}`, {
+    return this._httpClient.delete<any>(`${UrlSettings.getBackendUrl()}tasks/${id}`, {
       headers: header
     });
   }

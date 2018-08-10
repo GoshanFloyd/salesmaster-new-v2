@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpParams, HttpRequest, HttpResponse} from '@angular/common/http';
-import {ResponseContentType, ResponseType} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {PercentRepsponse} from '../classes/percent.class';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ReportService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -25,7 +22,7 @@ export class ReportService {
 
     let params = new HttpParams({fromObject: obj});
 
-    const req = new HttpRequest('GET', `${this.baseProtocol}${this.baseURL}reports`, {
+    const req = new HttpRequest('GET', `${UrlSettings.getBackendUrl()}reports`, {
       headers: header,
       params: params,
       reportProgress: true,

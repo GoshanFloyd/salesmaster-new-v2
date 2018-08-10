@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { ActivityTypeModel} from '../models/acitivitytype.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ActivityTypeService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -15,7 +13,7 @@ export class ActivityTypeService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ActivityTypeModel[]>(`${this.baseProtocol}${this.baseURL}activity_types`, {
+    return this._httpClient.get<ActivityTypeModel[]>(`${UrlSettings.getBackendUrl()}activity_types`, {
       params: obj ? obj : null,
       headers: headers
     });

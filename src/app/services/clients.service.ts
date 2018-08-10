@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ClientModel, IClientHandbook} from '../models/client.model';
 import {ClientLightModel} from '../models/client.light.model.';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ClientsService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) { }
 
@@ -17,7 +15,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<ClientModel>(`${this.baseProtocol}${this.baseURL}clients`,  obj, {headers: header},
+    return this._httpClient.post<ClientModel>(`${UrlSettings.getBackendUrl()}clients`,  obj, {headers: header},
     );
   }
 
@@ -27,7 +25,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientModel[]>(`${this.baseProtocol}${this.baseURL}clients`, {
+    return this._httpClient.get<ClientModel[]>(`${UrlSettings.getBackendUrl()}clients`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -39,7 +37,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientModel>(`${this.baseProtocol}${this.baseURL}clients/${id}`, {
+    return this._httpClient.get<ClientModel>(`${UrlSettings.getBackendUrl()}clients/${id}`, {
       headers: header
     });
   }
@@ -60,7 +58,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientLightModel>(`${this.baseProtocol}${this.baseURL}clients`, {
+    return this._httpClient.get<ClientLightModel>(`${UrlSettings.getBackendUrl()}clients`, {
       headers: header,
       params: obj ? obj : lightweight
     });
@@ -82,7 +80,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<Array<IClientHandbook>>(`${this.baseProtocol}${this.baseURL}clients`, {
+    return this._httpClient.get<Array<IClientHandbook>>(`${UrlSettings.getBackendUrl()}clients`, {
       headers: header,
       params: obj ? obj : digest
     });
@@ -94,7 +92,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ClientLightModel>(`${this.baseProtocol}${this.baseURL}clients/${id}?lightweight=True`, {
+    return this._httpClient.get<ClientLightModel>(`${UrlSettings.getBackendUrl()}clients/${id}?lightweight=True`, {
       headers: header,
     });
   }
@@ -105,7 +103,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}clients/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}clients/${id}`, obj, {
       headers: header
     });
   }
@@ -116,7 +114,7 @@ export class ClientsService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.delete<any>(`${this.baseProtocol}${this.baseURL}clients/${id}`, {
+    return this._httpClient.delete<any>(`${UrlSettings.getBackendUrl()}clients/${id}`, {
       headers: header,
     });
   }

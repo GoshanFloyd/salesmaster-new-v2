@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {UserRepository} from '../repositories/user.repository';
 import {ClientsRepository} from '../repositories/clients.repository';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class AuthService {
@@ -14,11 +15,8 @@ export class AuthService {
   public auth_token: string = localStorage.getItem('auth_token_salesmaster') || null;
   public isVerify = false;
 
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/';
-
   public authenticationUser (username: string, password: string): Observable<boolean> {
-    return this.httpClient.post<any>(`${this.baseProtocol}${this.baseURL}auth/`, {
+    return this.httpClient.post<any>(`${UrlSettings.getAuthBackendUrl()}auth/`, {
       'username': username,
       'password': password
     }).map((result) => {
@@ -36,7 +34,7 @@ export class AuthService {
   }
 
   public verifyToken(token: string = this.auth_token): Observable<boolean> {
-    return this.httpClient.post<any>(`${this.baseProtocol}${this.baseURL}verify/`, {
+    return this.httpClient.post<any>(`${UrlSettings.getAuthBackendUrl()}verify/`, {
       token: token
     }).map((result) => {
       if (result.token) {

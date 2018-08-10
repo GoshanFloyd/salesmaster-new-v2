@@ -4,14 +4,12 @@ import {NotificationService} from './notification.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserModel} from '../models/user.model';
 import {Router} from '@angular/router';
+import {UrlSettings} from '../classes/urlSettings';
 
 declare let Centrifuge: any;
 
 @Injectable()
 export class CentrifugeService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   private centrifuge: any;
 
@@ -29,7 +27,7 @@ export class CentrifugeService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get(`${this.baseProtocol}${this.baseURL}websocket/${user_id}`, {
+    return this._httpClient.get(`${UrlSettings.getBackendUrl()}websocket/${user_id}`, {
       headers: header
     });
   }
@@ -45,7 +43,7 @@ export class CentrifugeService {
 
   private initToken(data: any) {
     this.centrifuge = new Centrifuge({
-      url: 'https://test.salesmaster.me/centrifugo/connection/',
+      url: `${UrlSettings.getBackendUrlWithoutApi()}/centrifugo/connection/`,
       project: '(n*#zi*mo(8&txw(&ahz^2huusv86j8+mofha*+jt%88(ud=0d',
       user: this._userRepository.getMyUser().id.toString(),
       timestamp: data.timestamp.toString(),

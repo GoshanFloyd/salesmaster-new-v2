@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ProductModel} from '../models/product.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ProductService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -16,7 +14,7 @@ export class ProductService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ProductModel[]>(`${this.baseProtocol}${this.baseURL}products`, {
+    return this._httpClient.get<ProductModel[]>(`${UrlSettings.getBackendUrl()}products`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -28,7 +26,7 @@ export class ProductService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ProductModel[]>(`${this.baseProtocol}${this.baseURL}products/${id}`, {
+    return this._httpClient.get<ProductModel[]>(`${UrlSettings.getBackendUrl()}products/${id}`, {
       headers: header
     });
   }
@@ -39,7 +37,7 @@ export class ProductService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<ProductModel>(`${this.baseProtocol}${this.baseURL}products`, obj, {
+    return this._httpClient.post<ProductModel>(`${UrlSettings.getBackendUrl()}products`, obj, {
       headers: header
     });
   }
@@ -50,7 +48,7 @@ export class ProductService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}products/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}products/${id}`, obj, {
       headers: header
     })
   }

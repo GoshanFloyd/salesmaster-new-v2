@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DirectoryModel} from '../models/directory.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class DirectoryService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -16,7 +14,7 @@ export class DirectoryService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DirectoryModel[]>(`${this.baseProtocol}${this.baseURL}directories`, {
+    return this._httpClient.get<DirectoryModel[]>(`${UrlSettings.getBackendUrl()}directories`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -28,7 +26,7 @@ export class DirectoryService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<DirectoryModel>(`${this.baseProtocol}${this.baseURL}directories/${directory_id}`, {
+    return this._httpClient.get<DirectoryModel>(`${UrlSettings.getBackendUrl()}directories/${directory_id}`, {
       headers: header
     });
   }
@@ -39,7 +37,7 @@ export class DirectoryService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<DirectoryModel>(`${this.baseProtocol}${this.baseURL}directories`, obj, {
+    return this._httpClient.post<DirectoryModel>(`${UrlSettings.getBackendUrl()}directories`, obj, {
       headers: header
     });
   }
@@ -50,7 +48,7 @@ export class DirectoryService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}directories/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}directories/${id}`, obj, {
       headers: header
     });
   }

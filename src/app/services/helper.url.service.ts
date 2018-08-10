@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {UrlSettings} from '../classes/urlSettings';
 
 export interface IUrlItem {
   url: string;
@@ -8,9 +9,6 @@ export interface IUrlItem {
 
 @Injectable()
 export class HelperUrlService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _http: HttpClient) {}
 
@@ -21,7 +19,7 @@ export class HelperUrlService {
   }
 
   private getMainURL(): string {
-    return `${this.baseProtocol}${this.baseURL}`;
+    return `${UrlSettings.getBackendUrl()}`;
   }
 
   public requestGet(url: string, params?: any) {

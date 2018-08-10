@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {IAdminMessage} from '../components/admin.message.component/admin.message.component';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 
 export class AdminMessageService {
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) { }
 
@@ -16,7 +15,7 @@ export class AdminMessageService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.post<any>(`${this.baseProtocol}${this.baseURL}admins`,  obj, {headers: header},
+    return this._httpClient.post<any>(`${UrlSettings.getBackendUrl()}admins`,  obj, {headers: header},
     );
   }
 }

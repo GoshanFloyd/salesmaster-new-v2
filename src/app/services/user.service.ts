@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserModel} from '../models/user.model';
-import {Observable} from 'rxjs/Observable';
 import {IEmployeeInfo} from '../components/employee.info.component/employee.info.component';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class UserService {
 
   constructor(private httpClient: HttpClient) {}
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   public getMyUser(id: number) {
 
@@ -17,7 +15,7 @@ export class UserService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this.httpClient.get<UserModel>(`${this.baseProtocol}${this.baseURL}employees/${id}`, {
+    return this.httpClient.get<UserModel>(`${UrlSettings.getBackendUrl()}employees/${id}`, {
       headers: headers
     });
   }
@@ -28,7 +26,7 @@ export class UserService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this.httpClient.get<UserModel[]>(`${this.baseProtocol}${this.baseURL}employees`, {
+    return this.httpClient.get<UserModel[]>(`${UrlSettings.getBackendUrl()}employees`, {
       headers: headers,
       params: obj ? obj : null
     });
@@ -39,7 +37,7 @@ export class UserService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this.httpClient.patch<UserModel[]>(`${this.baseProtocol}${this.baseURL}employees/${id}`, obj, {
+    return this.httpClient.patch<UserModel[]>(`${UrlSettings.getBackendUrl()}employees/${id}`, obj, {
       headers: headers,
     });
   }
@@ -49,7 +47,7 @@ export class UserService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this.httpClient.get<Array<IEmployeeInfo>>(`${this.baseProtocol}${this.baseURL}employees?id=${id}&for_profile=true`, {
+    return this.httpClient.get<Array<IEmployeeInfo>>(`${UrlSettings.getBackendUrl()}employees?id=${id}&for_profile=true`, {
       headers: headers
     });
   }

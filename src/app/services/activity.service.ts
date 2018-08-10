@@ -2,12 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 import {ActivityModel} from '../models/activity.model';
 import { Subject } from 'rxjs/Subject';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ActivityService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -17,7 +15,7 @@ export class ActivityService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ActivityModel[]>(`${this.baseProtocol}${this.baseURL}activities`, {
+    return this._httpClient.get<ActivityModel[]>(`${UrlSettings.getBackendUrl()}activities`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -31,7 +29,7 @@ export class ActivityService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    const req = new HttpRequest('POST', `${this.baseProtocol}${this.baseURL}activities`, obj, {
+    const req = new HttpRequest('POST', `${UrlSettings.getBackendUrl()}activities`, obj, {
       headers: header,
       reportProgress: true
     });
@@ -53,7 +51,7 @@ export class ActivityService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<any>(`${this.baseProtocol}${this.baseURL}activities/${id}`, obj, {
+    return this._httpClient.patch<any>(`${UrlSettings.getBackendUrl()}activities/${id}`, obj, {
       headers: header
     });
   }

@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ProductBrandModel} from '../models/product-brand.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ProductBrandService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) {}
 
@@ -15,7 +13,7 @@ export class ProductBrandService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ProductBrandModel[]>(`${this.baseProtocol}${this.baseURL}product_brands`, {
+    return this._httpClient.get<ProductBrandModel[]>(`${UrlSettings.getBackendUrl()}product_brands`, {
       params: obj ? obj : null,
       headers: header
     });

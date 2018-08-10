@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ColdClientModel, IColdClientObjectCreate} from '../models/cold.client.model';
+import {UrlSettings} from '../classes/urlSettings';
 
 @Injectable()
 export class ColdClientService {
-
-  private readonly baseProtocol = 'https://';
-  private readonly baseURL = 'test.salesmaster.me/api/v1/';
 
   constructor (private _httpClient: HttpClient) { }
 
@@ -16,7 +14,7 @@ export class ColdClientService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.patch<IColdClientObjectCreate>(`${this.baseProtocol}${this.baseURL}cold_clients/${id}`,  obj, {
+    return this._httpClient.patch<IColdClientObjectCreate>(`${UrlSettings.getBackendUrl()}cold_clients/${id}`,  obj, {
       headers: header
     });
   }
@@ -26,7 +24,7 @@ export class ColdClientService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.put<any>(`${this.baseProtocol}${this.baseURL}cold_clients/${id}`,  obj, {
+    return this._httpClient.put<any>(`${UrlSettings.getBackendUrl()}cold_clients/${id}`,  obj, {
       headers: header
     });
   }
@@ -37,7 +35,7 @@ export class ColdClientService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ColdClientModel[]>(`${this.baseProtocol}${this.baseURL}cold_clients`, {
+    return this._httpClient.get<ColdClientModel[]>(`${UrlSettings.getBackendUrl()}cold_clients`, {
       params: obj ? obj : null,
       headers: header
     });
@@ -49,7 +47,7 @@ export class ColdClientService {
       'Authorization': `jwt ${localStorage.getItem('auth_token_salesmaster')}`
     });
 
-    return this._httpClient.get<ColdClientModel[]>(`${this.baseProtocol}${this.baseURL}cold_clients/${id}`, {
+    return this._httpClient.get<ColdClientModel[]>(`${UrlSettings.getBackendUrl()}cold_clients/${id}`, {
       headers: header
     });
   }
