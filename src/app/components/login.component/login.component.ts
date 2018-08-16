@@ -1,16 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {CentrifugeService} from '../../services/centrifuge.service';
 import {UserRepository} from '../../repositories/user.repository';
+import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 
 @Component({
   moduleId: module.id,
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: [
+    './login.component.css'
+  ]
 })
 
 export class LoginComponent implements OnInit{
+
+  @ViewChild('forgotPasswordModal') private _forgotPasswordModal: ModalStandardComponent;
 
   constructor (private _authService: AuthService,
                private _router: Router,
@@ -34,5 +40,9 @@ export class LoginComponent implements OnInit{
         this._router.navigateByUrl('/');
       }
     });
+  }
+
+  public openForgotPasswordModal(event: Event) {
+    this._forgotPasswordModal.showModal();
   }
 }

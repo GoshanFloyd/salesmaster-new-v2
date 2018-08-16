@@ -1,0 +1,14 @@
+.forgot-password-link {
+    color: #d1d9e6;
+    margin: 20px 0 0 0;
+    text-align: center;
+    vertical-align: bottom;
+    display: block;
+    box-sizing: border-box;
+    font-size: .9em;
+}
+
+.forgot-password-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

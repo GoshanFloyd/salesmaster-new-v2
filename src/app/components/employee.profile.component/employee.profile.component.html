@@ -69,6 +69,11 @@
              id="changedPassword"
              name="changedPassword"
              type="password"
+             pPassword
+             [weakLabel]="'Слабый пароль'"
+             [mediumLabel]="'Средний пароль'"
+             [strongLabel]="'Сложный пароль'"
+             [feedback]="true"
              placeholder="Введите новый пароль">
     </div>
     <div class="form-row">
@@ -78,6 +83,11 @@
              id="changedRepeatPassword"
              name="changedRepeatPassword"
              type="password"
+             pPassword
+             [weakLabel]="'Слабый пароль'"
+             [mediumLabel]="'Средний пароль'"
+             [strongLabel]="'Сложный пароль'"
+             [feedback]="true"
              placeholder="Повторите новый пароль">
     </div>
     <div class="error-block">

@@ -3,11 +3,17 @@
     <img src="../../../assets/images/logo-small.png" alt="" class="login__component__logo">
 
     <label for="login">EMAIL</label>
-    <input id="login" name="login" type="text" [(ngModel)]="loginInfo.username" placeholder="Your login">
+    <input id="login" name="login" type="text" [(ngModel)]="loginInfo.username" placeholder="Ваш email...">
 
     <label for="password">PASSWORD</label>
-    <input id="password" name="password" type="password" [(ngModel)]="loginInfo.password" placeholder="Your password">
+    <input id="password" name="password" type="password" [(ngModel)]="loginInfo.password" placeholder="Ваш пароль...">
 
     <input type="submit" value="Войти">
+
+    <a (click)="openForgotPasswordModal($event)" class="forgot-password-link">Забыли пароль?</a>
   </form>
 </div>
+
+<app-modal-standard #forgotPasswordModal [title]="'Восстановление пароля'">
+
+</app-modal-standard>

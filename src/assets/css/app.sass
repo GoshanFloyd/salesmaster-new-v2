@@ -187,13 +187,16 @@ body
 
       input[type=submit]
         border: none
-        border-radius: 20px
+        border-radius: 5px
         color: $login-input-color
         cursor: pointer
         font-weight: bold
+        width: 100%
+        display: block
         padding: 12px 25px
         text-transform: uppercase
         font-size: 15px
+        margin-top: 40px
         background: $login-input-background
         box-shadow: 0 11px 65px 0 $login-input-box-shadow-color
 
@@ -771,3 +774,6 @@ body
 
 .ui-tooltip
   z-index: 9999999 !important
+
+.ui-password-panel, .ui-password-panel-overlay
+  z-index: 999999999 !important
