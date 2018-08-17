@@ -15,5 +15,20 @@
 </div>
 
 <app-modal-standard #forgotPasswordModal [title]="'Восстановление пароля'">
-
+    <form class="activity-add__component">
+        <div class="form-row">
+            <label for="email-forgot-password">Укажите свой почтовый ящик:</label>
+            <input [(ngModel)]="usernameForgotPassword" type="email" name="email-forgot-password" id="email-forgot-password" placeholder="Почтовый адрес" class="input-add">
+        </div>
+        <div class="form-row">
+            <label for="code-forgot-password">Укажите код проверки:</label>
+            <input type="text" [(ngModel)]="codeResetForgotPassword" name="code-forgot-password" id="code-forgot-password" placeholder="Код проверки" class="input-add">
+        </div>
+        <div class="form-row">
+            <input (click)="getCode($event)" type="submit" value="Запросить код подтверждения" class="button-standard">
+        </div>
+        <div class="form-row">
+            <input [disabled]="!(codeResetForgotPassword.length >= 30)" (click)="resetPassword($event)" type="submit" value="Сбросить пароль" class="button-standard">
+        </div>
+    </form>
 </app-modal-standard>

@@ -24,6 +24,7 @@ import {OfflineService} from '../../services/offline.service';
 import {ColdClientService} from '../../services/cold.client.service';
 import {TaskRepository} from '../../repositories/task.repository';
 import {AdminMessageService} from '../../services/admin.message.service';
+import {ForgotPasswordService} from '../../services/forgot-password.service';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import {AdminMessageService} from '../../services/admin.message.service';
     OfflineService,
     ColdClientService,
     TaskRepository,
-    AdminMessageService
+    AdminMessageService,
+    ForgotPasswordService
   ]
 })
 export class ServiceModule { }

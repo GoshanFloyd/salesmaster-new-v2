@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {CentrifugeService} from '../../services/centrifuge.service';
 import {UserRepository} from '../../repositories/user.repository';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
+import {ForgotPasswordService} from '../../services/forgot-password.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   moduleId: module.id,
@@ -21,14 +23,20 @@ export class LoginComponent implements OnInit{
   constructor (private _authService: AuthService,
                private _router: Router,
                private _centrifuge: CentrifugeService,
-               private _userRepository: UserRepository) {}
+               private _userRepository: UserRepository,
+               private _forgotPasswordService: ForgotPasswordService,
+               private _notificationService: NotificationService) {}
 
   public loginInfo = {
     username: '',
     password: ''
   };
 
+  public usernameForgotPassword: string = null;
+  public codeResetForgotPassword: string = null;
+
   ngOnInit() {
+    this.codeResetForgotPassword = '';
     this._authService.clearToken();
     this._userRepository.user = null;
     this._centrifuge.disconnectCentrifuge();
@@ -44,5 +52,51 @@ export class LoginComponent implements OnInit{
 
   public openForgotPasswordModal(event: Event) {
     this._forgotPasswordModal.showModal();
+  }
+
+  public getCode(event: Event) {
+
+    event.preventDefault();
+
+    this._forgotPasswordService.authAndGetCode(this.usernameForgotPassword).subscribe(
+      data => {
+        if (data.success && data.success === `Code was successfully sent to the following E-Mail: ${this.usernameForgotPassword}`) {
+          this._notificationService.sendNotification({
+            title: 'Код подтверждения отправлен на указанную почту'
+          });
+        }
+      },
+      err => {
+        if ( err.error && err.error === `Employee (username=${this.usernameForgotPassword}) does not exist`) {
+          this._notificationService.sendNotification({
+            title: 'Данный пользователь не найден в базе'
+          });
+        }
+      }
+    );
+  }
+
+  public resetPassword(event: Event) {
+    event.preventDefault();
+
+    this._forgotPasswordService.resetPassword(this.usernameForgotPassword, this.codeResetForgotPassword).subscribe(
+      data => {
+        if (data.success && data.success === `Code was successfully sent to the following E-Mail: ${this.usernameForgotPassword}`) {
+          this._notificationService.sendNotification({
+            title: 'Пароль успешно сброшен. Проверьте почту'
+          });
+          this.usernameForgotPassword = '';
+          this.codeResetForgotPassword = '';
+          this._forgotPasswordModal.hideModal();
+        }
+      },
+      err => {
+        if (err.error && err.error === 'Reset codes do not match') {
+          this._notificationService.sendNotification({
+            title: 'Введен неверный код подтверждения'
+          });
+        }
+      }
+    );
   }
 }
