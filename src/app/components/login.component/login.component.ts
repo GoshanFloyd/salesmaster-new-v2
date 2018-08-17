@@ -6,6 +6,7 @@ import {UserRepository} from '../../repositories/user.repository';
 import {ModalStandardComponent} from '../modal.standard/modal.standard.component';
 import {ForgotPasswordService} from '../../services/forgot-password.service';
 import {NotificationService} from '../../services/notification.service';
+import {Subject} from 'rxjs';
 
 @Component({
   moduleId: module.id,
@@ -32,6 +33,11 @@ export class LoginComponent implements OnInit{
     password: ''
   };
 
+  public timerRequestSubject = new Subject<number>();
+  public timerRequestData = 60;
+  public timerRequestDisable = false;
+  public timeOut = null;
+
   public usernameForgotPassword: string = null;
   public codeResetForgotPassword: string = null;
 
@@ -54,6 +60,26 @@ export class LoginComponent implements OnInit{
     this._forgotPasswordModal.showModal();
   }
 
+  public startTimer() {
+    const self = this;
+    self.timerRequestDisable = true;
+    self.timerRequestSubject.next(self.timerRequestData);
+    this.timeOut = setInterval(function () {
+      self.timerRequestData -= 1;
+      if (self.timerRequestData < 0) {
+        self.timerRequestDisable = false;
+        self.timerRequestData = 60;
+        self.clearIntervalTimeOut();
+      } else {
+        self.timerRequestSubject.next(self.timerRequestData);
+      }
+    }, 1000);
+  }
+
+  public clearIntervalTimeOut() {
+    clearInterval(this.timeOut);
+  }
+
   public getCode(event: Event) {
 
     event.preventDefault();
@@ -64,6 +90,7 @@ export class LoginComponent implements OnInit{
           this._notificationService.sendNotification({
             title: 'Код подтверждения отправлен на указанную почту'
           });
+          this.startTimer();
         }
       },
       err => {

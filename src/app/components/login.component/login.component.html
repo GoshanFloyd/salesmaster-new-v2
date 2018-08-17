@@ -25,7 +25,12 @@
             <input type="text" [(ngModel)]="codeResetForgotPassword" name="code-forgot-password" id="code-forgot-password" placeholder="Код проверки" class="input-add">
         </div>
         <div class="form-row">
-            <input (click)="getCode($event)" type="submit" value="Запросить код подтверждения" class="button-standard">
+            <input [disabled]="timerRequestDisable" (click)="getCode($event)" type="submit" value="Запросить код подтверждения" class="button-standard">
+            <div class="error-block">
+              <span *ngIf="timerRequestDisable">
+                Запрос на код подтверждения можно будет отправить через {{timerRequestSubject | async}}
+              </span>
+            </div>
         </div>
         <div class="form-row">
             <input [disabled]="!(codeResetForgotPassword.length >= 30)" (click)="resetPassword($event)" type="submit" value="Сбросить пароль" class="button-standard">
