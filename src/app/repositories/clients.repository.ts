@@ -21,6 +21,7 @@ export class ClientsRepository {
 
   public currentSearchString: string = '';
   public currentCompanyID: number = null;
+  public currentScrollID: number = 0;
 
   public getContacts (obj?: any) {
     this._loadingService.showLoader();

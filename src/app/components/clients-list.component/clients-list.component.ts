@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {UserRepository} from '../../repositories/user.repository';
 import {ClientsRepository} from '../../repositories/clients.repository';
 import {UserModel} from '../../models/user.model';
@@ -11,17 +11,26 @@ import {ClientLightModel} from '../../models/client.light.model.';
   templateUrl: './clients-list.component.html'
 })
 
-export class ClientsListComponent {
+export class ClientsListComponent implements AfterViewInit{
 
   public searchString: string = '';
   public company_filter: number;
   public dateFilterClients: string = 'start_new';
   public my_client_filter: boolean = false;
 
+  @ViewChild('bodyListClients') public bodyListClients: ElementRef;
+
   constructor (public _userRepository: UserRepository,
                public _clientsRepository: ClientsRepository) {
     this.company_filter = this._clientsRepository.currentCompanyID;
     this.searchString = this._clientsRepository.currentSearchString;
+  }
+
+  ngAfterViewInit() {
+    const el = document.getElementById(this._clientsRepository.currentScrollID + '-scroll_id');
+    if (el){
+      el.scrollIntoView();
+    }
   }
 
   get user(): UserModel {
@@ -41,5 +50,9 @@ export class ClientsListComponent {
     this._clientsRepository.getContactsLight({
       company_id: this.company_filter
     });
+  }
+
+  public setCurrentClient(index: number) {
+    this._clientsRepository.currentScrollID = index;
   }
 }

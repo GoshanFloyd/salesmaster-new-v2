@@ -10,9 +10,9 @@
       <option *ngFor="let c of user.company" [ngValue]="c.id">{{c.title}}</option>
     </select>
   </form>
-  <div class="main__component__body">
+  <div class="main__component__body" #bodyListClients>
     <ul class="client-list__component__list">
-      <li *ngFor="let item of clients | async | searchClient: searchString"><a [routerLink]='item.id'>{{item.title}}<span class="new-caption__helper" *ngIf="item.isNewClient">New</span> </a></li>
+      <li *ngFor="let item of clients | async | searchClient: searchString; let i = index" [id]="i+'-scroll_id'"><a (click)="setCurrentClient(i)" [routerLink]='item.id'>{{item.title}}<span class="new-caption__helper" *ngIf="item.isNewClient">New</span> </a></li>
     </ul>
   </div>
 </div>
